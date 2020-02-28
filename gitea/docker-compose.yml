@@ -1,0 +1,33 @@
+version: '3.3'
+
+volumes:
+  gitea:
+
+networks:
+  traefik_web:
+    external:
+      name: traefik_web
+
+services:
+
+  gitea:
+    image: gitea/gitea:latest
+    networks: 
+      - traefik_web
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    volumes:
+      - gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "222:22"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitea.rule=Host(`gitea.nickyeoman.com`)"
+      - "traefik.http.routers.gitea.entrypoints=websecure"
+      - "traefik.http.routers.gitea.tls=true"
+      - "traefik.http.services.gite.loadbalancer.server.port=3000"
+
