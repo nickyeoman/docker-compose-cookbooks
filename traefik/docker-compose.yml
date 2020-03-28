@@ -1,13 +1,13 @@
-# must create network first:
-# docker network create web
-# TODO: clean up this file with atom
+###############################################################################
+# docker-compose up -d 
+###############################################################################
 
 version: '3.3'
 
 networks:
   web:
     driver: bridge
-    
+
 services:
 
   traefik:
@@ -17,7 +17,7 @@ services:
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --api 
+      - --api
       - --providers.docker
     ports:
       - "80:80"
@@ -40,4 +40,3 @@ services:
       - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
       # middleware redirect
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-
