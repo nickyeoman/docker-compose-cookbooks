@@ -12,9 +12,11 @@ services:
 
   portainer:
     image: portainer/portainer
+    container_name: portainer
+    hostname: portainer
     command: -H unix:///var/run/docker.sock
     restart: always
-    networks: 
+    networks:
       - traefik_web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
