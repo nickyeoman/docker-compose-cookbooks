@@ -1,0 +1,5 @@
+# Rename this file to .env
+DOMAIN_NAME=joomla.nickyeoman.com
+PREFIX=project_name
+MYSQL_PASSWORD=MyNotSecurePassword1234
+MYSQL_ROOT_PASSWORD=AlsoNotSecure

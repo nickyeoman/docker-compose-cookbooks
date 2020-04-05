@@ -1,0 +1,45 @@
+---
+version: '3.3'
+
+# Update the .env file
+# make sure you use the $PREFIX from .env for project_name
+# docker-compose -p project_name up -d
+volumes:
+  mariadb:
+  joomla:
+
+networks:
+  traefik_web:
+    external:
+      name: traefik_web
+
+services:
+
+  mariadb:
+    image: mariadb:10.4.11
+    restart: always
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - traefik_web
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: joomla
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: joomla
+
+  joomla:
+    image: joomla:3.9.16-apache
+    restart: always
+    links:
+      - ${PREFIX}_mariadb_1
+    networks:
+      - traefik_web
+    volumes:
+      - joomla:/var/www/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PREFIX}_joomla.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_joomla.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_joomla.tls=true"
+      - "traefik.http.services.${PREFIX}_joomla.loadbalancer.server.port=80"
