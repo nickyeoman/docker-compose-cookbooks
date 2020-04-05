@@ -1,10 +1,10 @@
 version: '3.3'
 
 volumes:
-  nc-mariadb:
-  nc-nextcloud:
-  nc-document_data:
-  nc-document_log:
+  mariadb:
+  nextcloud:
+  document_data:
+  document_log:
 
 networks:
   traefik_web:
@@ -13,39 +13,35 @@ networks:
 
 services:
 
-  nc-mariadb:
+  mariadb:
     image: mariadb:10.4.11
-    container_name: nc-mariadb
-    hostname: nc-mariadb
     restart: always
     volumes:
-      - nc-mariadb:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - traefik_web
     environment:
-      MYSQL_ROOT_PASSWORD: <changeme>
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: nextcloud
-      MYSQL_PASSWORD: <changeme>
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: nextcloud
 
-  nc-nextcloud:
+  nextcloud:
     image: nextcloud:18.0.3-apache
-    container_name: nc-nextcloud
-    hostname: nc-nextcloud
     stdin_open: true
     tty: true
     networks:
       - traefik_web
     restart: always
     depends_on:
-      - nc-mariadb
+      - mariadb
     links:
-      - nc-mariadb
+      - mariadb
     volumes:
-      - nc-nextcloud:/var/www/html
+      - nextcloud:/var/www/html
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.nickyeoman.com`)"
+      - "traefik.http.routers.nextcloud.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.nextcloud.entrypoints=websecure"
       - "traefik.http.routers.nextcloud.tls=true"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
