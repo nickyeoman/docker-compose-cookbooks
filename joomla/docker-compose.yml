@@ -1,9 +1,10 @@
----
-version: '3.3'
-
+################################################################################
 # Update the .env file
 # make sure you use the $PREFIX from .env for project_name
 # docker-compose -p project_name up -d
+################################################################################
+version: '3.3'
+
 volumes:
   mariadb:
   joomla:

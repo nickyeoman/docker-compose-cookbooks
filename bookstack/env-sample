@@ -1,0 +1,4 @@
+MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
+MYSQL_PASSWORD=Again2ASecurepass!
+DOMAIN_NAME=bookstack.nickyeoman.com
+PREFIX=p1
