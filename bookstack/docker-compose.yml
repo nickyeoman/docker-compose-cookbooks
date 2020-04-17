@@ -1,11 +1,14 @@
 ################################################################################
+# Bookstack
 # make sure you use the $PREFIX from .env for project_name
 # docker-compose -p project_name up -d
 #
-# If you are importing directly using the db you have to do the following in the container:
+# Importing directly to the db (phpmydadmin)
+# you have to run the following in the container:
 # php artisan bookstack:regenerate-permissions
+#
+# Version 1
 ################################################################################
-
 version: '2'
 
 volumes:
@@ -16,41 +19,28 @@ volumes:
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: ${NETWORK_NAME}
 
 services:
 
   bookstack-db:
-    image: mariadb:10.4.11
+    image: mariadb:${DB_V}
     restart: always
     volumes:
       - bookstack-db:/var/lib/mysql
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: bookstack
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: bookstack
 
-  # It's only exposed if someone knows the ip
-  bookstack-phpdb:
-    #https://hub.docker.com/r/phpmyadmin/phpmyadmin/tags
-    image: phpmyadmin/phpmyadmin:5.0
-    environment:
-      - PMA_ARBITRARY=1
-    external_links:
-      - bookstack-db
-    depends_on:
-      - bookstack-db
-    networks:
-      - traefik_web
-
   # https://hub.docker.com/r/solidnerd/bookstack
   bookstack:
-    image: solidnerd/bookstack:0.29.0
+    image: solidnerd/bookstack:${BOOKSTACK_V}
     depends_on:
-    - bookstack-db
+      - bookstack-db
     environment:
       - DB_HOST=${PREFIX}_bookstack-db_1:3306
       - DB_DATABASE=bookstack
@@ -58,7 +48,7 @@ services:
       - DB_PASSWORD=${MYSQL_PASSWORD}
       - APP_URL=https://${DOMAIN_NAME}
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     volumes:
       - bookstack-uploads:/var/www/bookstack/public/uploads
       - bookstack-storage:/var/www/bookstack/storage/uploads

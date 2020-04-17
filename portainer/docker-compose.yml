@@ -1,3 +1,12 @@
+################################################################################
+# Portainer
+# You should only need one instance of this running
+# Change .env then
+# docker-compose up -d
+#
+# Version 1
+################################################################################
+
 version: '3.3'
 
 volumes:
@@ -6,25 +15,26 @@ volumes:
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: ${NETWORK_NAME}
 
 services:
 
   portainer:
-    image: portainer/portainer
+    # https://hub.docker.com/r/portainer/portainer
+    image: portainer/portainer:${PORTAINER_V}
     container_name: portainer
     hostname: portainer
     command: -H unix:///var/run/docker.sock
-    restart: always
+    restart: unless-stopped
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
     command: -H unix:///var/run/docker.sock
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.nickyeoman.com`)"
+      - "traefik.http.routers.portainer.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.tls=true"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"

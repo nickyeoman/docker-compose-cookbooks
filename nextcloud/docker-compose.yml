@@ -1,3 +1,10 @@
+################################################################################
+# Nextcloud
+# make sure you use the $PREFIX from .env for project_name
+# docker-compose -p project_name up -d
+#
+# Version 1
+################################################################################
 version: '3.3'
 
 volumes:
@@ -9,17 +16,17 @@ volumes:
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: ${NETWORK_NAME}
 
 services:
 
   mariadb:
-    image: mariadb:10.4.11
+    image: mariadb:${DB_V}
     restart: always
     volumes:
       - mariadb:/var/lib/mysql
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: nextcloud
@@ -27,21 +34,21 @@ services:
       MYSQL_DATABASE: nextcloud
 
   nextcloud:
-    image: nextcloud:18.0.3-apache
+    image: nextcloud:${NEXTCLOUD_V}
     stdin_open: true
     tty: true
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     restart: always
     depends_on:
-      - mariadb
+      - ${PREFIX}_mariadb_1
     links:
-      - mariadb
+      - ${PREFIX}_mariadb_1
     volumes:
       - nextcloud:/var/www/html
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nextcloud.rule=Host(`${DOMAIN_NAME}`)"
-      - "traefik.http.routers.nextcloud.entrypoints=websecure"
-      - "traefik.http.routers.nextcloud.tls=true"
-      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+      - "traefik.http.routers.${PREFIX}_nextcloud.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_nextcloud.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_nextcloud.tls=true"
+      - "traefik.http.services.${PREFIX}_nextcloud.loadbalancer.server.port=80"

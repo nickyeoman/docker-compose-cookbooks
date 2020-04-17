@@ -1,17 +1,21 @@
 ###############################################################################
+# Traefik
+#
+# Should only need one instance of this.
+# Make sure the .env file is updated
 # docker-compose up -d
 ###############################################################################
-
 version: '3.3'
 
 networks:
-  web:
+  ${NETWORK_NAME}:
     driver: bridge
 
 services:
 
   traefik:
-    image: "traefik:v2.1.3"
+    # https://hub.docker.com/_/traefik
+    image: "traefik:${TRAEFIK_V}"
     container_name: "traefik"
     restart: unless-stopped
     command:
@@ -25,17 +29,15 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
-      - web
+      - ${NETWORK_NAME}
     labels:
       # Dashboard
-      - "traefik.http.routers.traefik.rule=Host(`proxy.nickyeoman.com`)"
+      - "traefik.http.routers.traefik.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.tls.certresolver=leresolver"
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.middlewares=authtraefik"
-      # https://medium.com/@techupbusiness/add-basic-authentication-in-docker-compose-files-with-traefik-34c781234970
-      # echo $(htpasswd -nbB <USER> "<PASS>") | sed -e s/\\$/\\$\\$/g
-      - "traefik.http.middlewares.authtraefik.basicauth.users=nick:encryptedpasswordgoeshere"
+      - "traefik.http.middlewares.authtraefik.basicauth.users=${TRAEFIK_USER}:${TRAEFIK_PASS}"
       # global redirect to https
       - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
       - "traefik.http.routers.http-catchall.entrypoints=web"

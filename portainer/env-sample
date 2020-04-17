@@ -1,0 +1,8 @@
+# Domains & Project
+DOMAIN_NAME=passbolt.nickyeoman.com
+
+# Software versions
+PORTAINER_V=1.23.2
+
+# Network
+NETWORK_NAME=traefik_web

@@ -1,0 +1,6 @@
+# Domain and project
+DOMAIN_NAME=stash.nickyeoman.com
+PREFIX=p1
+
+# Network
+NETWORK_NAME=traefik_web

@@ -1,14 +1,15 @@
 # Domains & Project
 PREFIX=p1
-DOMAIN_NAME=bookstack.nickyeoman.com
+DOMAIN_NAME=yourls.nickyeoman.com
 
 # Passwords
 MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
 MYSQL_PASSWORD=Again2ASecurepass!
+YOURLS_USER=username
+YOURLS_PASS=Password4urls
 
 # Software versions
 DB_V=10.4.11
-BOOKSTACK_V=0.29.0
 
 # Network
 NETWORK_NAME=traefik_web

@@ -1,0 +1,57 @@
+################################################################################
+# Stash
+# make sure you use the $PREFIX from .env for project_name
+# docker-compose -p project_name up -d
+#
+# Version 1
+################################################################################
+version: '3.4'
+
+volumes:
+  stash:
+  stash-metadata:
+  stash-cache:
+  stash-generated:
+
+networks:
+  traefik_web:
+    external:
+      name: ${NETWORK_NAME}
+
+services:
+  stash:
+    # https://hub.docker.com/r/stashapp/stash
+    image: stashapp/stash:latest
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "2m"
+    environment:
+      - STASH_STASH=/data/
+      - STASH_GENERATED=/generated/
+      - STASH_METADATA=/metadata/
+      - STASH_CACHE=/cache/
+    networks:
+      - ${NETWORK_NAME}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      ## Adjust below paths (the left part) to your liking.
+      ## E.g. you can change ./config:/root/.stash to ./stash:/root/.stash
+      ## Keep configs here.
+      #- ./config:/root/.stash
+      ## Point this at your collection.
+      - stash:/data
+      ## This is where your stash's metadata lives
+      - stash-metadata:/metadata
+      ## Any other cache content.
+      - stash-cache:/cache
+      ## Where to store generated content (screenshots,previews,transcodes,sprites)
+      - stash-generated:/generated
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PREFIX}_stash.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_stash.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_stash.tls=true"
+      - "traefik.http.services.${PREFIX}_stash.loadbalancer.server.port=9999"

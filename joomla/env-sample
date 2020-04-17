@@ -1,5 +1,14 @@
-# Rename this file to .env
+# Domains & Project
+PREFIX=p1
 DOMAIN_NAME=joomla.nickyeoman.com
-PREFIX=project_name
+
+# PASSWORDS
 MYSQL_PASSWORD=MyNotSecurePassword1234
 MYSQL_ROOT_PASSWORD=AlsoNotSecure
+
+# Software versions
+JOOMLA_V=3.9.16-apache
+JOOMLADB_V=10.4.11
+
+# Network
+NETWORK_NAME=traefik_web

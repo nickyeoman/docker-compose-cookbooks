@@ -1,6 +1,6 @@
 # Domains & Project
 PREFIX=p1
-DOMAIN_NAME=bookstack.nickyeoman.com
+DOMAIN_NAME=passbolt.nickyeoman.com
 
 # Passwords
 MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
@@ -8,7 +8,7 @@ MYSQL_PASSWORD=Again2ASecurepass!
 
 # Software versions
 DB_V=10.4.11
-BOOKSTACK_V=0.29.0
+PASSBOLT_V=2.12.0-debian
 
 # Network
 NETWORK_NAME=traefik_web

@@ -1,0 +1,57 @@
+################################################################################
+# yourls
+# make sure you use the $PREFIX from .env for project_name
+# docker-compose -p project_name up -d
+#
+#
+# Version 1
+################################################################################
+version: '3.1'
+
+volumes:
+  yourls:
+  yourls-db:
+
+networks:
+  traefik_web:
+    external:
+      name: ${NETWORK_NAME}
+
+services:
+
+  yourls-db:
+    # https://hub.docker.com/_/mariadb/
+    image: mariadb:${DB_V}
+    restart: always
+    volumes:
+      - yourls-mariadb:/var/lib/mysql
+    networks:
+      - ${NETWORK_NAME}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: yourls
+      MYSQL_USER: yourls
+
+  yourls:
+    # reference: https://github.com/matomo-org/docker/blob/master/.examples/docker-compose.yml
+    image: yourls
+    restart: always
+    volumes:
+      - yourls:/var/www/html
+    networks:
+      - ${NETWORK_NAME}
+    environment:
+      YOURLS_DB_HOST: ${PREFIX}_yourls-db_1
+      YOURLS_DB_USER: yourls
+      YOURLS_DB_PASS: ${MYSQL_PASSWORD}
+      YOURLS_DB_NAME: yourls
+      YOURLS_SITE: https://${DOMAIN_NAME}
+      YOURLS_USER: ${YOURLS_USER}
+      YOURLS_PASS: ${YOURLS_PASS}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PREFIX}_yourls.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_yourls.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_yourls.tls=true"
+      - "traefik.http.services.${PREFIX}_yourls.loadbalancer.server.port=80"

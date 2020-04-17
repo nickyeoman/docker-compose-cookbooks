@@ -1,0 +1,10 @@
+# Domains & Project
+PREFIX=p1
+DOMAIN_NAME=gitea.nickyeoman.com
+
+# Software versions
+GITEA_V=1.11.4
+GITEA_PORT=22
+
+# Network
+NETWORK_NAME=traefik_web

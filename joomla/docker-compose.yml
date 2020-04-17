@@ -1,7 +1,10 @@
 ################################################################################
+# Joomla
 # Update the .env file
 # make sure you use the $PREFIX from .env for project_name
 # docker-compose -p project_name up -d
+#
+# Version 1
 ################################################################################
 version: '3.3'
 
@@ -12,17 +15,17 @@ volumes:
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: ${NETWORK_NAME}
 
 services:
 
   mariadb:
-    image: mariadb:10.4.11
+    image: mariadb:${JOOMLADB_V}
     restart: always
     volumes:
       - mariadb:/var/lib/mysql
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: joomla
@@ -30,12 +33,12 @@ services:
       MYSQL_DATABASE: joomla
 
   joomla:
-    image: joomla:3.9.16-apache
+    image: joomla:${JOOMLA_V}
     restart: always
     links:
       - ${PREFIX}_mariadb_1
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     volumes:
       - joomla:/var/www/html
     labels:

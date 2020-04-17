@@ -1,13 +1,16 @@
+###############################################################################
+# Rocket Chat
 # Update the .env file
 # make sure you use the $PREFIX from .env for project_name
 # docker-compose -p project_name up -d
+###############################################################################
 
 version: '2'
 
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: ${NETWORK_NAME}
 
 volumes:
   rocketchat:
@@ -16,8 +19,10 @@ volumes:
   rocketchat-scripts:
 
 services:
+
   rocketchat:
-    image: rocketchat/rocket.chat:latest
+    # https://hub.docker.com/r/rocketchat/rocket.chat
+    image: rocketchat/rocket.chat:${ROCKETCHAT_V}
     command: >
       bash -c
         "for i in `seq 1 30`; do
@@ -30,17 +35,17 @@ services:
     volumes:
       - rocketchat:/app/uploads
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     environment:
       - PORT=3000
-      - ROOT_URL=http://chat.nickyeoman.com
-      - MONGO_URL=mongodb://mongo:27017/rocketchat
-      - MONGO_OPLOG_URL=mongodb://mongo:27017/local
+      - ROOT_URL=https://${DOMAIN_NAME}
+      - MONGO_URL=mongodb://${PREFIX}_rc-db_1:27017/rocketchat
+      - MONGO_OPLOG_URL=mongodb://${PREFIX}_rc-db_1:27017/local
       - MAIL_URL=smtp://smtp.email
 #       - HTTP_PROXY=http://proxy.domain.com
 #       - HTTPS_PROXY=http://proxy.domain.com
     depends_on:
-      - mongo
+      - rc-db
     ports:
       - 3000:3000
     labels:
@@ -50,14 +55,14 @@ services:
       - "traefik.http.routers.${PREFIX}_chat.tls=true"
       - "traefik.http.services.${PREFIX}_chat.loadbalancer.server.port=3000"
 
-  mongo:
+  rc-db:
     image: mongo:4.0
     restart: unless-stopped
     volumes:
      - rocketchat-db:/data/db
      #- ./data/dump:/dump
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
     labels:
       - "traefik.enable=false"
@@ -78,9 +83,9 @@ services:
           sleep 5;
         done; (exit $$s)"
     depends_on:
-      - mongo
+      - ${PREFIX}_rc-db_1
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
 
   # hubot, the popular chatbot (add the bot user first and change the password before starting this image)
   hubot:
@@ -101,7 +106,7 @@ services:
     volumes:
       - rocketchat-scripts:/home/hubot/scripts
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
   # this is used to expose the hubot port for notifications on the host on port 3001, e.g. for hubot-jenkins-notifier
     ports:
       - 3001:8080

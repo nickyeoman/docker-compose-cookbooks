@@ -1,57 +1,60 @@
+################################################################################
+# Passbolt
+# make sure you use the $PREFIX from .env for project_name
+# docker-compose -p project_name up -d
+#
+# Version 1
+################################################################################
 version: '3.3'
 
 volumes:
   pb-mariadb:
-  pb-gpg_volume:
-  pb-images_volume:
+  pb-gpg:
+  pb-images:
 
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: ${NETWORK_NAME}
 
 services:
 
   pb-mariadb:
-    image: mariadb:10.4.11
-    container_name: pb-mariadb
-    hostname: pb-mariadb
+    image: mariadb:${DB_V}
     restart: always
     volumes:
       - pb-mariadb:/var/lib/mysql
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     environment:
-      MYSQL_ROOT_PASSWORD: thasdfisIsRoot29837!
-      MYSQL_PASSWORD: p@ssblt!!1NOW
-      MYSQL_DATABASE: db_passbolt
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: passbolt
       MYSQL_USER: passbolt
 
   # https://help.passbolt.com/hosting/install/ce/docker.html
   # once it's running you will have to manually create your first user:
   # as www-data user: ./cake passbolt register_user -u <email> -f <firstname> -l <lastname> -r admin
   passbolt:
-    image: passbolt/passbolt:2.12.0-debian
-    container_name: pb-passbolt
-    hostname: passbolt
+    image: passbolt/passbolt:${PASSBOLT_V}
     networks:
-      - traefik_web
+      - ${NETWORK_NAME}
     restart: always
     tty: true
     tmpfs:
       - /run
     depends_on:
-      - pb-mariadb
+      - ${PREFIX}_pb-mariadb_1
     env_file:
       - passbolt.env
-    command: ["/usr/bin/wait-for.sh", "-t", "0", "pb-mariadb:3306", "--", "/docker-entrypoint.sh"]
+    command: ["/usr/bin/wait-for.sh", "-t", "0", "${PREFIX}_pb-mariadb_1:3306", "--", "/docker-entrypoint.sh"]
     volumes:
-      - pb-gpg_volume:/var/www/passbolt/config/gpg
-      - pb-images_volume:/var/www/passbolt/webroot/img/public
+      - pb-gpg:/var/www/passbolt/config/gpg
+      - pb-images:/var/www/passbolt/webroot/img/public
       - ./license:/var/www/passbolt/config/license
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.passbolt.rule=Host(`passbolt.nickyeoman.com`)"
-      - "traefik.http.routers.passbolt.entrypoints=websecure"
-      - "traefik.http.routers.passbolt.tls=true"
-      - "traefik.http.services.passbolt.loadbalancer.server.port=80"
+      - "traefik.http.routers.${PREFIX}_passbolt.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_passbolt.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_passbolt.tls=true"
+      - "traefik.http.services.${PREFIX}_passbolt.loadbalancer.server.port=80"

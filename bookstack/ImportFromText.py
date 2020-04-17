@@ -1,5 +1,6 @@
 ################################################################################
 # use like this: python3 run.py > test.sql
+# TODO: you need to change the last comma to a semi colon for it to work in mysql
 ################################################################################
 
 import os
@@ -44,5 +45,3 @@ for filename in os.listdir(directory):
         continue
     else:
         continue
-
-# TODO: you need to change the last comma to a semi colon for it to work in mysql

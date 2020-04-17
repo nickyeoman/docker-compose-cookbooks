@@ -1,3 +1,14 @@
+################################################################################
+# Gitea
+# make sure you use the $PREFIX from .env for project_name
+# docker-compose -p project_name up -d
+#
+# Importing directly to the db (phpmydadmin)
+# you have to run the following in the container:
+# php artisan bookstack:regenerate-permissions
+#
+# Version 1
+################################################################################
 version: '3.3'
 
 volumes:
@@ -6,14 +17,15 @@ volumes:
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: ${NETWORK_NAME}
 
 services:
 
   gitea:
-    image: gitea/gitea:latest
-    networks: 
-      - traefik_web
+    # https://hub.docker.com/r/gitea/gitea
+    image: gitea/gitea:${GITEA_V}
+    networks:
+      - ${NETWORK_NAME}
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -23,11 +35,10 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "222:22"
+      - "${GITEA_PORT}:22"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.gitea.rule=Host(`gitea.nickyeoman.com`)"
-      - "traefik.http.routers.gitea.entrypoints=websecure"
-      - "traefik.http.routers.gitea.tls=true"
-      - "traefik.http.services.gite.loadbalancer.server.port=3000"
-
+      - "traefik.http.routers.${PREFIX}_gitea.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_gitea.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_gitea.tls=true"
+      - "traefik.http.services.${PREFIX}_gitea.loadbalancer.server.port=3000"
