@@ -1,5 +1,5 @@
 # BUILD ME:
-# docker build -t nick/lamp .
+# docker build -t nick/ubuntu-apache-php .
 
 # Dockerfile for ubuntu
 FROM ubuntu:bionic

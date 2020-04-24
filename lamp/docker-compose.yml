@@ -37,7 +37,7 @@ services:
       - admin_web
 
   lamp:
-    image: nick/lamp
+    image: nick/ubuntu-apache-php:latest
     restart: always
     links:
       - mariadb
