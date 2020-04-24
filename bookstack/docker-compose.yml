@@ -30,6 +30,7 @@ services:
       - bookstack-db:/var/lib/mysql
     networks:
       - admin_web
+    command: --max_allowed_packet=32505856
     environment:
       MYSQL_ROOT_PASSWORD: ${BOOKSTACK_MYSQL_ROOT_PASSWORD}
       MYSQL_USER: bookstack

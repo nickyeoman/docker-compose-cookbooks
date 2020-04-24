@@ -5,7 +5,7 @@
 # Make sure the .env file is updated
 # docker-compose up -d
 ###############################################################################
-version: '3.3'
+version: '2'
 
 networks:
   web:
