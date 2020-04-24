@@ -8,9 +8,9 @@
 version: '2'
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 services:
 
@@ -20,12 +20,13 @@ services:
     image: phpmyadmin/phpmyadmin:${PHPMYADMIN_V}
     environment:
       - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=200M
     restart: unless-stopped
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_phpmyadmin.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_phpmyadmin.rule=Host(`${PHPMYADMIN_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_phpmyadmin.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_phpmyadmin.tls=true"
       - "traefik.http.services.${PREFIX}_phpmyadmin.loadbalancer.server.port=80"

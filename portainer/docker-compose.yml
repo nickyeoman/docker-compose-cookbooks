@@ -13,28 +13,25 @@ volumes:
   portainer:
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 services:
 
   portainer:
-    # https://hub.docker.com/r/portainer/portainer
     image: portainer/portainer:${PORTAINER_V}
-    container_name: portainer
-    hostname: portainer
     command: -H unix:///var/run/docker.sock
     restart: unless-stopped
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
     command: -H unix:///var/run/docker.sock
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.portainer.rule=Host(`${PORTAINER_DOMAIN_NAME}`)"
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.tls=true"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"

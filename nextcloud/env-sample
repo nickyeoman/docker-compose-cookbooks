@@ -1,15 +1,11 @@
 # Domains & Project
 PREFIX=p1
-DOMAIN_NAME=nextcloud.nickyeoman.com
-PHPDB_DOMAIN_NAME=bookstack-db.nickyeoman.com
+NEXTCLOUD_DOMAIN_NAME=nextcloud.nickyeoman.com
 
 # Passwords
-MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
-MYSQL_PASSWORD=Again2ASecurepass!
+NEXTCLOUD_MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
+NEXTCLOUD_MYSQL_PASSWORD=Again2ASecurepass!
 
 # Software versions
 DB_V=10.4.11
 NEXTCLOUD_V=18.0.3-apache
-
-# Network
-NETWORK_NAME=traefik_web

@@ -17,9 +17,9 @@ volumes:
   bookstack-storage:
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 services:
 
@@ -29,11 +29,11 @@ services:
     volumes:
       - bookstack-db:/var/lib/mysql
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${BOOKSTACK_MYSQL_ROOT_PASSWORD}
       MYSQL_USER: bookstack
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PASSWORD: ${BOOKSTACK_MYSQL_PASSWORD}
       MYSQL_DATABASE: bookstack
 
   # https://hub.docker.com/r/solidnerd/bookstack
@@ -45,16 +45,16 @@ services:
       - DB_HOST=${PREFIX}_bookstack-db_1:3306
       - DB_DATABASE=bookstack
       - DB_USERNAME=bookstack
-      - DB_PASSWORD=${MYSQL_PASSWORD}
-      - APP_URL=https://${DOMAIN_NAME}
+      - DB_PASSWORD=${BOOKSTACK_MYSQL_PASSWORD}
+      - APP_URL=https://${BOOKSTACK_DOMAIN_NAME}
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     volumes:
       - bookstack-uploads:/var/www/bookstack/public/uploads
       - bookstack-storage:/var/www/bookstack/storage/uploads
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_bookstack.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_bookstack.rule=Host(`${BOOKSTACK_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_bookstack.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_bookstack.tls=true"
       - "traefik.http.services.${PREFIX}_bookstack.loadbalancer.server.port=8080"

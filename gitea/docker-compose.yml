@@ -13,22 +13,40 @@ version: '3.3'
 
 volumes:
   gitea:
+  gitea-db:
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 services:
+
+  gitea-db:
+    image: mariadb:${DB_V}
+    restart: always
+    volumes:
+      - gitea-db:/var/lib/mysql
+    networks:
+      - admin_web
+    environment:
+      MYSQL_ROOT_PASSWORD: ${GITEA_MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: gitea
+      MYSQL_PASSWORD: ${GITEA_MYSQL_PASSWORD}
+      MYSQL_DATABASE: gitea
 
   gitea:
     # https://hub.docker.com/r/gitea/gitea
     image: gitea/gitea:${GITEA_V}
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     environment:
       - USER_UID=1000
       - USER_GID=1000
+      - DB_TYPE=mysql
+      - DB_HOST=${PREFIX}_gitea-db:3306
+      - DB_NAME=gitea
+      - DB_USER=gitea
     restart: always
     volumes:
       - gitea:/data
@@ -38,7 +56,7 @@ services:
       - "${GITEA_PORT}:22"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_gitea.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_gitea.rule=Host(`${GITEA_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_gitea.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_gitea.tls=true"
       - "traefik.http.services.${PREFIX}_gitea.loadbalancer.server.port=3000"

@@ -1,54 +1,48 @@
 ################################################################################
 # Nextcloud
-# make sure you use the $PREFIX from .env for project_name
-# docker-compose -p project_name up -d
 #
 # Version 1
 ################################################################################
 version: '3.3'
 
 volumes:
-  mariadb:
+  nextcloud-db:
   nextcloud:
-  document_data:
-  document_log:
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 services:
 
-  mariadb:
+  nextcloud-db:
     image: mariadb:${DB_V}
     restart: always
     volumes:
-      - mariadb:/var/lib/mysql
+      - nextcloud-db:/var/lib/mysql
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${NEXTCLOUD_MYSQL_ROOT_PASSWORD}
       MYSQL_USER: nextcloud
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: nextcloud
+      MYSQL_PASSWORD: ${NEXTCLOUD_MYSQL_PASSWORD}
+      MYSQL_DATABASE: db_nextcloud
 
   nextcloud:
     image: nextcloud:${NEXTCLOUD_V}
     stdin_open: true
     tty: true
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     restart: always
-    depends_on:
-      - ${PREFIX}_mariadb_1
     links:
-      - ${PREFIX}_mariadb_1
+      - nextcloud-db
     volumes:
       - nextcloud:/var/www/html
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_nextcloud.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_nextcloud.rule=Host(`${NEXTCLOUD_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_nextcloud.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_nextcloud.tls=true"
       - "traefik.http.services.${PREFIX}_nextcloud.loadbalancer.server.port=80"

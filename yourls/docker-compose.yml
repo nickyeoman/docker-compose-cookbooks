@@ -13,9 +13,9 @@ volumes:
   yourls-db:
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 services:
 
@@ -24,13 +24,13 @@ services:
     image: mariadb:${DB_V}
     restart: always
     volumes:
-      - yourls-mariadb:/var/lib/mysql
+      - yourls-db:/var/lib/mysql
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: yourls
+      MYSQL_ROOT_PASSWORD: ${YOURLS_MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${YOURLS_MYSQL_PASSWORD}
+      MYSQL_DATABASE: db_yourls
       MYSQL_USER: yourls
 
   yourls:
@@ -40,18 +40,18 @@ services:
     volumes:
       - yourls:/var/www/html
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     environment:
       YOURLS_DB_HOST: ${PREFIX}_yourls-db_1
       YOURLS_DB_USER: yourls
-      YOURLS_DB_PASS: ${MYSQL_PASSWORD}
-      YOURLS_DB_NAME: yourls
-      YOURLS_SITE: https://${DOMAIN_NAME}
+      YOURLS_DB_PASS: ${YOURLS_MYSQL_PASSWORD}
+      YOURLS_DB_NAME: db_yourls
+      YOURLS_SITE: https://${YOURLS_DOMAIN_NAME}
       YOURLS_USER: ${YOURLS_USER}
       YOURLS_PASS: ${YOURLS_PASS}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_yourls.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_yourls.rule=Host(`${YOURLS_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_yourls.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_yourls.tls=true"
       - "traefik.http.services.${PREFIX}_yourls.loadbalancer.server.port=80"

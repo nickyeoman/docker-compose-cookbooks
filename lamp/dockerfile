@@ -1,0 +1,47 @@
+# BUILD ME:
+# docker build -t nick/lamp .
+
+# Dockerfile for ubuntu
+FROM ubuntu:bionic
+MAINTAINER Nick Yeoman (c@nickyeoman.com)
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# install apache
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends apache2
+
+RUN a2enmod socache_shmcb ssl expires rewrite headers
+
+#Install php
+# each individually makes debuging easier
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q php
+RUN apt-get install -y php-imagick
+RUN apt-get install -y php-gd php-curl
+RUN apt-get install -y php-intl
+RUN apt-get install -y php-json
+RUN apt-get install -y php-memcache
+RUN apt-get install -y php-mbstring
+RUN apt-get install -y libapache2-mod-php7.2
+RUN apt-get install -y php7.2-xml
+RUN apt-get install -y php7.2-zip
+RUN apt-get install -y php7.2-mbstring
+RUN apt-get install -y php7.2-mysql
+
+COPY config/php.ini /etc/php/7.2/apache2/php.ini
+
+#Configure apache
+RUN servername="ServerName docker.fbot.co"
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN rm /etc/apache2/sites-available/000-default.conf
+COPY config/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Cleanup: remove lists
+RUN rm -r /var/lib/apt/lists/*
+
+# Default command
+CMD ["apachectl", "-D", "FOREGROUND"]
+
+# Ports
+EXPOSE 80

@@ -1,0 +1,5 @@
+# docker-compose -p <PREFIX>  up -d
+
+# Domains & Project
+PREFIX=p1
+DOMAIN_NAME=p1.nickyeoman.com

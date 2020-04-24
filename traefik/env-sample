@@ -1,6 +1,6 @@
 # Domains & Project
 PREFIX=p1
-DOMAIN_NAME=traefik.nickyeoman.com
+TRAEFIK_DOMAIN_NAME=traefik.nickyeoman.com
 
 # Passwords
 # https://medium.com/@techupbusiness/add-basic-authentication-in-docker-compose-files-with-traefik-34c781234970
@@ -11,6 +11,3 @@ TRAEFIK_PASS=M@keASecureOne
 # Software versions
 # https://hub.docker.com/_/traefik
 TRAEFIK_V=2.2.0
-
-# Network
-NETWORK_NAME=traefik_web

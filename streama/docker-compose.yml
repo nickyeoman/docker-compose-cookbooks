@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    container_name: mysql
+    hostname: mysql
+    networks:
+      - traefik_web
+    expose:
+      - 3306
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: streama_root_password
+      MYSQL_USER: streama
+      MYSQL_DATABASE: streama
+      MYSQL_PASSWORD: streama_password
+
+  streama:
+    image: streama
+    build: .
+    restart: always
+    container_name: streama
+    hostname: streama
+    depends_on:
+      - mysql
+    networks:
+      - traefik_web
+    expose:
+            - 8080
+    volumes:
+      - movies:/data/streama # Change to your video folder
+      - app_data:/app/streama
+    environment:
+      ACTIVE_PROFILE: mysql
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: streama
+      MYSQL_USER: streama
+      MYSQL_PASSWORD: streama_password
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nixflix.rule=Host(`nixflix.com`)"
+      - "traefik.http.routers.nixflix.entrypoints=websecure"
+      - "traefik.http.routers.nixflix.tls=true"
+      - "traefik.http.services.nixflix.loadbalancer.server.port=8080"
+
+networks:
+  traefik_web:
+    external:
+      name: traefik_web
+
+volumes:
+  db_data:
+  app_data:
+  proxy_reverse_data:
+  proxy_reverse_data_log:
+  movies:
