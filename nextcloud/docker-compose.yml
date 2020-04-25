@@ -44,5 +44,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_nextcloud.rule=Host(`${NEXTCLOUD_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_nextcloud.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_nextcloud.tls=true"
+      - "traefik.http.routers.${PREFIX}_nextcloud.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_nextcloud.loadbalancer.server.port=80"

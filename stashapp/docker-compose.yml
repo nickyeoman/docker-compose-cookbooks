@@ -53,5 +53,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_stash.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_stash.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_stash.tls=true"
+      - "traefik.http.routers.${PREFIX}_stash.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_stash.loadbalancer.server.port=9999"

@@ -52,7 +52,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_chat.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_chat.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_chat.tls=true"
+      - "traefik.http.routers.${PREFIX}_chat.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_chat.loadbalancer.server.port=3000"
 
   rc-db:

@@ -56,5 +56,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_passbolt.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_passbolt.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_passbolt.tls=true"
+      - "traefik.http.routers.${PREFIX}_passbolt.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_passbolt.loadbalancer.server.port=80"

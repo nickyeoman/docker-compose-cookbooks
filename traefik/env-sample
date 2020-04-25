@@ -1,7 +1,7 @@
 # Domains & Project
 PREFIX=p1
 TRAEFIK_DOMAIN_NAME=traefik.nickyeoman.com
-
+TRAEFIK_LE_EMAIL=email@domain.com
 # Passwords
 # https://medium.com/@techupbusiness/add-basic-authentication-in-docker-compose-files-with-traefik-34c781234970
 # echo $(htpasswd -nbB <USER> "<PASS>") | sed -e s/\\$/\\$\\$/g

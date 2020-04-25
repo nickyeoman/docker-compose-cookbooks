@@ -53,5 +53,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_yourls.rule=Host(`${YOURLS_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_yourls.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_yourls.tls=true"
+      - "traefik.http.routers.${PREFIX}_yourls.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_yourls.loadbalancer.server.port=80"

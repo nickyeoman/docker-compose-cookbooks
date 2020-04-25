@@ -57,5 +57,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_bookstack.rule=Host(`${BOOKSTACK_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_bookstack.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_bookstack.tls=true"
+      - "traefik.http.routers.${PREFIX}_bookstack.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_bookstack.loadbalancer.server.port=8080"

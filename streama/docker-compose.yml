@@ -1,3 +1,4 @@
+---
 version: "3"
 
 services:
@@ -42,15 +43,15 @@ services:
       MYSQL_PASSWORD: streama_password
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nixflix.rule=Host(`nixflix.com`)"
-      - "traefik.http.routers.nixflix.entrypoints=websecure"
-      - "traefik.http.routers.nixflix.tls=true"
-      - "traefik.http.services.nixflix.loadbalancer.server.port=8080"
+      - "traefik.http.routers.${PREFIX}_streama.rule=Host(`nixflix.nickyeoman.com`)"
+      - "traefik.http.routers.${PREFIX}_streama.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_streama.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${PREFIX}_streama.loadbalancer.server.port=8080"
 
 networks:
   traefik_web:
     external:
-      name: traefik_web
+      name: admin_web
 
 volumes:
   db_data:

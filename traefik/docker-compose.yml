@@ -30,7 +30,7 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.letsencrypt.acme.email=social@frostybot.com"
+      - "--certificatesresolvers.letsencrypt.acme.email=${TRAEFIK_LE_EMAIL}"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
@@ -48,8 +48,7 @@ services:
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.middlewares=dashboardauth"
       - "traefik.http.routers.traefik.middlewares=authtraefik"
-      #- "traefik.http.middlewares.authtraefik.basicauth.users=<USER>:<PASSWORD>"
-      - "traefik.http.middlewares.authtraefik.basicauth.users=nick:$$2y$$05$$XqXzcsc./tjB737OKEy8zec71XZi9Qe761cFUc71O6gLnAhG4ClU2"
+      - "traefik.http.middlewares.authtraefik.basicauth.users=<USER>:<PASSWORD>"
       # global redirect to https
       - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
       - "traefik.http.routers.http-catchall.entrypoints=web"
@@ -57,4 +56,3 @@ services:
       # middleware redirect
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.enable=true"
-      

@@ -58,5 +58,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_gitea.rule=Host(`${GITEA_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_gitea.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_gitea.tls=true"
+      - "traefik.http.routers.${PREFIX}_gitea.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_gitea.loadbalancer.server.port=3000"
