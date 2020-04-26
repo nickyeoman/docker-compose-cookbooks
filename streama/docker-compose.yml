@@ -1,61 +1,51 @@
 ---
-version: "3"
+version: "2"
+
+volumes:
+  strema-db:
+  streama-movies:
+  streama-appdata:
+
+networks:
+  admin_web:
+    external:
+      name: admin_web
 
 services:
-  mysql:
-    image: mysql:5.7
+  streama-db:
+    image: mariadb:${DB_V}
     restart: always
-    container_name: mysql
-    hostname: mysql
     networks:
-      - traefik_web
-    expose:
-      - 3306
+      - admin_web
     volumes:
-      - db_data:/var/lib/mysql
+      - streama-db:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: streama_root_password
-      MYSQL_USER: streama
+      MYSQL_ROOT_PASSWORD: ${STREAMA_MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${STREAMA_MYSQL_PASSWORD}
       MYSQL_DATABASE: streama
-      MYSQL_PASSWORD: streama_password
+      MYSQL_USER: streama
 
   streama:
     image: streama
     build: .
     restart: always
-    container_name: streama
-    hostname: streama
     depends_on:
-      - mysql
+      - streama-db
     networks:
-      - traefik_web
-    expose:
-            - 8080
+      - admin_web
     volumes:
-      - movies:/data/streama # Change to your video folder
-      - app_data:/app/streama
+      - streama-movies:/data/streama # Change to your video folder
+      - streama-appdata:/app/streama
     environment:
       ACTIVE_PROFILE: mysql
-      MYSQL_HOST: mysql
+      MYSQL_HOST: ${PREFIX}_streama-db_1
       MYSQL_PORT: 3306
       MYSQL_DB: streama
       MYSQL_USER: streama
-      MYSQL_PASSWORD: streama_password
+      MYSQL_PASSWORD: ${STREAMA_MYSQL_PASSWORD}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_streama.rule=Host(`nixflix.nickyeoman.com`)"
+      - "traefik.http.routers.${PREFIX}_streama.rule=Host(`${STREAMA_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_streama.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_streama.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_streama.loadbalancer.server.port=8080"
-
-networks:
-  traefik_web:
-    external:
-      name: admin_web
-
-volumes:
-  db_data:
-  app_data:
-  proxy_reverse_data:
-  proxy_reverse_data_log:
-  movies:
