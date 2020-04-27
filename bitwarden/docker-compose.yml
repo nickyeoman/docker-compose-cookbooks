@@ -1,0 +1,32 @@
+################################################################################
+# bitwarden
+#
+# Version 1
+################################################################################
+
+version: "3"
+
+volumes:
+  bitwarden:
+
+networks:
+  admin_web:
+    external:
+      name: admin_web
+
+services:
+  bitwarden:
+    # https://hub.docker.com/r/bitwardenrs/server
+    image: bitwardenrs/server:${BITWARDEN_V}
+    env_file: ./bitwarden.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - bitwarden:/data/:rw
+    networks:
+        - admin_web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PREFIX}_bitwarden.rule=Host(`${BITWARDEN_DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_bitwarden.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_bitwarden.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${PREFIX}_bitwarden.loadbalancer.server.port=80"

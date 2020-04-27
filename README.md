@@ -19,4 +19,11 @@ To create multiple projects is a little bit more tricky as  you have to
 define new directories for the .env file.
 
 To do this I've just been copying the app folder to a domain-name folder.
-Which isn't ideal, but I don't know how to do this more elegantly. 
+Which isn't ideal, but I don't know how to do this more elegantly.
+
+# Possible additions:
+
+* emby: [dockerhub](https://hub.docker.com/r/emby/embyserver) [official](https://emby.media/)
+* mailtrain: https://hub.docker.com/r/mailtrain/mailtrain
+* portus: https://hub.docker.com/r/opensuse/portus/
+* silverpeas: https://hub.docker.com/_/silverpeas

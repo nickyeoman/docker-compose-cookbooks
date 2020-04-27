@@ -8,9 +8,9 @@
 version: '2'
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 volumes:
   rocketchat:
@@ -35,10 +35,10 @@ services:
     volumes:
       - rocketchat:/app/uploads
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     environment:
       - PORT=3000
-      - ROOT_URL=https://${DOMAIN_NAME}
+      - ROOT_URL=https://${ROCKET_DOMAIN_NAME}
       - MONGO_URL=mongodb://${PREFIX}_rc-db_1:27017/rocketchat
       - MONGO_OPLOG_URL=mongodb://${PREFIX}_rc-db_1:27017/local
       - MAIL_URL=smtp://smtp.email
@@ -46,11 +46,9 @@ services:
 #       - HTTPS_PROXY=http://proxy.domain.com
     depends_on:
       - rc-db
-    ports:
-      - 3000:3000
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_chat.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_chat.rule=Host(`${ROCKET_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_chat.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_chat.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_chat.loadbalancer.server.port=3000"
@@ -62,7 +60,7 @@ services:
      - rocketchat-db:/data/db
      #- ./data/dump:/dump
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
     labels:
       - "traefik.enable=false"
@@ -85,14 +83,14 @@ services:
     depends_on:
       - ${PREFIX}_rc-db_1
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
 
   # hubot, the popular chatbot (add the bot user first and change the password before starting this image)
   hubot:
     image: rocketchat/hubot-rocketchat:latest
     restart: unless-stopped
     environment:
-      - ROCKETCHAT_URL=rocketchat:3000
+      - ROCKETCHAT_URL=${PREFIX}_rocketchat_1:3000
       - ROCKETCHAT_ROOM=GENERAL
       - ROCKETCHAT_USER=bot
       - ROCKETCHAT_PASSWORD=botpassword
@@ -106,7 +104,4 @@ services:
     volumes:
       - rocketchat-scripts:/home/hubot/scripts
     networks:
-      - ${NETWORK_NAME}
-  # this is used to expose the hubot port for notifications on the host on port 3001, e.g. for hubot-jenkins-notifier
-    ports:
-      - 3001:8080
+      - admin_web

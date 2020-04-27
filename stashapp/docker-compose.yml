@@ -5,7 +5,7 @@
 #
 # Version 1
 ################################################################################
-version: '3.4'
+version: '2'
 
 volumes:
   stash:
@@ -14,9 +14,9 @@ volumes:
   stash-generated:
 
 networks:
-  traefik_web:
+  admin_web:
     external:
-      name: ${NETWORK_NAME}
+      name: admin_web
 
 services:
   stash:
@@ -34,7 +34,7 @@ services:
       - STASH_METADATA=/metadata/
       - STASH_CACHE=/cache/
     networks:
-      - ${NETWORK_NAME}
+      - admin_web
     volumes:
       - /etc/localtime:/etc/localtime:ro
       ## Adjust below paths (the left part) to your liking.
@@ -51,7 +51,7 @@ services:
       - stash-generated:/generated
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_stash.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_stash.rule=Host(`${STASH_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_stash.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_stash.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_stash.loadbalancer.server.port=9999"

@@ -1,0 +1,6 @@
+# Domains & Project
+PREFIX=p1
+HEIMDALL_DOMAIN_NAME=heimdall.nickyeoman.com
+
+# Software versions
+HEIMDALL_V=2.2.2-ls83

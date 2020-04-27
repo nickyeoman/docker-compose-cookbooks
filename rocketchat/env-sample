@@ -1,13 +1,6 @@
 # Domains & Project
 PREFIX=p1
-DOMAIN_NAME=joomla.nickyeoman.com
-
-# Passwords
-MYSQL_PASSWORD=MyNotSecurePassword1234
-MYSQL_ROOT_PASSWORD=AlsoNotSecure
+ROCKET_DOMAIN_NAME=chat.nickyeoman.com
 
 # Software versions
 ROCKETCHAT_V=3.1.1
-
-# Network
-NETWORK_NAME=traefik_web

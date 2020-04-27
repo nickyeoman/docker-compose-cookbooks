@@ -1,17 +1,30 @@
 # https://hub.docker.com/r/linuxserver/heimdall
 ---
 version: "2.1"
+
+volumes:
+  heimdall:
+
+networks:
+  admin_web:
+    external:
+      name: admin_web
+
 services:
   heimdall:
-    image: linuxserver/heimdall
+    # https://hub.docker.com/r/linuxserver/heimdall
+    image: linuxserver/heimdall:${HEIMDALL_V}
     container_name: heimdall
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Vancouver
     volumes:
-      - /path/to/appdata/config:/config
-    ports:
-      - 80:80
-      - 443:443
+      - heimdall:/config
     restart: unless-stopped
+  labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.${PREFIX}_heimdall.rule=Host(`${HEIMDALL_DOMAIN_NAME}`)"
+    - "traefik.http.routers.${PREFIX}_heimdall.entrypoints=websecure"
+    - "traefik.http.routers.${PREFIX}_heimdall.tls.certresolver=letsencrypt"
+    - "traefik.http.services.${PREFIX}_heimdall.loadbalancer.server.port=80"

@@ -1,8 +1,0 @@
-version: '3'
-services:
-  # https://hub.docker.com/r/mailtrain/mailtrain
-  mailtrain:
-    environment:
-    - URL_BASE_TRUSTED
-    - URL_BASE_SANDBOX
-    - URL_BASE_PUBLIC
