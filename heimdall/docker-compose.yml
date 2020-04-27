@@ -14,7 +14,6 @@ services:
   heimdall:
     # https://hub.docker.com/r/linuxserver/heimdall
     image: linuxserver/heimdall:${HEIMDALL_V}
-    container_name: heimdall
     environment:
       - PUID=1000
       - PGID=1000
@@ -22,6 +21,8 @@ services:
     volumes:
       - heimdall:/config
     restart: unless-stopped
+    networks:
+      - admin_web
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${PREFIX}_heimdall.rule=Host(`${HEIMDALL_DOMAIN_NAME}`)"
