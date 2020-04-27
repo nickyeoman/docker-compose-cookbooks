@@ -81,7 +81,7 @@ services:
           sleep 5;
         done; (exit $$s)"
     depends_on:
-      - ${PREFIX}_rc-db_1
+      - rc-db
     networks:
       - admin_web
 
