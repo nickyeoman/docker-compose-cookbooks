@@ -34,6 +34,8 @@ services:
     restart: unless-stopped
     volumes:
       - rocketchat:/app/uploads
+    networks:
+      - admin_web
     environment:
       - PORT=3000
       - ROOT_URL=http://${ROCKET_DOMAIN_NAME}:3000
@@ -57,6 +59,8 @@ services:
     volumes:
      - rocketchat-db:/data/db
      - rocketchat-dump:/dump
+    networks:
+      - admin_web
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
 
   mongo-init-replica:
@@ -74,6 +78,8 @@ services:
         done; (exit $$s)"
     depends_on:
       - mongo
+    networks:
+      - admin_web
 
   # hubot, the popular chatbot (add the bot user first and change the password before starting this image)
   hubot:
@@ -91,3 +97,6 @@ services:
       - rocketchat
     volumes:
       - rocketchat-scripts:/home/hubot/scripts
+    networks:
+      - admin_web
+      
