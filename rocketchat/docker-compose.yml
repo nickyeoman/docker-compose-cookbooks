@@ -18,8 +18,6 @@ volumes:
   rocketchat-dump:
   rocketchat-scripts:
 
-version: '2'
-
 services:
   rocketchat:
     image: rocketchat/rocket.chat:latest
@@ -99,4 +97,3 @@ services:
       - rocketchat-scripts:/home/hubot/scripts
     networks:
       - admin_web
-      
