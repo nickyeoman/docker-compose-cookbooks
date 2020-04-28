@@ -55,6 +55,6 @@ services:
       MYSQL_DATABASE: wallabag
 
   wallabag-redis:
-    image: redis:alpine:5.0.9
+    image: redis:5.0.9
     networks:
       - admin_web
