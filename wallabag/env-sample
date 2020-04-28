@@ -1,11 +1,11 @@
 # Domains & Project
 PREFIX=p1
-BOOKSTACK_DOMAIN_NAME=bookstack.nickyeoman.com
+WALLABAG_DOMAIN_NAME=wallabag.nickyeoman.com
 
 # Passwords
-BOOKSTACK_MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
-BOOKSTACK_MYSQL_PASSWORD=Again2ASecurepass!
+WALLABAG_MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
+WALLABAG_MYSQL_PASSWORD=Again2ASecurepass!
 
 # Software versions
 DB_V=10.4.11
-BOOKSTACK_V=0.29.0
+WALLABAG_V=2.3.8

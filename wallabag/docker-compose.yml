@@ -8,6 +8,7 @@ networks:
 
 volumes:
   wallabag:
+  wallabag-db:
 
 services:
 
@@ -43,7 +44,7 @@ services:
     image: mariadb:${DB_V}
     restart: always
     volumes:
-      - bookstack-db:/var/lib/mysql
+      - wallabag-db:/var/lib/mysql
     networks:
       - admin_web
     command: --max_allowed_packet=32505856
