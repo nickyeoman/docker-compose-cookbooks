@@ -29,8 +29,11 @@ services:
       - SYMFONY__ENV__MAILER_PASSWORD=~
       - SYMFONY__ENV__FROM_EMAIL=wallabag@example.com
       - SYMFONY__ENV__DOMAIN_NAME=https://${WALLABAG_DOMAIN_NAME}
+      - SYMFONY__ENV__REDIS_HOST=${PREFIX}_wallabag-redis_1
     volumes:
       - wallabag:/var/www/wallabag/web/assets/images
+    expose:
+      - "80"
     networks:
       - admin_web
     labels:
