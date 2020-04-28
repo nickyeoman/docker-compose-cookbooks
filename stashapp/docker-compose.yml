@@ -26,8 +26,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-file: "10"
-        max-size: "2m"
+        max-file: "100"
+        max-size: "200m"
     environment:
       - STASH_STASH=/data/
       - STASH_GENERATED=/generated/
@@ -37,17 +37,9 @@ services:
       - admin_web
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      ## Adjust below paths (the left part) to your liking.
-      ## E.g. you can change ./config:/root/.stash to ./stash:/root/.stash
-      ## Keep configs here.
-      #- ./config:/root/.stash
-      ## Point this at your collection.
       - stash:/data
-      ## This is where your stash's metadata lives
       - stash-metadata:/metadata
-      ## Any other cache content.
       - stash-cache:/cache
-      ## Where to store generated content (screenshots,previews,transcodes,sprites)
       - stash-generated:/generated
     labels:
       - "traefik.enable=true"

@@ -2,6 +2,9 @@
 # Nextcloud
 #
 # Version 1
+#
+# useful commands:
+# php occ trashbin:cleanup --all-users
 ################################################################################
 version: '3.3'
 
