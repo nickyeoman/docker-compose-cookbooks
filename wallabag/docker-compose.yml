@@ -19,17 +19,26 @@ services:
       - wallabag-db:/var/lib/mysql
     networks:
       - admin_web
-    command: --max_allowed_packet=32505856
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --character-set-client-handshake=FALSE
     environment:
       MYSQL_ROOT_PASSWORD: ${WALLABAG_MYSQL_ROOT_PASSWORD}
       MYSQL_USER: wallabag
       MYSQL_PASSWORD: ${WALLABAG_MYSQL_PASSWORD}
       MYSQL_DATABASE: wallabag
+      MYSQL_ROOT_HOST: "172.18.0.20"
 
   wallabag:
     #https://hub.docker.com/r/wallabag/wallabag
     image: wallabag/wallabag:${WALLABAG_V}
+    healthcheck:
+      test: ["CMD", "curl" , "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     environment:
+      - TZ=it-IT
+      - PUID=1000
+      - PGID=1000
       - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD}
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
       - SYMFONY__ENV__DATABASE_HOST=${PREFIX}_wallabag-db_1
@@ -49,9 +58,10 @@ services:
       - wallabag:/var/www/wallabag/web/assets/images
     expose:
       - "80"
+      - "443"
     depends_on:
       - wallabag-db
-    link:
+    links:
       - wallabag-db
     networks:
       - admin_web
@@ -60,7 +70,7 @@ services:
       - "traefik.http.routers.${PREFIX}_wallabag.rule=Host(`${WALLABAG_DOMAIN_NAME}`)"
       - "traefik.http.routers.${PREFIX}_wallabag.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_wallabag.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_wallabag.loadbalancer.server.port=80"
+      - "traefik.http.services.${PREFIX}_wallabag.loadbalancer.server.port=443"
 
   wallabag-redis:
     image: redis:5.0.9
