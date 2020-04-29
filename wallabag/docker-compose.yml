@@ -34,6 +34,10 @@ services:
       - wallabag:/var/www/wallabag/web/assets/images
     expose:
       - "80"
+    depends_on:
+      - wallabag-db
+    link:
+      - wallabag-db
     networks:
       - admin_web
     labels:
