@@ -12,6 +12,20 @@ volumes:
 
 services:
 
+  wallabag-db:
+    image: mariadb:${DB_V}
+    restart: always
+    volumes:
+      - wallabag-db:/var/lib/mysql
+    networks:
+      - admin_web
+    command: --max_allowed_packet=32505856
+    environment:
+      MYSQL_ROOT_PASSWORD: ${WALLABAG_MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: wallabag
+      MYSQL_PASSWORD: ${WALLABAG_MYSQL_PASSWORD}
+      MYSQL_DATABASE: wallabag
+
   wallabag:
     #https://hub.docker.com/r/wallabag/wallabag
     image: wallabag/wallabag:${WALLABAG_V}
@@ -30,6 +44,7 @@ services:
       - SYMFONY__ENV__FROM_EMAIL=wallabag@example.com
       - SYMFONY__ENV__DOMAIN_NAME=https://${WALLABAG_DOMAIN_NAME}
       - SYMFONY__ENV__REDIS_HOST=${PREFIX}_wallabag-redis_1
+      - SYMFONY__ENV__SECRET=Fm0r4R
     volumes:
       - wallabag:/var/www/wallabag/web/assets/images
     expose:
@@ -46,20 +61,6 @@ services:
       - "traefik.http.routers.${PREFIX}_wallabag.entrypoints=websecure"
       - "traefik.http.routers.${PREFIX}_wallabag.tls.certresolver=letsencrypt"
       - "traefik.http.services.${PREFIX}_wallabag.loadbalancer.server.port=80"
-
-  wallabag-db:
-    image: mariadb:${DB_V}
-    restart: always
-    volumes:
-      - wallabag-db:/var/lib/mysql
-    networks:
-      - admin_web
-    command: --max_allowed_packet=32505856
-    environment:
-      MYSQL_ROOT_PASSWORD: ${WALLABAG_MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: wallabag
-      MYSQL_PASSWORD: ${WALLABAG_MYSQL_PASSWORD}
-      MYSQL_DATABASE: wallabag
 
   wallabag-redis:
     image: redis:5.0.9
