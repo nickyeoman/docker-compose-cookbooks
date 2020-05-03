@@ -1,0 +1,57 @@
+################################################################################
+# MONICA_
+# TODO: this isn't working, it won't grab the DB host name
+# I think you have to build it with the env file
+#
+# make sure you use the $PREFIX from .env for project_name
+# docker-compose -p project_name up -d
+#
+# Importing directly to the db (phpmydadmin)
+# you have to run the following in the container:
+# php artisan bookstack:regenerate-permissions
+#
+# Version 1
+################################################################################
+version: "3.4"
+
+volumes:
+  monica-db:
+  monica:
+
+networks:
+  admin_web:
+    external:
+      name: admin_web
+
+services:
+  monica:
+    # https://hub.docker.com/r/monicahq/monicahq
+    image: monicahq/monicahq:${MONICA_V}
+    depends_on:
+      - monica-db
+    networks:
+      - admin_web
+    ports:
+      - 80:80
+    volumes:
+      - monica:/var/www/monica/storage
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PREFIX}_monica.rule=Host(`${MONICA_DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_monica.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_monica.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${PREFIX}_monica.loadbalancer.server.port=8080"
+
+  monica-db:
+    image: mariadb:${DB_V}
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MONICA_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=monica
+      - MYSQL_USER=homestead
+      - MYSQL_PASSWORD=${MONICA_MYSQL_PASSWORD}
+    volumes:
+      - monica-db:/var/lib/mysql
+    networks:
+      - admin_web

@@ -6,7 +6,7 @@
 
 import os
 import html
-directory = '/home/nick/working/emails-2019'
+directory = '/home/nick/working/emails-202003'
 
 # The insert statement to insert a page
 print("INSERT INTO `pages` (`id`, `book_id`, `chapter_id`, `name`, `slug`, `html`, `text`, `priority`, `created_at`, `updated_at`, `created_by`, `updated_by`, `restricted`, `draft`, `markdown`, `revision_count`, `template`) VALUES" )
@@ -38,7 +38,7 @@ for filename in os.listdir(directory):
         slug=slugnospace.lower()
 
         # now write the sql query
-        print("(NULL, '1', '_fixme_', '", end = '')
+        print("(NULL, '1', '33', '", end = '')
         print(filenoext, end = '') #Name
         print("', '", end = '')
         print(slug, end = '') #slug
