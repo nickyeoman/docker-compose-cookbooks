@@ -1,0 +1,11 @@
+# Domains & Project
+PREFIX=p1
+MATOMO_DOMAIN_NAME=matomo.nickyeoman.com
+
+# Passwords
+MATOMO_MYSQL_ROOT_PASSWORD=ChangeMe2ASecurepass!
+MATOMO_MYSQL_PASSWORD=Again2ASecurepass!
+
+# Software versions
+DB_V=10.4.0
+MATOMO_V=3.7.0

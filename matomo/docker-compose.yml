@@ -1,0 +1,50 @@
+################################################################################
+# matomo
+#
+# Version 1
+#
+################################################################################
+version: '3.3'
+
+volumes:
+  matomodb:
+  matomo:
+  matomoconfig:
+  matomologs:
+
+networks:
+  admin_web:
+    external:
+      name: admin_web
+
+services:
+
+  matomodb:
+    image: mariadb:${DB_V}
+    restart: always
+    volumes:
+      - matomodb:/var/lib/mysql
+    networks:
+      - admin_web
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MATOMO_MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MATOMO_MYSQL_PASSWORD}
+      MYSQL_DATABASE: matomo
+      MYSQL_USER: matomo
+
+  # https://hub.docker.com/_/matomo/
+  matomo:
+    image: matomo:${MATOMO_V}
+    volumes:
+      - matomo:/var/www/html
+      - matomoconfig:/var/www/html/config
+      - matomologs:/var/www/html/logs
+    networks:
+      - admin_web
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PREFIX}_nextcloud.rule=Host(`${MATOMO_DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_nextcloud.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_nextcloud.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${PREFIX}_nextcloud.loadbalancer.server.port=80"

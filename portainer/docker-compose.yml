@@ -4,7 +4,7 @@
 # Change .env then
 # docker-compose up -d
 #
-# Version 1
+# Version 2
 ################################################################################
 
 version: '2'
@@ -27,6 +27,7 @@ services:
       - admin_web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./templates/templates.json:/templates.json
       - portainer:/data
     command: -H unix:///var/run/docker.sock
     labels:
