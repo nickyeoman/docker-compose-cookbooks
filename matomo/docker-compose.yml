@@ -44,7 +44,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_nextcloud.rule=Host(`${MATOMO_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_nextcloud.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_nextcloud.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_nextcloud.loadbalancer.server.port=80"
+      - "traefik.http.routers.${PREFIX}_matomo.rule=Host(`${MATOMO_DOMAIN_NAME}`)"
+      - "traefik.http.routers.${PREFIX}_matomo.entrypoints=websecure"
+      - "traefik.http.routers.${PREFIX}_matomo.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${PREFIX}_matomo.loadbalancer.server.port=80"
