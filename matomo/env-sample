@@ -8,4 +8,4 @@ MATOMO_MYSQL_PASSWORD=Again2ASecurepass!
 
 # Software versions
 DB_V=10.4.0
-MATOMO_V=3.7.0
+MATOMO_V=3.13.5-apache
