@@ -4,4 +4,4 @@ PORTAINER_DOMAIN_NAME=portainer.nickyeoman.com
 # Software versions
 
 # https://hub.docker.com/r/portainer/portainer
-PORTAINER_V=1.23.2
+PORTAINER_V=1.24.0
