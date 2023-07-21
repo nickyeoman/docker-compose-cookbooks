@@ -1,0 +1,69 @@
+version: '3.8'
+
+# Recommended .env file
+#
+# # Docker
+# NETWORKNAME=admin_web
+# # MySQL
+# MYSQL_ROOT_PASSWORD=ChangeMe!
+# MYSQL_USER=ChangeMe!
+# MYSQL_PASSWORD=ChangeMe!
+# MYSQL_DATABASE=ChangeMe!
+# # GITEA
+# GITEA_API_URL=http://giteaDomain.com/api/v1
+# ACCESS_TOKEN=ChangeMe!
+# # Joomla
+# EMAIL=info@example.com
+# JOOMLA_USER="ChangeMe!"
+# JOOMLA_USERNAME=ChangeMe!
+# # Passwords must be 12 characters long (admin-password)
+# JOOMLA_PASSWORD=ChangeMe!123
+# # SMTP
+# SMTP_USER=null
+# SMTP_PASS=null
+# SMTP_HOST='mailhog'
+# SMTP_SECURITY='None'
+# SMTP_PORT=1025
+# # PRODUCTION
+# PRODUCTION=cow.nickyeoman.com
+
+volumes:
+  joomla-db:
+  #joomla:
+
+networks:
+  default:
+    external:
+      name: ${NETWORKNAME}
+
+services:
+
+  mariadb-joomla:
+    image: mariadb:10.7.1 # https://hub.docker.com/_/mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - joomla-db:/var/lib/mysql
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+  joomla:
+    image: joomla:4.3.3 # https://hub.docker.com/_/joomla
+    restart: always
+    environment:
+      JOOMLA_DB_HOST: mariadb-joomla
+      JOOMLA_DB_USER: ${MYSQL_USER}
+      JOOMLA_DB_PASSWORD: ${MYSQL_PASSWORD}
+      JOOMLA_DB_NAME: ${MYSQL_DATABASE}
+    volumes:
+      #- joomla:/var/www/html
+      - ./html:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    links:
+      - mariadb-joomla
