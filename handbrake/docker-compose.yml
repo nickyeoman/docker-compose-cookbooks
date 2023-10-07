@@ -1,0 +1,31 @@
+---
+version: "3"
+
+###########################################################################################################################
+# Handbrake
+# 
+# DockerHub: https://hub.docker.com/r/jlesage/handbrake
+#
+# SAMPLE ENV
+# <intentionally blank>
+#
+# NOTES
+#
+# You can specify read and write for example:
+# "handbrake-storage:/storage:ro"
+# "handbrake-output:/output:rw"
+###########################################################################################################################
+
+services:
+  handbrake:
+    image: jlesage/handbrake
+    volumes:
+      - ./data/config:/config
+      - ./data/raw:/storage
+      - ./data/watch:/watch
+      - ./data/processed:/output
+    restart: "no"
+    ports:
+      - "8000:5800"
+
+

@@ -1,22 +1,10 @@
 ---
 version: "2"
 
-volumes:
-  streama-db:
-  streama-movies:
-  streama-appdata:
-
-networks:
-  admin_web:
-    external:
-      name: admin_web
-
 services:
   streama-db:
     image: mariadb:${DB_V}
     restart: always
-    networks:
-      - admin_web
     volumes:
       - streama-db:/var/lib/mysql
     environment:
@@ -31,8 +19,6 @@ services:
     restart: always
     depends_on:
       - streama-db
-    networks:
-      - admin_web
     volumes:
       - streama-movies:/data/streama # Change to your video folder
       - streama-appdata:/app/streama
@@ -43,9 +29,3 @@ services:
       MYSQL_DB: streama
       MYSQL_USER: streama
       MYSQL_PASSWORD: ${STREAMA_MYSQL_PASSWORD}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_streama.rule=Host(`${STREAMA_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_streama.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_streama.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_streama.loadbalancer.server.port=8080"

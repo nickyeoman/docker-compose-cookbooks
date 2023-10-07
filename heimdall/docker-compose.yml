@@ -11,10 +11,11 @@ version: "3"
 #
 # NOTES
 #
-# Make sure your volume is set correctly
+# Make sure your volume is set correctly.
+# Ports don't need to be set if behind proxy
 #
 # You can edit vol/www/.env
-# For https include FORCE_HTTPS=true
+# For https include: FORCE_HTTPS=true
 #
 ###########################################################################################################################
 
@@ -28,4 +29,7 @@ services:
     volumes:
       - ./data:/config
     restart: unless-stopped
+    #ports:
+    #  - "8000:80"
+
 
