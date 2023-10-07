@@ -14,6 +14,15 @@ version: "3"
 # You can specify read and write for example:
 # "handbrake-storage:/storage:ro"
 # "handbrake-output:/output:rw"
+#
+# Gotcha ubuntu zfs
+# mkdir /etc/docker
+# nano /etc/docker/daemon.json
+# {
+#   "storage-driver": "fuse-overlayfs"
+# } <- put this inside the new file daemon.json
+# apt install fuse-overlayfs
+# fuse-overlayfs --version
 ###########################################################################################################################
 
 services:
