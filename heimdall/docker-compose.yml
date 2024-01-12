@@ -5,9 +5,12 @@ version: "3"
 # Heimdall (Homepage)
 # 
 # DockerHub: https://hub.docker.com/r/linuxserver/heimdall
+# Offical Website: https://heimdall.site/
 #
-# SAMPLE ENV
-# <intentionally blank>
+# SAMPLE .env
+# VERSION=latest
+# TZ=America/Vancouver
+# PORT=8000
 #
 # NOTES
 #
@@ -21,15 +24,15 @@ version: "3"
 
 services:
   heimdall:
-    image: linuxserver/heimdall:2.5.6
+    image: linuxserver/heimdall:${VERSION:-latest}
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Vancouver
+      - TZ=${TZ:-America/Vancouver}
     volumes:
       - ./data:/config
     restart: unless-stopped
     #ports:
-    #  - "8000:80"
+    #  - "${PORT:-80}:80"
 
 

@@ -23,7 +23,6 @@ Which isn't ideal, but I don't know how to do this more elegantly.
 
 # Possible additions:
 
-* emby: [dockerhub](https://hub.docker.com/r/emby/embyserver) [official](https://emby.media/)
 * mailtrain: https://hub.docker.com/r/mailtrain/mailtrain
 * portus: https://hub.docker.com/r/opensuse/portus/
 * silverpeas: https://hub.docker.com/_/silverpeas
