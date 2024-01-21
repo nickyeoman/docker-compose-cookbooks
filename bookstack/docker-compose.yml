@@ -1,61 +1,56 @@
 ################################################################################
 # Bookstack
-# make sure you use the $PREFIX from .env for project_name
-# docker-compose -p project_name up -d
 #
-# Importing directly to the db (phpmydadmin)
-# you have to run the following in the container:
-# php artisan bookstack:regenerate-permissions
+# Sample .env
 #
-# Version 1
+# DB_USER=bookstack
+# DB_PASSWORD=ChnageThisPassword
+# APP_URL=http://localhost:8248
+# APP_KEY=32CharacterKey123456789012345678
+# NETWORKNAME=admin_web
 ################################################################################
 version: '2'
 
-volumes:
-  bookstack-db:
-  bookstack-uploads:
-  bookstack-storage:
-
 networks:
-  admin_web:
+  default:
     external:
-      name: admin_web
+      name: ${NETWORKNAME:-default} 
 
 services:
 
-  bookstack-db:
-    image: mariadb:${DB_V}
+   bookstack-db:
+    image: mariadb:latest # https://hub.docker.com/_/mariadb
     restart: always
     volumes:
-      - bookstack-db:/var/lib/mysql
-    networks:
-      - admin_web
+      - ./data/db:/var/lib/mysql
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     command: --max_allowed_packet=32505856
     environment:
-      MYSQL_ROOT_PASSWORD: ${BOOKSTACK_MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: bookstack
-      MYSQL_PASSWORD: ${BOOKSTACK_MYSQL_PASSWORD}
-      MYSQL_DATABASE: bookstack
+      MYSQL_ROOT_PASSWORD: ChangeThisToRandom
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_USER}
 
-  # https://hub.docker.com/r/solidnerd/bookstack
   bookstack:
-    image: solidnerd/bookstack:${BOOKSTACK_V}
+    image: solidnerd/bookstack:latest # https://hub.docker.com/r/solidnerd/bookstack
     depends_on:
       - bookstack-db
     environment:
-      - DB_HOST=${PREFIX}_bookstack-db_1:3306
-      - DB_DATABASE=bookstack
-      - DB_USERNAME=bookstack
-      - DB_PASSWORD=${BOOKSTACK_MYSQL_PASSWORD}
-      - APP_URL=https://${BOOKSTACK_DOMAIN_NAME}
-    networks:
-      - admin_web
+      - DB_HOST=bookstack-db:3306
+      - DB_DATABASE=${DB_USER}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - APP_URL=${APP_URL:-http://localhost:8248}
+      - REVISION_LIMIT=false
+      - APP_KEY=${APP_KEY}
+      - APP_TIMEZONE=America/Vancouver
     volumes:
-      - bookstack-uploads:/var/www/bookstack/public/uploads
-      - bookstack-storage:/var/www/bookstack/storage/uploads
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_bookstack.rule=Host(`${BOOKSTACK_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_bookstack.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_bookstack.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_bookstack.loadbalancer.server.port=8080"
+      - ./data/uploads:/var/www/bookstack/public/uploads
+      - ./data/storage:/var/www/bookstack/storage/uploads
+      - ./php.ini:/usr/local/etc/php/php.ini
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    ports:
+      - "8248:8080"
+   
