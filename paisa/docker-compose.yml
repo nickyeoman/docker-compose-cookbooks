@@ -1,10 +1,23 @@
+################################################################################
+# Paisa
+# 
+# url: https://paisa.fyi/
+#
+# Builds on top of the ledger double entry accounting tool.
+################################################################################
 version: '3.8'
+
+networks:
+  default:
+    external:
+      name: ${NETWORKNAME:-default} 
 
 services:
   paisa:
     image: ananthakumaran/paisa:latest
+    volumes:
+      - ./data/paisa:/root/Documents/paisa/
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     ports:
       - "7500:7500"
-    volumes:
-      - /home/john/Documents/paisa/:/root/Documents/paisa/
-
