@@ -17,6 +17,8 @@ version: "3"
 # Make sure your volume is set correctly.
 # Ports don't need to be set if behind proxy
 #
+# Powered by sqlite in www directory (data)
+#
 # You can edit vol/www/.env
 # For https include: FORCE_HTTPS=true
 #
@@ -30,7 +32,7 @@ services:
       - PGID=1000
       - TZ=${TZ:-America/Vancouver}
     volumes:
-      - ./data:/config
+      - ./data/heimdall:/config
     restart: unless-stopped
     #ports:
     #  - "${PORT:-80}:80"
