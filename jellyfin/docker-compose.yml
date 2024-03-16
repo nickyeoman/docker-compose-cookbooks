@@ -5,7 +5,8 @@ version: "3"
 # Jellyfin
 # 
 # LINKS
-# * [DockerHub](https://hub.docker.com/_/mariadb/)
+# * [DockerHub jellyfin](https://hub.docker.com/r/jellyfin/jellyfin)
+# * [DockerHub Mariadb](https://hub.docker.com/_/mariadb/)
 # * [Docs](https://jellyfin.org/docs/)
 #
 # Notes:
@@ -16,7 +17,7 @@ version: "3"
 # * 7359/udp is also used for auto-discovery. This is not configurable.
 #
 # SAMPLE ENV
-# <blank>
+# APP_URL: http://localhost:8096
 ###########################################################################################################################
 
 services:
@@ -36,6 +37,5 @@ services:
       - ./data/content/shows:/shows
     ports: 
       - "8096:8096"
-    restart: unless-stopped
     environment:
-      - JELLYFIN_PublishedServerUrl=http://localhost:8000
+      - JELLYFIN_PublishedServerUrl=${APP_URL:-http://localhost:8096}
