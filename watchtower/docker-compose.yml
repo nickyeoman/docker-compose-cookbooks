@@ -1,0 +1,10 @@
+version: "3"
+
+# https://containrrr.dev/watchtower/
+# Untested
+
+services:
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
