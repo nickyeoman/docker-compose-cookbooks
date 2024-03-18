@@ -24,34 +24,25 @@ networks:
       name: admin_web
 
 services:
-  monica:
-    # https://hub.docker.com/r/monicahq/monicahq
-    image: monicahq/monicahq:${MONICA_V}
-    depends_on:
-      - monica-db
-    networks:
-      - admin_web
-    ports:
-      - 80:80
+    monica-db:
+    image: mariadb:latest
+    restart: unless-stopped
     volumes:
-      - monica:/var/www/monica/storage
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_monica.rule=Host(`${MONICA_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_monica.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_monica.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_monica.loadbalancer.server.port=8080"
-
-  monica-db:
-    image: mariadb:${DB_V}
-    restart: always
+      - ./data/monica-db:/var/lib/mysql
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
     environment:
-      - MYSQL_ROOT_PASSWORD=${MONICA_MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=monica
-      - MYSQL_USER=homestead
-      - MYSQL_PASSWORD=${MONICA_MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_USER: monica
+      MYSQL_PASSWORD: changeme
+      MYSQL_DATABASE: monica
+
+  monica:
+    image: monica:latest
+    restart: unless-stopped
     volumes:
-      - monica-db:/var/lib/mysql
-    networks:
-      - admin_web
+      - ./data/monica:/var/www/html/storage
+    environment:
+      DB_HOST: monica-db
+      DB_USERNAME: monica
+      DB_PASSWORD: changeme
+      APP_ENV: production

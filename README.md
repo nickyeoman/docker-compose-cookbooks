@@ -24,3 +24,5 @@ Which isn't ideal, but I don't know how to do this more elegantly.
 * mailtrain: https://hub.docker.com/r/mailtrain/mailtrain
 * portus: https://hub.docker.com/r/opensuse/portus/
 * silverpeas: https://hub.docker.com/_/silverpeas
+* grocy: https://github.com/grocy/grocy-docker/blob/main/docker-compose.yml
+
