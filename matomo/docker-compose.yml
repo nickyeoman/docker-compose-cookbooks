@@ -1,21 +1,19 @@
 ################################################################################
 # matomo
 #
-# Version 1
+# Sample .env
 #
+# MATOMO_MYSQL_ROOT_PASSWORD=ChangeRootPass
+# MATOMO_MYSQL_PASSWORD=ChangeThisPassword
+# NETWORKNAME=admin_web
+# DB_V=11.3.2
 ################################################################################
-version: '3.3'
-
-volumes:
-  matomodb:
-  matomo:
-  matomoconfig:
-  matomologs:
+version: '3.8'
 
 networks:
-  admin_web:
+  default:
     external:
-      name: admin_web
+      name: ${NETWORKNAME:-default} 
 
 services:
 
@@ -23,9 +21,7 @@ services:
     image: mariadb:${DB_V}
     restart: always
     volumes:
-      - matomodb:/var/lib/mysql
-    networks:
-      - admin_web
+      - ./data/matomodb:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MATOMO_MYSQL_ROOT_PASSWORD}
       MYSQL_PASSWORD: ${MATOMO_MYSQL_PASSWORD}
@@ -36,15 +32,7 @@ services:
   matomo:
     image: matomo:${MATOMO_V}
     volumes:
-      - matomo:/var/www/html
-      - matomoconfig:/var/www/html/config
-      - matomologs:/var/www/html/logs
-    networks:
-      - admin_web
+      - ./data/matomo:/var/www/html
+      - ./data/matomoconfig:/var/www/html/config
+      - ./data/matomologs:/var/www/html/logs
     restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_matomo.rule=Host(`${MATOMO_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_matomo.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_matomo.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_matomo.loadbalancer.server.port=80"
