@@ -1,0 +1,45 @@
+version: "3.4"
+################################################################################
+# Semaphore
+#
+# https://docs.semui.co/administration-guide/installation#docker
+# port 3000
+# SEMAPHORE_ACCESS_KEY_ENCRYPTION — head -c32 /dev/urandom | base64.
+################################################################################
+
+networks:
+  admin_web:
+    external:
+      name: admin_web
+
+services:
+
+  semaphoredb:
+    image: mariadb:${DB_V:-latest}
+    restart: always
+    volumes:
+      - ./data/semaphoredb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SEMAPHORE_MYSQL_ROOT_PASSWORD:-changeme}
+      MYSQL_PASSWORD: ${SEMAPHORE_MYSQL_PASSWORD:-changeme1234}
+      MYSQL_DATABASE: semaphore
+      MYSQL_USER: semaphore
+
+  semaphore:
+    ports:
+      - 3000:3000
+    image: semaphoreui/semaphore:latest
+    environment:
+      SEMAPHORE_DB_USER: semaphore
+      SEMAPHORE_DB_PASS: ${SEMAPHORE_MYSQL_PASSWORD:-changeme1234}
+      SEMAPHORE_DB_HOST: semaphoredb # for postgres, change to: postgres
+      SEMAPHORE_DB_PORT: 3306 # change to 5432 for postgres
+      SEMAPHORE_DB_DIALECT: mysql # for postgres, change to: postgres
+      SEMAPHORE_DB: semaphore
+      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+      SEMAPHORE_ADMIN_PASSWORD: changeme
+      SEMAPHORE_ADMIN_NAME: admin
+      SEMAPHORE_ADMIN_EMAIL: admin@localhost
+      SEMAPHORE_ADMIN: admin
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=
+      SEMAPHORE_LDAP_ACTIVATED: 'no' # if you wish to use ldap, set to: 'yes' 

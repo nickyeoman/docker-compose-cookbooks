@@ -23,8 +23,8 @@ services:
     volumes:
       - ./data/matomodb:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MATOMO_MYSQL_ROOT_PASSWORD}
-      MYSQL_PASSWORD: ${MATOMO_MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MATOMO_MYSQL_ROOT_PASSWORD:-12345678}
+      MYSQL_PASSWORD: ${MATOMO_MYSQL_PASSWORD:-987654321}
       MYSQL_DATABASE: matomo
       MYSQL_USER: matomo
 
