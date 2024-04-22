@@ -8,6 +8,9 @@ version: "2.3"
 # Ports: 80
 # ntfy user add your_name
 # ntfy user change-role your_name admin
+#
+# Example use:
+# read $MYPASS; curl -u nick:$MYPASS -d "Look ma, with auth" https://ntfy.nickyeoman.com/internal
 #####################################################################################################################################
 
 services:
