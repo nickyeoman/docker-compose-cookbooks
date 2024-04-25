@@ -5,6 +5,11 @@ version: "3.4"
 # https://docs.semui.co/administration-guide/installation#docker
 # port 3000
 # SEMAPHORE_ACCESS_KEY_ENCRYPTION — head -c32 /dev/urandom | base64.
+#
+# Sample env
+# DB_V=latest
+# SEMAPHORE_MYSQL_ROOT_PASSWORD=ChangeThisPassword
+# SEMAPHORE_MYSQL_PASSWORD=ChangePassword
 ################################################################################
 
 networks:
