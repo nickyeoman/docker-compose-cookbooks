@@ -1,3 +1,4 @@
+# NOT TESTED
 # NOTE: This docker-compose.yml is meant to be just an example guideline
 # on how you can achieve the same. It is not intented to run out of the box
 # and you must edit the below configurations to suit your needs.
@@ -65,3 +66,21 @@ networks:
 
 volumes:
   listmonk-data:
+
+version: '3'
+
+services:
+  listmonk:
+    image: listmonk/listmonk:latest
+    container_name: listmonk
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./data/listmonk:/app/data
+    environment:
+      - SECRET_KEY=<your_secret_key>
+      - DB_PROVIDER=sqlite3
+      - DB_SOURCE=/app/data/listmonk.db
+      - WEB_SERVER_HOST=localhost
+      - WEB_SERVER_PORT=9000

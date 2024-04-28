@@ -7,6 +7,9 @@
 # MATOMO_MYSQL_PASSWORD=ChangeThisPassword
 # NETWORKNAME=admin_web
 # DB_V=11.3.2
+#
+# Examples:
+# https://github.com/matomo-org/docker/blob/master/.examples/apache/docker-compose.yml
 ################################################################################
 version: '3.8'
 
