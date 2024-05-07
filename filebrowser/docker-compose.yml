@@ -1,0 +1,12 @@
+  filebrowser:
+    # https://filebrowser.org/installation
+    # proxy to port 80
+    image: filebrowser/filebrowser
+    restart: always
+    #user: "33:33"
+    user: "1000:1000"
+    volumes:
+      - ./data/joomla-html:/srv
+      - ./filebrowser/filebrowser.db:/database.db
+    security_opt:
+      - no-new-privileges:true
