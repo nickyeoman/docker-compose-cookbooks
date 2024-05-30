@@ -8,14 +8,13 @@ version: "3.4"
 #
 # Sample env
 # DB_V=latest
+# SEMAPHORE_PORT=3000
 # SEMAPHORE_MYSQL_ROOT_PASSWORD=ChangeThisPassword
 # SEMAPHORE_MYSQL_PASSWORD=ChangePassword
+# SEMAPHORE_MYSQL_PASSWORD=ChangePassword
+# SEMAPHORE_ADMIN_EMAIL=example@example.com
+# SEMAPHORE_ACCESS_KEY_ENCRYPTION=dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=
 ################################################################################
-
-networks:
-  admin_web:
-    external:
-      name: admin_web
 
 services:
 
@@ -32,7 +31,7 @@ services:
 
   semaphore:
     ports:
-      - 3000:3000
+      - ${SEMAPHORE_PORT:-3000}:3000
     image: semaphoreui/semaphore:latest
     environment:
       SEMAPHORE_DB_USER: semaphore
@@ -42,9 +41,12 @@ services:
       SEMAPHORE_DB_DIALECT: mysql # for postgres, change to: postgres
       SEMAPHORE_DB: semaphore
       SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
-      SEMAPHORE_ADMIN_PASSWORD: changeme
+      SEMAPHORE_ADMIN_PASSWORD: ${SEMAPHORE_MYSQL_PASSWORD:-changeadmin1234}
       SEMAPHORE_ADMIN_NAME: admin
-      SEMAPHORE_ADMIN_EMAIL: admin@localhost
+      SEMAPHORE_ADMIN_EMAIL: ${SEMAPHORE_ADMIN_EMAIL:-admin@localhost}
       SEMAPHORE_ADMIN: admin
-      SEMAPHORE_ACCESS_KEY_ENCRYPTION: dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION:-dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=}
       SEMAPHORE_LDAP_ACTIVATED: 'no' # if you wish to use ldap, set to: 'yes' 
+    volumes:
+      - ./data/semaphore/etc/:/etc/semaphore
+      - ./data/semaphore/ssh/:/home/semaphore/.ssh
