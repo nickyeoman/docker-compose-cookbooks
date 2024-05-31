@@ -4,7 +4,12 @@ version: "3.4"
 #
 # https://docs.semui.co/administration-guide/installation#docker
 # port 3000
-# SEMAPHORE_ACCESS_KEY_ENCRYPTION — head -c32 /dev/urandom | base64.
+# SEMAPHORE_ACCESS_KEY_ENCRYPTION — head -c32 /dev/urandom | base64
+#
+# Trouble shooting
+# The trick to getting this going is loggin into the container and running 
+# semaphore commands
+# you can generate the config.json file that way
 #
 # Sample env
 # DB_V=latest
@@ -48,5 +53,5 @@ services:
       SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION:-dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=}
       SEMAPHORE_LDAP_ACTIVATED: 'no' # if you wish to use ldap, set to: 'yes' 
     volumes:
-      - ./data/semaphore/etc/:/etc/semaphore
-      - ./data/semaphore/ssh/:/home/semaphore/.ssh
+      - ./config/config.json:/home/semaphore/config.json
+      - ./config/ssh/:/home/semaphore/.ssh
