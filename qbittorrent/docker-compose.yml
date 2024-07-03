@@ -1,0 +1,23 @@
+version: "3.3"
+
+# Username Admin
+
+services:
+  qbittorrent:
+    image: trigus42/qbittorrentvpn
+    container_name: qbittorrent
+    environment:
+      - VPN_TYPE=wireguard
+      - WEBUI_PASSWORD=${QBIT_PASSWORD:-ChangeMePass}
+    volumes:
+      - './data/config/:/config'
+      - './data/downloads/:/downloads'
+      - './data/incomplete/:/incomplete'
+      - '/dev/net/tun:/dev/net/tun'
+    ports:
+     - 8080:8080
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
