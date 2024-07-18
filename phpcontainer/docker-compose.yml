@@ -4,7 +4,7 @@ version: "3.3"
 services:
 
   php-apache:
-    image: "4lights/phpcontainer:latest"
+    image: ${PHPCONTAINER_IMAGE:-4lights/phpcontainer:latest}
     restart: always
     volumes:
       - "${VOL_PATH:-./data}/website:/data"
