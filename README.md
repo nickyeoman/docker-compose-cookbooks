@@ -1,28 +1,42 @@
 # Nick Yeoman's Collection of Docker compose files
 
-Checkout [https://www.nickyeoman.com/](https://www.nickyeoman.com/) to learn more.
+Author: [Nick Yeoman](https://www.nickyeoman.com/).
 
-The idea is to run all these services off of one host and they are setup so
-you can run multiple versions of any software just by changing the .env file
+These cookbooks are created with the intent of using Docker's extend feature. This way, you can run multiple containers in different domains but still have only one file to update.
 
-The process is:
+These compose files make a few assumptions:
 
-1. cd ~/Git/docker-cookbooks/app-you-want-to-use
-1. cp env-sample .env
-1. vi .env
-  1. PREFIX in .env should the project_name (for example nick_yeoman or ny)
-1. docker-compose -p project_name up -d
+1. You are only running on one host.
+2. You are using Nginx Proxy Manager (although most have redundant port access).
+3. Volumes are stored in the project folder under "data", git ignored and backed up externally.
 
-To create multiple projects is a little bit more tricky as you have to
-define new directories for the .env file.
+The intended workflow is as follows:
 
-To do this I've just been copying the app folder to a domain-name folder.
-Which isn't ideal, but I don't know how to do this more elegantly.
+1. Clone the repository locally ```git clone git@github.com:nickyeoman/docker-compose-cookbooks.git /git-repos/docker-compose-cookbooks```
+2. Create a project directory, usually by domain ```mkdir /projects/domainname-com```
+3. Create a .env file in the project directory ```touch .env```
+4. Add the COOKBOOK Variable to the project's env file: ```COOKBOOK=/git-repos/docker-compose-cookbooks```
+5. Create a .gitignore file in the project directory and ignore "data/"
+6. Create a docker-compose.yml file in the project directory with the external code given in the README file in the container folder.
 
-# Possible additions:
+## Example
 
-* mailtrain: https://hub.docker.com/r/mailtrain/mailtrain
-* portus: https://hub.docker.com/r/opensuse/portus/
-* silverpeas: https://hub.docker.com/_/silverpeas
-* grocy: https://github.com/grocy/grocy-docker/blob/main/docker-compose.yml
+Here is an example of how your project's docker-compose file might look:
 
+```yaml
+version: '3.4'
+
+networks:
+  proxy:
+    external: true
+
+services:
+  proxy:
+    extends:
+      file: ${COOKBOOK}/nginx-proxy-manager/docker-compose.yml
+      service: proxy
+    env_file:
+      - .env
+    networks:
+      - proxy
+```
