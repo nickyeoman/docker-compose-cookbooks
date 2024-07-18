@@ -1,49 +1,27 @@
-################################################################################
-# Stash
-# make sure you use the $PREFIX from .env for project_name
-# docker-compose -p project_name up -d
-#
-# Version 1
-################################################################################
-version: '2'
-
-volumes:
-  stash:
-  stash-metadata:
-  stash-cache:
-  stash-generated:
-
-networks:
-  admin_web:
-    external:
-      name: admin_web
+version: '3.4'
 
 services:
   stash:
-    # https://hub.docker.com/r/stashapp/stash
-    image: stashapp/stash:latest
-    restart: unless-stopped
+    image: ${STASH_IMAGE:-stashapp/stash:v0.26.2}
     logging:
       driver: "json-file"
       options:
         max-file: "100"
-        max-size: "200m"
+        max-size: ${MAX_SIZE:-200m}
+    restart: unless-stopped
     environment:
-      - STASH_STASH=/data/
-      - STASH_GENERATED=/generated/
-      - STASH_METADATA=/metadata/
-      - STASH_CACHE=/cache/
-    networks:
-      - admin_web
+      - STASH_STASH=${STASH_STASH:-/data/}
+      - STASH_GENERATED=${STASH_GENERATED:-/generated/}
+      - STASH_METADATA=${STASH_METADATA:-/metadata/}
+      - STASH_CACHE=${STASH_CACHE:-/cache/}
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - stash:/data
-      - stash-metadata:/metadata
-      - stash-cache:/cache
-      - stash-generated:/generated
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_stash.rule=Host(`${STASH_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_stash.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_stash.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_stash.loadbalancer.server.port=9999"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "./data/video:/data"
+      - "./data/metadata:/metadata"
+      - "./data/cache:/cache"
+      - "./data/generated:/generated"
+      - "./data/root:/root"
+    # Uncomment and use if needed
+    # network_mode: "host"
+
+
