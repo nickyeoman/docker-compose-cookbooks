@@ -16,11 +16,11 @@ services:
       - STASH_CACHE=${STASH_CACHE:-/cache/}
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - "./data/stash-video:/data"
-      - "./data/stash-metadata:/metadata"
-      - "./data/stash-cache:/cache"
-      - "./data/stash-generated:/generated"
-      - "./data/stash-root:/root"
+      - "${VOL_PATH:-./data}/stash-video:/data"
+      - "${VOL_PATH:-./data}/stash-metadata:/metadata"
+      - "${VOL_PATH:-./data}/stash-cache:/cache"
+      - "${VOL_PATH:-./data}/stash-generated:/generated"
+      - "${VOL_PATH:-./data}/stash-root:/root"
     # Uncomment and use if needed
     # network_mode: "host"
 

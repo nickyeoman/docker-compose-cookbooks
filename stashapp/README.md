@@ -25,8 +25,8 @@ In your PROJECT directory set the following env file:
 # Local
 PROD=prod.domain.com
 PRODDIR=/var/www/stashdomain-com/
-NETWORKNAME=proxy
 COOKBOOK=/home/user/git/docker-compose-cookbooks
+VOL_PATH=/project-dir/project-name/data
 STASH_IMAGE=stashapp/stash:v0.26.2
 
 # Container
