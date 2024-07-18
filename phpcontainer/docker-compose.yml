@@ -9,5 +9,3 @@ services:
     volumes:
       - "${VOL_PATH:-./data}/website:/data"
       - "${VOL_PATH:-./config}/php.ini:/usr/local/etc/php/php.ini"
-    ports:
-      - "${DOCKERPORT}:80"
