@@ -1,10 +1,8 @@
 version: "3"
 
-# https://containrrr.dev/watchtower/
-# Untested
-
 services:
   watchtower:
-    image: containrrr/watchtower
+    image: ${WATCHTOWER_IMAGE:-containrrr/watchtower:latest}
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/localtime:/etc/localtime:ro"
