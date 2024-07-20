@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   stash:
-    image: ${STASH_IMAGE:-stashapp/stash:v0.26.2}
+    image: ${STASH_IMAGE:-stashapp/stash:latest}
     logging:
       driver: "json-file"
       options:
