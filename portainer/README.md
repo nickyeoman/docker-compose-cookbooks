@@ -55,3 +55,14 @@ You will likely want to spit up the agent and GUI in your projects.
 ### Podman
 
 Make sure podman-docker is installed.
+```sudo dnf install podman-docker```
+
+Create the necessary directory for Podman
+```bash
+sudo mkdir -p /run/podman
+sudo chmod 755 /run/podman
+# Restart Podman socket service
+sudo systemctl restart podman.socket
+# Check the status of the Podman socket
+sudo systemctl status podman.socket
+```
