@@ -22,14 +22,14 @@ Note this setup is meant to be used between two directories, COOKBOOK and PROJEC
 In your PROJECT directory set the following env file:
 
 ```text
-# Local
+# Stash App
 PROD=prod.domain.com
-PRODDIR=/var/www/stashdomain-com/
-COOKBOOK=/home/user/git/docker-compose-cookbooks
-VOL_PATH=/project-dir/project-name/data
+PRODDIR=/var/www/stashdomain-com/ #HELP: project_path
+COOKBOOK=/home/user/git/docker-compose-cookbooks #HELP: cookbooks
+VOL_PATH=/project-dir/project-name/data #HELP: volpath
 STASH_IMAGE=stashapp/stash:v0.26.2
 
-# Container
+# Stash Container
 STASH_DOMAIN_NAME=stash.4lt.ca
 MAX_SIZE=200m
 STASH_STASH=/data/

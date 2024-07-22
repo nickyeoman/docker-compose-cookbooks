@@ -1,0 +1,20 @@
+version: '3.4'
+
+networks:
+	portainer-net:
+	external: true
+
+services:
+	portainer-agent:
+		extends:
+			file: ${COOKBOOK}/portainer/docker-compose.yml
+			service: portainer-agent
+		env_file:
+			- .env
+
+	portainer:
+		extends:
+			file: ${COOKBOOK}/portainer/docker-compose.yml
+			service: portainer
+		env_file:
+			- .env

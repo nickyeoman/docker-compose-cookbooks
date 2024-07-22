@@ -14,11 +14,12 @@ Create a private network for portainer: ```sudo podman network create portainer-
 You must set an agent secret ```openssl rand -base64 32```
 
 ```
+# Portainer
 PORTAINER_IMAGE=portainer/portainer-ce:latest
 PORTAINER_AGENT_IMAGE=portainer/agent:latest
-AGENT_SECRET=01234567890132456789012345678912
-VOL_PATH=/docker/vol/portainer-data
-COOKBOOK=/home/user/git/docker-compose-cookbooks
+AGENT_SECRET=01234567890132456789012345678912 #HELP: gen32
+VOL_PATH=/docker/vol/portainer-data #HELP: volpath
+COOKBOOK=/home/user/git/docker-compose-cookbooks #HELP: cookbooks
 ```
 
 ### Docker Compose Extend

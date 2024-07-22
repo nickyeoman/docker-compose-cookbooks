@@ -21,14 +21,7 @@ docker network create proxy
 
 ## Project Setup
 
-```yaml
-proxy:
-    extends:
-        file: ${COOKBOOK}/nginx-proxy-manager/docker-compose.yml
-        service: proxy
-    env_file:
-        - .env
-```
+See sample-extends.yml
 
 ### Create volumes
 ```bash
@@ -38,6 +31,10 @@ mkdir -p data/proxy data/proxy-letsencrypt
 ### env file
 
 ```text
+# Nginx Proxy Manager
+PRODDIR=/var/www/stashdomain-com/ #HELP: project_path
+VOL_PATH=/docker/vol/portainer-data #HELP: volpath
+COOKBOOK=/home/user/git/docker-compose-cookbooks #HELP: cookbooks
 PROXY_IMAGE=jc21/nginx-proxy-manager:2.11.3
 ```
 
