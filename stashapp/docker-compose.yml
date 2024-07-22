@@ -23,5 +23,3 @@ services:
       - "${VOL_PATH:-./data}/stash-root:/root"
     # Uncomment and use if needed
     # network_mode: "host"
-
-

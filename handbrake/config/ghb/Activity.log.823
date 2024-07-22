@@ -1,0 +1,16 @@
+OS: Alpine Linux v3.17
+HandBrake 1.7.3 (2024030500)
+Kernel: Linux 6.9.8-200.fc40.x86_64 (x86_64)
+CPU: Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz x 8
+Install Dir: /usr/bin
+Config Dir:  /config/ghb
+_______________________________
+
+[06:32:12] Compile-time hardening features are enabled
+Cannot load libnvidia-encode.so.1
+[06:32:12] hb_qsv_make_adapters_list: MFXVideoCORE_QueryPlatform failed impl=0 err=-16
+[06:32:12] qsv: is available on this system
+[06:32:12] hb_init: starting libhb thread
+[06:32:12] hb_init: starting libhb thread
+[06:32:12] hb_init: starting libhb thread
+[06:32:12] gtkgui: Failed to read presets file, initializing new presets...

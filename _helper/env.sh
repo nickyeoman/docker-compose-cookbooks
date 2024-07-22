@@ -22,6 +22,8 @@ process_help_comments() {
                 var_value="$HLPR_PROJECTPATH"
             elif [[ "$line" =~ \#HELP:\ volpath ]]; then
                 var_value="$HLPR_PROJECTPATH/data"
+			elif [[ "$line" =~ \#HELP:\ configpath ]]; then
+                var_value="$HLPR_PROJECTPATH/config"
             elif [[ "$line" =~ \#HELP:\ cookbooks ]]; then
                 var_value="$HLPR_COOKBOOKDIR"
             elif [[ "$line" =~ \#HELP:\ gen32 ]]; then
