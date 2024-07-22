@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  php-apache:
+    extends:
+      file: ${COOKBOOK}/phpcontainer/docker-compose.yml
+      service: php-apache
+    volumes:
+      - "./project:/data"
+      - "./config/php.ini:/usr/local/etc/php/php.ini"
