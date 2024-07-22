@@ -1,0 +1,52 @@
+<svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#0d1117" />
+
+  <!-- Title Text -->
+  <text x="50%" y="50%" font-size="36" text-anchor="middle" fill="#fff" dy=".3em">Docker Compose Cookbooks</text>
+
+  <!-- Snowflakes -->
+  <g fill="#fff" opacity="0.7">
+    <circle class="snowflake" cx="50" cy="0" r="3" />
+    <circle class="snowflake" cx="150" cy="0" r="4" />
+    <circle class="snowflake" cx="250" cy="0" r="3" />
+    <circle class="snowflake" cx="350" cy="0" r="4" />
+    <circle class="snowflake" cx="450" cy="0" r="3" />
+    <circle class="snowflake" cx="550" cy="0" r="4" />
+    <circle class="snowflake" cx="650" cy="0" r="3" />
+    <circle class="snowflake" cx="750" cy="0" r="4" />
+  </g>
+
+  <!-- Snowflake Animation -->
+  <style>
+    @keyframes fall {
+      0% { transform: translateY(-200px); }
+      100% { transform: translateY(200px); }
+    }
+    .snowflake {
+      animation: fall 5s linear infinite;
+    }
+    .snowflake:nth-child(2) {
+      animation-duration: 6s;
+    }
+    .snowflake:nth-child(3) {
+      animation-duration: 7s;
+    }
+    .snowflake:nth-child(4) {
+      animation-duration: 8s;
+    }
+    .snowflake:nth-child(5) {
+      animation-duration: 9s;
+    }
+    .snowflake:nth-child(6) {
+      animation-duration: 10s;
+    }
+    .snowflake:nth-child(7) {
+      animation-duration: 11s;
+    }
+    .snowflake:nth-child(8) {
+      animation-duration: 12s;
+    }
+  </style>
+</svg>
+

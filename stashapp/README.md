@@ -21,6 +21,7 @@ git clone git@github.com:nickyeoman/docker-compose-cookbooks.git
 Note this setup is meant to be used between two directories, COOKBOOK and PROJECT.  
 In your PROJECT directory set the following env file:
 
+#### Dot env file
 ```text
 # Stash App
 PROD=prod.domain.com
@@ -38,7 +39,7 @@ STASH_METADATA=/metadata/
 STASH_CACHE=/cache/
 ```
 
-### Docker Compose Extend
+#### Docker Compose Extend
 
 Now using extend you can call the service:
 
