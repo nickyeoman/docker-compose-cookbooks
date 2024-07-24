@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+	vaultwarden:
+		extends:
+			file: ${COOKBOOK}/vaultwarden/docker-compose.yml
+			service: vaultwarden

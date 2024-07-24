@@ -1,6 +1,0 @@
-# Domains & Project
-PREFIX=p1
-BITWARDEN_DOMAIN_NAME=passtool.nickyeoman.com
-
-# Software versions
-BITWARDEN_V=1.14.2
