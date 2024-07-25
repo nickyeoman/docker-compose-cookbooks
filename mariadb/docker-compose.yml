@@ -1,0 +1,17 @@
+version: '3.8'  # or any version you prefer
+
+services:
+  mariadb:
+    image: ${MARIADB_IMAGE:-mariadb:latest}
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-mydb}
+      MARIADB_USER: ${MARIADB_USER:-dbuser}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-AlsoChangeThisPassword}
+    volumes:
+      - ${VOL_PATH:-./data/}mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - mariadb_network
+

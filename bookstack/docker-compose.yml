@@ -1,56 +1,20 @@
-################################################################################
-# Bookstack
-#
-# Sample .env
-#
-# DB_USER=bookstack
-# DB_PASSWORD=ChangeThisPassword
-# APP_URL=http://localhost:8248
-# APP_KEY=32CharacterKey123456789012345678
-# NETWORKNAME=admin_web
-################################################################################
 version: '3.8'
-
-networks:
-  default:
-    external:
-      name: ${NETWORKNAME:-default} 
 
 services:
 
-   bookstack-db:
-    image: mariadb:latest # https://hub.docker.com/_/mariadb
-    restart: always
-    volumes:
-      - ./data/db:/var/lib/mysql
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
-    command: --max_allowed_packet=32505856
-    environment:
-      MYSQL_ROOT_PASSWORD: ChangeThisToRandom
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_USER}
-
   bookstack:
-    image: solidnerd/bookstack:latest # https://hub.docker.com/r/solidnerd/bookstack
-    depends_on:
-      - bookstack-db
+    image: ${BOOKSTACK_IMAGE:-solidnerd/bookstack:latest}
     environment:
       - DB_HOST=bookstack-db:3306
-      - DB_DATABASE=${DB_USER}
-      - DB_USERNAME=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=dbuser
+      - DB_USERNAME=dbuser
+      - DB_PASSWORD=dbpass
       - APP_URL=${APP_URL:-http://localhost:8248}
       - REVISION_LIMIT=false
-      - APP_KEY=${APP_KEY}
+      - APP_KEY=APP_KEY
       - APP_TIMEZONE=America/Vancouver
     volumes:
+      - "/etc/timezone:/etc/timezone:ro"
       - ./data/uploads:/var/www/bookstack/public/uploads
       - ./data/storage:/var/www/bookstack/storage/uploads
-      - ./php.ini:/usr/local/etc/php/php.ini
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
-    ports:
-      - "8248:8080"
-   
+      - ./config/php.ini:/usr/local/etc/php/php.ini

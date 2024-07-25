@@ -3,11 +3,6 @@ version: '3.4'
 services:
   stash:
     image: ${STASH_IMAGE:-stashapp/stash:latest}
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "100"
-        max-size: ${MAX_SIZE:-200m}
     restart: unless-stopped
     environment:
       - STASH_STASH=${STASH_STASH:-/data/}
@@ -21,5 +16,6 @@ services:
       - "${VOL_PATH:-./data}/stash-cache:/cache"
       - "${VOL_PATH:-./data}/stash-generated:/generated"
       - "${VOL_PATH:-./data}/stash-root:/root"
+      
     # Uncomment and use if needed
     # network_mode: "host"

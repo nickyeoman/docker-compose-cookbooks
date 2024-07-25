@@ -7,11 +7,6 @@
 ################################################################################
 version: '3.8'
 
-networks:
-  default:
-    external:
-      name: ${NETWORKNAME:-default} 
-
 services:
   paisa:
     image: ananthakumaran/paisa:latest
