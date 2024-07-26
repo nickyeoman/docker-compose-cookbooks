@@ -20,6 +20,7 @@ get_env_vars() {
 
     echo "$env_vars"
 }
+
 get_image() {
     local compose_content="$1"
     local images=""

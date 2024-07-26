@@ -5,16 +5,15 @@ services:
     image: ${BOOKSTACK_IMAGE:-solidnerd/bookstack:latest}
     restart: unless-stopped
     environment:
-      - APP_KEY: ${BOOKSTACK_APP_KEY:-APP_KEY}
-      - APP_TIMEZONE: ${BOOKSTACK_APP_TIMEZONE:-America/Vancouver}
-      - APP_URL: ${BOOKSTACK_APP_URL:-http://localhost:8248}
-      - DB_DATABASE: ${BOOKSTACK_DB_DATABASE:-dbname}
-      - DB_HOST: ${BOOKSTACK_DB_HOST:-bookstack-mariadb:3306}
-      - DB_PASSWORD: ${BOOKSTACK_DB_PASSWORD:-dbpass}
-      - DB_USERNAME: ${BOOKSTACK_DB_USERNAME:-dbuser}
-      - REVISION_LIMIT: ${BOOKSTACK_REVISION_LIMIT:-false}
+      - APP_KEY=${BOOKSTACK_APP_KEY:-APP_KEY}
+      - APP_TIMEZONE=${BOOKSTACK_APP_TIMEZONE:-America/Vancouver}
+      - APP_URL=${BOOKSTACK_APP_URL:-http://localhost:8080}
+      - DB_DATABASE=${BOOKSTACK_DB_DATABASE:-dbname}
+      - DB_HOST=${BOOKSTACK_DB_HOST:-bookstack-mariadb:3306}
+      - DB_PASSWORD=${BOOKSTACK_DB_PASSWORD:-dbpass}
+      - DB_USERNAME=${BOOKSTACK_DB_USERNAME:-dbuser}
+      - REVISION_LIMIT=${BOOKSTACK_REVISION_LIMIT:-false}
     volumes:
       - ${VOL_CONFIG_PATH:-./config}/php.ini:/usr/local/etc/php/php.ini
       - ${VOL_PATH:-./data}/storage:/var/www/bookstack/storage/uploads
       - ${VOL_PATH:-./data}/uploads:/var/www/bookstack/public/uploads
-      - /etc/timezone:/etc/timezone:ro

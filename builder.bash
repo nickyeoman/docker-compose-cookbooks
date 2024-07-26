@@ -58,10 +58,10 @@ BLDR_DC_VOLS=$(process_volumes "$BLDR_DC_VOLS")
 # Clean up ENV
 ################################################
 source ./_builder/dc-env.sh
-# echo "*** Pre process **"
+# echo "The Input: "
 # echo "$BLDR_DC_ENV"
 BLDR_DC_ENV=$(process_env_vars "$BLDR_DC_ENV" "$BLDR_APP")
-# echo "*** Post **"
+# echo "The Output: "
 # echo "$BLDR_DC_ENV"
 # exit
 
