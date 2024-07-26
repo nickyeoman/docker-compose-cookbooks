@@ -1,16 +1,17 @@
 #!/bin/bash
 
-BLDR_DIR=""
+
 BLDR_APP=""
-BLDR_PARENT_PATH=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
-BLDR_OLD_DCF="" # Content of Old Docker Compose File
-BLDR_NEW_DCF="" # Content of New Docker Compose File
-BLDR_NEW_SE="" # sample-extends
-BLDR_NEW_README=""
-BLDR_DC_VOLS=""
-BLDR_DC_IMAGE=""
 BLDR_DC_ENV=""
+BLDR_DC_IMAGE=""
+BLDR_DC_VOLS=""
+BLDR_DIR=""
 BLDR_ENV_FILE=""
+BLDR_NEW_DCF="" # Content of New Docker Compose File
+BLDR_NEW_README=""
+BLDR_NEW_SE="" # sample-extends
+BLDR_OLD_DCF="" # Content of Old Docker Compose File
+BLDR_PARENT_PATH=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
 source ./_builder/debug.sh
 #debug_print_helper_variables
@@ -26,7 +27,6 @@ check_command "yq"
 # Get Directory we are working with
 ################################################
 source ./_builder/getdir.bash
-get_directory
 
 ################################################
 # Save file to work with
@@ -78,11 +78,8 @@ source ./_builder/extends-new.sh
 ################################################
 # Create Readme.md
 ################################################
-source ./_builder/readme-new.sh
-BLDR_NEW_README=$(generate_readme)
-echo "$BLDR_NEW_README" > ${BLDR_DIR}/README.md
-
-# TODO: for readme file do mkdir -p data/vols for vols
-# Do a git diff on the directory
-# fuzzy find latest image using skopeo
-# skopeo list-tags docker://docker.io/solidnerd/book
+if [[ ! -f "${BLDR_DIR}/README.md" ]]; then
+    source ./_builder/readme-new.sh
+    BLDR_NEW_README=$(generate_readme)
+    echo "$BLDR_NEW_README" > ${BLDR_DIR}/README.md
+fi

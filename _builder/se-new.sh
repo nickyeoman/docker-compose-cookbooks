@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BLDR_ENV_FILE+="# $BLDR_APP\n"
-BLDR_ENV_FILE+="COOKBOOK=$BLDR_PARENT_PATH #HELP: cookbooks\n"
+BLDR_ENV_FILE+="COOKBOOK=/git/docker-compose-cookbooks #HELP: cookbooks\n"
 
 while IFS= read -r line; do
   # Use a regex to match and extract variable names and defaults

@@ -13,6 +13,13 @@ generate_readme() {
   readme_content+="# $BLDR_APP\n\n"
   readme_content+="Last Updated: $UPDATED\n\n"
 
+  # Overview
+  readme_content+="## Overview\n"
+  readme_content+="Docker Hub: \n"
+  readme_content+="Project: \n"
+  readme_content+="Composer Example: \n"
+  readme_content+="Proxy Port: \n"
+
   # Description
   readme_content+="## Description\n"
   readme_content+="$DESCRIPTION\n\n"
