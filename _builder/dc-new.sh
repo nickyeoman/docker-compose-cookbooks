@@ -4,10 +4,10 @@ BLDR_IMAGE_VAR="\${${BLDR_APP^^}_IMAGE:-$BLDR_DC_IMAGE}"
 
 # Generate Docker Compose content and save it to a variable
 BLDR_NEW_DCF=$(cat <<EOF
-version: '3.4'
+version: '3.8'
 
 services:
-  stash:
+  $BLDR_APP:
     image: $BLDR_IMAGE_VAR
     restart: unless-stopped
     environment:

@@ -1,17 +1,13 @@
-version: '3.8'  # or any version you prefer
+version: '3.8'
 
 services:
   mariadb:
     image: ${MARIADB_IMAGE:-mariadb:latest}
+    restart: unless-stopped
     environment:
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
-      MARIADB_DATABASE: ${MARIADB_DATABASE:-mydb}
-      MARIADB_USER: ${MARIADB_USER:-dbuser}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-AlsoChangeThisPassword}
+      - MARIADB_DATABASE: ${MARIADB_MARIADB_DATABASE:-mydb}
+      - MARIADB_PASSWORD: ${MARIADB_MARIADB_PASSWORD:-AlsoChangeThisPassword}
+      - MARIADB_ROOT_PASSWORD: ${MARIADB_MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
+      - MARIADB_USER: ${MARIADB_MARIADB_USER:-dbuser}
     volumes:
       - ${VOL_PATH:-./data/}mariadb_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    networks:
-      - mariadb_network
-

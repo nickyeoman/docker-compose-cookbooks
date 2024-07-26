@@ -1,11 +1,9 @@
 #!/bin/bash
 
 # List all directories in the current directory that don't start with an underscore
-directories
 directories=$(find . -maxdepth 1 -type d -not -name '_*' -exec basename {} \; | grep -v '[_\.]' | sort -r)
 
 # Use fzf to allow the user to select a directory
-selected_dir
 selected_dir=$(echo "$directories" | fzf --prompt="Select a directory: ")
 
 # Check if a directory was selected

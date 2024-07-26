@@ -1,6 +1,7 @@
 # Mariadb
 
 Dockerhub: https://hub.docker.com/_/mariadb
+Proxy Port: 3306
 
 It will be quite uncommon to just use this compose file, it's likely you are extending this from another project.
 That's the main context of this container.
