@@ -15,5 +15,4 @@ EOF
 # Output the content to a file
 BLDR_NEW_SE="$file_content" 
 
-echo "***** Sample Extends *****"
-echo "$BLDR_NEW_SE"
+echo "$BLDR_NEW_SE" > ${BLDR_DIR}/sample-extends.yml

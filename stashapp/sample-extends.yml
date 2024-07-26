@@ -1,11 +1,7 @@
 version: '3.4'
 
 services:
-	stash:
-		extends:
-			file: ${COOKBOOK}/stashapp/docker-compose.yml
-			service: stash
-		env_file:
-			- .env
-		ports:
-			- "9999:9999"
+  stashapp:
+    extends:
+      file: ${COOKBOOK}/stashapp/docker-compose.yml
+      service: stashapp

@@ -11,13 +11,33 @@ process_env_vars() {
         var_name="${env_var%%=*}"  # Variable name
         var_value="${env_var#*=}"  # Variable value
 
-        # Handle variables with and without default values
-        if [[ "$var_value" == *'${'*:*'}'* ]]; then
-            # For variables with default values
-            modified_var="${var_name}=\${${APP_NAME}_${var_value#\$\{}"
+        # Check if the variable value contains a reference to another variable with the format ${VAR_NAME:-default}
+        if [[ "$var_value" == *'${'*':'*'}'* ]]; then
+            # Extract the variable inside the ${} braces
+            ref_var="${var_value#\$\{}"
+            ref_var="${ref_var%%[:-]*}"
+
+            # Extract the default value part
+            default_value="${var_value##*:-}"
+            default_value="${default_value%\}}"
+
+            # Check if the reference variable already contains APP_NAME_ prefix
+            if [[ "$ref_var" == ${APP_NAME}_* ]]; then
+                # If it already contains the prefix, use it as is
+                modified_var="${var_name}=\${${ref_var}:-${default_value}}"
+            else
+                # If not, add the APP_NAME_ prefix
+                modified_var="${var_name}=\${${APP_NAME}_${ref_var}:-${default_value}}"
+            fi
         else
-            # For variables without default values
-            modified_var="${var_name}=\${${APP_NAME}_${var_name}:-${var_value}}"
+            # For variables without ${VAR_NAME} references
+            if [[ "$var_name" == ${APP_NAME}_* ]]; then
+                # If the variable name already starts with APP_NAME_, do not prefix again
+                modified_var="${var_name}=${var_value}"
+            else
+                # Add APP_NAME_ prefix for consistency
+                modified_var="${var_name}=\${${APP_NAME}_${var_name}:-${var_value}}"
+            fi
         fi
 
         # Append the modified variable to results

@@ -18,5 +18,4 @@ EOF
 )
 
 # Print the variable to verify the content
-echo "***** NEW docker-compose.yml *****"
-echo "$BLDR_NEW_DCF"
+echo "$BLDR_NEW_DCF" > ${BLDR_DIR}/docker-compose.yml

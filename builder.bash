@@ -80,8 +80,7 @@ source ./_builder/extends-new.sh
 ################################################
 source ./_builder/readme-new.sh
 BLDR_NEW_README=$(generate_readme)
-echo "***** README *****"
-echo "$BLDR_NEW_README"
+echo "$BLDR_NEW_README" > ${BLDR_DIR}/README.md
 
 # TODO: for readme file do mkdir -p data/vols for vols
 # Do a git diff on the directory

@@ -2,20 +2,18 @@ version: '3.4'
 
 services:
   stash:
-    image: ${STASH_IMAGE:-stashapp/stash:latest}
+    image: ${STASHAPP_IMAGE:-stashapp/stash:latest}
     restart: unless-stopped
     environment:
-      - STASH_STASH=${STASH_STASH:-/data/}
-      - STASH_GENERATED=${STASH_GENERATED:-/generated/}
-      - STASH_METADATA=${STASH_METADATA:-/metadata/}
-      - STASH_CACHE=${STASH_CACHE:-/cache/}
+      - STASH_CACHE=${STASHAPP_STASH_CACHE:-/cache/}
+      - STASH_DOMAIN_NAME=${STASHAPP_STASH_DOMAIN_NAME:-stash.yourdomain.ca}
+      - STASH_GENERATED=${STASHAPP_STASH_GENERATED:-/generated/}
+      - STASH_METADATA=${STASHAPP_STASH_METADATA:-/metadata/}
+      - STASH_STASH=${STASHAPP_STASH_STASH:-/data/}
     volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "${VOL_PATH:-./data}/stash-video:/data"
-      - "${VOL_PATH:-./data}/stash-metadata:/metadata"
-      - "${VOL_PATH:-./data}/stash-cache:/cache"
-      - "${VOL_PATH:-./data}/stash-generated:/generated"
-      - "${VOL_PATH:-./data}/stash-root:/root"
-      
-    # Uncomment and use if needed
-    # network_mode: "host"
+      - ${VOL_PATH:-./data}/stash-cache:/cache
+      - ${VOL_PATH:-./data}/stash-generated:/generated
+      - ${VOL_PATH:-./data}/stash-metadata:/metadata
+      - ${VOL_PATH:-./data}/stash-root:/root
+      - ${VOL_PATH:-./data}/stash-video:/data
+      - /etc/localtime:/etc/localtime:ro
