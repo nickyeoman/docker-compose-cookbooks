@@ -8,8 +8,8 @@ process_env_vars() {
     # Loop through each environment variable
     while IFS= read -r env_var; do
         # Split into name and value parts based on '='
-        var_name="${env_var%%:*}"  # Variable name (split by colon for YAML)
-        var_value="${env_var#*: }"  # Variable value (remove leading space)
+        var_name="${env_var%%=*}"  # Variable name
+        var_value="${env_var#*=}"  # Variable value
 
         # Handle variables without existing braces (not previously processed)
         if [[ "$var_value" != *'${'* ]]; then

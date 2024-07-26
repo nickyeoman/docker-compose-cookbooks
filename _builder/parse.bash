@@ -15,12 +15,11 @@ get_env_vars() {
     local compose_content="$1"
     local env_vars=""
 
-    # Use yq to extract the environment variables in 'key: value' format
-    env_vars=$(echo "$compose_content" | yq eval '.services.*.environment | to_entries | .[] | "\(.key): \(.value)"' - 2>/dev/null)
+    # Use yq to extract environment variables in 'key=value' format without indices
+    env_vars=$(echo "$compose_content" | yq eval '.services.*.environment[]' - 2>/dev/null)
 
     echo "$env_vars"
 }
-
 get_image() {
     local compose_content="$1"
     local images=""
