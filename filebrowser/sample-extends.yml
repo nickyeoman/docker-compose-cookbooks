@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  filebrowser:
+    extends:
+      file: ${COOKBOOK}/filebrowser/docker-compose.yml
+      service: filebrowser
