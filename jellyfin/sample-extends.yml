@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  jellyfin:
+    extends:
+      file: ${COOKBOOK}/jellyfin/docker-compose.yml
+      service: jellyfin

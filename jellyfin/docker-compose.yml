@@ -1,41 +1,18 @@
----
-version: "3"
-
-###########################################################################################################################
-# Jellyfin
-# 
-# LINKS
-# * [DockerHub jellyfin](https://hub.docker.com/r/jellyfin/jellyfin)
-# * [DockerHub Mariadb](https://hub.docker.com/_/mariadb/)
-# * [Docs](https://jellyfin.org/docs/)
-#
-# Notes:
-# Static Ports
-# * 8096/tcp is used by default for HTTP traffic. You can change this in the dashboard.
-# * 8920/tcp is used by default for HTTPS traffic. You can change this in the dashboard.
-# * 1900/udp is used for service auto-discovery. This is not configurable.
-# * 7359/udp is also used for auto-discovery. This is not configurable.
-#
-# SAMPLE ENV
-# APP_URL: http://localhost:8096
-###########################################################################################################################
+version: '3.8'
 
 services:
-
   jellyfin:
-    image: jellyfin/jellyfin:latest
-    restart: always
-    volumes:
-      - ./data/config:/config
-      - ./data/cache:/cache
-      - ./data/content/media:/media
-      - ./data/content/books:/books
-      - ./data/content/movies:/movies
-      - ./data/content/music:/music
-      - ./data/content/musicvideos:/musicvideos
-      - ./data/content/photos:/photos
-      - ./data/content/shows:/shows
-    ports: 
-      - "8096:8096"
+    image: ${JELLYFIN_IMAGE:-jellyfin/jellyfin:latest}
+    restart: unless-stopped
     environment:
-      - JELLYFIN_PublishedServerUrl=${APP_URL:-http://localhost:8096}
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_PublishedServerUrl:-http://localhost:8096}
+    volumes:
+      - ${VOL_PATH:-./data}/jellyfin-cache:/cache
+      - ${VOL_PATH:-./data}/jellyfin-config:/config
+      - ${VOL_PATH:-./data}/jellyfin-content/books:/books
+      - ${VOL_PATH:-./data}/jellyfin-content/media:/media
+      - ${VOL_PATH:-./data}/jellyfin-content/movies:/movies
+      - ${VOL_PATH:-./data}/jellyfin-content/music:/music
+      - ${VOL_PATH:-./data}/jellyfin-content/musicvideos:/musicvideos
+      - ${VOL_PATH:-./data}/jellyfin-content/photos:/photos
+      - ${VOL_PATH:-./data}/jellyfin-content/shows:/shows
