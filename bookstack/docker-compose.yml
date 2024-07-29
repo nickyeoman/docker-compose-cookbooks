@@ -15,5 +15,5 @@ services:
       - REVISION_LIMIT=${BOOKSTACK_REVISION_LIMIT:-false}
     volumes:
       - ${VOL_CONFIG_PATH:-./config}/php.ini:/usr/local/etc/php/php.ini
-      - ${VOL_PATH:-./data}/storage:/var/www/bookstack/storage/uploads
-      - ${VOL_PATH:-./data}/uploads:/var/www/bookstack/public/uploads
+      - ${VOL_PATH:-./data}/bookstack-storage:/var/www/bookstack/storage/uploads
+      - ${VOL_PATH:-./data}/bookstack-uploads:/var/www/bookstack/public/uploads
