@@ -11,10 +11,10 @@ services:
       - NTFY_CACHE_FILE=${NTFY_CACHE_FILE:-/var/lib/ntfy/cache.db}
       - NTFY_AUTH_FILE=${NTFY_AUTH_FILE:-/var/lib/ntfy/auth.db}
       - NTFY_AUTH_DEFAULT_ACCESS=${NTFY_AUTH_DEFAULT_ACCESS:-deny-all}
-      - NTFY_BEHIND_PROXY="${NTFY_BEHIND_PROXY:-true}"
+      - NTFY_BEHIND_PROXY=${NTFY_BEHIND_PROXY:-true}
       - NTFY_ATTACHMENT_CACHE_DIR=${NTFY_ATTACHMENT_CACHE_DIR:-/var/lib/ntfy/attachments}
-      - NTFY_ENABLE_LOGIN="${NTFY_ENABLE_LOGIN:-true}"
-      - TZ=${NTFY_TZ:-UTC}
+      - NTFY_ENABLE_LOGIN=${NTFY_ENABLE_LOGIN:-true}
+      - TZ=${TZ:-UTC}
     volumes:
       - ${VOL_PATH:-./data}/ntfy-cache/ntfy:/var/cache/ntfy
       - ${VOL_PATH:-./data}/ntfy:/etc/ntfy

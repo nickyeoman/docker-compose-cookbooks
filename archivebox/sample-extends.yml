@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  archivebox:
+    extends:
+      file: ${COOKBOOK}/archivebox/docker-compose.yml
+      service: archivebox

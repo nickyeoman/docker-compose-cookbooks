@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  archivebox:
+    image: ${ARCHIVEBOX_IMAGE:-archivebox/archivebox:stable}
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH:-./data}/archive-data:/data
+    environment:
+      - ARCHIVEBOX_UID=1000
+      - ARCHIVEBOX_GID=1000
+      - PYTHONUNBUFFERED=1 # Ensures logs are output in real-time
+    command: server --quick-init 0.0.0.0:8000
