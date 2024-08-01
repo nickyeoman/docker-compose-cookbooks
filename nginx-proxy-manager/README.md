@@ -5,7 +5,13 @@ This Docker Compose configuration sets up the Reverse Proxy application using Do
 
 - App: [Proxy Manager on Docker Hub](https://hub.docker.com/r/jc21/nginx-proxy-manager)
 - Official Site: [Nginx Proxy Manager](https://nginxproxymanager.com/)
+- [Docker tags](https://hub.docker.com/r/jc21/nginx-proxy-manager/tags)
 - Expose ports: 80, 81, 443
+
+## Default Login
+
+* Email: admin@example.com
+* Password: changeme
 
 ## Create Network
 
