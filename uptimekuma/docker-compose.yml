@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  uptimekuma:
+    image: ${UPTIMEKUMA_IMAGE:-louislam/uptime-kuma}
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH:-./data}/uptimekuma-data:/app/data

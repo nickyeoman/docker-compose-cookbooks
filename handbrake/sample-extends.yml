@@ -1,9 +1,9 @@
 version: '3.4'
 
 services:
-	  handbrake:
-      extends:
-        file: ${COOKBOOK}/handbrake/docker-compose.yml
-        service: handbrake
-      env_file:
-        - .env
+  handbrake:
+    extends:
+      file: ${COOKBOOK}/handbrake/docker-compose.yml
+      service: handbrake
+    env_file:
+      - .env

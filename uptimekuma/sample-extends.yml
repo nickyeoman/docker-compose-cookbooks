@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  uptimekuma:
+    extends:
+      file: ${COOKBOOK}/uptimekuma/docker-compose.yml
+      service: uptimekuma
