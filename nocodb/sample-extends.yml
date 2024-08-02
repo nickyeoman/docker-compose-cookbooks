@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  nc:
+    extends:
+      file: ${COOKBOOK}/nocodb/docker-compose.yml
+      service: nc

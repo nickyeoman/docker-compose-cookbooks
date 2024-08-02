@@ -17,7 +17,7 @@ generate_readme() {
   readme_content+="## Overview\n"
   readme_content+="Docker Hub: \n"
   readme_content+="Project: \n"
-  readme_content+="Composer Example: \n"
+  readme_content+="Docker Compose Example: \n"
   readme_content+="Proxy Port: \n"
 
   # Description
