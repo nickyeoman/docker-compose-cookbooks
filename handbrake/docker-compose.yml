@@ -8,6 +8,7 @@ services:
       - "${VOL_CONFIG_PATH:-./}/config/ghb:/config/ghb"
       - "${VOL_PATH:-./data}/handbrake/storage:/storage"
       - "${VOL_PATH:-./data}/handbrake/complete:/output"
+      - "${VOL_PATH:-./data}/handbrake/watch:/watch"
     restart: "unless-stopped"
     ports:
       - "5800:5800"

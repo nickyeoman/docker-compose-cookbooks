@@ -1,6 +1,7 @@
 # Handbrake
  
 DockerHub: https://hub.docker.com/r/jlesage/handbrake
+Env docs: https://github.com/jlesage/docker-handbrake
 
 ## SAMPLE ENV
 
@@ -18,4 +19,6 @@ You can specify read and write for example:
 "handbrake-storage:/storage:ro"
 "handbrake-output:/output:rw"
 
- 
+## Nvidia
+
+HANDBRAKE_IMAGE=zocker160/handbrake-nvenc:latest
