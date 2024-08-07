@@ -5,15 +5,16 @@ services:
     image: ollama/ollama
     container_name: ollama
     runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./data/ollama:/root/.ollama
     deploy:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
-    volumes:
-      - ollama:/root/.ollama
-    ports:
-      - "11434:11434"
-
-volumes:
-  ollama:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
