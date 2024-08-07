@@ -5,7 +5,7 @@ services:
   handbrake:
     image: ${HANDBRAKE_IMAGE:-jlesage/handbrake:latest}
     volumes:
-      - "${VOL_CONFIG_PATH:-./config}/ghb:/config/ghb"
+      - "${VOL_CONFIG_PATH:-./}/config/ghb:/config/ghb"
       - "${VOL_PATH:-./data}/handbrake/storage:/storage"
       - "${VOL_PATH:-./data}/handbrake/complete:/output"
     restart: "unless-stopped"
