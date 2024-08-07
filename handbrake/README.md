@@ -22,3 +22,4 @@ You can specify read and write for example:
 ## Nvidia
 
 HANDBRAKE_IMAGE=zocker160/handbrake-nvenc:latest
+https://github.com/zocker-160/handbrake-nvenc-docker
