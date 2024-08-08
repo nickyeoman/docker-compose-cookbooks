@@ -1,48 +1,13 @@
-################################################################################
-# MONICA_
-# TODO: this isn't working, it won't grab the DB host name
-# I think you have to build it with the env file
-#
-# make sure you use the $PREFIX from .env for project_name
-# docker-compose -p project_name up -d
-#
-# Importing directly to the db (phpmydadmin)
-# you have to run the following in the container:
-# php artisan bookstack:regenerate-permissions
-#
-# Version 1
-################################################################################
-version: "3.4"
-
-volumes:
-  monica-db:
-  monica:
-
-networks:
-  admin_web:
-    external:
-      name: admin_web
+version: '3.8'
 
 services:
-    monica-db:
-    image: mariadb:latest
-    restart: unless-stopped
-    volumes:
-      - ./data/monica-db:/var/lib/mysql
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
-    environment:
-      MYSQL_ROOT_PASSWORD: changeme
-      MYSQL_USER: monica
-      MYSQL_PASSWORD: changeme
-      MYSQL_DATABASE: monica
-
   monica:
-    image: monica:latest
+    image: ${MONICA_IMAGE:-latest}
     restart: unless-stopped
-    volumes:
-      - ./data/monica:/var/www/html/storage
     environment:
-      DB_HOST: monica-db
-      DB_USERNAME: monica
-      DB_PASSWORD: changeme
-      APP_ENV: production
+      - DB_HOST=${MONICA_DB_HOST:-monica-db}
+      - DB_USERNAME=${MONICA_DB_USERNAME:-monica}
+      - DB_PASSWORD=${MONICA_DB_PASSWORD:-changeme}
+      - APP_ENV=${MONICA_APP_ENV:-production}
+    volumes:
+      - ${VOL_PATH}/monica:/var/www/html/storage

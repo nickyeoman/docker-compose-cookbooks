@@ -6,9 +6,9 @@ services:
       file: ${COOKBOOK}/piwigo/docker-compose.yml
       service: piwigo
 
-piwigo-db:
-  extends:
-    file: ${COOKBOOK}/mariadb/docker-compose.yml
-    service: mariadb
-  command: --max_allowed_packet=32505856
-  
+  piwigo-db:
+    extends:
+      file: ${COOKBOOK}/mariadb/docker-compose.yml
+      service: mariadb
+    command: --max_allowed_packet=32505856
+    

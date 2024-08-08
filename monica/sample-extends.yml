@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  monica:
+    extends:
+      file: ${COOKBOOK}/monica/docker-compose.yml
+      service: monica
+
+  monica-db:
+    extends:
+      file: ${COOKBOOK}/mariadb/docker-compose.yml
+      service: mariadb
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
+  
