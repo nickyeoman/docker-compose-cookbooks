@@ -1,40 +1,12 @@
----
-version: "3"
-
-###########################################################################################################################
-# Heimdall (Homepage)
-# 
-# DockerHub: https://hub.docker.com/r/linuxserver/heimdall
-# Offical Website: https://heimdall.site/
-#
-# SAMPLE .env
-# VERSION=latest
-# TZ=America/Vancouver
-# PORT=8000
-#
-# NOTES
-#
-# Make sure your volume is set correctly.
-# Ports don't need to be set if behind proxy
-#
-# Powered by sqlite in www directory (data)
-#
-# You can edit vol/www/.env
-# For https include: FORCE_HTTPS=true
-#
-###########################################################################################################################
+version: '3.8'
 
 services:
   heimdall:
-    image: linuxserver/heimdall:${VERSION:-latest}
+    image: ${HEIMDALL_IMAGE:-linuxserver/heimdall:latest}
+    restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PGID=${HEIMDALL_PGID:-1000}
+      - PUID=${HEIMDALL_PUID:-1000}
       - TZ=${TZ:-America/Vancouver}
     volumes:
-      - ./data/heimdall:/config
-    restart: unless-stopped
-    #ports:
-    #  - "${PORT:-80}:80"
-
-
+      - ${VOL_PATH:-./data}/heimdall:/config
