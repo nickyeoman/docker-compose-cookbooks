@@ -12,4 +12,4 @@ services:
       - MINIO_BROWSER_REDIRECT_URL=${MINIO_BROWSER_REDIRECT_URL:-https://console.s3.example.com}
       - CONSOLE_SECURE_TLS_REDIRECT=${MINIO_CONSOLE_SECURE_TLS_REDIRECT:-off}
     volumes:
-      - ${VOL_PATH:-./data/}minio:/data
+      - ${VOL_PATH:-./data/}/minio:/data
