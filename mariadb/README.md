@@ -26,3 +26,12 @@ GRANT ALL PRIVILEGES ON wordpress_db.* TO 'wordpress_user'@'%';
 
 FLUSH PRIVILEGES;
 ```
+
+### Change command
+
+```yaml
+# heimdall, pwigo
+command: --max_allowed_packet=32505856
+# monica
+command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
+```

@@ -1,28 +1,13 @@
-  piwigo-db:
-    image: mariadb:11.2.2 # https://hub.docker.com/_/mariadb
-    restart: unless-stopped
-    command: --max_allowed_packet=32505856
-    volumes:
-      - ./data/db:/var/lib/mysql
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
-    environment:
-      MYSQL_ROOT_PASSWORD: 3NcHCnWbkm7x
-      MYSQL_USER: piwigo
-      MYSQL_PASSWORD: text
-      MYSQL_DATABASE: piwigo
+version: '3.8'
 
+services:
   piwigo:
-    image: lscr.io/linuxserver/piwigo:latest # https://hub.docker.com/r/linuxserver/piwigo/tags/
+    image: ${PIWIGO_IMAGE:-lscr.io/linuxserver/piwigo:latest}
     restart: unless-stopped
-    volumes:
-      - ./data/piwigo:/config
-      - ./data/gallery:/gallery
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Vancouver
-    ports:
-      - 8203:80
+      - PUID=${PIWIGO_PUID:-1000}
+      - PGID=${PIWIGO_PGID:-1000}
+      - TZ=${TZ:-America/Vancouver}
+    volumes:
+      - ${VOL_PATH:-./data}/piwigo:/config
+      - ${VOL_PATH:-./data}/gallery:/gallery
