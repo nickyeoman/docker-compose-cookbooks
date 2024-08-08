@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mealie:
+    image: ${MEALIE_IMAGE:-hkotel/mealie:latest}
+    restart: unless-stopped
+    environment:
+      - BASE_URL=${MEALIE_BASE_URL:-https://mealie.domain.com}
+      - DEFAULT_EMAIL=${MEALIE_DEFAULT_EMAIL:-email@domain.com}
+      - PGID=${MEALIE_PGID:-1000}
+      - PUID=${MEALIE_PUID:-1000}
+      - RECIPE_DISABLE_AMOUNT=${MEALIE_RECIPE_DISABLE_AMOUNT:-false}
+      - RECIPE_DISABLE_COMMENTS=${MEALIE_RECIPE_DISABLE_COMMENTS:-false}
+      - RECIPE_LANDSCAPE_VIEW=${MEALIE_RECIPE_LANDSCAPE_VIEW:-true}
+      - RECIPE_PUBLIC=${MEALIE_RECIPE_PUBLIC:-true}
+      - RECIPE_SHOW_ASSETS=${MEALIE_RECIPE_SHOW_ASSETS:-true}
+      - RECIPE_SHOW_NUTRITION=${MEALIE_RECIPE_SHOW_NUTRITION:-true}
+      - TZ=${TZ:-America/Vancouver}
+    volumes:
+      - ${VOL_PATH:-./data}/mealie:/app/data
