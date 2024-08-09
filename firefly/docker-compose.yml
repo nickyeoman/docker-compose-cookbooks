@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  firefly:
+    image: ${FIREFLY_IMAGE:-fireflyiii/core:latest}
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH:-./data}/firefly:/var/www/html/storage/upload
+  
+  firefly-importer:
+    image: ${FIREFLY_IMPORTER_IMAGE:-fireflyiii/data-importer:latest}
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH:-./data}/firefly:/var/www/html/storage/upload

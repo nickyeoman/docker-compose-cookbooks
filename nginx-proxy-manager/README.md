@@ -33,31 +33,3 @@ See sample-extends.yml
 ```bash
 mkdir -p data/proxy data/proxy-letsencrypt
 ```
-
-### env file
-
-```text
-# Nginx Proxy Manager
-PRODDIR=/var/www/stashdomain-com/ #HELP: project_path
-VOL_PATH=/docker/vol/portainer-data #HELP: volpath
-COOKBOOK=/home/user/git/docker-compose-cookbooks #HELP: cookbooks
-PROXY_IMAGE=jc21/nginx-proxy-manager:2.11.3
-```
-
-## Usage
-
-In the project directory you have to run as root as you use port 80 and 443
-
-```bash
-# Docker Start
-docker-compose up -d
-
-# Docker Stop 
-docker-compose down
-
-# Podman Start
-sudo podman-compose up -d
-
-# Podman Stop 
-sudo podman-compose down
-```
