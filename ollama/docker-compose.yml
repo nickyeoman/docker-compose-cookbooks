@@ -3,7 +3,6 @@ version: '3.8'
 services:
   ollama:
     image: ollama/ollama
-    container_name: ollama
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
@@ -18,3 +17,21 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+
+  webui:
+    image: ${WEBUI_IMAGE:-ghcr.io/open-webui/open-webui:cuda}
+    runtime: nvidia  # Use NVIDIA runtime for GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - "${VOL_PATH:-./data}/webui:/root/.cache"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "7860:7860"  # Open WebUI access

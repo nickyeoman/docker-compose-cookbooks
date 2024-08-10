@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  ollama:
+    extends:
+      file: ${COOKBOOK}/ollama/docker-compose.yml
+      service: ollama
+
+  webui:
+    extends:
+      file: ${COOKBOOK}/ollama/docker-compose.yml
+      service: webui
