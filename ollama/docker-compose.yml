@@ -34,4 +34,4 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
-      - "7860:7860"  # Open WebUI access
+      - "3000:8080"  # Open WebUI access

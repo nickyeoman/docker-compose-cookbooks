@@ -2,7 +2,7 @@
 
 Dockerhub: https://hub.docker.com/r/ollama/ollama
 
-Reverse Proxy Port webui: 7860
+Reverse Proxy Port webui: 8080
 
 ## Preperation
 
