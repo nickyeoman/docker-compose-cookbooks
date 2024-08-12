@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  webtop:
+    extends:
+      file: ${COOKBOOK}/webtop/docker-compose.yml
+      service: webtop

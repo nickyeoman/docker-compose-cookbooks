@@ -1,0 +1,17 @@
+---
+version: '3.8'
+
+services:
+  thunderbird:
+    image: ${THUNDERBIRD_IMAGE:-jlesage/thunderbird}
+    restart: unless-stopped
+    environment:
+      - TZ=${THUNDERBIRD_TZ:-America/Vancouver}
+      - WEB_AUTHENTICATION=${THUNDERBIRD_WEB_AUTHENTICATION:-1}
+      - WEB_AUTHENTICATION_USERNAME=${THUNDERBIRD_WEB_AUTHENTICATION_USERNAME:-user}
+      - WEB_AUTHENTICATION_PASSWORD=${THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD:-password}
+      - SECURE_CONNECTION=${THUNDERBIRD_SECURE_CONNECTION:-1}
+    volumes:
+      - "${VOL_PATH:-/tmp}/thunderbird:/config:rw"
+    ports:
+      - "5800:5800"
