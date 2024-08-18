@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  redis:
+    extends:
+      file: ${COOKBOOK}/redis/docker-compose.yml
+      service: redis

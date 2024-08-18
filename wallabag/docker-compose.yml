@@ -1,75 +1,26 @@
-###############################################################################
-# reference link: https://geek-cookbook.funkypenguin.co.nz/recipes/wallabag/
-# You will want this for environment:
-# https://doc.wallabag.org/en/admin/parameters.html
-# and main docker page:
-# https://github.com/wallabag/docker/blob/master/README.md
-###############################################################################
----
-version: '3'
-
-networks:
-  admin_web:
-    external:
-      name: admin_web
-
-volumes:
-  wallabag:
-  wallabag-db:
+version: '3.8'
 
 services:
-
-  wallabag-db:
-    image: mariadb:${DB_V}
-    restart: always
-    volumes:
-      - wallabag-db:/var/lib/mysql
-    networks:
-      - admin_web
-    environment:
-      MYSQL_ROOT_PASSWORD: ${WALLABAG_MYSQL_ROOT_PASSWORD}
-      # Do not define mysql info, an ansible script in wallabag does that.
-
   wallabag:
-    #https://hub.docker.com/r/wallabag/wallabag
-    image: wallabag/wallabag:${WALLABAG_V}
+    image: ${WALLABAG_IMAGE:-wallabag/wallabag:latest}
+    restart: unless-stopped
     environment:
-      - TZ=it-IT
-      - PUID=1000
-      - PGID=1000
-      - SYMFONY__ENV__DOMAIN_NAME=https://${WALLABAG_DOMAIN_NAME}
-      # 30 characters, try:
-      - SYMFONY__ENV__SECRET=${WALLABAG_SECRET}
-      - SYMFONY__ENV__FOSUSER_REGISTRATION=false
-      # MYSQL
-      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD}
-      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
-      - SYMFONY__ENV__DATABASE_HOST=${PREFIX}_wallabag-db_1
-      - SYMFONY__ENV__DATABASE_PORT=3306
-      - SYMFONY__ENV__DATABASE_NAME=wallabag
-      - SYMFONY__ENV__DATABASE_USER=wallabag
-      - SYMFONY__ENV__DATABASE_PASSWORD=${WALLABAG_MYSQL_PASSWORD}
-      - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
-      # Redis
-      - SYMFONY__ENV__REDIS_HOST=${PREFIX}_wallabag-redis_1
-      # Mailer doesn't work until v2.4
-
+      - SYMFONY__ENV__DATABASE_DRIVER=${WALLABAG_DB_DRIVER:-pdo_mysql}
+      - SYMFONY__ENV__DATABASE_HOST=${WALLABAG_DB_HOST:-wallabag-db}
+      - SYMFONY__ENV__DATABASE_PORT=${WALLABAG_DB_PORT:-3306}
+      - SYMFONY__ENV__DATABASE_NAME=${WALLABAG_DB_NAME:-wallabag}
+      - SYMFONY__ENV__DATABASE_USER=${WALLABAG_DB_USER:-wallabag}
+      - SYMFONY__ENV__DATABASE_PASSWORD=${WALLABAG_DB_PASS:-wallapass}
+      - SYMFONY__ENV__DATABASE_CHARSET=${WALLABAG_DB_CHARSET:-utf8mb4}
+      - SYMFONY__ENV__DATABASE_TABLE_PREFIX=${WALLABAG_DB_PREFIX:-wallabag_}
+      - SYMFONY__ENV__MAILER_DSN=${WALLABAG_MAILER_DSN:-smtp://127.0.0.1}
+      - SYMFONY__ENV__FROM_EMAIL=${WALLABAG_FROM_WEMAIL:-wallabag@example.com}
+      - SYMFONY__ENV__DOMAIN_NAME=${WALLABAG_DOMAIN:-https://your-wallabag-instance.wallabag.org}
+      - SYMFONY__ENV__SERVER_NAME=${WALLABAG_SERVER:-Your wallabag instance}
+      - TZ=${WALLABAG_TZ:-America/Vancouver}
+    healthcheck:
+      test: ["CMD", "wget" ,"--no-verbose", "--tries=1", "--spider", "http://localhost/api/info"]
+      interval: 1m
+      timeout: 3s
     volumes:
-      - wallabag:/var/www/wallabag/web/assets/images
-    depends_on:
-      - wallabag-db
-    links:
-      - wallabag-db
-    networks:
-      - admin_web
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_wallabag.rule=Host(`${WALLABAG_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_wallabag.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_wallabag.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_wallabag.loadbalancer.server.port=80"
-
-  wallabag-redis:
-    image: redis:5.0.9
-    networks:
-      - admin_web
+      - "${VOL_PATH:-/tmp}/wallabag:/var/www/wallabag/web/assets/images"
