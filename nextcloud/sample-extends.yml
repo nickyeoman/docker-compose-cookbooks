@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  nextcloud:
+    extends:
+      file: ${COOKBOOK}/nextcloud/docker-compose.yml
+      service: nextcloud
+
+  nextcloud-mariadb:
+		extends:
+			file: ${COOKBOOK}/mariadb/docker-compose.yml
+			service: mariadb
