@@ -35,4 +35,6 @@ FLUSH PRIVILEGES;
 command: --max_allowed_packet=32505856
 # monica
 command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
+# nextcloud
+command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
 ```
