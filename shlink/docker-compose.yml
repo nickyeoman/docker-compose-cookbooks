@@ -1,0 +1,32 @@
+ mariadb-shlink:
+    image: mariadb:10.7.1 # https://hub.docker.com/_/mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: change
+      MYSQL_USER: shlink
+      MYSQL_PASSWORD: changea
+      MYSQL_DATABASE: shlinkdb
+    volumes:
+      - ./data/shlink-db:/var/lib/mysql
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - 4lt_internal
+
+  shlink:
+    # proxy to port 8080
+    image: shlinkio/shlink:3.6.1
+    restart: always
+    environment:
+      - TZ=America/Vancouver
+      - DEFAULT_DOMAIN=4lt.ca
+      - IS_HTTPS_ENABLED=true
+      - DB_DRIVER=maria
+      - DB_USER=shlink
+      - DB_NAME=shlinkdb
+      - DB_PASSWORD=change
+      - DB_HOST=mariadb-shlink
+      - DEFAULT_BASE_URL_REDIRECT=https://www.domain.ca
+    networks:
+      - 4lt_internal
+      - admin_web
