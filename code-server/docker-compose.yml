@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  code-server:
+    image: ${CODE-SERVER_IMAGE:-null}
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-America/Vancouver}
+      - PASSWORD=${CODE-SERVER_PASSWORD:-RanDoMChangeMe}
+      - DEFAULT_WORKSPACE=/data
+      - PROXY_DOMAIN=${CODE-SERVER_DOMAIN:-localhost}
+    volumes:
+      - ${VOL_PATH:-./data}/codeserver:/data
+      - ${VOL_PATH:-./data}/codeserver-config:/config"
