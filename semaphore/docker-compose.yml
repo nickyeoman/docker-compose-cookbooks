@@ -1,57 +1,18 @@
 version: "3.4"
-################################################################################
-# Semaphore
-#
-# https://docs.semui.co/administration-guide/installation#docker
-# port 3000
-# SEMAPHORE_ACCESS_KEY_ENCRYPTION — head -c32 /dev/urandom | base64
-#
-# Trouble shooting
-# The trick to getting this going is loggin into the container and running 
-# semaphore commands
-# you can generate the config.json file that way
-#
-# Sample env
-# DB_V=latest
-# SEMAPHORE_PORT=3000
-# SEMAPHORE_MYSQL_ROOT_PASSWORD=ChangeThisPassword
-# SEMAPHORE_MYSQL_PASSWORD=ChangePassword
-# SEMAPHORE_MYSQL_PASSWORD=ChangePassword
-# SEMAPHORE_ADMIN_EMAIL=example@example.com
-# SEMAPHORE_ACCESS_KEY_ENCRYPTION=dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=
-################################################################################
 
 services:
-
-  semaphoredb:
-    image: mariadb:${DB_V:-latest}
-    restart: always
-    volumes:
-      - ./data/semaphoredb:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${SEMAPHORE_MYSQL_ROOT_PASSWORD:-changeme}
-      MYSQL_PASSWORD: ${SEMAPHORE_MYSQL_PASSWORD:-changeme1234}
-      MYSQL_DATABASE: semaphore
-      MYSQL_USER: semaphore
-
   semaphore:
+    image: ${SEMAPHORE_IMAGE:-semaphoreui/semaphore:latest}
+    environment:
+      SEMAPHORE_DB_DIALECT: ${SEMAPHORE_DB_DIALECT:-bolt}
+      SEMAPHORE_PLAYBOOK_PATH: ${SEMAPHORE_PLAYBOOK_PATH:-/tmp/semaphore/}
+      SEMAPHORE_ADMIN_PASSWORD: ${SEMAPHORE_ADMIN_PASSWORD:-changeadmin1234}
+      SEMAPHORE_ADMIN_NAME: ${SEMAPHORE_ADMIN_NAME:-admin}
+      SEMAPHORE_ADMIN_EMAIL: ${SEMAPHORE_ADMIN_EMAIL:-admin@localhost}
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION:-dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=}
+      SEMAPHORE_LDAP_ACTIVATED: ${SEMAPHORE_LDAP_ACTIVATED:-no}
+    volumes:
+      - ${CONFIG_VOL:-./config}/config.json:/home/semaphore/config.json
+      #- ./config/ssh/:/home/semaphore/.ssh
     ports:
       - ${SEMAPHORE_PORT:-3000}:3000
-    image: semaphoreui/semaphore:latest
-    environment:
-      SEMAPHORE_DB_USER: semaphore
-      SEMAPHORE_DB_PASS: ${SEMAPHORE_MYSQL_PASSWORD:-changeme1234}
-      SEMAPHORE_DB_HOST: semaphoredb # for postgres, change to: postgres
-      SEMAPHORE_DB_PORT: 3306 # change to 5432 for postgres
-      SEMAPHORE_DB_DIALECT: mysql # for postgres, change to: postgres
-      SEMAPHORE_DB: semaphore
-      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
-      SEMAPHORE_ADMIN_PASSWORD: ${SEMAPHORE_MYSQL_PASSWORD:-changeadmin1234}
-      SEMAPHORE_ADMIN_NAME: admin
-      SEMAPHORE_ADMIN_EMAIL: ${SEMAPHORE_ADMIN_EMAIL:-admin@localhost}
-      SEMAPHORE_ADMIN: admin
-      SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION:-dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=}
-      SEMAPHORE_LDAP_ACTIVATED: 'no' # if you wish to use ldap, set to: 'yes' 
-    volumes:
-      - ./config/config.json:/home/semaphore/config.json
-      - ./config/ssh/:/home/semaphore/.ssh

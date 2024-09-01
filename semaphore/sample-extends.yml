@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  semaphore:
+    extends:
+      file: ${COOKBOOK}/semaphore/docker-compose.yml
+      service: semaphore
