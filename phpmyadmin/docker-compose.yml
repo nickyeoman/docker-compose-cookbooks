@@ -1,32 +1,13 @@
-################################################################################
-# phpmyadmin
-# make sure you use the $PREFIX from .env for project_name
-# docker-compose -p project_name up -d
-#
-# Version 1
-################################################################################
-version: '2'
-
-networks:
-  admin_web:
-    external:
-      name: admin_web
+version: '3.8'
 
 services:
-
-  # It's only exposed if someone knows the ip
   phpmyadmin:
-    #https://hub.docker.com/r/phpmyadmin/phpmyadmin/tags
-    image: phpmyadmin/phpmyadmin:${PHPMYADMIN_V}
-    environment:
-      - PMA_ARBITRARY=1
-      - UPLOAD_LIMIT=200M
+    image: ${PHPMYADMIN_IMAGE:-phpmyadmin/phpmyadmin:latest}
     restart: unless-stopped
-    networks:
-      - admin_web
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_phpmyadmin.rule=Host(`${PHPMYADMIN_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_phpmyadmin.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_phpmyadmin.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_phpmyadmin.loadbalancer.server.port=80"
+    environment:
+      - PMA_ARBITRARY=${PHPMYADMIN_PMA_ARBITRARY:-1}
+      - PMA_HOST=${PHPMYADMIN_PMA_HOST:-mariadb}
+      - PMA_USER=${PHPMYADMIN_PMA_USER:-root}
+      - PMA_PASSWORD=${MARIADB_MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
+      - UPLOAD_LIMIT=${PHPMYADMIN_UPLOAD_LIMIT:-200M}  
+      
