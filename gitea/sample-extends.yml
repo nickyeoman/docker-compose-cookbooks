@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+	gitea:
+		extends:
+			file: ${COOKBOOK}/gitea/docker-compose.yml
+			service: gitea
+		
+	gitea-mariadb:
+		extends:
+			file: ${COOKBOOK}/mariadb/docker-compose.yml
+			service: mariadb

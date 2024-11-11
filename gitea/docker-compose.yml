@@ -1,62 +1,21 @@
-################################################################################
-# Gitea
-# make sure you use the $PREFIX from .env for project_name
-# docker-compose -p project_name up -d
-#
-# Importing directly to the db (phpmydadmin)
-# you have to run the following in the container:
-# php artisan bookstack:regenerate-permissions
-#
-# Version 1
-################################################################################
-version: '3.3'
-
-volumes:
-  gitea:
-  gitea-db:
-
-networks:
-  admin_web:
-    external:
-      name: admin_web
+version: '3.8'
 
 services:
 
-  gitea-db:
-    image: mariadb:${DB_V}
-    restart: always
-    volumes:
-      - gitea-db:/var/lib/mysql
-    networks:
-      - admin_web
-    environment:
-      MYSQL_ROOT_PASSWORD: ${GITEA_MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: gitea
-      MYSQL_PASSWORD: ${GITEA_MYSQL_PASSWORD}
-      MYSQL_DATABASE: gitea
-
   gitea:
-    # https://hub.docker.com/r/gitea/gitea
-    image: gitea/gitea:${GITEA_V}
-    networks:
-      - admin_web
+    image: ${GITEA_IMAGE:-gitea/gitea:latest}
     environment:
       - USER_UID=1000
       - USER_GID=1000
       - DB_TYPE=mysql
-      - DB_HOST=${PREFIX}_gitea-db:3306
+      - DB_HOST=${GITEA_DB_HOST:-gitea-mariadb:3306}
       - DB_NAME=gitea
       - DB_USER=gitea
+      - SSH_DOMAIN=${GITEA_SSH_DOMAIN:-example.com}
+      - ENABLE_SWAGGER="true"
+      - MAX_RESPONSE_ITEMS="15"
     restart: always
     volumes:
-      - gitea:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      - ${VOL_PATH:-./data}/gitea:/data
     ports:
       - "${GITEA_PORT}:22"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PREFIX}_gitea.rule=Host(`${GITEA_DOMAIN_NAME}`)"
-      - "traefik.http.routers.${PREFIX}_gitea.entrypoints=websecure"
-      - "traefik.http.routers.${PREFIX}_gitea.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${PREFIX}_gitea.loadbalancer.server.port=3000"
