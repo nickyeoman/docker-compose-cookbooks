@@ -36,3 +36,20 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - "3000:8080"  # Open WebUI access
+
+  ollama-cpu:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - "${VOL_PATH:-./data}/ollama:/root/.ollama"
+
+  webui-cpu:
+    image: ${WEBUI_IMAGE:-ghcr.io/open-webui/open-webui:cuda}
+    volumes:
+      - "${VOL_PATH:-./data}/webui:/root/.cache"
+      - "${VOL_PATH:-./data}/open-webui:/app/backend/data"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "3000:8080"  # Open WebUI access
