@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: ${N8N_IMAGE:-n8nio/n8n:latest}
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH}/n8n:/home/node/.n8n
+      - ${VOL_PATH}/n8n-files:/files
+    ports:
+      - "5678:${N8N_PORT:-5678}"
+    environment:
+      - GENERIC_TIMEZONE=${TZ:-America/Vancouver}
+      - TZ=${TZ:-America/Vancouver}
+      - NODE_ENV=production
+      - N8N_PROTOCOL=http
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - DB_SQLITE_VACUUM_ON_STARTUP=false
+      - N8N_PORT=${N8N_PORT:-5678}
+      - N8N_HOST=${N8N_HOST:-http://localhost:5678}
+      - WEBHOOK_URL=${N8N_HOST:-http://localhost:5678}      
+    user: "1000:1000"
