@@ -5,3 +5,9 @@ services:
     extends:
       file: ${COOKBOOK}/semaphore/docker-compose.yml
       service: semaphore
+
+  monica-db:
+    extends:
+      file: ${COOKBOOK}/mariadb/docker-compose.yml
+      service: mariadb
+      

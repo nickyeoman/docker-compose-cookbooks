@@ -6,8 +6,8 @@ services:
     restart: unless-stopped
     environment:
       - MARIADB_DATABASE=${MARIADB_MARIADB_DATABASE:-mydb}
-      - MARIADB_PASSWORD=${MARIADB_MARIADB_PASSWORD:-AlsoChangeThisPassword}
       - MARIADB_ROOT_PASSWORD=${MARIADB_MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
       - MARIADB_USER=${MARIADB_MARIADB_USER:-dbuser}
+      - MARIADB_PASSWORD=${MARIADB_MARIADB_PASSWORD:-AlsoChangeThisPassword}
     volumes:
-      - ${VOL_PATH:-./data/}mariadb_data:/var/lib/mysql
+      - ${VOL_PATH:-./data/}/mariadb_data:/var/lib/mysql
