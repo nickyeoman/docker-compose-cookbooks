@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   portainer:
     image: ${PORTAINER_IMAGE:-portainer/portainer-ce:latest}
@@ -26,4 +24,3 @@ services:
     restart: always
     networks:
       - portainer-net
-

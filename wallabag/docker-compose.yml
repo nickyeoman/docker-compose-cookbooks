@@ -1,5 +1,4 @@
-version: '3.8'
-
+---
 services:
   wallabag:
     image: ${WALLABAG_IMAGE:-wallabag/wallabag:latest}

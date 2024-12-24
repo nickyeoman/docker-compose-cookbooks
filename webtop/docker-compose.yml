@@ -1,6 +1,4 @@
 ---
-version: '3.8'
-
 services:
   webtop:
     image: ${WEBTOP_IMAGE:-lscr.io/linuxserver/webtop:debian-xfce}

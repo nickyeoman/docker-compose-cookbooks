@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   jellyfin:
     image: ${JELLYFIN_IMAGE:-jellyfin/jellyfin:latest}
