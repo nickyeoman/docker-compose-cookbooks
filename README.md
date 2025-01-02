@@ -29,8 +29,6 @@ You will likely want to override a number of things in the project folder, such 
 Here is an example of how your project's docker-compose file might look:
 
 ```yaml
-version: '3.4'
-
 networks:
   proxy:
     external: true
@@ -51,3 +49,5 @@ with the .env file:
 ```text
 COOKBOOK=/git-repos/docker-compose-cookbooks
 ```
+
+Now use ```docker compose up -d``` to start the project.
