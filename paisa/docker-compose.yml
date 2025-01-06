@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   paisa:
     image: ${PAISA_IMAGE:-ananthakumaran/paisa:latest}

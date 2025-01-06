@@ -11,13 +11,6 @@
 # Examples:
 # https://github.com/matomo-org/docker/blob/master/.examples/apache/docker-compose.yml
 ################################################################################
-version: '3.8'
-
-networks:
-  default:
-    external:
-      name: ${NETWORKNAME:-default} 
-
 services:
 
   matomodb:

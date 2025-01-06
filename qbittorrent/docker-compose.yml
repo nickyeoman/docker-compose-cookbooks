@@ -1,5 +1,3 @@
-version: "3.3"
-
 services:
   qbittorrent:
     image: ${QBT_IMAGE:-trigus42/qbittorrentvpn:latest}

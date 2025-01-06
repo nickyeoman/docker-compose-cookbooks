@@ -1,4 +1,3 @@
----
 services:
   watchtower:
     image: ${WATCHTOWER_IMAGE:-containrrr/watchtower:latest}

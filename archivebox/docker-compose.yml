@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   archivebox:
     image: ${ARCHIVEBOX_IMAGE:-archivebox/archivebox:stable}

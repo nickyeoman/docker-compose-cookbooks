@@ -4,8 +4,6 @@
 # and you must edit the below configurations to suit your needs.
 # https://github.com/knadh/listmonk/blob/master/docker-compose.yml
 
-version: "3.7"
-
 x-app-defaults: &app-defaults
   restart: unless-stopped
   image: listmonk/listmonk:latest

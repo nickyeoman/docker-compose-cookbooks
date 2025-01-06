@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mealie:
     image: ${MEALIE_IMAGE:-hkotel/mealie:latest}

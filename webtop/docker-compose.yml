@@ -1,4 +1,3 @@
----
 services:
   webtop:
     image: ${WEBTOP_IMAGE:-lscr.io/linuxserver/webtop:debian-xfce}

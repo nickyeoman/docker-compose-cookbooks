@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   n8n:
     image: ${N8N_IMAGE:-n8nio/n8n:latest}

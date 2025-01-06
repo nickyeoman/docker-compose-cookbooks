@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nc:
     image: ${NOCODB_IMAGE:-nocodb/nocodb:latest}

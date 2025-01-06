@@ -1,6 +1,3 @@
----
-version: '3.8'
-
 services:
   thunderbird:
     image: ${THUNDERBIRD_IMAGE:-jlesage/thunderbird}

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   bookstack:
     image: ${BOOKSTACK_IMAGE:-solidnerd/bookstack:latest}
