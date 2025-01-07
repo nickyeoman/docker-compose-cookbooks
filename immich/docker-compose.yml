@@ -15,9 +15,6 @@ services:
       - DB_PASSWORD=${IMMICH_DB_PASSWORD:-postgres}
       - DB_USERNAME=${IMMICH_DB_USERNAME:-postgres}
       - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME:-immich}
-    depends_on:
-      - immich-redis
-      - immich-postgres
     healthcheck:
       disable: false
 
