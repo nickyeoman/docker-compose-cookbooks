@@ -1,6 +1,6 @@
 # Immich
 
-[Documentation](https://immich.app/docs/install/docker-compose/)
+* [Documentation](https://immich.app/docs/install/docker-compose/)
+* [Documentation for env variables](https://immich.app/docs/install/environment-variables)
 
-Port: 2283
-
+Reverse Poxy Port: 2283

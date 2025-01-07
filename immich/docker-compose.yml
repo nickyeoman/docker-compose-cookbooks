@@ -10,19 +10,16 @@ services:
       - ${VOL_PATH:-./data}/immich-import:/import
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - REDIS_HOSTNAME=${REDIS_HOSTNAME:-immich-redis}
-      - DB_HOSTNAME=${DB_HOSTNAME:-immich-postgres}
-      - DB_PASSWORD=${DB_PASSWORD:-postgres}
-      - DB_USERNAME=${DB_USERNAME:-postgres}
-      - DB_DATABASE_NAME=${DB_DATABASE_NAME:-immich}
+      - REDIS_HOSTNAME=${IMMICH_REDIS_HOSTNAME:-immich-redis}
+      - DB_HOSTNAME=${IMMICH_DB_HOSTNAME:-immich-postgres}
+      - DB_PASSWORD=${IMMICH_DB_PASSWORD:-postgres}
+      - DB_USERNAME=${IMMICH_DB_USERNAME:-postgres}
+      - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME:-immich}
     depends_on:
       - immich-redis
       - immich-postgres
     healthcheck:
       disable: false
-    networks:
-      - immich-net
-      - proxy
 
   immich-machine-learning:
     # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
@@ -35,22 +32,18 @@ services:
       - ${VOL_PATH:-./data}/model-cache:/cache
     healthcheck:
       disable: false
-    networks:
-      - immich-net
 
   immich-redis:
     image: docker.io/redis:6.2-alpine@sha256:eaba718fecd1196d88533de7ba49bf903ad33664a92debb24660a922ecd9cac8
     healthcheck:
       test: redis-cli ping || exit 1
-    networks:
-      - immich-net
 
   immich-postgres:
     image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgrespass}
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_DB: ${DB_DATABASE_NAME:-immich}
+      POSTGRES_PASSWORD: ${IMMICH_DB_PASSWORD:-postgrespass}
+      POSTGRES_USER: ${IMMICH_DB_USERNAME:-postgres}
+      POSTGRES_DB: ${IMMICH_DB_DATABASE_NAME:-immich}
       POSTGRES_INITDB_ARGS: '--data-checksums'
     volumes:
       - ${VOL_PATH:-./data}/immich-postgres:/var/lib/postgresql/data
@@ -71,5 +64,3 @@ services:
       -c max_wal_size=2GB
       -c shared_buffers=512MB
       -c wal_compression=on
-    networks:
-      - immich-net
