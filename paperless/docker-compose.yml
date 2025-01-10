@@ -1,0 +1,57 @@
+###############################################################################
+# Paperless-ngx
+# Modifed from: https://github.com/paperless-ngx/paperless-ngx/blob/main/docker/compose/docker-compose.mariadb-tika.yml
+###############################################################################
+
+services:
+
+  paperless-broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH}/paperless/redis:/data
+
+  paperless-db:
+    image: docker.io/library/mariadb:11
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH}/paperless/db:/var/lib/mysql
+    environment:
+      MARIADB_HOST: ${PAPERLESS_MARIADB_HOST:-paperless-db}
+      MARIADB_DATABASE: ${PAPERLESS_MARIADB_DATABASE:-paperless}
+      MARIADB_USER: ${PAPERLESS_MARIADB_USER:-paperless}
+      MARIADB_PASSWORD: ${PAPERLESS_MARIADB_PASSWORD:-paperless}
+      MARIADB_ROOT_PASSWORD: ${PAPERLESS_MARIADB_ROOT_PASSWORD:-paperless}
+
+  paperless-webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    volumes:
+      - ${VOL_PATH}/paperless/data:/usr/src/paperless/data
+      - ${VOL_PATH}/paperless/media:/usr/src/paperless/media
+      - ${VOL_PATH}/paperless/export:/usr/src/paperless/export
+      - ${VOL_PATH}/paperless/consume:/usr/src/paperless/consume
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_DBENGINE: mariadb
+      PAPERLESS_DBHOST: paperless-db
+      PAPERLESS_DBUSER: ${PAPERLESS_MARIADB_USER:-paperless}
+      PAPERLESS_DBPASS: ${PAPERLESS_MARIADB_PASSWORD:-paperless}
+      PAPERLESS_DBPORT: 3306
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://paperless-gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://paperless-tika:9998
+
+  paperless-gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.7
+    restart: unless-stopped
+    # The gotenberg chromium route is used to convert .eml files. We do not
+    # want to allow external content like tracking pixels or even javascript.
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+
+  paperless-tika:
+    image: docker.io/apache/tika:latest
+    restart: unless-stopped

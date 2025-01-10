@@ -1,0 +1,25 @@
+services:
+  paperless-broker:
+    extends:
+      file: ${COOKBOOK}/paperless/docker-compose.yml
+      service: paperless-broker
+
+  paperless-db:
+    extends:
+      file: ${COOKBOOK}/paperless/docker-compose.yml
+      service: paperless-db
+
+  paperless-webserver:
+    extends:
+      file: ${COOKBOOK}/paperless/docker-compose.yml
+      service: paperless-webserver
+
+  paperless-gotenberg:
+    extends:
+      file: ${COOKBOOK}/paperless/docker-compose.yml
+      service: paperless-gotenberg
+
+  paperless-tika:
+    extends:
+      file: ${COOKBOOK}/paperless/docker-compose.yml
+      service: paperless-tika
