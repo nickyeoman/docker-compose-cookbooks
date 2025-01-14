@@ -1,6 +1,6 @@
-# jellyfin
+# Jellyfin
 
-Last Updated: Sun July 28, 2024 14:30:43 PDT
+Last Updated: Jan 14, 2025
 
 ## Overview
 
