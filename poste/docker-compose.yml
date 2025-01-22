@@ -1,0 +1,19 @@
+services:
+  poste:
+    image: analogic/poste.io
+    container_name: poste
+    restart: unless-stopped
+    ports:
+      - "25:25"     # SMTP
+      - "110:110"   # POP3
+      - "143:143"   # IMAP
+      - "587:587"   # Submission (SMTP client relay)
+      - "993:993"   # IMAPS
+      - "995:995"   # POP3S
+      - "8080:80"   # Internal HTTP for reverse proxy
+    environment:
+      - HTTPS=ON
+      - PUBLIC_HOSTNAME=${POSTE_PUBLIC_HOSTNAME:-mail.yourdomain.com}
+      - TZ=${TZ:-America/Vancouver}
+    volumes:
+      - ./data:/data

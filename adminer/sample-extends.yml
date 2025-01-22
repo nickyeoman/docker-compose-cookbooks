@@ -1,7 +1,6 @@
-version: '3.4'
-
 services:
-  mariadb:
+
+  adminer:
     extends:
       file: ${COOKBOOK}/adminer/docker-compose.yml
       service: adminer

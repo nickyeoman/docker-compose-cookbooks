@@ -1,6 +1,5 @@
-version: '3.4'
-
 services:
+
   stashapp:
     extends:
       file: ${COOKBOOK}/stashapp/docker-compose.yml

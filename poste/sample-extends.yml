@@ -1,0 +1,6 @@
+services:
+
+  poste:
+    extends:
+      file: ${COOKBOOK}/poste/docker-compose.yml
+      service: poste
