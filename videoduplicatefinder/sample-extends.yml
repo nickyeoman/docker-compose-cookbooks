@@ -1,0 +1,6 @@
+services:
+
+  video-duplicate-finder:
+    extends:
+      file: ${COOKBOOK}/videoduplicatefinder/docker-compose.yml
+      service: video-duplicate-finder

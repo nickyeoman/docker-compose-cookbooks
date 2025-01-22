@@ -1,0 +1,8 @@
+services:
+  video-duplicate-finder:
+    image: jlesage/video-duplicate-finder:latest
+    ports:
+      - "5800:5800"
+    volumes:
+      - ${VOL_PATH:-./data}/video-duplicate-finder:/config:rw
+      - ${VDF_VOL_STORAGE_PATH}:/storage:rw
