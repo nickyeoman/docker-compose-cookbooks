@@ -1,0 +1,47 @@
+services:
+  mailu:
+    image: mailu/mailu:2024.06
+    restart: always
+    ports:
+      - "25:25" / "110:110"
+      - "587:587"
+    volumes:
+      - ${VOL_PATH}/mailu-data:/var/mailu
+      - ${VOL_PATH}/domain.conf:/etc/mailu/domain.conf
+
+  postfix:
+    image: postfix
+    restart: always
+    ports:
+      - "25:25"
+      - "587:587"
+    volumes:
+      - ${VOL_PATH}/postfix-config:/etc/postfix/
+      - ${VOL_PATH}/domain.conf:/etc/postfix/main.cf
+
+  dovecot:
+    image: dovecot
+    restart: always
+    ports:
+      - "25/3:25/3"
+      - "110/3:110/3"
+      - "587/3:587/3"
+    volumes:
+      - ${VOL_PATH}/dovecot-config:/etc/dovecot/
+
+  mailu-database:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=mailu
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mailu
+    volumes:
+      - ${VOL_PATH}/db-data:/var/lib/postgresql/data
+
+  mailu-web:
+    image: nginx
+    restart: always
+    volumes:
+      - ${VOL_PATH}/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ${VOL_PATH}/certs:/etc/nginx/certs
