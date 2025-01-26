@@ -1,11 +1,13 @@
 # Semaphore
 
-In progress, do data dir.
-
 ## Overview
-Docker Hub: https://hub.docker.com/r/semaphoreui/semaphore
-Project: https://semaphoreui.com/
-Docker Compose Example: https://docs.semaphoreui.com/administration-guide/installation/#docker
+
+* [Docker Hub](https://hub.docker.com/r/semaphoreui/semaphore)
+* [Official Website](https://semaphoreui.com/)
+* [Docker Compose Example](https://docs.semaphoreui.com/administration-guide/installation/#docker)
+
+## Reverse Proxy
+
 Proxy Port: 3000
 
 ## Notes

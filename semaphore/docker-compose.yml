@@ -17,6 +17,6 @@ services:
       SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION:-dfTa9mOCsaoM1zZ+YBE+eGSZnEB0sXvHePhatj9ohuk=}
       SEMAPHORE_LDAP_ACTIVATED: 'no'
     volumes:
-      - ${VOL_PATH}/semaphore:${SEMAPHORE_PLAYBOOK_PATH:-/tmp/semaphore/}
+      - ${VOL_PATH}/semaphore/app:${SEMAPHORE_PLAYBOOK_PATH:-/tmp/semaphore/}
       - ${VOL_CONFIG_PATH:-./config}/ssh/:/home/semaphore/.ssh/
       - ${VOL_CONFIG_PATH:-./config}/etchosts:/etc/hosts
