@@ -9,8 +9,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - "${VOL_PATH:-./config}/portainer:/data"
     restart: always
-    networks:
-      - portainer-net
   
   portainer-agent:
     image: ${PORTAINER_AGENT_IMAGE:-portainer/agent:latest}
@@ -22,5 +20,4 @@ services:
     ports:
       - 9001:9001
     restart: always
-    networks:
-      - portainer-net
+    

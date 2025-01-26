@@ -1,9 +1,5 @@
-version: '3.4'
-
 services:
   proxy:
     extends:
       file: ${COOKBOOK}/nginx-proxy-manager/docker-compose.yml
       service: proxy
-    env_file:
-      - .env
