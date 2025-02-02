@@ -14,3 +14,10 @@ You can specify read and write for example:
 HANDBRAKE_IMAGE=zocker160/handbrake-nvenc:latest
 Github: https://github.com/zocker-160/handbrake-nvenc-docker
 DockerHub NVENC: https://hub.docker.com/r/zocker160/handbrake-nvenc
+
+# Gotchas
+
+```
+problem /etc/cont-init.d/55-handbrake.sh: 47: log: not found docker
+```
+chmod the volumes

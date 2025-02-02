@@ -2,10 +2,12 @@ services:
   handbrake:
     image: ${HANDBRAKE_IMAGE:-jlesage/handbrake:latest}
     volumes:
-      - "${VOL_CONFIG_PATH:-./}/config/ghb:/config/ghb"
+      - "${VOL_PATH:-./data}/handbrake/ghb-config:/config"
       - "${VOL_PATH:-./data}/handbrake/storage:/storage"
       - "${VOL_PATH:-./data}/handbrake/complete:/output"
       - "${VOL_PATH:-./data}/handbrake/watch:/watch"
+      - "${VOL_PATH:-./data}/handbrake/watch2:/watch2"
+      - "${VOL_PATH:-./data}/handbrake/trash:/trash"
     restart: "unless-stopped"
     ports:
       - "5800:5800"
