@@ -17,10 +17,8 @@ These compose files make a few assumptions:
 ## 📚 Workflow
 The intended workflow is as follows:
 
-1. Clone the cookbook repository locally ```git clone git@github.com:nickyeoman/docker-compose-cookbooks.git /git-repos/docker-compose-cookbooks```
+1. Clone the cookbook repository locally ```git clone git@github.com:nickyeoman/docker-compose-cookbooks.git /docker-compose-cookbooks```
 2. Change to the directory ```cd /git-repos/docker-compose-cookbooks```
-3. Run the helper cli wizard: ```bash helper.bash```
-4. Commit the new project to git.
 
 You will likely want to override a number of things in the project folder, such as networks.
 
@@ -29,10 +27,6 @@ You will likely want to override a number of things in the project folder, such 
 Here is an example of how your project's docker-compose file might look:
 
 ```yaml
-networks:
-  proxy:
-    external: true
-
 services:
   proxy:
     extends:
@@ -42,12 +36,20 @@ services:
       - .env
     networks:
       - proxy
+
+networks:
+  proxy:
+    external: true
 ```
 
 with the .env file:
 
 ```text
-COOKBOOK=/git-repos/docker-compose-cookbooks
+COOKBOOK=/docker-compose-cookbooks
+COMPOSE_PROJECT_NAME=www-4lt-ca
+TZ=America/Vancouver
+VOL_CONFIG_PATH=/websites/www-4lt-ca/config
+VOL_PATH=/websites/www-4lt-ca/data
 ```
 
 Now use ```docker compose up -d``` to start the project.

@@ -1,5 +1,4 @@
 services:
-
   mariadb:
     extends:
       file: ${COOKBOOK}/mariadb/docker-compose.yml
