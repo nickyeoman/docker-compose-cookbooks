@@ -9,4 +9,4 @@ services:
       - MARIADB_USER=${MARIADB_MARIADB_USER:-dbuser}
       - MARIADB_PASSWORD=${MARIADB_MARIADB_PASSWORD:-AlsoChangeThisPassword}
     volumes:
-      - ${VOL_PATH:-./data/}/mariadb_data:/var/lib/mysql
+      - ${VOL_PATH:-./data/}/mariadb:/var/lib/mysql

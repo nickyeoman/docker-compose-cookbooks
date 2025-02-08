@@ -1,6 +1,0 @@
-# Domains & Project
-PREFIX=p1
-PHPMYADMIN_DOMAIN_NAME=phpmyadmin.nickyeoman.com
-
-# Software versions
-PHPMYADMIN_V=5.0

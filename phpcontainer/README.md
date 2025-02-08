@@ -19,13 +19,14 @@ VOL_PATH=/project_dir/project/data
 Now using extend you can call the service:
 
 ```yaml
-version: '3.4'
-
 services:
-  stash:
+
+  php-apache:
     extends:
       file: ${COOKBOOK}/phpcontainer/docker-compose.yml
       service: php-apache
-    env_file:
-      - .env
+    volumes:
+      - "./project:/data"
+      - "./config/php.ini:/usr/local/etc/php/php.ini"
+      
 ```
