@@ -9,4 +9,4 @@ services:
       - /data/dockge/data:/app/data
       - /opt/stacks:/opt/stacks
     environment:
-      - DOCKGE_STACKS_DIR=/data/dockge/stacks
+      - DOCKGE_STACKS_DIR=/opt/stacks
