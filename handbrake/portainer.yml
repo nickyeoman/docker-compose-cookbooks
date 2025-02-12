@@ -1,4 +1,5 @@
 # Here is what I'm using for portainer copied into the editor
+# It will only work if you copy the env section into the env section of portainer
 services:
   handbrake:
     image: ${HANDBRAKE_IMAGE:-jlesage/handbrake:latest}
@@ -11,6 +12,17 @@ services:
       - "/handbrake/720:/watch"
       - "/handbrake/4k:/watch2"
       - "/handbrake/trash:/trash"
+    environment:
+      - HANDBRAKE_IMAGE=zocker160/handbrake-nvenc:18x
+      - AUTOMATED_CONVERSION=1
+      - AUTOMATED_CONVERSION_FORMAT=m4v
+      - AUTOMATED_CONVERSION_KEEP_SOURCE=0
+      - AUTOMATED_CONVERSION_USE_TRASH=1
+      - AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS=2
+      - AUTOMATED_CONVERSION_PRESET="nix/720"
+      - AUTOMATED_CONVERSION_OUTPUT_DIR="/output"
+      - AUTOMATED_CONVERSION_PRESET_2="nix/4K"
+      - AUTOMATED_CONVERSION_OUTPUT_DIR_2="/output"
     ports:
       - "5800:5800"
     runtime: nvidia
@@ -19,15 +31,3 @@ services:
         reservations:
           devices:
             - capabilities: [gpu]
-
-# ENV
-HANDBRAKE_IMAGE=zocker160/handbrake-nvenc:18x
-AUTOMATED_CONVERSION=1
-AUTOMATED_CONVERSION_FORMAT=m4v
-AUTOMATED_CONVERSION_KEEP_SOURCE=0
-AUTOMATED_CONVERSION_USE_TRASH=1
-AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS=2
-AUTOMATED_CONVERSION_PRESET="nix/720"
-AUTOMATED_CONVERSION_OUTPUT_DIR="/output"
-AUTOMATED_CONVERSION_PRESET_2="nix/4K"
-AUTOMATED_CONVERSION_OUTPUT_DIR_2="/output"
