@@ -11,3 +11,10 @@ services:
     restart: "unless-stopped"
     ports:
       - "5800:5800"
+    # Below for GPU
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
