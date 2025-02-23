@@ -9,54 +9,6 @@ This Docker Compose configuration sets up the Stash application using Docker con
 
 ## Setup
 
-### COOKBOOK SETUP
-
-Clone the repository then set the COOKBOOK Variable in your PROJECT's env file
-```
-git clone git@github.com:nickyeoman/docker-compose-cookbooks.git
-```
-
-### Project Setup
-
-Note this setup is meant to be used between two directories, COOKBOOK and PROJECT.  
-In your PROJECT directory set the following env file:
-
-#### Dot env file
-```text
-# Stash App
-PROD=prod.domain.com
-PRODDIR=/var/www/stashdomain-com/ #HELP: project_path
-COOKBOOK=/home/user/git/docker-compose-cookbooks #HELP: cookbooks
-VOL_PATH=/project-dir/project-name/data #HELP: volpath
-STASH_IMAGE=stashapp/stash:v0.26.2
-
-# Stash Container
-STASH_DOMAIN_NAME=stash.4lt.ca
-MAX_SIZE=200m
-STASH_STASH=/data/
-STASH_GENERATED=/generated/
-STASH_METADATA=/metadata/
-STASH_CACHE=/cache/
-```
-
-#### Docker Compose Extend
-
-Now using extend you can call the service:
-
-```yaml
-version: '3.4'
-
-services:
-  stash:
-    extends:
-      file: ${COOKBOOK}/stashapp/docker-compose.yml
-      service: stash
-    env_file:
-      - .env
-    ports:
-      - "9999:9999"
-```
-
 ### Data directories
 
 By default the compose file creates volumes locally in the project:
