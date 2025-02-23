@@ -1,28 +1,28 @@
 services:
   directus:
-    image: directus/directus
+    image: directus/directus:latest
     restart: unless-stopped
     ports:
       - "8000:8055"
     environment:
-      SECRET: ChangeMeTo32
+      SECRET: ${DIRECTUS_SECRET:-0123456789}
       DB_CLIENT: mysql
-      DB_HOST: db
+      DB_HOST: mariadb
       DB_PORT: 3306
-      DB_DATABASE: directus
-      DB_USER: directus
-      DB_PASSWORD: directuspassword
+      DB_DATABASE: ${MARIADB_DATABASE:-dbname}
+      DB_USER: ${MARIADB_USER:-db_username}
+      DB_PASSWORD: ${MARIADB_PASSWORD:-db_password}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL:-noreply@example.com}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD:-change_me_to_admin_pass}
+      CACHE_ENABLED: "true"
+      CACHE_AUTO_PURGE: "true"
+      CACHE_STORE: "redis"
+      REDIS: "redis://cache:6379"
+      PUBLIC_URL: ${DIRECTUS_PUBLIC_URL:-http://localhost:8055}
     depends_on:
-      - db
-
-  db:
-    image: mariadb:latest
-    restart: unless-stopped
-    environment:
-      MARIADB_DATABASE: directus
-      MARIADB_USER: directus
-      MARIADB_PASSWORD: directuspassword
-      MARIADB_ROOT_PASSWORD: rootpassword
+      - mariadb
+      - redis
     volumes:
-      - ./data/directus_db_data:/var/lib/mysql
-
+      - ${VOL_PATH:-./data}/directus/uploads:/directus/uploads
+      - ${VOL_PATH:-./data}/directus/extensions:/directus/extensions
+      - ${VOL_PATH:-./data}/directus/templates:/directus/templates
