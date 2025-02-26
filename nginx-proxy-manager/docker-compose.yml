@@ -14,3 +14,8 @@ services:
       - "${VOL_PATH:-./data}/proxy/letsencrypt:/etc/letsencrypt"
     networks:
       - proxy
+
+networks:
+  proxy:
+    name: proxy
+    driver: bridge

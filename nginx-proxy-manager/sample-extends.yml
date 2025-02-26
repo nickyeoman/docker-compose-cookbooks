@@ -1,5 +1,0 @@
-services:
-  proxy:
-    extends:
-      file: ${COOKBOOK}/nginx-proxy-manager/docker-compose.yml
-      service: proxy
