@@ -1,6 +1,6 @@
 services:
   uptimekuma:
-    image: ${UPTIMEKUMA_IMAGE:-louislam/uptime-kuma}
+    image: ${UPTIMEKUMA_IMAGE:-louislam/uptime-kuma:latest}
     restart: unless-stopped
     volumes:
       - ${VOL_PATH:-./data}/uptimekuma-data:/app/data
