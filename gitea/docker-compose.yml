@@ -17,3 +17,4 @@ services:
       - ${VOL_PATH:-./data}/gitea:/data
     ports:
       - "${GITEA_PORT}:22"
+      - "${GITEA_WEB_PORT}:3000"

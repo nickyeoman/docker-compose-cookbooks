@@ -8,4 +8,6 @@ services:
       - PMA_USER=${PHPMYADMIN_PMA_USER:-root}
       - PMA_PASSWORD=${MARIADB_MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
       - UPLOAD_LIMIT=${PHPMYADMIN_UPLOAD_LIMIT:-200M}  
-      
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"

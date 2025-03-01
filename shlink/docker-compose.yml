@@ -1,4 +1,6 @@
- mariadb-shlink:
+services:
+
+  mariadb-shlink:
     image: mariadb:10.7.1 # https://hub.docker.com/_/mariadb
     restart: always
     environment:
@@ -27,6 +29,15 @@
       - DB_PASSWORD=change
       - DB_HOST=mariadb-shlink
       - DEFAULT_BASE_URL_REDIRECT=https://www.domain.ca
-    networks:
-      - 4lt_internal
-      - admin_web
+
+  shlink-web-client:
+    image: shlinkio/shlink-web-client
+    restart: always
+    volumes:
+      - ./shlink/servers.json:/usr/share/nginx/html/servers.json
+    ports:
+      - 8003:80
+
+networks:
+    - 4lt_internal
+    - admin_web

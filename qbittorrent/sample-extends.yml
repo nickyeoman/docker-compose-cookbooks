@@ -1,9 +1,0 @@
-version: '3.4'
-
-services:
-	  qbittorrent:
-      extends:
-        file: ${COOKBOOK}/qbittorrent/docker-compose.yml
-        service: qbittorrent
-      env_file:
-        - .env
