@@ -1,7 +1,0 @@
-version: '3.4'
-
-services:
-  heimdall:
-    extends:
-      file: ${COOKBOOK}/heimdall/docker-compose.yml
-      service: heimdall

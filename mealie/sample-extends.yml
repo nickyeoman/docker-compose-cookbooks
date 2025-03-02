@@ -1,7 +1,0 @@
-version: '3.4'
-
-services:
-  mealie:
-    extends:
-      file: ${COOKBOOK}/mealie/docker-compose.yml
-      service: mealie
