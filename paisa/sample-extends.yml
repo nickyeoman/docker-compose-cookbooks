@@ -1,5 +1,0 @@
-services:
-  paisa:
-    extends:
-      file: ${COOKBOOK}/paisa/docker-compose.yml
-      service: paisa

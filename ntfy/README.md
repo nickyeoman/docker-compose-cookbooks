@@ -1,7 +1,5 @@
 # ntfy
 
-Last Updated: Wed July 31, 2024 20:41:59 PDT
-
 ## Overview
 
 * [Docker Hub](https://hub.docker.com/r/binwiederhier/ntfy)
