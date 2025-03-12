@@ -1,10 +1,7 @@
 # minio
 
-Last Updated: Fri August 02, 2024 14:21:26 PDT
-
 ## Overview
-Docker Hub: 
-Project: 
-Docker Compose Example: 
+Docker Hub: https://hub.docker.com/r/minio/minio/tags
+Project: https://min.io/
 Proxy Port: 9001
 

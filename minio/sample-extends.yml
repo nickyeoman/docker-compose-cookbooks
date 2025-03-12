@@ -1,7 +1,0 @@
-version: '3.4'
-
-services:
-  minio:
-    extends:
-      file: ${COOKBOOK}/minio/docker-compose.yml
-      service: minio
