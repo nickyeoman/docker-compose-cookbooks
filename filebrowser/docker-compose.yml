@@ -3,6 +3,6 @@ services:
     image: ${FILEBROWSER_IMAGE:-filebrowser/filebrowser:latest}
     restart: unless-stopped
     volumes:
-      - ${VOL_CONFIG_PATH:-./config}/filebrowser.json:/.filebrowser.json
+      - ${VOL_CONFIG_PATH:-./config}/filebrowser.json:/config/settings.json
       - ${VOL_PATH:-./data}/filebrowser/filebrowser.db:/database.db
       - ${VOL_PATH:-./data}/filebrowser-root:/srv
