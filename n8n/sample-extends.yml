@@ -1,7 +1,0 @@
-version: '3.4'
-
-services:
-  n8n:
-    extends:
-      file: ${COOKBOOK}/n8n/docker-compose.yml
-      service: n8n
