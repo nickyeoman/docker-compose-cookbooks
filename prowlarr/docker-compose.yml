@@ -1,0 +1,13 @@
+services:
+  prowlarr:
+    image: ${PROWLARR_IMAGE}
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TZ}
+    volumes:
+      - "${VOL_CONFIG_PATH:-./data/prowlarr/config}:/config"
+    ports:
+      - 9696:9696
