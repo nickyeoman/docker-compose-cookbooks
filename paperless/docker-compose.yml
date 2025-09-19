@@ -6,13 +6,13 @@
 services:
 
   paperless-broker:
-    image: docker.io/library/redis:7
+    image: docker.io/library/redis:8
     restart: unless-stopped
     volumes:
       - ${VOL_PATH}/paperless/redis:/data
 
   paperless-db:
-    image: docker.io/library/mariadb:11
+    image: docker.io/library/mariadb:12
     restart: unless-stopped
     volumes:
       - ${VOL_PATH}/paperless/db:/var/lib/mysql
@@ -24,7 +24,7 @@ services:
       MARIADB_ROOT_PASSWORD: ${PAPERLESS_MARIADB_ROOT_PASSWORD:-paperless}
 
   paperless-webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ${PAPERLESS_IMAGE:-ghcr.io/paperless-ngx/paperless-ngx:latest}
     restart: unless-stopped
     volumes:
       - ${VOL_PATH}/paperless/data:/usr/src/paperless/data
@@ -41,9 +41,16 @@ services:
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://paperless-gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://paperless-tika:9998
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY:-changeme}
+      PAPERLESS_OCR_LANGUAGE: ${PAPERLESS_OCR_LANGUAGE:-eng}
+      #PAPERLESS_URL: ${PAPERLESS_URL:-http://localhost}
+      PAPERLESS_CONSUMER_DELETE_DUPLICATES: ${PAPERLESS_CONSUMER_DELETE_DUPLICATES:-0}
+      PAPERLESS_CONSUMER_RECURSIVE: 1
+      #USERMAP_GID: 1000
+      #USERMAP_UID: 1000
 
   paperless-gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.7
+    image: docker.io/gotenberg/gotenberg:8.22
     restart: unless-stopped
     # The gotenberg chromium route is used to convert .eml files. We do not
     # want to allow external content like tracking pixels or even javascript.
