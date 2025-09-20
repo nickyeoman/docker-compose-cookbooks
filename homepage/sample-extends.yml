@@ -1,7 +1,0 @@
-version: '3.4'
-
-services:
-  homepage:
-    extends:
-      file: ${COOKBOOK}/homepage/docker-compose.yml
-      service: homepage

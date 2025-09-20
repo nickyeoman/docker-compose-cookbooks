@@ -1,7 +1,0 @@
-version: '3.4'
-
-services:
-  thunderbird:
-    extends:
-      file: ${COOKBOOK}/thunderbird/docker-compose.yml
-      service: thunderbird

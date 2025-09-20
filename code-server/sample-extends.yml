@@ -1,7 +1,0 @@
-version: '3.4'
-
-services:
-  code-server:
-    extends:
-      file: ${COOKBOOK}/code-server/docker-compose.yml
-      service: code-server

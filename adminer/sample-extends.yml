@@ -1,6 +1,0 @@
-services:
-
-  adminer:
-    extends:
-      file: ${COOKBOOK}/adminer/docker-compose.yml
-      service: adminer

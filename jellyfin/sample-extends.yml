@@ -1,5 +1,0 @@
-services:
-  jellyfin:
-    extends:
-      file: ${COOKBOOK}/jellyfin/docker-compose.yml
-      service: jellyfin
