@@ -1,0 +1,14 @@
+services:
+  duplicati:
+    image: ${DUPLICATI_IMAGE:-duplicati/duplicati:latest}
+    volumes:
+      - ${VOL_PATH:-./data}/duplicati/config:/config  # Persistent config directory
+      - ${VOL_PATH:-./data}/duplicati/source:/source:ro  # Read-only source data to back up
+      - ${VOL_PATH:-./data}/duplicati/backups:/backups  # Backup destination
+    environment:
+      TZ: ${TZ:-America/Vancouver}
+      SETTINGS_ENCRYPTION_KEY: "ThisNeedsToChange"
+      DUPLICATI__WEBSERVICE_PASSWORD: "changeMe"
+    restart: unless-stopped
+    ports:
+      - "8200:8200"
