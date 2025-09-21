@@ -1,0 +1,57 @@
+services:
+  peertube:
+    image: chocobozzz/peertube:production-bookworm
+    ports:
+      - "9000:9000" # Local access via http://localhost:9000
+    volumes:
+      - ./data/peertube/data:/data # Stores raw videos
+      - ./data/peertube/config:/config # Custom configs
+    environment:
+      - NODE_ENV=production
+      - POSTGRES_USER=peertube
+      - POSTGRES_PASSWORD=peertube
+      - POSTGRES_DB=peertube
+      - PEERTUBE_DB_USERNAME=peertube
+      - PEERTUBE_DB_PASSWORD=peertube
+      - PEERTUBE_DB_SSL=false
+      - PEERTUBE_DB_HOSTNAME=postgres
+      - PEERTUBE_WEBSERVER_HOSTNAME=localhost # Use localhost for offline
+      - PEERTUBE_WEBSERVER_PORT=9000
+      - PEERTUBE_WEBSERVER_HTTPS=false
+      - PEERTUBE_SIGNUP_ENABLED=false # Disable public signups for private use
+      - PEERTUBE_TRANSCODING_ENABLED=false # Optional: Disable to keep only raw files
+      - PEERTUBE_CONTACT_FORM_ENABLED=false # Disable for offline
+      - PEERTUBE_ADMIN_EMAIL=admin@example.com # Local email, no SMTP needed
+      - PEERTUBE_ADMIN_USERNAME=admin # Changed for clarity
+      - PEERTUBE_ADMIN_PASSWORD=changeme123 # Stronger password
+      - PEERTUBE_SECRET=FpRb4xKCgNHMv9MqmxMVqcwM9HRsVLs3N9hNtkFvXJTVkmjw3gpbmnxRrjtwLVvx # pwgen -cnsB1v 64
+      - PEERTUBE_FEDERATION_ENABLED=false # Disable federation for offline
+      - PEERTUBE_TRACKER_ENABLED=false # Disable WebTorrent trackers
+      - PEERTUBE_IMPORT_ENABLED=false # Disable external imports
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - peertube-net
+
+  postgres:
+    image: postgres:16-alpine # Updated to latest stable
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=peertube
+      - POSTGRES_PASSWORD=peertube
+      - POSTGRES_DB=peertube
+    networks:
+      - peertube-net
+
+  redis:
+    image: redis:7-alpine # Updated to latest stable
+    volumes:
+      - ./data/redis:/data
+    networks:
+      - peertube-net
+
+networks:
+  peertube-net:
+    driver: bridge

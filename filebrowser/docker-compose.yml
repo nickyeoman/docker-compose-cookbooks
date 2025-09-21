@@ -9,5 +9,4 @@ services:
       FILEBROWSER_CONFIG: "${FILEBROWSER_CONFIG:-/home/filebrowser/config.yaml}"
       FILEBROWSER_ADMIN_PASSWORD: ${FILEBROWSER_ADMIN_PASSWORD:-admin}
       TZ: ${TZ:-America/Vancouver}
-    ports:
-      - "80:80"
+
