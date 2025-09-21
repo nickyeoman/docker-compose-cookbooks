@@ -1,8 +1,13 @@
 services:
   filebrowser:
-    image: ${FILEBROWSER_IMAGE:-filebrowser/filebrowser:latest}
-    restart: unless-stopped
+    image: ${FILEBROWSER_IMAGE:-gtstef/filebrowser:latest}
     volumes:
-      - ${VOL_CONFIG_PATH:-./config}/filebrowser.json:/config/settings.json
-      - ${VOL_PATH:-./data}/filebrowser/filebrowser.db:/database.db
-      - ${VOL_PATH:-./data}/filebrowser-root:/srv
+      - ${VOL_PATH:-./data}/filebrowser/storage:/srv
+      - ${VOL_PATH:-./data}/filebrowser/root:/home/filebrowser/data
+      - ${VOL_CONFIG_PATH:-./config}/config.yaml:/home/filebrowser/config.yaml
+    environment:
+      FILEBROWSER_CONFIG: "${FILEBROWSER_CONFIG:-/home/filebrowser/config.yaml}"
+      FILEBROWSER_ADMIN_PASSWORD: ${FILEBROWSER_ADMIN_PASSWORD:-admin}
+      TZ: ${TZ:-America/Vancouver}
+    ports:
+      - "80:80"
