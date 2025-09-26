@@ -1,18 +1,18 @@
 # Filebrowser Quantum
 
-## Overview
+A lightweight Docker Compose setup for running the **Filebrowser Quantum** container.
+The future of Filebrowser was in question so switched to Quantum.
 
-* [Github](https://github.com/gtsteffaniak/filebrowser/tree/main)
-* [Getting Started Wiki](https://github.com/gtsteffaniak/filebrowser/wiki/Getting-Started)
-* [Configuration Docs](https://github.com/gtsteffaniak/filebrowser/wiki/Configuration-And-Examples)
+## Quick Notes
 
 Proxy Port: 80
-Username: admin
-Password: admin
 
-## Description
+Default user account:
+* Username: admin
+* Password: admin
 
-Filebrowser was dying so upgraded to Quantum.
+## Overview
 
-
-
+* [Filebrowser Quantum on GitHub](https://github.com/gtsteffaniak/filebrowser/tree/main)
+* [Getting Started Wiki](https://github.com/gtsteffaniak/filebrowser/wiki/Getting-Started)
+* [Configuration Docs](https://github.com/gtsteffaniak/filebrowser/wiki/Configuration-And-Examples)

@@ -2,7 +2,7 @@ services:
   filebrowser:
     image: ${FILEBROWSER_IMAGE:-gtstef/filebrowser:latest}
     volumes:
-      - ${VOL_PATH:-./data}/filebrowser/storage:/srv
+      - ${VOL_PATH:-./data}/storage:/srv
       - ${VOL_PATH:-./data}/filebrowser/root:/home/filebrowser/data
       - ${VOL_CONFIG_PATH:-./config}/config.yaml:/home/filebrowser/config.yaml
     environment:
