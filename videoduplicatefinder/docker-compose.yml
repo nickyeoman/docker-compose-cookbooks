@@ -4,5 +4,5 @@ services:
     ports:
       - "5800:5800"
     volumes:
-      - ${VOL_PATH:-./data}/video-duplicate-finder:/config:rw
-      - ${VDF_VOL_STORAGE_PATH}:/storage:rw
+      - ${VOL_PATH:-./data}/video-duplicate-finder-config:/config:rw
+      - ${VDF_VOL_STORAGE_PATH:-./data/storage}:/storage:rw

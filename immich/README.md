@@ -12,6 +12,12 @@ Reverse Poxy Port: 2283
 1. Place your files in the immich-import directory.
 1. run the [Job](http://localhost:8000/admin/jobs-status) External Libraries
 
+## Upgrades
+
+The version tags can be confusing here.
+I go to the releases page: https://github.com/immich-app/immich/releases
+and then bump to that release: IMMICH_IMAGE=ghcr.io/immich-app/immich-server:v1.143.1
+
 ## Note
 
 If the env file doesn't work after a change, try running ```docker compose up -d --force-recreate```.
