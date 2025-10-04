@@ -1,0 +1,40 @@
+services:
+    open-archiver:
+        image: logiclabshq/open-archiver:latest
+        ports:
+            - '3000:3000' # Frontend
+        env_file:
+            - sample.env
+        volumes:
+            - ${VOL_PATH:-./data}/archiver-data:/var/data/open-archiver
+        depends_on:
+            - postgres
+            - valkey
+            - meilisearch
+
+    postgres:
+        image: postgres:17-alpine
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB:-open_archive}
+            POSTGRES_USER: ${POSTGRES_USER:-admin}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+        volumes:
+            - ${VOL_PATH:-./data}/pgdata:/var/lib/postgresql/data
+
+    valkey:
+        image: valkey/valkey:8-alpine
+        command: valkey-server --requirepass ${REDIS_PASSWORD:-RedisPasswordChangeMe}
+        volumes:
+            - ${VOL_PATH:-./data}/valkeydata:/data
+
+    meilisearch:
+        image: getmeili/meilisearch:v1.15
+        environment:
+            MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-aSampleMasterKey}
+        volumes:
+            - ${VOL_PATH:-./data}/meilidata:/meili_data
+
+    tika:
+        image: apache/tika:3.2.2.0-full
+
+
