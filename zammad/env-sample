@@ -9,15 +9,21 @@
 
 # RESTART=always
 
+# Base path for all persistent data (defaults to ./data relative to docker-compose.yml)
+VOL_PATH=./data
+TZ="America/Vancouver"
+COMPOSE_PROJECT_NAME=zammad
+
 # Use a fixed Zammad version rather than the default. If you do so,
 #   you are responsible to update this to newer patch level versions yourself.
+# The tag format is zammad-VERSION-BUILD (e.g., zammad-6.5.1-1). Check https://hub.docker.com/r/zammad/zammad-docker-compose/tags for latest.
 # VERSION=6.5.1
 # You can also use floating versions that will give you automatic updates:
 # VERSION=6.2     # all patchlevel updates
 # VERSION=6       # including minor updates
 # VERSION=latest  # all updates of stable versions, including major
 # VERSION=develop # bleeding-edge development version
-# IMAGE_REPO=ghcr.io/zammad/zammad
+# IMAGE_REPO=zammad/zammad-docker-compose
 
 # ELASTICSEARCH_VERSION=8.19.2
 # MEMCACHE_SERVERS=zammad-memcached:11211
@@ -26,37 +32,55 @@
 # REDIS_VERSION=7.4.5-alpine
 # POSTGRES_VERSION=17.5-alpine
 
-# RAILS_TRUSTED_PROXIES=
-# ZAMMAD_HTTP_TYPE=
-# ZAMMAD_FQDN=
-
-# NGINX_PORT=8080
-# NGINX_EXPOSE_PORT=8080
-# NGINX_CLIENT_MAX_BODY_SIZE=50M
 # POSTGRES_DB=zammad_production
 # POSTGRES_PASS=zammad
 # POSTGRES_USER=zammad
 # POSTGRES_HOST=zammad-postgresql
 # POSTGRES_PORT=5432
 # POSTGRESQL_OPTIONS=?pool=50
+# POSTGRESQL_DB_CREATE=true
 
+# ELASTICSEARCH_ENABLED=true
 # ELASTICSEARCH_SCHEMA=http
 # ELASTICSEARCH_HOST=zammad-elasticsearch
 # ELASTICSEARCH_PORT=9200
-# ELASTICSEARCH_USER=elastic
-# ELASTICSEARCH_PASS=zammad
+# ELASTICSEARCH_USER=  # Leave empty if no auth (xpack.security.enabled=false)
+# ELASTICSEARCH_PASS=
 # ELASTICSEARCH_NAMESPACE=zammad
-# ELASTICSEARCH_REINDEX=true
+# ELASTICSEARCH_REINDEX=  # Set to 'true' to force reindex
 # ELASTICSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
 
-# Variables used by ngingx-proxy container for reverse proxy creations,
+# RAILS_TRUSTED_PROXIES=  # Default: ['127.0.0.1', '::1']
+# ZAMMAD_HTTP_TYPE=  # e.g., 'https'
+# ZAMMAD_FQDN=  # e.g., yourdomain.com
+
+# NGINX_PORT=8080
+# NGINX_EXPOSE_PORT=8080
+# NGINX_CLIENT_MAX_BODY_SIZE=50M
+# NGINX_SERVER_NAME=_  # '_' matches all; set to your FQDN/IP for restriction
+# NGINX_SERVER_SCHEME=$scheme  # Or force 'http'/'https'
+
+# Backup settings
+# BACKUP_DIR=/var/tmp/zammad
+# BACKUP_TIME=03:00
+# HOLD_DAYS=10
+# TZ=Europe/Berlin
+
+# App tuning (scale workers as needed)
+# ZAMMAD_WEB_CONCURRENCY=  # e.g., 4 for more concurrent web connections
+# ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS=  # e.g., 2
+# ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS=1
+# ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS=  # e.g., 3
+
+# Variables used by nginx-proxy container for reverse proxy creations,
 #   for docs refer to https://github.com/nginx-proxy/nginx-proxy.
-# VIRTUAL_HOST=
-# VIRTUAL_PORT=
+# VIRTUAL_HOST=yourdomain.com
+# VIRTUAL_PORT=80
+
 # Variables used by acme-companion for retrieval of LetsEncrypt certificate,
 #   for docs refer to https://github.com/nginx-proxy/acme-companion.
-# LETSENCRYPT_HOST=
-# LETSENCRYPT_EMAIL=
+# LETSENCRYPT_HOST=yourdomain.com
+# LETSENCRYPT_EMAIL=admin@yourdomain.com
 
 #############################################
 # scenarios/add-cloudflare-tunnel.yml
