@@ -49,5 +49,8 @@ services:
       - "${VOL_PATH:-./data}/open-webui:/app/backend/data"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+      - USE_CUDA_DOCKER=${USE_CUDA_DOCKER}
     ports:
       - "3000:8080"  # Open WebUI access
