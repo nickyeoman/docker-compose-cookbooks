@@ -4,7 +4,7 @@
 
 👤 Author: [Nick Yeoman](https://www.nickyeoman.com/).
 
-These cookbooks are created with the intent of using Docker's extend feature. This way, you can run multiple containers in different domains but still have only one file to update.
+Production ready docker compose files
 
 ## 🤔 Assumptions
 
@@ -21,35 +21,5 @@ The intended workflow is as follows:
 2. Change to the directory ```cd /git-repos/docker-compose-cookbooks```
 
 You will likely want to override a number of things in the project folder, such as networks.
-
-## 🔍 Example Result
-
-Here is an example of how your project's docker-compose file might look:
-
-```yaml
-services:
-  proxy:
-    extends:
-      file: ${COOKBOOK}/nginx-proxy-manager/docker-compose.yml
-      service: proxy
-    env_file:
-      - .env
-    networks:
-      - proxy
-
-networks:
-  proxy:
-    external: true
-```
-
-with the .env file:
-
-```text
-COOKBOOK=/docker-compose-cookbooks
-COMPOSE_PROJECT_NAME=www-4lt-ca
-TZ=America/Vancouver
-VOL_CONFIG_PATH=/websites/www-4lt-ca/config
-VOL_PATH=/websites/www-4lt-ca/data
-```
 
 Now use ```docker compose up -d``` to start the project.
