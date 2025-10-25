@@ -18,26 +18,7 @@ mkdir -p data/video data/cache data/metadata data/generated data/root/.stash
 touch data/root/.stash/config.yml
 ```
 
-Usually I .gitignore the data directory and use a backup solution for redundancy.
-
-
-## Usage
-
-In the project directory just run
-
-```bash
-# Docker Start
-docker-compose up -d
-
-# Docker Stop 
-docker-compose down
-
-# Podman Start
-podman-compose up -d
-
-# Podman Stop 
-podman-compose down
-```
+Usually I .gitignore the data directory and use a backup solution.
 
 ## Configuration Details
 
@@ -46,6 +27,7 @@ podman-compose down
 #### STASH_IMAGE
 
 Docker image tag for Stash app.
+Alternative image found here: https://hotio.dev/containers/stash/
 
 #### STASH_DOMAIN_NAME
 
@@ -70,23 +52,11 @@ STASH_STASH, STASH_GENERATED, STASH_METADATA, STASH_CACHE: Paths for Stash data 
 
 ### Networking
 
-In  your project file, you can change the network mode to host:
+In your project file, you can change the network mode to host:
 ```yaml
-stash:
-    extends:
-      file: ${COOKBOOK}/stashapp/docker-compose.yml
-      service: stash
-    env_file:
-      - .env
+services:
+  stash:
     ports:
       - "8000:9999"
     network_mode: "host"
-```
-
-If you are using a reverse proxy, you need to set that network:
-
-```yaml
-networks:
-  proxy:
-    external: true
 ```

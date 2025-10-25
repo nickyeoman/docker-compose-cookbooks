@@ -1,0 +1,6 @@
+networks:
+  proxy:
+    external: true  # Shared for reverse proxies (create once: docker network create proxy)
+  internal:
+    driver: bridge
+    name: ${COMPOSE_PROJECT_NAME:-cookbook}_internal  # Project-isolated (from cookbook.env)

@@ -1,17 +1,21 @@
 services:
-  stash:
+  stashapp:
     image: ${STASHAPP_IMAGE:-stashapp/stash:latest}
-    restart: unless-stopped
+    # image: ghcr.io/hotio/stash # Alternative image
+    restart: ${STASHAPP_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-./data}/stash/cache:/cache
+      - ${VOL_PATH:-./data}/stash/generated:/generated
+      - ${VOL_PATH:-./data}/stash/metadata:/metadata
+      - ${VOL_PATH:-./data}/stash/root:/root
+      - ${VOL_PATH:-./data}/stash/video:/data
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - STASH_CACHE=${STASHAPP_STASH_CACHE:-/cache/}
       - STASH_DOMAIN_NAME=${STASHAPP_STASH_DOMAIN_NAME:-stash.yourdomain.ca}
       - STASH_GENERATED=${STASHAPP_STASH_GENERATED:-/generated/}
       - STASH_METADATA=${STASHAPP_STASH_METADATA:-/metadata/}
       - STASH_STASH=${STASHAPP_STASH_STASH:-/data/}
-    volumes:
-      - ${VOL_PATH:-./data}/stash-cache:/cache
-      - ${VOL_PATH:-./data}/stash-generated:/generated
-      - ${VOL_PATH:-./data}/stash-metadata:/metadata
-      - ${VOL_PATH:-./data}/stash-root:/root
-      - ${VOL_PATH:-./data}/stash-video:/data
-      - /etc/localtime:/etc/localtime:ro
+    ports: # Optional, can remove if running proxy
+      - "${STASHAPP_PORT:-9999}:9999"
+    network_mode: "host" # Optional, to run DLNA
