@@ -9,4 +9,8 @@ Official Documenation: https://docs.zammad.org/en/latest/install/docker-compose.
 
 Official Repository: https://github.com/zammad/zammad-docker-compose/blob/master/docker-compose.yml
 
-chmod data directory to 1000:1000
+```bash
+mkdir -p data/elasticsearch
+chown -R 1000:1000 data/
+chmod -R 755 data/elasticsearch/
+```

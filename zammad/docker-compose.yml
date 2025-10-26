@@ -14,7 +14,7 @@ x-shared:
       POSTGRESQL_DB_CREATE: ${POSTGRESQL_DB_CREATE:-true}
       REDIS_URL: ${REDIS_URL:-redis://zammad-redis:6379}
       # Storage (S3 optional; leave empty for local)
-      S3_URL: ${S3_URL:-}
+      S3_URL: ${S3_URL:-dummy}
       # Backup settings
       BACKUP_DIR: "${BACKUP_DIR:-/var/tmp/zammad}"
       BACKUP_TIME: "${BACKUP_TIME:-03:00}"
@@ -102,8 +102,8 @@ services:
     command: ["zammad-nginx"]
     expose:
       - "${NGINX_PORT:-8080}"
-    #ports:
-    #  - "${NGINX_EXPOSE_PORT:-8080}:${NGINX_PORT:-8080}"
+    ports:
+      - "${NGINX_PORT:-8080}:${NGINX_PORT:-8080}"
     depends_on:
       - zammad-railsserver
 

@@ -19,3 +19,5 @@ services:
     ports: # Optional, can remove if running proxy
       - "${STASHAPP_PORT:-9999}:9999"
     network_mode: "host" # Optional, to run DLNA
+    networks: # optional for reverse proxy
+      - proxy
