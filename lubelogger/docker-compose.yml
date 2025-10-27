@@ -1,0 +1,9 @@
+services:
+  lubelogger:
+    image: ${LUBELOGR_IMAGE_NAME:-ghcr.io/hargata/lubelogger:latest}
+    restart: ${LUBELOGR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-./data}/lubelogger/App:/App/data
+      - ${VOL_PATH:-./data}/lubelogger/keys:/root/.aspnet/DataProtection-Keys
+    ports:
+      - "${LUBELOGR_PORT:-8080}:8080"
