@@ -1,15 +1,19 @@
-# heimdall
-
-Last Updated: Thu August 08, 2024 12:50:47 PDT
+# Heimdall
 
 ## Overview
 
-DockerHub: https://hub.docker.com/r/linuxserver/heimdall
-Offical Website: https://heimdall.site/
-Proxy Port: 80
+Heimdall is a lightweight web-based dashboard for organizing and launching your self-hosted applications.
 
-## notes
+## Project Details
 
-For https include: FORCE_HTTPS=true
+-   **Project Repository:** [Offical Website](https://heimdall.site/)
+-   **Container Image:** [Docker Hub](https://hub.docker.com/r/linuxserver/heimdall)
+-   **Reverse Proxy Port:** `80`
 
-TODO: where is domain base path set?
+## Environment Variable Notes
+
+    FORCE_HTTPS=true - For https
+    
+## Additional Notes / Gotchas
+
+Still working on the staging config, TODO: where is domain base path set?

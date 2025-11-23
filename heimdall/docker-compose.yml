@@ -1,10 +1,14 @@
 services:
   heimdall:
-    image: ${HEIMDALL_IMAGE:-linuxserver/heimdall:latest}
+    image: ${HEIMDALL_IMAGE}
     restart: unless-stopped
+    volumes:
+      - ${VOL_PATH:-./data}/heimdall:/config
     environment:
       - PGID=${HEIMDALL_PGID:-1000}
       - PUID=${HEIMDALL_PUID:-1000}
       - TZ=${TZ:-America/Vancouver}
-    volumes:
-      - ${VOL_PATH:-./data}/heimdall:/config
+    ports:
+      - 8000:80
+    networks:
+      - proxy
