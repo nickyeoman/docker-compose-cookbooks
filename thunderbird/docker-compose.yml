@@ -3,8 +3,8 @@ services:
     image: ${THUNDERBIRD_IMAGE:-jlesage/thunderbird}
     restart: unless-stopped
     volumes:
-      - "${VOL_PATH:-./data}/thunderbird/config:/config:rw"
-      - "${VOL_PATH:-./data}/thunderbird/export:/export:rw"
+      - "thunderbird-config:/config"
+      - "thunderbird-export:/export"
     environment:
       - TZ=${THUNDERBIRD_TZ:-America/Vancouver}
       - WEB_AUTHENTICATION=${THUNDERBIRD_WEB_AUTHENTICATION:-1}
@@ -16,3 +16,7 @@ services:
     networks:
       - proxy
       - internal
+
+volumes:
+  thunderbird-config:
+  thunderbird-export:

@@ -52,9 +52,11 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/website:/data"
+          "name": "phpcontainer-data",
+          "container": "/data"
         },
         {
+          "name": "phpcontainer-usr-local-etc-php-php.ini",
           "container": "/usr/local/etc/php/php.ini"
         }
       ]
@@ -160,7 +162,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-/tmp}/wallabag:/var/www/wallabag/web/assets/images"
+          "name": "wallabag-var-www-wallabag-web-assets-images",
+          "container": "/var/www/wallabag/web/assets/images"
         }
       ]
     },
@@ -216,10 +219,12 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/thunderbird/config:/config:rw"
+          "name": "thunderbird-config",
+          "container": "/config"
         },
         {
-          "container": "-./data}/thunderbird/export:/export:rw"
+          "name": "thunderbird-export",
+          "container": "/export"
         }
       ]
     },
@@ -289,7 +294,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data/}/mariadb:/var/lib/mysql"
+          "name": "mariadb-var-lib-mysql",
+          "container": "/var/lib/mysql"
         }
       ]
     },
@@ -319,6 +325,7 @@
       ],
       "volumes": [
         {
+          "name": "dozzle-var-run-docker.sock",
           "container": "/var/run/docker.sock"
         }
       ]
@@ -405,6 +412,7 @@
       ],
       "volumes": [
         {
+          "name": "unami-var-lib-postgresql-data",
           "container": "/var/lib/postgresql/data"
         }
       ]
@@ -435,9 +443,11 @@
       ],
       "volumes": [
         {
+          "name": "peertube-data",
           "container": "/data"
         },
         {
+          "name": "peertube-config",
           "container": "/config"
         }
       ]
@@ -518,10 +528,12 @@
       "ports": [],
       "volumes": [
         {
-          "container": "/etc/timezone:ro"
+          "name": "phpmyadmin-ro",
+          "container": "ro"
         },
         {
-          "container": "/etc/localtime:ro"
+          "name": "phpmyadmin-ro",
+          "container": "ro"
         }
       ]
     },
@@ -603,9 +615,11 @@
       ],
       "volumes": [
         {
+          "name": "pihole-etc-pihole",
           "container": "/etc/pihole"
         },
         {
+          "name": "pihole-etc-dnsmasq.d",
           "container": "/etc/dnsmasq.d"
         }
       ]
@@ -691,6 +705,7 @@
       "ports": [],
       "volumes": [
         {
+          "name": "paperless-data",
           "container": "/data"
         }
       ]
@@ -737,9 +752,11 @@
       ],
       "volumes": [
         {
+          "name": "sonarr-config",
           "container": "/config"
         },
         {
+          "name": "sonarr-data",
           "container": "/data"
         }
       ]
@@ -775,7 +792,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/nc_data:/usr/app/data"
+          "name": "nocodb-usr-app-data",
+          "container": "/usr/app/data"
         }
       ]
     },
@@ -841,13 +859,16 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/directus/uploads:/directus/uploads"
+          "name": "directus-directus-uploads",
+          "container": "/directus/uploads"
         },
         {
-          "container": "-./data}/directus/extensions:/directus/extensions"
+          "name": "directus-directus-extensions",
+          "container": "/directus/extensions"
         },
         {
-          "container": "-./data}/directus/templates:/directus/templates"
+          "name": "directus-directus-templates",
+          "container": "/directus/templates"
         }
       ]
     },
@@ -902,6 +923,7 @@
       "ports": [],
       "volumes": [
         {
+          "name": "matomo-var-lib-mysql",
           "container": "/var/lib/mysql"
         }
       ]
@@ -992,9 +1014,11 @@
       "ports": [],
       "volumes": [
         {
+          "name": "n8n-home-node-.n8n",
           "container": "/home/node/.n8n"
         },
         {
+          "name": "n8n-files",
           "container": "/files"
         }
       ]
@@ -1041,9 +1065,11 @@
       ],
       "volumes": [
         {
+          "name": "radarr-config",
           "container": "/config"
         },
         {
+          "name": "radarr-data",
           "container": "/data"
         }
       ]
@@ -1159,7 +1185,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/mealie:/app/data"
+          "name": "mealie-app-data",
+          "container": "/app/data"
         }
       ]
     },
@@ -1189,6 +1216,7 @@
       ],
       "volumes": [
         {
+          "name": "memos-var-opt-memos",
           "container": "/var/opt/memos"
         }
       ]
@@ -1276,13 +1304,16 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/duplicati/config:/data"
+          "name": "duplicati-data",
+          "container": "/data"
         },
         {
-          "container": "-./data}/duplicati/backups:/backups"
+          "name": "duplicati-backups",
+          "container": "/backups"
         },
         {
-          "container": "-./data}/duplicati/source:/source:ro"
+          "name": "duplicati-ro",
+          "container": "ro"
         }
       ]
     },
@@ -1333,15 +1364,19 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/qbit/config:/config"
+          "name": "qbittorrent-config",
+          "container": "/config"
         },
         {
-          "container": "-./data}/qbit/downloads:/downloads"
+          "name": "qbittorrent-downloads",
+          "container": "/downloads"
         },
         {
-          "container": "-./data}/qbit/incomplete:/incomplete"
+          "name": "qbittorrent-incomplete",
+          "container": "/incomplete"
         },
         {
+          "name": "qbittorrent-dev-net-tun",
           "container": "/dev/net/tun"
         }
       ]
@@ -1402,6 +1437,7 @@
       "ports": [],
       "volumes": [
         {
+          "name": "monica-var-www-html-storage",
           "container": "/var/www/html/storage"
         }
       ]
@@ -1453,6 +1489,7 @@
       ],
       "volumes": [
         {
+          "name": "listmonk-var-lib-postgresql-data",
           "container": "/var/lib/postgresql/data"
         }
       ]
@@ -1483,13 +1520,16 @@
       ],
       "volumes": [
         {
+          "name": "shlink-var-lib-mysql",
           "container": "/var/lib/mysql"
         },
         {
-          "container": "/etc/timezone:ro"
+          "name": "shlink-ro",
+          "container": "ro"
         },
         {
-          "container": "/etc/localtime:ro"
+          "name": "shlink-ro",
+          "container": "ro"
         }
       ]
     },
@@ -1529,10 +1569,12 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/lubelogger/App:/App/data"
+          "name": "lubelogger-App-data",
+          "container": "/App/data"
         },
         {
-          "container": "-./data}/lubelogger/keys:/root/.aspnet/DataProtection-Keys"
+          "name": "lubelogger-root-.aspnet-DataProtection-Keys",
+          "container": "/root/.aspnet/DataProtection-Keys"
         }
       ]
     },
@@ -1587,10 +1629,12 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/codeserver:/data"
+          "name": "code-server-data",
+          "container": "/data"
         },
         {
-          "container": "-./data}/codeserver-config:/config"
+          "name": "code-server-config",
+          "container": "/config"
         }
       ]
     },
@@ -1614,6 +1658,7 @@
       "ports": [],
       "volumes": [
         {
+          "name": "authentik-var-lib-postgresql-data",
           "container": "/var/lib/postgresql/data"
         }
       ]
@@ -1720,22 +1765,28 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/handbrake/ghb-config:/config"
+          "name": "handbrake-config",
+          "container": "/config"
         },
         {
-          "container": "-./data}/handbrake/storage:/storage"
+          "name": "handbrake-storage",
+          "container": "/storage"
         },
         {
-          "container": "-./data}/handbrake/complete:/output"
+          "name": "handbrake-output",
+          "container": "/output"
         },
         {
-          "container": "-./data}/handbrake/watch:/watch"
+          "name": "handbrake-watch",
+          "container": "/watch"
         },
         {
-          "container": "-./data}/handbrake/watch2:/watch2"
+          "name": "handbrake-watch2",
+          "container": "/watch2"
         },
         {
-          "container": "-./data}/handbrake/trash:/trash"
+          "name": "handbrake-trash",
+          "container": "/trash"
         }
       ]
     },
@@ -1795,7 +1846,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/yourls-db:/var/lib/mysql"
+          "name": "yourls-var-lib-mysql",
+          "container": "/var/lib/mysql"
         }
       ]
     },
@@ -1835,7 +1887,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/paisa:/root/Documents/paisa/"
+          "name": "paisa-root-Documents-paisa",
+          "container": "/root/Documents/paisa/"
         }
       ]
     },
@@ -1910,13 +1963,16 @@
       "ports": [],
       "volumes": [
         {
-          "container": "${SEMAPHORE_PLAYBOOK_PATH:-/tmp/semaphore/}"
+          "name": "semaphore---tmp-semaphore-}",
+          "container": "-/tmp/semaphore/}"
         },
         {
-          "container": "-./config}/ssh/:/home/semaphore/.ssh/"
+          "name": "semaphore-home-semaphore-.ssh",
+          "container": "/home/semaphore/.ssh/"
         },
         {
-          "container": "-./config}/etchosts:/etc/hosts"
+          "name": "semaphore-etc-hosts",
+          "container": "/etc/hosts"
         }
       ]
     },
@@ -1951,7 +2007,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/uptimekuma-data:/app/data"
+          "name": "uptimekuma-app-data",
+          "container": "/app/data"
         }
       ]
     },
@@ -2021,7 +2078,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/postgresql:/var/lib/postgresql/data"
+          "name": "zammad-var-lib-postgresql-data",
+          "container": "/var/lib/postgresql/data"
         }
       ]
     },
@@ -2061,9 +2119,11 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./config}/homepage:/app/config"
+          "name": "homepage-app-config",
+          "container": "/app/config"
         },
         {
+          "name": "homepage-var-run-docker.sock",
           "container": "/var/run/docker.sock"
         }
       ]
@@ -2119,10 +2179,12 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/piwigo:/config"
+          "name": "piwigo-config",
+          "container": "/config"
         },
         {
-          "container": "-./data}/gallery:/gallery"
+          "name": "piwigo-gallery",
+          "container": "/gallery"
         }
       ]
     },
@@ -2177,13 +2239,16 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/storage:/srv"
+          "name": "filebrowser-srv",
+          "container": "/srv"
         },
         {
-          "container": "-./data}/filebrowser/root:/home/filebrowser/data"
+          "name": "filebrowser-home-filebrowser-data",
+          "container": "/home/filebrowser/data"
         },
         {
-          "container": "-./config}/config.yaml:/home/filebrowser/config.yaml"
+          "name": "filebrowser-home-filebrowser-config.yaml",
+          "container": "/home/filebrowser/config.yaml"
         }
       ]
     },
@@ -2228,7 +2293,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/firefly:/var/www/html/storage/upload"
+          "name": "firefly-var-www-html-storage-upload",
+          "container": "/var/www/html/storage/upload"
         }
       ]
     },
@@ -2273,31 +2339,40 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/jellyfin-cache:/cache"
+          "name": "jellyfin-cache",
+          "container": "/cache"
         },
         {
-          "container": "-./data}/jellyfin-config:/config"
+          "name": "jellyfin-config",
+          "container": "/config"
         },
         {
-          "container": "-./data}/jellyfin-content/books:/books"
+          "name": "jellyfin-books",
+          "container": "/books"
         },
         {
-          "container": "-./data}/jellyfin-content/media:/media"
+          "name": "jellyfin-media",
+          "container": "/media"
         },
         {
-          "container": "-./data}/jellyfin-content/movies:/movies"
+          "name": "jellyfin-movies",
+          "container": "/movies"
         },
         {
-          "container": "-./data}/jellyfin-content/music:/music"
+          "name": "jellyfin-music",
+          "container": "/music"
         },
         {
-          "container": "-./data}/jellyfin-content/musicvideos:/musicvideos"
+          "name": "jellyfin-musicvideos",
+          "container": "/musicvideos"
         },
         {
-          "container": "-./data}/jellyfin-content/photos:/photos"
+          "name": "jellyfin-photos",
+          "container": "/photos"
         },
         {
-          "container": "-./data}/jellyfin-content/shows:/shows"
+          "name": "jellyfin-shows",
+          "container": "/shows"
         }
       ]
     },
@@ -2327,9 +2402,11 @@
       ],
       "volumes": [
         {
+          "name": "mailu-var-mailu",
           "container": "/var/mailu"
         },
         {
+          "name": "mailu-etc-mailu-domain.conf",
           "container": "/etc/mailu/domain.conf"
         }
       ]
@@ -2395,7 +2472,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data/}/minio:/data"
+          "name": "minio-data",
+          "container": "/data"
         }
       ]
     },
@@ -2490,7 +2568,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/vault-data:/data"
+          "name": "vaultwarden-data",
+          "container": "/data"
         }
       ]
     },
@@ -2633,10 +2712,12 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/proxy/data:/data"
+          "name": "nginx-proxy-manager-data",
+          "container": "/data"
         },
         {
-          "container": "-./data}/proxy/letsencrypt:/etc/letsencrypt"
+          "name": "nginx-proxy-manager-etc-letsencrypt",
+          "container": "/etc/letsencrypt"
         }
       ]
     },
@@ -2666,6 +2747,7 @@
       ],
       "volumes": [
         {
+          "name": "docmost-app-data-storage",
           "container": "/app/data/storage"
         }
       ]
@@ -2679,7 +2761,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "logo": "https://i.4lt.ca/cookbooks/bookstack.png",
       "image": "solidnerd/bookstack:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2767,12 +2849,15 @@
       ],
       "volumes": [
         {
+          "name": "bookstack-usr-local-etc-php-php.ini",
           "container": "/usr/local/etc/php/php.ini"
         },
         {
+          "name": "bookstack-var-www-bookstack-storage-uploads",
           "container": "/var/www/bookstack/storage/uploads"
         },
         {
+          "name": "bookstack-var-www-bookstack-public-uploads",
           "container": "/var/www/bookstack/public/uploads"
         }
       ]
@@ -2833,7 +2918,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/gitea:/data"
+          "name": "gitea-data",
+          "container": "/data"
         }
       ]
     },
@@ -2879,7 +2965,8 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/heimdall:/config"
+          "name": "heimdall-config",
+          "container": "/config"
         }
       ]
     },
@@ -2959,13 +3046,16 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/ntfy-cache/ntfy:/var/cache/ntfy"
+          "name": "ntfy-var-cache-ntfy",
+          "container": "/var/cache/ntfy"
         },
         {
-          "container": "-./data}/ntfy:/etc/ntfy"
+          "name": "ntfy-etc-ntfy",
+          "container": "/etc/ntfy"
         },
         {
-          "container": "-./data}/ntfy-var:/var/lib/ntfy"
+          "name": "ntfy-var-lib-ntfy",
+          "container": "/var/lib/ntfy"
         }
       ]
     },
@@ -3021,7 +3111,8 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/suitecrm_data:/bitnami/suitecrm"
+          "name": "suitecrm-bitnami-suitecrm",
+          "container": "/bitnami/suitecrm"
         }
       ]
     },
@@ -3087,12 +3178,15 @@
       ],
       "volumes": [
         {
+          "name": "dockge-var-run-docker.sock",
           "container": "/var/run/docker.sock"
         },
         {
+          "name": "dockge-app-data",
           "container": "/app/data"
         },
         {
+          "name": "dockge-opt-stacks",
           "container": "/opt/stacks"
         }
       ]
@@ -3139,6 +3233,7 @@
       ],
       "volumes": [
         {
+          "name": "jellyseerr-config",
           "container": "/config"
         }
       ]
@@ -3412,7 +3507,8 @@
       ],
       "volumes": [
         {
-          "container": "-./data/prowlarr/config}:/config"
+          "name": "prowlarr-config",
+          "container": "/config"
         }
       ]
     },
@@ -3467,22 +3563,28 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/stash/cache:/cache"
+          "name": "stashapp-cache",
+          "container": "/cache"
         },
         {
-          "container": "-./data}/stash/generated:/generated"
+          "name": "stashapp-generated",
+          "container": "/generated"
         },
         {
-          "container": "-./data}/stash/metadata:/metadata"
+          "name": "stashapp-metadata",
+          "container": "/metadata"
         },
         {
-          "container": "-./data}/stash/root:/root"
+          "name": "stashapp-root",
+          "container": "/root"
         },
         {
-          "container": "-./data}/stash/video:/data"
+          "name": "stashapp-data",
+          "container": "/data"
         },
         {
-          "container": "/etc/localtime:ro"
+          "name": "stashapp-ro",
+          "container": "ro"
         }
       ]
     },
@@ -3522,7 +3624,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/archive-data:/data"
+          "name": "archivebox-data",
+          "container": "/data"
         }
       ]
     },
@@ -3608,6 +3711,7 @@
       ],
       "volumes": [
         {
+          "name": "poste-data",
           "container": "/data"
         }
       ]
@@ -3668,7 +3772,8 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/nextcloud:/var/www/html"
+          "name": "nextcloud-var-www-html",
+          "container": "/var/www/html"
         }
       ]
     },
@@ -3698,6 +3803,7 @@
       ],
       "volumes": [
         {
+          "name": "hedgedoc-hedgedoc-data",
           "container": "/hedgedoc/data"
         }
       ]

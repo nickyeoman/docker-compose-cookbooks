@@ -116,7 +116,6 @@ def parse_ports(compose_path: Path):
                 container_port = int(container_port.split("/")[0].strip())
                 host_port = int(host_port.split("/")[0].strip())
             except ValueError:
-                # Skip invalid ports
                 continue
             ports_list.append({
                 "container": container_port,
@@ -128,9 +127,13 @@ def parse_ports(compose_path: Path):
 
 # ---------------------------------------------------------
 # Parse volumes from docker-compose.yml
-# Returns a list of dicts: {"container": "/container/path"}
+# Returns a list of dicts: {"name": "volume_name", "container": "/container/path"}
 # ---------------------------------------------------------
-def parse_volumes(compose_path: Path):
+# ---------------------------------------------------------
+# Parse volumes from docker-compose.yml
+# Returns a list of dicts: {"name": "unique-name", "container": "/container/path"}
+# ---------------------------------------------------------
+def parse_volumes(compose_path: Path, stack_name: str):
     if not compose_path.exists():
         return []
 
@@ -145,16 +148,17 @@ def parse_volumes(compose_path: Path):
             continue
         if in_volumes:
             if not stripped or not stripped.startswith("-"):
-                break  # end of volumes section
-            # remove "- " prefix
-            volume_str = stripped[1:].strip()
-            # split by ':' to separate host path from container path
-            parts = volume_str.split(":", 1)
-            container_path = parts[-1].strip()  # take container path only
-            # remove quotes and inline comments
-            container_path = container_path.split("#")[0].strip().strip('"').strip("'")
-            if container_path:
-                volumes.append({"container": container_path})
+                break
+            volume_str = stripped[1:].strip().split("#", 1)[0].strip().strip('"').strip("'")
+            if not volume_str:
+                continue
+            parts = volume_str.rsplit(":", 1)
+            container_path = parts[-1].strip()
+            container_path = re.sub(r":(ro|rw)$", "", container_path)
+            name = f"{stack_name}-{container_path.strip('/').replace('/', '-')}"
+            if not name:
+                name = f"{stack_name}-volume"
+            volumes.append({"name": name, "container": container_path})
 
     return volumes
 
@@ -194,17 +198,20 @@ def generate_template_object(dir_path: Path):
     compose_file = dir_path / "docker-compose.yml"
     readme_file = dir_path / "README.md"
 
+    # Extract info
     description = extract_overview(readme_file, name)
     logo = find_logo_url(dir_path)
     env_vars = parse_env_vars(dir_path)
     image = parse_image(compose_file, env_vars)
     ports = parse_ports(compose_file)
-    volumes = parse_volumes(compose_file)
+    volumes = parse_volumes(compose_file, name)  # pass stack name for unique volume naming
 
+    # Environment variables entries for Portainer
     env_entries = [
         {"name": v["name"], "label": v["name"], "default": v["default"]} for v in env_vars
     ]
 
+    # Build template object
     return {
         "type": 1,
         "title": name,
