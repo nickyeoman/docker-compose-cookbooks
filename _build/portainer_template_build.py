@@ -265,11 +265,24 @@ def main():
             continue
         if item.name.endswith(("_dev", "_notes")):
             continue
-        if not (item / "docker-compose.yml").exists():
+
+        compose_path = item / "docker-compose.yml"
+        if not compose_path.exists():
             continue
 
+        # ---------------------------------------------
+        # Skip stacks still using ${VOL_PATH
+        # ---------------------------------------------
+        compose_text = compose_path.read_text()
+        if "${VOL_PATH" in compose_text:
+            continue
+
+        # ---------------------------------------------
+        # Generate Portainer template object
+        # ---------------------------------------------
         templates.append(generate_template_object(item, nologo=True))
 
+    # Write output file
     output_data = {
         "version": "3",
         "templates": templates
@@ -277,6 +290,7 @@ def main():
 
     OUTPUT_FILE.write_text(json.dumps(output_data, indent=2))
     print(f"Generated {OUTPUT_FILE} with templates for Docker Compose stacks.")
+
 
 if __name__ == "__main__":
     main()
