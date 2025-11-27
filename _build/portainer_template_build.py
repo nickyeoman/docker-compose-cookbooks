@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Portainer templates generator (Portainer CE compatible)
+Portainer templates generator (Portainer CE compatible, v3 format)
 Usage:
   python3 _build/portainer_template_build.py [--nologo] [--branch BRANCH] [--output PATH] [--no-skip-volpath]
 Defaults:
   branch = master
   output = ./templates.json
   skips projects containing "${VOL_PATH" by default (use --no-skip-volpath to disable)
-  Note: Branch is used only for logo asset lookup; templates use default repo branch (master).
+  Note: Generates v3 format with unique IDs to fix compatibility issues in Portainer 2.22+.
 """
 from pathlib import Path
 import argparse
@@ -119,11 +119,12 @@ def parse_env_vars(dir_path: Path) -> List[Dict[str,str]]:
 # -------------------------
 # Build Portainer template object
 # -------------------------
-def generate_template_object(dir_path: Path, branch: str, nologo: bool) -> Dict:
+def generate_template_object(dir_path: Path, branch: str, nologo: bool, template_id: int) -> Dict:
     name = dir_path.name
     readme_path = dir_path / "README.md"
     env_vars = parse_env_vars(dir_path)
     obj = {
+        "id": template_id,  # Unique ID for v3 format
         "type": 3,
         "title": name,
         "name": name,
@@ -143,7 +144,11 @@ def generate_template_object(dir_path: Path, branch: str, nologo: bool) -> Dict:
     for v in env_vars:
         if not v.get("name"):
             continue
-        env_entries.append({"name": v["name"], "label": v["name"], "default": v.get("default","")})
+        env_entries.append({
+            "name": v["name"],
+            "label": v["name"],
+            "default": v.get("default","")
+        })
     if env_entries:
         obj["env"] = env_entries
     return obj
@@ -164,6 +169,7 @@ def main():
     templates = []
     skipped = []
     errored = []
+    template_counter = 1  # Start ID from 1
     for item in sorted(REPO_ROOT.iterdir()):
         if not item.is_dir():
             continue
@@ -179,14 +185,15 @@ def main():
             skipped.append((item.name, "uses ${VOL_PATH}"))
             continue
         try:
-            tpl = generate_template_object(item, branch=branch, nologo=nologo)
+            tpl = generate_template_object(item, branch=branch, nologo=nologo, template_id=template_counter)
             templates.append(tpl)
+            template_counter += 1
         except Exception as e:
             errored.append((item.name, str(e)))
-    output = {"version": "2", "templates": templates}
+    output = {"version": "3", "templates": templates}
     # write atomic
     write_atomic(out_path, json.dumps(output, indent=2))
-    print(f"Generated {out_path} with {len(templates)} templates.")
+    print(f"Generated {out_path} with {len(templates)} templates (v3 format with IDs).")
     if skipped:
         print("Skipped projects:")
         for n, reason in skipped:

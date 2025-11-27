@@ -1,7 +1,8 @@
 {
-  "version": "2",
+  "version": "3",
   "templates": [
     {
+      "id": 1,
       "type": 3,
       "title": "archivebox",
       "name": "archivebox",
@@ -25,6 +26,7 @@
       ]
     },
     {
+      "id": 2,
       "type": 3,
       "title": "authentik",
       "name": "authentik",
@@ -41,6 +43,7 @@
       }
     },
     {
+      "id": 3,
       "type": 3,
       "title": "bookstack",
       "name": "bookstack",
@@ -49,7 +52,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "logo": "https://i.4lt.ca/cookbooks/bookstack.png",
       "description": "BookStack is a self-hosted wiki platform for organizing and storing documentation in a simple, book/chapter/page structure. This Docker Compose stack allows easy deployment with persistent storage.",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -129,6 +132,7 @@
       ]
     },
     {
+      "id": 4,
       "type": 3,
       "title": "dockge",
       "name": "dockge",
@@ -145,6 +149,7 @@
       }
     },
     {
+      "id": 5,
       "type": 3,
       "title": "docmost",
       "name": "docmost",
@@ -161,6 +166,7 @@
       }
     },
     {
+      "id": 6,
       "type": 3,
       "title": "dozzle",
       "name": "dozzle",
@@ -177,6 +183,7 @@
       }
     },
     {
+      "id": 7,
       "type": 3,
       "title": "etherpad",
       "name": "etherpad",
@@ -193,6 +200,7 @@
       }
     },
     {
+      "id": 8,
       "type": 3,
       "title": "hedgedoc",
       "name": "hedgedoc",
@@ -209,6 +217,7 @@
       }
     },
     {
+      "id": 9,
       "type": 3,
       "title": "homepage",
       "name": "homepage",
@@ -237,6 +246,7 @@
       ]
     },
     {
+      "id": 10,
       "type": 3,
       "title": "invoiceninja",
       "name": "invoiceninja",
@@ -455,6 +465,7 @@
       ]
     },
     {
+      "id": 11,
       "type": 3,
       "title": "joomla",
       "name": "joomla",
@@ -471,6 +482,7 @@
       }
     },
     {
+      "id": 12,
       "type": 3,
       "title": "listmonk",
       "name": "listmonk",
@@ -509,6 +521,7 @@
       ]
     },
     {
+      "id": 13,
       "type": 3,
       "title": "mariadb",
       "name": "mariadb",
@@ -552,6 +565,7 @@
       ]
     },
     {
+      "id": 14,
       "type": 3,
       "title": "matomo",
       "name": "matomo",
@@ -600,6 +614,7 @@
       ]
     },
     {
+      "id": 15,
       "type": 3,
       "title": "memos",
       "name": "memos",
@@ -616,6 +631,7 @@
       }
     },
     {
+      "id": 16,
       "type": 3,
       "title": "passbolt",
       "name": "passbolt",
@@ -669,6 +685,7 @@
       ]
     },
     {
+      "id": 17,
       "type": 3,
       "title": "peertube",
       "name": "peertube",
@@ -685,6 +702,7 @@
       }
     },
     {
+      "id": 18,
       "type": 3,
       "title": "penpot",
       "name": "penpot",
@@ -701,6 +719,7 @@
       }
     },
     {
+      "id": 19,
       "type": 3,
       "title": "phpmyadmin",
       "name": "phpmyadmin",
@@ -774,6 +793,7 @@
       ]
     },
     {
+      "id": 20,
       "type": 3,
       "title": "pihole",
       "name": "pihole",
@@ -807,6 +827,7 @@
       ]
     },
     {
+      "id": 21,
       "type": 3,
       "title": "posthog",
       "name": "posthog",
@@ -823,6 +844,7 @@
       }
     },
     {
+      "id": 22,
       "type": 3,
       "title": "prowlarr",
       "name": "prowlarr",
@@ -856,6 +878,7 @@
       ]
     },
     {
+      "id": 23,
       "type": 3,
       "title": "redis",
       "name": "redis",
@@ -884,6 +907,7 @@
       ]
     },
     {
+      "id": 24,
       "type": 3,
       "title": "rocketchat",
       "name": "rocketchat",
@@ -917,6 +941,7 @@
       ]
     },
     {
+      "id": 25,
       "type": 3,
       "title": "shlink",
       "name": "shlink",
@@ -933,6 +958,7 @@
       }
     },
     {
+      "id": 26,
       "type": 3,
       "title": "thunderbird",
       "name": "thunderbird",
@@ -941,7 +967,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "logo": "https://i.4lt.ca/cookbooks/thunderbird.png",
       "description": "Git Hub: https://github.com/jlesage/docker-thunderbird Proxy Port: 5800",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -976,6 +1002,7 @@
       ]
     },
     {
+      "id": 27,
       "type": 3,
       "title": "unami",
       "name": "unami",
@@ -992,6 +1019,7 @@
       }
     },
     {
+      "id": 28,
       "type": 3,
       "title": "wallabag",
       "name": "wallabag",
