@@ -8,8 +8,13 @@ Docker Compose file collection reference with the intent of running in productio
 
 ## Requirements and Support
 
-* Minimum Docker Engine: 20.10.0
-* Minimum Docker Compose CLI: v2.0.0
+I'm only one guy, I tested with
+
+| Software            | Version   |
+|---------------------|-----------|
+| Debian              | 13        |
+| Docker Engine       | 29.0.4    |
+| Portainer           | 2.33.4    |
 
 ## 🤔 Assumptions
 
@@ -28,6 +33,12 @@ The intended workflow is as follows:
 1. OPTIONAL: concatonate network.yml into your docker-compose.yml
 
 You may have to use multiple containers, such as Maria or postgres for db. 
+
+## 🛠 Project Directory Structure
+
+Directories ending with _dev contain projects that are still under development or experimental. These are not yet considered production-ready.
+
+Directories ending with _notes contain projects that usually don’t require a full Docker Compose file. They may include notes, example commands, or minimal Compose files just to illustrate setup. For example, the ollama project has a docker-compose.yml showing CPU vs GPU usage.
 
 ### Decisions
 

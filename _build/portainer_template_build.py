@@ -2,6 +2,7 @@
 import os
 import json
 import re
+import requests
 from pathlib import Path
 
 # ---------------------------------------------------------
@@ -15,12 +16,6 @@ OUTPUT_FILE = REPO_ROOT / "templates.json"
 # Extract "Overview" section from README.md (strict)
 # ---------------------------------------------------------
 def extract_overview(readme_path: Path, project_name: str) -> str:
-    """
-    Extracts the ## Overview section from README.md.
-    - Must match '## Overview' exactly (case-sensitive)
-    - Stops at the next line starting with '#'
-    - If no ## Overview section, returns '<project_name> description to come'
-    """
     if not readme_path.exists():
         return f"{project_name} description to come"
 
@@ -45,37 +40,127 @@ def extract_overview(readme_path: Path, project_name: str) -> str:
     return " ".join(overview)
 
 # ---------------------------------------------------------
-# Logo URL mapping
+# Logo URL mapping with existence check
 # ---------------------------------------------------------
 def find_logo_url(dir_path: Path) -> str:
+    base_url = "https://i.4lt.ca/cookbooks/"
     name = dir_path.name
-    return f"https://i.4lt.ca/cookbooks/{name}.png"
+    logo_url = f"{base_url}{name}.png"
+
+    try:
+        resp = requests.head(logo_url, timeout=5)
+        if resp.status_code == 200:
+            return logo_url
+    except requests.RequestException:
+        pass
+
+    return f"{base_url}default.png"
 
 # ---------------------------------------------------------
-# Parse first image name from docker-compose.yml
-# Handles Bash-style defaults like ${VAR:-default}
+# Parse image from docker-compose.yml using sample.env defaults
 # ---------------------------------------------------------
-def parse_image(compose_path: Path) -> str:
+def parse_image(compose_path: Path, env_vars: list) -> str:
     if not compose_path.exists():
         return ""
 
+    env_defaults = {v["name"]: v["default"] for v in env_vars}
+
     for line in compose_path.read_text().splitlines():
-        if "image:" in line:
+        line = line.strip()
+        if line.startswith("image:"):
             image = line.split("image:", 1)[1].strip().strip('"').strip("'")
-            # Handle Bash-style ${VAR:-default} -> default
-            match = re.match(r"\$\{[^:]+:-([^}]+)\}", image)
-            if match:
-                image = match.group(1)
+
+            # Handle ${VAR:-default} or ${VAR}
+            def replace_var(match):
+                var_name = match.group(1)
+                bash_default = match.group(2)
+                return env_defaults.get(var_name, bash_default if bash_default else "")
+
+            # Regex matches ${VAR} or ${VAR:-default}
+            image = re.sub(r"\$\{([^:}]+)(?:[:-]([^}]+))?\}", replace_var, image)
+
             return image
 
     return ""
 
 # ---------------------------------------------------------
+# Parse ports from docker-compose.yml
+# Returns a list of dicts: {"container": port, "published": port, "protocol": "tcp"}
+# ---------------------------------------------------------
+def parse_ports(compose_path: Path):
+    if not compose_path.exists():
+        return []
+
+    ports_list = []
+    lines = compose_path.read_text().splitlines()
+    in_ports = False
+
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("ports:"):
+            in_ports = True
+            continue
+        if in_ports:
+            if not stripped or not stripped.startswith("-"):
+                break
+            # Remove "- " prefix, quotes, and strip comments
+            port_str = stripped[1:].strip().split("#", 1)[0].strip().strip('"').strip("'")
+            if not port_str:
+                continue
+            if ":" in port_str:
+                host_port, container_port = port_str.split(":", 1)
+            else:
+                container_port = port_str
+                host_port = container_port
+            try:
+                container_port = int(container_port.split("/")[0].strip())
+                host_port = int(host_port.split("/")[0].strip())
+            except ValueError:
+                # Skip invalid ports
+                continue
+            ports_list.append({
+                "container": container_port,
+                "published": host_port,
+                "protocol": "tcp"
+            })
+
+    return ports_list
+
+
+
+# ---------------------------------------------------------
+# Parse volumes from docker-compose.yml
+# Returns a list of dicts: {"container": container_path}
+# ---------------------------------------------------------
+def parse_volumes(compose_path: Path):
+    if not compose_path.exists():
+        return []
+
+    volumes_list = []
+    lines = compose_path.read_text().splitlines()
+    in_volumes = False
+
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("volumes:"):
+            in_volumes = True
+            continue
+        if in_volumes:
+            if not stripped or not stripped.startswith("-"):
+                break
+            vol_str = stripped[1:].strip()
+            parts = vol_str.split(":", 1)
+            container_path = parts[1] if len(parts) == 2 else parts[0]
+            volumes_list.append({"container": container_path})
+
+    return volumes_list
+
+# ---------------------------------------------------------
 # Parse environment variables from sample.env or env-sample
+# Returns a list of dicts: {"name": ..., "default": ...}
 # ---------------------------------------------------------
 def parse_env_vars(dir_path: Path):
     env_file = None
-
     if (dir_path / "sample.env").exists():
         env_file = dir_path / "sample.env"
     elif (dir_path / "env-sample").exists():
@@ -90,9 +175,11 @@ def parse_env_vars(dir_path: Path):
         if not line or line.startswith("#"):
             continue
         if "=" in line:
-            key = line.split("=", 1)[0].strip()
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
             if key:
-                env_list.append(key)
+                env_list.append({"name": key, "default": value})
 
     return env_list
 
@@ -105,15 +192,14 @@ def generate_template_object(dir_path: Path):
     readme_file = dir_path / "README.md"
 
     description = extract_overview(readme_file, name)
-    if not description.strip():
-        description = f"{name} Docker Compose stack"
-
     logo = find_logo_url(dir_path)
-    image = parse_image(compose_file)
     env_vars = parse_env_vars(dir_path)
+    image = parse_image(compose_file, env_vars)
+    ports = parse_ports(compose_file)
+    volumes = parse_volumes(compose_file)
 
     env_entries = [
-        {"name": v, "label": v, "default": ""} for v in env_vars
+        {"name": v["name"], "label": v["name"], "default": v["default"]} for v in env_vars
     ]
 
     return {
@@ -130,7 +216,9 @@ def generate_template_object(dir_path: Path):
             "stackfile": f"{name}/docker-compose.yml",
             "stackfile_plain": False
         },
-        "env": env_entries
+        "env": env_entries,
+        "ports": ports,
+        "volumes": volumes
     }
 
 # ---------------------------------------------------------
@@ -144,7 +232,7 @@ def main():
             continue
         if item.name.startswith("_"):
             continue
-        if item.name.endswith("_dev"):  # development/experimental projects
+        if item.name.endswith(("_dev", "_notes")):
             continue
         if not (item / "docker-compose.yml").exists():
             continue

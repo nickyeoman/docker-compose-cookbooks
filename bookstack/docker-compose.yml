@@ -2,16 +2,49 @@ services:
   bookstack:
     image: ${BOOKSTACK_IMAGE:-solidnerd/bookstack:latest}
     restart: unless-stopped
+    depends_on:
+      - mariadb
+    volumes:
+      - bookstack-php-config:/usr/local/etc/php/php.ini
+      - bookstack-storage:/var/www/bookstack/storage/uploads
+      - bookstack-uploads:/var/www/bookstack/public/uploads
     environment:
       - APP_KEY=${BOOKSTACK_APP_KEY:-APP_KEY}
       - APP_TIMEZONE=${BOOKSTACK_APP_TIMEZONE:-America/Vancouver}
       - APP_URL=${BOOKSTACK_APP_URL:-http://localhost:8080}
-      - DB_DATABASE=${BOOKSTACK_DB_DATABASE:-dbname}
-      - DB_HOST=${BOOKSTACK_DB_HOST:-bookstack-mariadb:3306}
+      - DB_DATABASE=${BOOKSTACK_DB_DATABASE:-bookstack}
+      - DB_HOST=mariadb:3306
       - DB_PASSWORD=${BOOKSTACK_DB_PASSWORD:-dbpass}
       - DB_USERNAME=${BOOKSTACK_DB_USERNAME:-dbuser}
       - REVISION_LIMIT=${BOOKSTACK_REVISION_LIMIT:-false}
+    ports:
+      - "8080:8080"
+    networks:
+      - proxy
+      - internal
+
+  mariadb:
+    image: ${MARIADB_IMAGE:-mariadb:latest}
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
+    environment:
+      - MARIADB_DATABASE=${MARIADB_MARIADB_DATABASE:-bookstack}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
+      - MARIADB_USER=${MARIADB_MARIADB_USER:-dbuser}
+      - MARIADB_PASSWORD=${MARIADB_MARIADB_PASSWORD:-AlsoChangeThisPassword}
     volumes:
-      - ${VOL_CONFIG_PATH:-./config}/php.ini:/usr/local/etc/php/php.ini
-      - ${VOL_PATH:-./data}/bookstack-storage:/var/www/bookstack/storage/uploads
-      - ${VOL_PATH:-./data}/bookstack-uploads:/var/www/bookstack/public/uploads
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - internal
+
+volumes:
+  bookstack-php-config:
+  bookstack-storage:
+  bookstack-uploads:
+  mariadb-data:
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: true

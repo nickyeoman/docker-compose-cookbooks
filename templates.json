@@ -10,7 +10,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/phpcontainer.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "4lights/phpcontainer:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -21,32 +21,41 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/docker-compose-cookbooks"
         },
         {
           "name": "COMPOSE_PROJECT_NAME",
           "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "default": "project"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "/data/projectName/config"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/data/projectName/data"
         },
         {
           "name": "PHPCONTAINER_IMAGE",
           "label": "PHPCONTAINER_IMAGE",
-          "default": ""
+          "default": "4lights/phpcontainer:latest"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/website:/data\""
+        },
+        {
+          "container": "/usr/local/etc/php/php.ini\""
         }
       ]
     },
@@ -59,7 +68,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/wallabag.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "wallabag/wallabag:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -70,82 +79,88 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/docker/vol/wallabag-data #HELP: volpath"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "WALLABAG_TZ",
           "label": "WALLABAG_TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "WALLABAG_IMAGE",
           "label": "WALLABAG_IMAGE",
-          "default": ""
+          "default": "wallabag/wallabag:latest"
         },
         {
           "name": "WALLABAG_DB_DRIVER",
           "label": "WALLABAG_DB_DRIVER",
-          "default": ""
+          "default": "pdo_mysql"
         },
         {
           "name": "WALLABAG_DB_HOST",
           "label": "WALLABAG_DB_HOST",
-          "default": ""
+          "default": "wallabag-db"
         },
         {
           "name": "WALLABAG_DB_PORT",
           "label": "WALLABAG_DB_PORT",
-          "default": ""
+          "default": "3306"
         },
         {
           "name": "WALLABAG_DB_NAME",
           "label": "WALLABAG_DB_NAME",
-          "default": ""
+          "default": "wallabag"
         },
         {
           "name": "WALLABAG_DB_USER",
           "label": "WALLABAG_DB_USER",
-          "default": ""
+          "default": "wallabag"
         },
         {
           "name": "WALLABAG_DB_PASS",
           "label": "WALLABAG_DB_PASS",
-          "default": ""
+          "default": "wallapass"
         },
         {
           "name": "WALLABAG_DB_CHARSET",
           "label": "WALLABAG_DB_CHARSET",
-          "default": ""
+          "default": "utf8mb4"
         },
         {
           "name": "WALLABAG_DB_PREFIX",
           "label": "WALLABAG_DB_PREFIX",
-          "default": ""
+          "default": "wallabag_"
         },
         {
           "name": "WALLABAG_MAILER_DSN",
           "label": "WALLABAG_MAILER_DSN",
-          "default": ""
+          "default": "smtp://127.0.0.1"
         },
         {
           "name": "WALLABAG_FROM_WEMAIL",
           "label": "WALLABAG_FROM_WEMAIL",
-          "default": ""
+          "default": "wallabag@example.com"
         },
         {
           "name": "WALLABAG_DOMAIN",
           "label": "WALLABAG_DOMAIN",
-          "default": ""
+          "default": "https://your-wallabag-instance.wallabag.org"
         },
         {
           "name": "WALLABAG_SERVER",
           "label": "WALLABAG_SERVER",
-          "default": ""
+          "default": "Your wallabag instance"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-/tmp}/wallabag:/var/www/wallabag/web/assets/images\""
         }
       ]
     },
@@ -158,8 +173,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/thunderbird.png",
-      "image": "jlesage/thunderbird",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "jlesage/thunderbird:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "thunderbird/docker-compose.yml",
@@ -169,27 +184,42 @@
         {
           "name": "THUNDERBIRD_IMAGE",
           "label": "THUNDERBIRD_IMAGE",
-          "default": ""
+          "default": "jlesage/thunderbird:latest"
         },
         {
           "name": "THUNDERBIRD_WEB_AUTHENTICATION",
           "label": "THUNDERBIRD_WEB_AUTHENTICATION",
-          "default": ""
+          "default": "1"
         },
         {
           "name": "THUNDERBIRD_WEB_AUTHENTICATION_USERNAME",
           "label": "THUNDERBIRD_WEB_AUTHENTICATION_USERNAME",
-          "default": ""
+          "default": "user"
         },
         {
           "name": "THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD",
           "label": "THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD",
-          "default": ""
+          "default": "password"
         },
         {
           "name": "THUNDERBIRD_SECURE_CONNECTION",
           "label": "THUNDERBIRD_SECURE_CONNECTION",
-          "default": ""
+          "default": "1"
+        }
+      ],
+      "ports": [
+        {
+          "container": 5800,
+          "published": 5800,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/thunderbird/config:/config:rw\""
+        },
+        {
+          "container": "-./data}/thunderbird/export:/export:rw\""
         }
       ]
     },
@@ -202,7 +232,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/mariadb.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "mariadb:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -213,47 +243,53 @@
         {
           "name": "COMPOSE_PROJECT_NAME",
           "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "default": "project"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "/data/projectName/config"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/data/projectName/data"
         },
         {
           "name": "MARIADB_IMAGE",
           "label": "MARIADB_IMAGE",
-          "default": ""
+          "default": "mariadb:latest"
         },
         {
           "name": "MARIADB_MARIADB_DATABASE",
           "label": "MARIADB_MARIADB_DATABASE",
-          "default": ""
+          "default": "mydb"
         },
         {
           "name": "MARIADB_MARIADB_ROOT_PASSWORD",
           "label": "MARIADB_MARIADB_ROOT_PASSWORD",
-          "default": ""
+          "default": "ChangeThisPassword0123456789ABCD"
         },
         {
           "name": "MARIADB_MARIADB_PASSWORD",
           "label": "MARIADB_MARIADB_PASSWORD",
-          "default": ""
+          "default": "AlsoChangeThisPassword0123456789"
         },
         {
           "name": "MARIADB_MARIADB_USER",
           "label": "MARIADB_MARIADB_USER",
-          "default": ""
+          "default": "dbuser"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data/}/mariadb:/var/lib/mysql"
         }
       ]
     },
@@ -266,14 +302,26 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/dozzle.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "amir20/dozzle:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "dozzle/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 8080,
+          "published": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/var/run/docker.sock"
+        }
+      ]
     },
     {
       "type": 1,
@@ -284,8 +332,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/passbolt.png",
-      "image": "mariadb:${DB_V}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "mariadb:10.4.11",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "passbolt/docker-compose.yml",
@@ -295,39 +343,41 @@
         {
           "name": "PREFIX",
           "label": "PREFIX",
-          "default": ""
+          "default": "p1"
         },
         {
           "name": "DOMAIN_NAME",
           "label": "DOMAIN_NAME",
-          "default": ""
+          "default": "passbolt.nickyeoman.com"
         },
         {
           "name": "MYSQL_ROOT_PASSWORD",
           "label": "MYSQL_ROOT_PASSWORD",
-          "default": ""
+          "default": "ChangeMe2ASecurepass!"
         },
         {
           "name": "MYSQL_PASSWORD",
           "label": "MYSQL_PASSWORD",
-          "default": ""
+          "default": "Again2ASecurepass!"
         },
         {
           "name": "DB_V",
           "label": "DB_V",
-          "default": ""
+          "default": "10.4.11"
         },
         {
           "name": "PASSBOLT_V",
           "label": "PASSBOLT_V",
-          "default": ""
+          "default": "2.12.0-debian"
         },
         {
           "name": "NETWORK_NAME",
           "label": "NETWORK_NAME",
-          "default": ""
+          "default": "traefik_web"
         }
-      ]
+      ],
+      "ports": [],
+      "volumes": []
     },
     {
       "type": 1,
@@ -338,14 +388,26 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/unami.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "ghcr.io/umami-software/umami:postgresql-latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "unami/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 3000,
+          "published": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/var/lib/postgresql/data"
+        }
+      ]
     },
     {
       "type": 1,
@@ -356,14 +418,29 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/peertube.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "chocobozzz/peertube:production-bookworm",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "peertube/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 9000,
+          "published": 9000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/data # Stores raw videos"
+        },
+        {
+          "container": "/config # Custom configs"
+        }
+      ]
     },
     {
       "type": 1,
@@ -374,7 +451,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/phpmyadmin.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "phpmyadmin/phpmyadmin:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -385,77 +462,68 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/docker-compose-cookbooks"
         },
         {
           "name": "COMPOSE_PROJECT_NAME",
           "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "default": "phpmyadmin"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "/data/projectName/config"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/data/projectName/data"
         },
         {
           "name": "PHPMYADMIN_IMAGE",
           "label": "PHPMYADMIN_IMAGE",
-          "default": ""
+          "default": "phpmyadmin/phpmyadmin:latest"
         },
         {
           "name": "PHPMYADMIN_PMA_ARBITRARY",
           "label": "PHPMYADMIN_PMA_ARBITRARY",
-          "default": ""
+          "default": "1"
         },
         {
           "name": "PHPMYADMIN_PMA_HOST",
           "label": "PHPMYADMIN_PMA_HOST",
-          "default": ""
+          "default": "mariadb"
         },
         {
           "name": "PHPMYADMIN_PMA_USER",
           "label": "PHPMYADMIN_PMA_USER",
-          "default": ""
+          "default": "root"
         },
         {
           "name": "PHPMYADMIN_PMA_PASSWORD",
           "label": "PHPMYADMIN_PMA_PASSWORD",
-          "default": ""
+          "default": "ChangeThisPassword0123456789ABCD"
         },
         {
           "name": "PHPMYADMIN_UPLOAD_LIMIT",
           "label": "PHPMYADMIN_UPLOAD_LIMIT",
-          "default": ""
+          "default": "200M"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "/etc/timezone:ro\""
+        },
+        {
+          "container": "/etc/localtime:ro\""
         }
       ]
-    },
-    {
-      "type": 1,
-      "title": "activepieces",
-      "description": "activepieces description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/activepieces.png",
-      "image": "ghcr.io/activepieces/activepieces:0.44.0",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "activepieces/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": []
     },
     {
       "type": 1,
@@ -466,14 +534,22 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/penpot.png",
-      "image": "traefik:v2.9",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "penpotapp/frontend:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "penpot/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 8080,
+          "published": 9001,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": []
     },
     {
       "type": 1,
@@ -484,7 +560,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/pihole.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "pihole/pihole:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -495,17 +571,42 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "COMPOSE_PROJECT_NAME",
           "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "default": "pihole"
+        }
+      ],
+      "ports": [
+        {
+          "container": 53,
+          "published": 53,
+          "protocol": "tcp"
+        },
+        {
+          "container": 53,
+          "published": 53,
+          "protocol": "tcp"
+        },
+        {
+          "container": 80,
+          "published": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/etc/pihole'"
+        },
+        {
+          "container": "/etc/dnsmasq.d'"
         }
       ]
     },
@@ -518,7 +619,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/paperless.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "docker.io/library/redis:8",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -529,62 +630,68 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "PAPERLESS_IMAGE",
           "label": "PAPERLESS_IMAGE",
-          "default": ""
+          "default": "ghcr.io/paperless-ngx/paperless-ngx:latest"
         },
         {
           "name": "PAPERLESS_MARIADB_HOST",
           "label": "PAPERLESS_MARIADB_HOST",
-          "default": ""
+          "default": "paperless-db"
         },
         {
           "name": "PAPERLESS_MARIADB_DATABASE",
           "label": "PAPERLESS_MARIADB_DATABASE",
-          "default": ""
+          "default": "paperless"
         },
         {
           "name": "PAPERLESS_MARIADB_USER",
           "label": "PAPERLESS_MARIADB_USER",
-          "default": ""
+          "default": "paperless"
         },
         {
           "name": "PAPERLESS_MARIADB_PASSWORD",
           "label": "PAPERLESS_MARIADB_PASSWORD",
-          "default": ""
+          "default": "paperless"
         },
         {
           "name": "PAPERLESS_MARIADB_ROOT_PASSWORD",
           "label": "PAPERLESS_MARIADB_ROOT_PASSWORD",
-          "default": ""
+          "default": "paperless"
         },
         {
           "name": "PAPERLESS_SECRET_KEY",
           "label": "PAPERLESS_SECRET_KEY",
-          "default": ""
+          "default": "changeme"
         },
         {
           "name": "PAPERLESS_OCR_LANGUAGE",
           "label": "PAPERLESS_OCR_LANGUAGE",
-          "default": ""
+          "default": "eng"
         },
         {
           "name": "PAPERLESS_URL",
           "label": "PAPERLESS_URL",
-          "default": ""
+          "default": "http://localhost"
         },
         {
           "name": "PAPERLESS_CONSUMER_DELETE_DUPLICATES",
           "label": "PAPERLESS_CONSUMER_DELETE_DUPLICATES",
-          "default": ""
+          "default": "0"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "/data"
         }
       ]
     },
@@ -597,8 +704,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/sonarr.png",
-      "image": "${SONARR_IMAGE}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "ghcr.io/hotio/sonarr:release",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "sonarr/docker-compose.yml",
@@ -608,17 +715,32 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data/sonarr/config"
         },
         {
           "name": "SONARR_IMAGE",
           "label": "SONARR_IMAGE",
-          "default": ""
+          "default": "ghcr.io/hotio/sonarr:release"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
+        }
+      ],
+      "ports": [
+        {
+          "container": 8989,
+          "published": 8989,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/config"
+        },
+        {
+          "container": "/data"
         }
       ]
     },
@@ -631,7 +753,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/nocodb.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "nocodb/nocodb:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -642,12 +764,18 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "NOCODB_IMAGE",
           "label": "NOCODB_IMAGE",
-          "default": ""
+          "default": "nocodb/nocodb:latest"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/nc_data:/usr/app/data\""
         }
       ]
     },
@@ -660,7 +788,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/directus.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "directus/directus:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -671,37 +799,55 @@
         {
           "name": "COMPOSE_PROJECT_NAME",
           "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "default": "directus"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "/docker/directus/config"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/docker/directus/data"
         },
         {
           "name": "DIRECTUS_SECRET",
           "label": "DIRECTUS_SECRET",
-          "default": ""
+          "default": "01234567890123456789012345678912"
         },
         {
           "name": "DIRECTUS_ADMIN_EMAIL",
           "label": "DIRECTUS_ADMIN_EMAIL",
-          "default": ""
+          "default": "noreply@example.com"
         },
         {
           "name": "DIRECTUS_ADMIN_PASSWORD",
           "label": "DIRECTUS_ADMIN_PASSWORD",
-          "default": ""
+          "default": "enter_secure_password_here"
+        }
+      ],
+      "ports": [
+        {
+          "container": 8055,
+          "published": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/directus/uploads:/directus/uploads"
+        },
+        {
+          "container": "-./data}/directus/extensions:/directus/extensions"
+        },
+        {
+          "container": "-./data}/directus/templates:/directus/templates"
         }
       ]
     },
@@ -714,8 +860,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/matomo.png",
-      "image": "mariadb:${DB_V}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "mariadb:10.4.0",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "matomo/docker-compose.yml",
@@ -725,32 +871,38 @@
         {
           "name": "PREFIX",
           "label": "PREFIX",
-          "default": ""
+          "default": "p1"
         },
         {
           "name": "MATOMO_DOMAIN_NAME",
           "label": "MATOMO_DOMAIN_NAME",
-          "default": ""
+          "default": "matomo.nickyeoman.com"
         },
         {
           "name": "MATOMO_MYSQL_ROOT_PASSWORD",
           "label": "MATOMO_MYSQL_ROOT_PASSWORD",
-          "default": ""
+          "default": "ChangeMe2ASecurepass!"
         },
         {
           "name": "MATOMO_MYSQL_PASSWORD",
           "label": "MATOMO_MYSQL_PASSWORD",
-          "default": ""
+          "default": "Again2ASecurepass!"
         },
         {
           "name": "DB_V",
           "label": "DB_V",
-          "default": ""
+          "default": "10.4.0"
         },
         {
           "name": "MATOMO_V",
           "label": "MATOMO_V",
-          "default": ""
+          "default": "3.13.5-apache"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "/var/lib/mysql"
         }
       ]
     },
@@ -763,53 +915,16 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/joomla.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "joomla/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
-    },
-    {
-      "type": 1,
-      "title": "adminer",
-      "description": "adminer description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/adminer.png",
-      "image": "adminer:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "adminer/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": ""
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": ""
-        },
-        {
-          "name": "TZ",
-          "label": "TZ",
-          "default": ""
-        },
-        {
-          "name": "ADMINER_DEFAULT_SERVER",
-          "label": "ADMINER_DEFAULT_SERVER",
-          "default": ""
-        }
-      ]
+      "env": [],
+      "ports": [],
+      "volumes": []
     },
     {
       "type": 1,
@@ -820,14 +935,16 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/etherpad.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "etherpad/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [],
+      "volumes": []
     },
     {
       "type": 1,
@@ -838,8 +955,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/n8n.png",
-      "image": "n8nio/n8n:latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "n8nio/n8n:latest # or 1.70.2",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "n8n/docker-compose.yml",
@@ -849,27 +966,36 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "N8N_IMAGE",
           "label": "N8N_IMAGE",
-          "default": ""
+          "default": "n8nio/n8n:latest # or 1.70.2"
         },
         {
           "name": "N8N_PORT",
           "label": "N8N_PORT",
-          "default": ""
+          "default": "5678"
         },
         {
           "name": "N8N_HOST",
           "label": "N8N_HOST",
-          "default": ""
+          "default": "localhost"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "/home/node/.n8n"
+        },
+        {
+          "container": "/files"
         }
       ]
     },
@@ -882,8 +1008,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/radarr.png",
-      "image": "${RADARR_IMAGE}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "ghcr.io/hotio/radarr:release",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "radarr/docker-compose.yml",
@@ -893,17 +1019,32 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data/radarr/config"
         },
         {
           "name": "RADARR_IMAGE",
           "label": "RADARR_IMAGE",
-          "default": ""
+          "default": "ghcr.io/hotio/radarr:release"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
+        }
+      ],
+      "ports": [
+        {
+          "container": 7878,
+          "published": 7878,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/config"
+        },
+        {
+          "container": "/data"
         }
       ]
     },
@@ -916,14 +1057,16 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/posthog.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "posthog/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [],
+      "volumes": []
     },
     {
       "type": 1,
@@ -934,7 +1077,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/mealie.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "hkotel/mealie:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -945,72 +1088,78 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data/ #HELP: volpath"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "MEALIE_IMAGE",
           "label": "MEALIE_IMAGE",
-          "default": ""
+          "default": "hkotel/mealie:latest"
         },
         {
           "name": "MEALIE_BASE_URL",
           "label": "MEALIE_BASE_URL",
-          "default": ""
+          "default": "https://mealie.domain.com"
         },
         {
           "name": "MEALIE_DEFAULT_EMAIL",
           "label": "MEALIE_DEFAULT_EMAIL",
-          "default": ""
+          "default": "email@domain.com"
         },
         {
           "name": "MEALIE_PGID",
           "label": "MEALIE_PGID",
-          "default": ""
+          "default": "1000"
         },
         {
           "name": "MEALIE_PUID",
           "label": "MEALIE_PUID",
-          "default": ""
+          "default": "1000"
         },
         {
           "name": "MEALIE_RECIPE_DISABLE_AMOUNT",
           "label": "MEALIE_RECIPE_DISABLE_AMOUNT",
-          "default": ""
+          "default": "false"
         },
         {
           "name": "MEALIE_RECIPE_DISABLE_COMMENTS",
           "label": "MEALIE_RECIPE_DISABLE_COMMENTS",
-          "default": ""
+          "default": "false"
         },
         {
           "name": "MEALIE_RECIPE_LANDSCAPE_VIEW",
           "label": "MEALIE_RECIPE_LANDSCAPE_VIEW",
-          "default": ""
+          "default": "true"
         },
         {
           "name": "MEALIE_RECIPE_PUBLIC",
           "label": "MEALIE_RECIPE_PUBLIC",
-          "default": ""
+          "default": "true"
         },
         {
           "name": "MEALIE_RECIPE_SHOW_ASSETS",
           "label": "MEALIE_RECIPE_SHOW_ASSETS",
-          "default": ""
+          "default": "true"
         },
         {
           "name": "MEALIE_RECIPE_SHOW_NUTRITION",
           "label": "MEALIE_RECIPE_SHOW_NUTRITION",
-          "default": ""
+          "default": "true"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/mealie:/app/data"
         }
       ]
     },
@@ -1023,14 +1172,26 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/memos.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "neosmemo/memos:stable",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "memos/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 5230,
+          "published": 5230,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/var/opt/memos"
+        }
+      ]
     },
     {
       "type": 1,
@@ -1041,7 +1202,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/redis.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "redis:alpine",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1052,14 +1213,16 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "REDIS_IMAGE",
           "label": "REDIS_IMAGE",
-          "default": ""
+          "default": "redis:alpine"
         }
-      ]
+      ],
+      "ports": [],
+      "volumes": []
     },
     {
       "type": 1,
@@ -1070,8 +1233,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/duplicati.png",
-      "image": "duplicati/duplicati:latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "duplicati/duplicati:latest #2.1.0.5",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "duplicati/docker-compose.yml",
@@ -1081,27 +1244,45 @@
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "DUPLICATI_IMAGE",
           "label": "DUPLICATI_IMAGE",
-          "default": ""
+          "default": "duplicati/duplicati:latest #2.1.0.5"
         },
         {
           "name": "DUPLICATI_KEY",
           "label": "DUPLICATI_KEY",
-          "default": ""
+          "default": "ThisNeedsToChange"
         },
         {
           "name": "DUPLICATI_PASS",
           "label": "DUPLICATI_PASS",
-          "default": ""
+          "default": "changeMe"
+        }
+      ],
+      "ports": [
+        {
+          "container": 8200,
+          "published": 8200,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/duplicati/config:/data"
+        },
+        {
+          "container": "-./data}/duplicati/backups:/backups"
+        },
+        {
+          "container": "-./data}/duplicati/source:/source:ro"
         }
       ]
     },
@@ -1114,7 +1295,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/qbittorrent.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "trigus42/qbittorrentvpn:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1125,56 +1306,43 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/project-dir/project-name/data #HELP: volpath"
         },
         {
           "name": "QBT_IMAGE",
           "label": "QBT_IMAGE",
-          "default": ""
+          "default": "trigus42/qbittorrentvpn:latest"
         },
         {
           "name": "QBT_PASS",
           "label": "QBT_PASS",
-          "default": ""
+          "default": "01234567890 #HELP: gen32"
         }
-      ]
-    },
-    {
-      "type": 1,
-      "title": "videoduplicatefinder",
-      "description": "videoduplicatefinder description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
       ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/videoduplicatefinder.png",
-      "image": "jlesage/video-duplicate-finder:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "videoduplicatefinder/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
+      "ports": [
         {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": ""
+          "container": 8080,
+          "published": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/qbit/config:/config\""
         },
         {
-          "name": "TZ",
-          "label": "TZ",
-          "default": ""
+          "container": "-./data}/qbit/downloads:/downloads\""
         },
         {
-          "name": "COMPOSE_PROJECT_NAME",
-          "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "container": "-./data}/qbit/incomplete:/incomplete\""
+        },
+        {
+          "container": "/dev/net/tun'"
         }
       ]
     },
@@ -1187,8 +1355,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/monica.png",
-      "image": "latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "monica:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "monica/docker-compose.yml",
@@ -1198,37 +1366,43 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data #HELP: volpath"
         },
         {
           "name": "MONICA_IMAGE",
           "label": "MONICA_IMAGE",
-          "default": ""
+          "default": "monica:latest"
         },
         {
           "name": "MONICA_DB_HOST",
           "label": "MONICA_DB_HOST",
-          "default": ""
+          "default": "monica-db"
         },
         {
           "name": "MONICA_DB_USERNAME",
           "label": "MONICA_DB_USERNAME",
-          "default": ""
+          "default": "monica"
         },
         {
           "name": "MONICA_DB_PASSWORD",
           "label": "MONICA_DB_PASSWORD",
-          "default": ""
+          "default": "changeme"
         },
         {
           "name": "MONICA_APP_ENV",
           "label": "MONICA_APP_ENV",
-          "default": ""
+          "default": "production"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "/var/www/html/storage"
         }
       ]
     },
@@ -1241,7 +1415,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/listmonk.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "postgres:13-alpine",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1252,22 +1426,34 @@
         {
           "name": "POSTGRES_USER",
           "label": "POSTGRES_USER",
-          "default": ""
+          "default": "listmonk"
         },
         {
           "name": "POSTGRES_PASSWORD",
           "label": "POSTGRES_PASSWORD",
-          "default": ""
+          "default": "securepassword"
         },
         {
           "name": "POSTGRES_DB",
           "label": "POSTGRES_DB",
-          "default": ""
+          "default": "listmonk"
         },
         {
           "name": "SECRET_KEY",
           "label": "SECRET_KEY",
-          "default": ""
+          "default": "your_super_secret_key"
+        }
+      ],
+      "ports": [
+        {
+          "container": 9000,
+          "published": 9000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/var/lib/postgresql/data"
         }
       ]
     },
@@ -1280,14 +1466,32 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/shlink.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "shlink/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 80,
+          "published": 8003,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/var/lib/mysql"
+        },
+        {
+          "container": "/etc/timezone:ro\""
+        },
+        {
+          "container": "/etc/localtime:ro\""
+        }
+      ]
     },
     {
       "type": 1,
@@ -1298,7 +1502,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/lubelogger.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "ghcr.io/hargata/lubelogger:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1309,17 +1513,26 @@
         {
           "name": "LUBELOGR_IMAGE_NAME",
           "label": "LUBELOGR_IMAGE_NAME",
-          "default": ""
+          "default": "ghcr.io/hargata/lubelogger:latest"
         },
         {
           "name": "LUBELOGR_RESTART",
           "label": "LUBELOGR_RESTART",
-          "default": ""
+          "default": "unless-stopped"
         },
         {
           "name": "LUBELOGR_PORT",
           "label": "LUBELOGR_PORT",
-          "default": ""
+          "default": "8080"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/lubelogger/App:/App/data"
+        },
+        {
+          "container": "-./data}/lubelogger/keys:/root/.aspnet/DataProtection-Keys"
         }
       ]
     },
@@ -1332,8 +1545,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/code-server.png",
-      "image": "null",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "lscr.io/linuxserver/code-server:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "code-server/docker-compose.yml",
@@ -1343,32 +1556,41 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data #HELP: volpath"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "CODE-SERVER_IMAGE",
           "label": "CODE-SERVER_IMAGE",
-          "default": ""
+          "default": "lscr.io/linuxserver/code-server:latest"
         },
         {
           "name": "CODE-SERVER_PASSWORD",
           "label": "CODE-SERVER_PASSWORD",
-          "default": ""
+          "default": "RanDoMChangeMe #HELP: gen32"
         },
         {
           "name": "CODE-SERVER_DOMAIN",
           "label": "CODE-SERVER_DOMAIN",
-          "default": ""
+          "default": "localhost"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/codeserver:/data"
+        },
+        {
+          "container": "-./data}/codeserver-config:/config\""
         }
       ]
     },
@@ -1381,14 +1603,20 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/authentik.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "docker.io/library/postgres:16-alpine",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "authentik/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "/var/lib/postgresql/data"
+        }
+      ]
     },
     {
       "type": 1,
@@ -1399,7 +1627,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/handbrake.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "jlesage/handbrake:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1410,77 +1638,104 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/docker/vol/handbrake-data #HELP: volpath"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "/docker/vol #HELP: configpath"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "HANDBRAKE_IMAGE",
           "label": "HANDBRAKE_IMAGE",
-          "default": ""
+          "default": "jlesage/handbrake:latest"
         },
         {
           "name": "AUTOMATED_CONVERSION",
           "label": "AUTOMATED_CONVERSION",
-          "default": ""
+          "default": "1 # 0 for no"
         },
         {
           "name": "AUTOMATED_CONVERSION_FORMAT",
           "label": "AUTOMATED_CONVERSION_FORMAT",
-          "default": ""
+          "default": "m4v"
         },
         {
           "name": "AUTOMATED_CONVERSION_KEEP_SOURCE",
           "label": "AUTOMATED_CONVERSION_KEEP_SOURCE",
-          "default": ""
+          "default": "1 # 0 for remove"
         },
         {
           "name": "AUTOMATED_CONVERSION_USE_TRASH",
           "label": "AUTOMATED_CONVERSION_USE_TRASH",
-          "default": ""
+          "default": "0 # 1 for yes.  Required KEEP_SOURCE"
         },
         {
           "name": "AUTOMATED_CONVERSION_OVERWRITE_OUTPUT",
           "label": "AUTOMATED_CONVERSION_OVERWRITE_OUTPUT",
-          "default": ""
+          "default": "0"
         },
         {
           "name": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
           "label": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
-          "default": ""
+          "default": "0 # 0 is show"
         },
         {
           "name": "AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS",
           "label": "AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS",
-          "default": ""
+          "default": "2"
         },
         {
           "name": "AUTOMATED_CONVERSION_PRESET",
           "label": "AUTOMATED_CONVERSION_PRESET",
-          "default": ""
+          "default": "Very Fast 1080p30"
         },
         {
           "name": "AUTOMATED_CONVERSION_OUTPUT_DIR",
           "label": "AUTOMATED_CONVERSION_OUTPUT_DIR",
-          "default": ""
+          "default": "/output"
         },
         {
           "name": "AUTOMATED_CONVERSION_PRESET_2",
           "label": "AUTOMATED_CONVERSION_PRESET_2",
-          "default": ""
+          "default": "Very Fast 1080p30"
         },
         {
           "name": "AUTOMATED_CONVERSION_OUTPUT_DIR_2",
           "label": "AUTOMATED_CONVERSION_OUTPUT_DIR_2",
-          "default": ""
+          "default": "/output"
+        }
+      ],
+      "ports": [
+        {
+          "container": 5800,
+          "published": 5800,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/handbrake/ghb-config:/config\""
+        },
+        {
+          "container": "-./data}/handbrake/storage:/storage\""
+        },
+        {
+          "container": "-./data}/handbrake/complete:/output\""
+        },
+        {
+          "container": "-./data}/handbrake/watch:/watch\""
+        },
+        {
+          "container": "-./data}/handbrake/watch2:/watch2\""
+        },
+        {
+          "container": "-./data}/handbrake/trash:/trash\""
         }
       ]
     },
@@ -1493,8 +1748,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/yourls.png",
-      "image": "mariadb:${DB_V}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "mariadb:10.4.11",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "yourls/docker-compose.yml",
@@ -1504,37 +1759,43 @@
         {
           "name": "PREFIX",
           "label": "PREFIX",
-          "default": ""
+          "default": "p1"
         },
         {
           "name": "YOURLS_DOMAIN_NAME",
           "label": "YOURLS_DOMAIN_NAME",
-          "default": ""
+          "default": "yourls.nickyeoman.com"
         },
         {
           "name": "YOURLS_MYSQL_ROOT_PASSWORD",
           "label": "YOURLS_MYSQL_ROOT_PASSWORD",
-          "default": ""
+          "default": "ChangeMe2ASecurepass!"
         },
         {
           "name": "YOURLS_MYSQL_PASSWORD",
           "label": "YOURLS_MYSQL_PASSWORD",
-          "default": ""
+          "default": "Again2ASecurepass!"
         },
         {
           "name": "YOURLS_USER",
           "label": "YOURLS_USER",
-          "default": ""
+          "default": "username"
         },
         {
           "name": "YOURLS_PASS",
           "label": "YOURLS_PASS",
-          "default": ""
+          "default": "Password4urls"
         },
         {
           "name": "DB_V",
           "label": "DB_V",
-          "default": ""
+          "default": "10.4.11"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/yourls-db:/var/lib/mysql"
         }
       ]
     },
@@ -1547,7 +1808,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/paisa.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "ananthakumaran/paisa:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1558,17 +1819,23 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data/ #HELP: volpath"
         },
         {
           "name": "PAISA_IMAGE",
           "label": "PAISA_IMAGE",
-          "default": ""
+          "default": "ananthakumaran/paisa:latest"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/paisa:/root/Documents/paisa/"
         }
       ]
     },
@@ -1581,7 +1848,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/semaphore.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "semaphoreui/semaphore:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1592,52 +1859,64 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "./config"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "SEMAPHORE_IMAGE",
           "label": "SEMAPHORE_IMAGE",
-          "default": ""
+          "default": "semaphoreui/semaphore:latest"
         },
         {
           "name": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
           "label": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
-          "default": ""
+          "default": "1234567890123456789012345678901234567890"
         },
         {
           "name": "SEMAPHORE_ADMIN_EMAIL",
           "label": "SEMAPHORE_ADMIN_EMAIL",
-          "default": ""
+          "default": "example@example.com"
         },
         {
           "name": "SEMAPHORE_ADMIN_NAME",
           "label": "SEMAPHORE_ADMIN_NAME",
-          "default": ""
+          "default": "admin"
         },
         {
           "name": "SEMAPHORE_ADMIN_PASSWORD",
           "label": "SEMAPHORE_ADMIN_PASSWORD",
-          "default": ""
+          "default": "password"
         },
         {
           "name": "SEMAPHORE_PLAYBOOK_PATH",
           "label": "SEMAPHORE_PLAYBOOK_PATH",
-          "default": ""
+          "default": "/tmp/semaphore/"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "${SEMAPHORE_PLAYBOOK_PATH:-/tmp/semaphore/}"
+        },
+        {
+          "container": "-./config}/ssh/:/home/semaphore/.ssh/"
+        },
+        {
+          "container": "-./config}/etchosts:/etc/hosts"
         }
       ]
     },
@@ -1650,8 +1929,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/uptimekuma.png",
-      "image": "louislam/uptime-kuma:latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "louislam/uptime-kuma:1",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "uptimekuma/docker-compose.yml",
@@ -1661,56 +1940,18 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "UPTIMEKUMA_IMAGE",
           "label": "UPTIMEKUMA_IMAGE",
-          "default": ""
+          "default": "louislam/uptime-kuma:1"
         }
-      ]
-    },
-    {
-      "type": 1,
-      "title": "ollama",
-      "description": "ollama description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
       ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/ollama.png",
-      "image": "ollama/ollama",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "ollama/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
+      "ports": [],
+      "volumes": [
         {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": ""
-        },
-        {
-          "name": "WEBUI_IMAGE",
-          "label": "WEBUI_IMAGE",
-          "default": ""
-        },
-        {
-          "name": "WEBUI_SECRET_KEY",
-          "label": "WEBUI_SECRET_KEY",
-          "default": ""
-        },
-        {
-          "name": "WEBUI_URL",
-          "label": "WEBUI_URL",
-          "default": ""
-        },
-        {
-          "name": "USE_CUDA_DOCKER",
-          "label": "USE_CUDA_DOCKER",
-          "default": ""
+          "container": "-./data}/uptimekuma-data:/app/data"
         }
       ]
     },
@@ -1723,8 +1964,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/zammad.png",
-      "image": "postgres:${POSTGRES_VERSION:-17.5-alpine}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "postgres:-17.5-alpine",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "zammad/docker-compose.yml",
@@ -1734,47 +1975,53 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "COMPOSE_PROJECT_NAME",
           "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "default": "zammad"
         },
         {
           "name": "ZAMMAD_RAILS_IMAGE",
           "label": "ZAMMAD_RAILS_IMAGE",
-          "default": ""
+          "default": "ghcr.io/zammad/zammad:latest"
         },
         {
           "name": "ZAMMAD_RESTART",
           "label": "ZAMMAD_RESTART",
-          "default": ""
+          "default": "always"
         },
         {
           "name": "scheme",
           "label": "scheme",
-          "default": ""
+          "default": "http"
         },
         {
           "name": "AWS_REGION",
           "label": "AWS_REGION",
-          "default": ""
+          "default": "dummy"
         },
         {
           "name": "NGINX_PORT",
           "label": "NGINX_PORT",
-          "default": ""
+          "default": "8080"
         },
         {
           "name": "NGINX_SERVER_SCHEME",
           "label": "NGINX_SERVER_SCHEME",
-          "default": ""
+          "default": "$scheme  # Or force 'http'/'https"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/postgresql:/var/lib/postgresql/data"
         }
       ]
     },
@@ -1787,7 +2034,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/homepage.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "ghcr.io/gethomepage/homepage:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1798,17 +2045,26 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "HOMEPAGE_IMAGE",
           "label": "HOMEPAGE_IMAGE",
-          "default": ""
+          "default": "ghcr.io/gethomepage/homepage:latest"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "./config"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./config}/homepage:/app/config # Make sure your local config directory exists"
+        },
+        {
+          "container": "/var/run/docker.sock # (optional) For docker integrations"
         }
       ]
     },
@@ -1821,7 +2077,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/piwigo.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "lscr.io/linuxserver/piwigo:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1832,220 +2088,41 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data #HELP: volpath"
         },
         {
           "name": "PIWIGO_IMAGE",
           "label": "PIWIGO_IMAGE",
-          "default": ""
+          "default": "lscr.io/linuxserver/piwigo:latest"
         },
         {
           "name": "PIWIGO_PUID",
           "label": "PIWIGO_PUID",
-          "default": ""
+          "default": "1000"
         },
         {
           "name": "PIWIGO_PGID",
           "label": "PIWIGO_PGID",
-          "default": ""
+          "default": "1000"
         }
-      ]
-    },
-    {
-      "type": 1,
-      "title": "portainer",
-      "description": "portainer description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
       ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/portainer.png",
-      "image": "portainer/portainer-ce:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "portainer/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
+      "ports": [],
+      "volumes": [
         {
-          "name": "PORTAINER_IMAGE",
-          "label": "PORTAINER_IMAGE",
-          "default": ""
+          "container": "-./data}/piwigo:/config"
         },
         {
-          "name": "PORTAINER_AGENT_IMAGE",
-          "label": "PORTAINER_AGENT_IMAGE",
-          "default": ""
-        },
-        {
-          "name": "AGENT_SECRET",
-          "label": "AGENT_SECRET",
-          "default": ""
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": ""
-        },
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": ""
-        }
-      ]
-    },
-    {
-      "type": 1,
-      "title": "openarchiver",
-      "description": "openarchiver description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/openarchiver.png",
-      "image": "logiclabshq/open-archiver:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "openarchiver/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": ""
-        },
-        {
-          "name": "NODE_ENV",
-          "label": "NODE_ENV",
-          "default": ""
-        },
-        {
-          "name": "PORT_BACKEND",
-          "label": "PORT_BACKEND",
-          "default": ""
-        },
-        {
-          "name": "PORT_FRONTEND",
-          "label": "PORT_FRONTEND",
-          "default": ""
-        },
-        {
-          "name": "SYNC_FREQUENCY",
-          "label": "SYNC_FREQUENCY",
-          "default": ""
-        },
-        {
-          "name": "POSTGRES_DB",
-          "label": "POSTGRES_DB",
-          "default": ""
-        },
-        {
-          "name": "POSTGRES_USER",
-          "label": "POSTGRES_USER",
-          "default": ""
-        },
-        {
-          "name": "POSTGRES_PASSWORD",
-          "label": "POSTGRES_PASSWORD",
-          "default": ""
-        },
-        {
-          "name": "DATABASE_URL",
-          "label": "DATABASE_URL",
-          "default": ""
-        },
-        {
-          "name": "MEILI_MASTER_KEY",
-          "label": "MEILI_MASTER_KEY",
-          "default": ""
-        },
-        {
-          "name": "MEILI_HOST",
-          "label": "MEILI_HOST",
-          "default": ""
-        },
-        {
-          "name": "MEILI_INDEXING_BATCH",
-          "label": "MEILI_INDEXING_BATCH",
-          "default": ""
-        },
-        {
-          "name": "REDIS_HOST",
-          "label": "REDIS_HOST",
-          "default": ""
-        },
-        {
-          "name": "REDIS_PORT",
-          "label": "REDIS_PORT",
-          "default": ""
-        },
-        {
-          "name": "REDIS_PASSWORD",
-          "label": "REDIS_PASSWORD",
-          "default": ""
-        },
-        {
-          "name": "REDIS_TLS_ENABLED",
-          "label": "REDIS_TLS_ENABLED",
-          "default": ""
-        },
-        {
-          "name": "STORAGE_TYPE",
-          "label": "STORAGE_TYPE",
-          "default": ""
-        },
-        {
-          "name": "BODY_SIZE_LIMIT",
-          "label": "BODY_SIZE_LIMIT",
-          "default": ""
-        },
-        {
-          "name": "STORAGE_LOCAL_ROOT_PATH",
-          "label": "STORAGE_LOCAL_ROOT_PATH",
-          "default": ""
-        },
-        {
-          "name": "RATE_LIMIT_WINDOW_MS",
-          "label": "RATE_LIMIT_WINDOW_MS",
-          "default": ""
-        },
-        {
-          "name": "RATE_LIMIT_MAX_REQUESTS",
-          "label": "RATE_LIMIT_MAX_REQUESTS",
-          "default": ""
-        },
-        {
-          "name": "JWT_SECRET",
-          "label": "JWT_SECRET",
-          "default": ""
-        },
-        {
-          "name": "JWT_EXPIRES_IN",
-          "label": "JWT_EXPIRES_IN",
-          "default": ""
-        },
-        {
-          "name": "ENCRYPTION_KEY",
-          "label": "ENCRYPTION_KEY",
-          "default": ""
-        },
-        {
-          "name": "TIKA_URL",
-          "label": "TIKA_URL",
-          "default": ""
+          "container": "-./data}/gallery:/gallery"
         }
       ]
     },
@@ -2058,8 +2135,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/filebrowser.png",
-      "image": "gtstef/filebrowser:latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "gtstef/filebrowser:latest #0.8.7-beta",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "filebrowser/docker-compose.yml",
@@ -2069,32 +2146,44 @@
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": ""
+          "default": "./config"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "FILEBROWSER_IMAGE",
           "label": "FILEBROWSER_IMAGE",
-          "default": ""
+          "default": "gtstef/filebrowser:latest #0.8.7-beta"
         },
         {
           "name": "FILEBROWSER_CONFIG",
           "label": "FILEBROWSER_CONFIG",
-          "default": ""
+          "default": "/home/filebrowser/config.yaml"
         },
         {
           "name": "FILEBROWSER_ADMIN_PASSWORD",
           "label": "FILEBROWSER_ADMIN_PASSWORD",
-          "default": ""
+          "default": "admin"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/storage:/srv"
+        },
+        {
+          "container": "-./data}/filebrowser/root:/home/filebrowser/data"
+        },
+        {
+          "container": "-./config}/config.yaml:/home/filebrowser/config.yaml"
         }
       ]
     },
@@ -2107,7 +2196,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/firefly.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "fireflyiii/core:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2118,22 +2207,28 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/docker/vol/portainer-data #HELP: volpath"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "FIREFLY_IMAGE",
           "label": "FIREFLY_IMAGE",
-          "default": ""
+          "default": "fireflyiii/core:latest"
         },
         {
           "name": "FIREFLY_IMPORTER_IMAGE",
           "label": "FIREFLY_IMPORTER_IMAGE",
-          "default": ""
+          "default": "fireflyiii/data-importer:latest"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/firefly:/var/www/html/storage/upload"
         }
       ]
     },
@@ -2157,22 +2252,52 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "JELLYFIN_IMAGE",
           "label": "JELLYFIN_IMAGE",
-          "default": ""
+          "default": "jellyfin/jellyfin:latest"
         },
         {
           "name": "JELLYFIN_PublishedServerUrl",
           "label": "JELLYFIN_PublishedServerUrl",
-          "default": ""
+          "default": "http://localhost:8096"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/jellyfin-cache:/cache"
+        },
+        {
+          "container": "-./data}/jellyfin-config:/config"
+        },
+        {
+          "container": "-./data}/jellyfin-content/books:/books"
+        },
+        {
+          "container": "-./data}/jellyfin-content/media:/media"
+        },
+        {
+          "container": "-./data}/jellyfin-content/movies:/movies"
+        },
+        {
+          "container": "-./data}/jellyfin-content/music:/music"
+        },
+        {
+          "container": "-./data}/jellyfin-content/musicvideos:/musicvideos"
+        },
+        {
+          "container": "-./data}/jellyfin-content/photos:/photos"
+        },
+        {
+          "container": "-./data}/jellyfin-content/shows:/shows"
         }
       ]
     },
@@ -2185,14 +2310,29 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/mailu.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "mailu/mailu:2024.06",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "mailu/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 587,
+          "published": 587,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/var/mailu"
+        },
+        {
+          "container": "/etc/mailu/domain.conf"
+        }
+      ]
     },
     {
       "type": 1,
@@ -2203,8 +2343,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/minio.png",
-      "image": "quay.io/minio/minio",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "quay.io/minio/minio:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "minio/docker-compose.yml",
@@ -2214,42 +2354,48 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data/ #HELP: volpath"
         },
         {
           "name": "MINIO_IMAGE",
           "label": "MINIO_IMAGE",
-          "default": ""
+          "default": "quay.io/minio/minio:latest"
         },
         {
           "name": "MINIO_ROOT_USER",
           "label": "MINIO_ROOT_USER",
-          "default": ""
+          "default": "administrator"
         },
         {
           "name": "MINIO_ROOT_PASSWORD",
           "label": "MINIO_ROOT_PASSWORD",
-          "default": ""
+          "default": "01234567890123456"
         },
         {
           "name": "MINIO_SERVER_URL",
           "label": "MINIO_SERVER_URL",
-          "default": ""
+          "default": "https://s3.example.com"
         },
         {
           "name": "MINIO_BROWSER_REDIRECT_URL",
           "label": "MINIO_BROWSER_REDIRECT_URL",
-          "default": ""
+          "default": "https://console.s3.example.com"
         },
         {
           "name": "MINO_CONSOLE_SECURE_TLS_REDIRECT",
           "label": "MINO_CONSOLE_SECURE_TLS_REDIRECT",
-          "default": ""
+          "default": "off"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data/}/minio:/data"
         }
       ]
     },
@@ -2262,8 +2408,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/vaultwarden.png",
-      "image": "vaultwarden/server:latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "vaultwarden/server:1.31.0",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "vaultwarden/docker-compose.yml",
@@ -2273,72 +2419,78 @@
         {
           "name": "PRODDIR",
           "label": "PRODDIR",
-          "default": ""
+          "default": "/var/www/stashdomain-com/ #HELP: project_path"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/project-dir/project-name/data #HELP: volpath"
         },
         {
           "name": "VAULT_DOMAIN_NAME",
           "label": "VAULT_DOMAIN_NAME",
-          "default": ""
+          "default": "www.YourDomain.com"
         },
         {
           "name": "VAULT_IMAGE",
           "label": "VAULT_IMAGE",
-          "default": ""
+          "default": "vaultwarden/server:1.31.0"
         },
         {
           "name": "WEBSOCKET_ENABLED",
           "label": "WEBSOCKET_ENABLED",
-          "default": ""
+          "default": "true # Enable WebSocket notifications"
         },
         {
           "name": "SIGNUPS_ALLOWED",
           "label": "SIGNUPS_ALLOWED",
-          "default": ""
+          "default": "false # Disable new user signups"
         },
         {
           "name": "VAULT_ADMIN_TOKEN",
           "label": "VAULT_ADMIN_TOKEN",
-          "default": ""
+          "default": "01234567890123456790123456790123456789012345678 #HELP: gen32"
         },
         {
           "name": "SMTP_HOST",
           "label": "SMTP_HOST",
-          "default": ""
+          "default": "smtp.domain.tld"
         },
         {
           "name": "SMTP_FROM",
           "label": "SMTP_FROM",
-          "default": ""
+          "default": "vaultwarden@domain.tld"
         },
         {
           "name": "SMTP_PORT",
           "label": "SMTP_PORT",
-          "default": ""
+          "default": "587"
         },
         {
           "name": "SMTP_SECURITY",
           "label": "SMTP_SECURITY",
-          "default": ""
+          "default": "starttls"
         },
         {
           "name": "SMTP_USERNAME",
           "label": "SMTP_USERNAME",
-          "default": ""
+          "default": "username"
         },
         {
           "name": "SMTP_PASSWORD",
           "label": "SMTP_PASSWORD",
-          "default": ""
+          "default": "password"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/vault-data:/data\""
         }
       ]
     },
@@ -2351,8 +2503,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/immich.png",
-      "image": "${IMMICH_IMAGE}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "ghcr.io/immich-app/immich-server:release",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "immich/docker-compose.yml",
@@ -2362,64 +2514,72 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "IMMICH_IMAGE",
           "label": "IMMICH_IMAGE",
-          "default": ""
+          "default": "ghcr.io/immich-app/immich-server:release"
         },
         {
           "name": "IMMICH_UPLOAD_LOCATION",
           "label": "IMMICH_UPLOAD_LOCATION",
-          "default": ""
+          "default": "./library"
         },
         {
           "name": "IMMICH_DB_DATA_LOCATION",
           "label": "IMMICH_DB_DATA_LOCATION",
-          "default": ""
+          "default": "./postgres"
         },
         {
           "name": "IMMICH_DB_HOSTNAME",
           "label": "IMMICH_DB_HOSTNAME",
-          "default": ""
+          "default": "immich-postgres"
         },
         {
           "name": "IMMICH_DB_PASSWORD",
           "label": "IMMICH_DB_PASSWORD",
-          "default": ""
+          "default": "postgres"
         },
         {
           "name": "IMMICH_DB_USERNAME",
           "label": "IMMICH_DB_USERNAME",
-          "default": ""
+          "default": "postgres"
         },
         {
           "name": "IMMICH_DB_DATABASE_NAME",
           "label": "IMMICH_DB_DATABASE_NAME",
-          "default": ""
+          "default": "immich"
         },
         {
           "name": "IMMICH_REDIS_HOSTNAME",
           "label": "IMMICH_REDIS_HOSTNAME",
-          "default": ""
+          "default": "immich-redis"
         },
         {
           "name": "REDIS_IMAGE",
           "label": "REDIS_IMAGE",
-          "default": ""
+          "default": "redis:6.2.19-alpine"
         },
         {
           "name": "POSTGRES_IMAGE",
           "label": "POSTGRES_IMAGE",
-          "default": ""
+          "default": "tensorchord/pgvecto-rs:pg14-v0.2.0"
         }
-      ]
+      ],
+      "ports": [
+        {
+          "container": 2283,
+          "published": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": []
     },
     {
       "type": 1,
@@ -2430,8 +2590,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/nginx-proxy-manager.png",
-      "image": "jc21/nginx-proxy-manager:latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "jc21/nginx-proxy-manager:2.11.3",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "nginx-proxy-manager/docker-compose.yml",
@@ -2441,17 +2601,42 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/docker/vol/portainer-data #HELP: volpath"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "PROXY_IMAGE",
           "label": "PROXY_IMAGE",
-          "default": ""
+          "default": "jc21/nginx-proxy-manager:2.11.3"
+        }
+      ],
+      "ports": [
+        {
+          "container": 80,
+          "published": 80,
+          "protocol": "tcp"
+        },
+        {
+          "container": 81,
+          "published": 81,
+          "protocol": "tcp"
+        },
+        {
+          "container": 443,
+          "published": 443,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/proxy/data:/data\""
+        },
+        {
+          "container": "-./data}/proxy/letsencrypt:/etc/letsencrypt\""
         }
       ]
     },
@@ -2464,25 +2649,37 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/docmost.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "docmost/docmost:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "docmost/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 3000,
+          "published": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/app/data/storage"
+        }
+      ]
     },
     {
       "type": 1,
       "title": "bookstack",
-      "description": "bookstack description to come",
+      "description": "BookStack is a self-hosted wiki platform for organizing and storing documentation in a simple, book/chapter/page structure. This Docker Compose stack allows easy deployment with persistent storage.",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/bookstack.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "solidnerd/bookstack:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2491,64 +2688,92 @@
       },
       "env": [
         {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": ""
-        },
-        {
-          "name": "VOL_CONFIG_PATH",
-          "label": "VOL_CONFIG_PATH",
-          "default": ""
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": ""
-        },
-        {
           "name": "BOOKSTACK_APP_KEY",
           "label": "BOOKSTACK_APP_KEY",
-          "default": ""
+          "default": "APP_KEY"
         },
         {
           "name": "BOOKSTACK_APP_TIMEZONE",
           "label": "BOOKSTACK_APP_TIMEZONE",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "BOOKSTACK_APP_URL",
           "label": "BOOKSTACK_APP_URL",
-          "default": ""
+          "default": "http://localhost:8080"
         },
         {
           "name": "BOOKSTACK_DB_DATABASE",
           "label": "BOOKSTACK_DB_DATABASE",
-          "default": ""
+          "default": "bookstack"
         },
         {
           "name": "BOOKSTACK_DB_HOST",
           "label": "BOOKSTACK_DB_HOST",
-          "default": ""
+          "default": "mariadb:3306"
         },
         {
           "name": "BOOKSTACK_DB_PASSWORD",
           "label": "BOOKSTACK_DB_PASSWORD",
-          "default": ""
+          "default": "dbpass"
         },
         {
           "name": "BOOKSTACK_DB_USERNAME",
           "label": "BOOKSTACK_DB_USERNAME",
-          "default": ""
+          "default": "dbuser"
         },
         {
           "name": "BOOKSTACK_IMAGE",
           "label": "BOOKSTACK_IMAGE",
-          "default": ""
+          "default": "solidnerd/bookstack:latest"
         },
         {
           "name": "BOOKSTACK_REVISION_LIMIT",
           "label": "BOOKSTACK_REVISION_LIMIT",
-          "default": ""
+          "default": "false"
+        },
+        {
+          "name": "MARIADB_IMAGE",
+          "label": "MARIADB_IMAGE",
+          "default": "mariadb:latest"
+        },
+        {
+          "name": "MARIADB_MARIADB_DATABASE",
+          "label": "MARIADB_MARIADB_DATABASE",
+          "default": "bookstack"
+        },
+        {
+          "name": "MARIADB_MARIADB_ROOT_PASSWORD",
+          "label": "MARIADB_MARIADB_ROOT_PASSWORD",
+          "default": "ChangeThisPassword"
+        },
+        {
+          "name": "MARIADB_MARIADB_USER",
+          "label": "MARIADB_MARIADB_USER",
+          "default": "dbuser"
+        },
+        {
+          "name": "MARIADB_MARIADB_PASSWORD",
+          "label": "MARIADB_MARIADB_PASSWORD",
+          "default": "AlsoChangeThisPassword"
+        }
+      ],
+      "ports": [
+        {
+          "container": 8080,
+          "published": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/usr/local/etc/php/php.ini"
+        },
+        {
+          "container": "/var/www/bookstack/storage/uploads"
+        },
+        {
+          "container": "/var/www/bookstack/public/uploads"
         }
       ]
     },
@@ -2561,7 +2786,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/gitea.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "gitea/gitea:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2572,37 +2797,43 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data #HELP: volpath"
         },
         {
           "name": "GITEA_IMAGE",
           "label": "GITEA_IMAGE",
-          "default": ""
+          "default": "gitea/gitea:latest"
         },
         {
           "name": "GITEA_DB_HOST",
           "label": "GITEA_DB_HOST",
-          "default": ""
+          "default": "gitea-db:3306"
         },
         {
           "name": "GITEA_SSH_PORT",
           "label": "GITEA_SSH_PORT",
-          "default": ""
+          "default": "22"
         },
         {
           "name": "GITEA_WEB_PORT",
           "label": "GITEA_WEB_PORT",
-          "default": ""
+          "default": "3000"
         },
         {
           "name": "GITEA_SSH_DOMAIN",
           "label": "GITEA_SSH_DOMAIN",
-          "default": ""
+          "default": "example.com"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/gitea:/data"
         }
       ]
     },
@@ -2615,8 +2846,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/heimdall.png",
-      "image": "${HEIMDALL_IMAGE}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "linuxserver/heimdall:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "heimdall/docker-compose.yml",
@@ -2626,17 +2857,29 @@
         {
           "name": "HEIMDALL_IMAGE",
           "label": "HEIMDALL_IMAGE",
-          "default": ""
+          "default": "linuxserver/heimdall:latest"
         },
         {
           "name": "HEIMDALL_PGID",
           "label": "HEIMDALL_PGID",
-          "default": ""
+          "default": "1000"
         },
         {
           "name": "HEIMDALL_PUID",
           "label": "HEIMDALL_PUID",
-          "default": ""
+          "default": "1000"
+        }
+      ],
+      "ports": [
+        {
+          "container": 80,
+          "published": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/heimdall:/config"
         }
       ]
     },
@@ -2649,7 +2892,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/ntfy.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "binwiederhier/ntfy",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2660,57 +2903,69 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "UTC"
         },
         {
           "name": "NTFY_IMAGE",
           "label": "NTFY_IMAGE",
-          "default": ""
+          "default": "binwiederhier/ntfy"
         },
         {
           "name": "NTFY_BASE_URL",
           "label": "NTFY_BASE_URL",
-          "default": ""
+          "default": "http://localhost"
         },
         {
           "name": "NTFY_CACHE_FILE",
           "label": "NTFY_CACHE_FILE",
-          "default": ""
+          "default": "/var/lib/ntfy/cache.db"
         },
         {
           "name": "NTFY_AUTH_FILE",
           "label": "NTFY_AUTH_FILE",
-          "default": ""
+          "default": "/var/lib/ntfy/auth.db"
         },
         {
           "name": "NTFY_AUTH_DEFAULT_ACCESS",
           "label": "NTFY_AUTH_DEFAULT_ACCESS",
-          "default": ""
+          "default": "deny-all"
         },
         {
           "name": "NTFY_BEHIND_PROXY",
           "label": "NTFY_BEHIND_PROXY",
-          "default": ""
+          "default": "true"
         },
         {
           "name": "NTFY_ATTACHMENT_CACHE_DIR",
           "label": "NTFY_ATTACHMENT_CACHE_DIR",
-          "default": ""
+          "default": "/var/lib/ntfy/attachments"
         },
         {
           "name": "NTFY_ENABLE_LOGIN",
           "label": "NTFY_ENABLE_LOGIN",
-          "default": ""
+          "default": "true"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/ntfy-cache/ntfy:/var/cache/ntfy"
+        },
+        {
+          "container": "-./data}/ntfy:/etc/ntfy"
+        },
+        {
+          "container": "-./data}/ntfy-var:/var/lib/ntfy"
         }
       ]
     },
@@ -2723,7 +2978,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/suitecrm.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "bitnami/suitecrm:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2734,27 +2989,39 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "/data"
         },
         {
           "name": "SUITECRM_IMAGE",
           "label": "SUITECRM_IMAGE",
-          "default": ""
+          "default": "bitnami/suitecrm:latest"
         },
         {
           "name": "SUITECRM_DB_PASSWORD",
           "label": "SUITECRM_DB_PASSWORD",
-          "default": ""
+          "default": "ThisPasswordNeedsToChange"
         },
         {
           "name": "SUITECRM_USER",
           "label": "SUITECRM_USER",
-          "default": ""
+          "default": "suiteuser"
         },
         {
           "name": "SUITECRM_PASS",
           "label": "SUITECRM_PASS",
-          "default": ""
+          "default": "sweetpassword"
+        }
+      ],
+      "ports": [
+        {
+          "container": 8080,
+          "published": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data}/suitecrm_data:/bitnami/suitecrm"
         }
       ]
     },
@@ -2767,7 +3034,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/rocketchat.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "rocketchat/rocket.chat:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2778,19 +3045,21 @@
         {
           "name": "PREFIX",
           "label": "PREFIX",
-          "default": ""
+          "default": "p1"
         },
         {
           "name": "ROCKET_DOMAIN_NAME",
           "label": "ROCKET_DOMAIN_NAME",
-          "default": ""
+          "default": "chat.nickyeoman.com"
         },
         {
           "name": "ROCKETCHAT_V",
           "label": "ROCKETCHAT_V",
-          "default": ""
+          "default": "3.1.1"
         }
-      ]
+      ],
+      "ports": [],
+      "volumes": []
     },
     {
       "type": 1,
@@ -2801,14 +3070,32 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/dockge.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "louislam/dockge:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "dockge/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 5001,
+          "published": 5001,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/var/run/docker.sock"
+        },
+        {
+          "container": "/app/data"
+        },
+        {
+          "container": "/opt/stacks"
+        }
+      ]
     },
     {
       "type": 1,
@@ -2819,8 +3106,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/jellyseerr.png",
-      "image": "${JELLYSEERR_IMAGE}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "ghcr.io/hotio/jellyseerr:release",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "jellyseerr/docker-compose.yml",
@@ -2830,17 +3117,29 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data/jellyseerr/config"
         },
         {
           "name": "JELLYSEERR_IMAGE",
           "label": "JELLYSEERR_IMAGE",
-          "default": ""
+          "default": "ghcr.io/hotio/jellyseerr:release"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
+        }
+      ],
+      "ports": [
+        {
+          "container": 5055,
+          "published": 5055,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/config"
         }
       ]
     },
@@ -2853,8 +3152,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/invoiceninja.png",
-      "image": "invoiceninja/invoiceninja-debian:${TAG:-latest}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "invoiceninja/invoiceninja-debian:-latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "invoiceninja/docker-compose.yml",
@@ -2864,182 +3163,182 @@
         {
           "name": "APP_URL",
           "label": "APP_URL",
-          "default": ""
+          "default": "http://localhost:8000"
         },
         {
           "name": "APP_KEY",
           "label": "APP_KEY",
-          "default": ""
+          "default": "base64:IIEkhdQrjEFFIUAFAZMXBlPBM0mwLb76MC4txj/tu4g="
         },
         {
           "name": "APP_ENV",
           "label": "APP_ENV",
-          "default": ""
+          "default": "production"
         },
         {
           "name": "APP_DEBUG",
           "label": "APP_DEBUG",
-          "default": ""
+          "default": "true"
         },
         {
           "name": "REQUIRE_HTTPS",
           "label": "REQUIRE_HTTPS",
-          "default": ""
+          "default": "false"
         },
         {
           "name": "PHANTOMJS_PDF_GENERATION",
           "label": "PHANTOMJS_PDF_GENERATION",
-          "default": ""
+          "default": "false"
         },
         {
           "name": "PDF_GENERATOR",
           "label": "PDF_GENERATOR",
-          "default": ""
+          "default": "snappdf"
         },
         {
           "name": "TRUSTED_PROXIES",
           "label": "TRUSTED_PROXIES",
-          "default": ""
+          "default": "*"
         },
         {
           "name": "CACHE_DRIVER",
           "label": "CACHE_DRIVER",
-          "default": ""
+          "default": "redis"
         },
         {
           "name": "QUEUE_CONNECTION",
           "label": "QUEUE_CONNECTION",
-          "default": ""
+          "default": "redis"
         },
         {
           "name": "SESSION_DRIVER",
           "label": "SESSION_DRIVER",
-          "default": ""
+          "default": "redis"
         },
         {
           "name": "REDIS_HOST",
           "label": "REDIS_HOST",
-          "default": ""
+          "default": "redis"
         },
         {
           "name": "REDIS_PASSWORD",
           "label": "REDIS_PASSWORD",
-          "default": ""
+          "default": "null"
         },
         {
           "name": "REDIS_PORT",
           "label": "REDIS_PORT",
-          "default": ""
+          "default": "6379"
         },
         {
           "name": "FILESYSTEM_DISK",
           "label": "FILESYSTEM_DISK",
-          "default": ""
+          "default": "debian_docker"
         },
         {
           "name": "DB_HOST",
           "label": "DB_HOST",
-          "default": ""
+          "default": "mysql"
         },
         {
           "name": "DB_PORT",
           "label": "DB_PORT",
-          "default": ""
+          "default": "3306"
         },
         {
           "name": "DB_DATABASE",
           "label": "DB_DATABASE",
-          "default": ""
+          "default": "ninja"
         },
         {
           "name": "DB_USERNAME",
           "label": "DB_USERNAME",
-          "default": ""
+          "default": "ninja"
         },
         {
           "name": "DB_PASSWORD",
           "label": "DB_PASSWORD",
-          "default": ""
+          "default": "ninja"
         },
         {
           "name": "DB_ROOT_PASSWORD",
           "label": "DB_ROOT_PASSWORD",
-          "default": ""
+          "default": "ninjaAdm1nPassword"
         },
         {
           "name": "DB_CONNECTION",
           "label": "DB_CONNECTION",
-          "default": ""
+          "default": "mysql"
         },
         {
           "name": "IN_USER_EMAIL",
           "label": "IN_USER_EMAIL",
-          "default": ""
+          "default": "admin@example.com"
         },
         {
           "name": "IN_PASSWORD",
           "label": "IN_PASSWORD",
-          "default": ""
+          "default": "changeme!"
         },
         {
           "name": "MAIL_MAILER",
           "label": "MAIL_MAILER",
-          "default": ""
+          "default": "log"
         },
         {
           "name": "MAIL_HOST",
           "label": "MAIL_HOST",
-          "default": ""
+          "default": "smtp.mailtrap.io"
         },
         {
           "name": "MAIL_PORT",
           "label": "MAIL_PORT",
-          "default": ""
+          "default": "2525"
         },
         {
           "name": "MAIL_USERNAME",
           "label": "MAIL_USERNAME",
-          "default": ""
+          "default": "null"
         },
         {
           "name": "MAIL_PASSWORD",
           "label": "MAIL_PASSWORD",
-          "default": ""
+          "default": "null"
         },
         {
           "name": "MAIL_ENCRYPTION",
           "label": "MAIL_ENCRYPTION",
-          "default": ""
+          "default": "null"
         },
         {
           "name": "MAIL_FROM_ADDRESS",
           "label": "MAIL_FROM_ADDRESS",
-          "default": ""
+          "default": "user@example.com"
         },
         {
           "name": "MAIL_FROM_NAME",
           "label": "MAIL_FROM_NAME",
-          "default": ""
+          "default": "Self Hosted User"
         },
         {
           "name": "MYSQL_ROOT_PASSWORD",
           "label": "MYSQL_ROOT_PASSWORD",
-          "default": ""
+          "default": "ninjaAdm1nPassword"
         },
         {
           "name": "MYSQL_USER",
           "label": "MYSQL_USER",
-          "default": ""
+          "default": "ninja"
         },
         {
           "name": "MYSQL_PASSWORD",
           "label": "MYSQL_PASSWORD",
-          "default": ""
+          "default": "ninja"
         },
         {
           "name": "MYSQL_DATABASE",
           "label": "MYSQL_DATABASE",
-          "default": ""
+          "default": "ninja"
         },
         {
           "name": "NORDIGEN_SECRET_ID",
@@ -3054,14 +3353,22 @@
         {
           "name": "IS_DOCKER",
           "label": "IS_DOCKER",
-          "default": ""
+          "default": "true"
         },
         {
           "name": "SCOUT_DRIVER",
           "label": "SCOUT_DRIVER",
-          "default": ""
+          "default": "null"
         }
-      ]
+      ],
+      "ports": [
+        {
+          "container": 80,
+          "published": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": []
     },
     {
       "type": 1,
@@ -3072,8 +3379,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/prowlarr.png",
-      "image": "${PROWLARR_IMAGE}",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "ghcr.io/hotio/prowlarr:release",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "prowlarr/docker-compose.yml",
@@ -3083,17 +3390,29 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data/prowlarr/config"
         },
         {
           "name": "PROWLARR_IMAGE",
           "label": "PROWLARR_IMAGE",
-          "default": ""
+          "default": "ghcr.io/hotio/prowlarr:release"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
+        }
+      ],
+      "ports": [
+        {
+          "container": 9696,
+          "published": 9696,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "-./data/prowlarr/config}:/config\""
         }
       ]
     },
@@ -3106,8 +3425,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/stashapp.png",
-      "image": "stashapp/stash:latest",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "stashapp/stash:latest # https://hub.docker.com/r/stashapp/stash/tags",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "stashapp/docker-compose.yml",
@@ -3117,32 +3436,53 @@
         {
           "name": "STASHAPP_IMAGE",
           "label": "STASHAPP_IMAGE",
-          "default": ""
+          "default": "stashapp/stash:latest # https://hub.docker.com/r/stashapp/stash/tags"
         },
         {
           "name": "STASHAPP_STASH_CACHE",
           "label": "STASHAPP_STASH_CACHE",
-          "default": ""
+          "default": "/cache/"
         },
         {
           "name": "STASHAPP_STASH_DOMAIN_NAME",
           "label": "STASHAPP_STASH_DOMAIN_NAME",
-          "default": ""
+          "default": "stash.yourdomain.ca"
         },
         {
           "name": "STASHAPP_STASH_GENERATED",
           "label": "STASHAPP_STASH_GENERATED",
-          "default": ""
+          "default": "/generated/"
         },
         {
           "name": "STASHAPP_STASH_METADATA",
           "label": "STASHAPP_STASH_METADATA",
-          "default": ""
+          "default": "/metadata/"
         },
         {
           "name": "STASHAPP_STASH_STASH",
           "label": "STASHAPP_STASH_STASH",
-          "default": ""
+          "default": "/data/"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/stash/cache:/cache"
+        },
+        {
+          "container": "-./data}/stash/generated:/generated"
+        },
+        {
+          "container": "-./data}/stash/metadata:/metadata"
+        },
+        {
+          "container": "-./data}/stash/root:/root"
+        },
+        {
+          "container": "-./data}/stash/video:/data"
+        },
+        {
+          "container": "/etc/localtime:ro"
         }
       ]
     },
@@ -3155,8 +3495,8 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/archivebox.png",
-      "image": "archivebox/archivebox:stable",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "image": "archivebox/archivebox:sha-1d49bee",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "archivebox/docker-compose.yml",
@@ -3166,17 +3506,23 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "ARCHIVEBOX_IMAGE",
           "label": "ARCHIVEBOX_IMAGE",
-          "default": ""
+          "default": "archivebox/archivebox:sha-1d49bee"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/archive-data:/data"
         }
       ]
     },
@@ -3189,7 +3535,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/poste.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "analogic/poste.io",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3200,27 +3546,69 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data"
         },
         {
           "name": "TZ",
           "label": "TZ",
-          "default": ""
+          "default": "America/Vancouver"
         },
         {
           "name": "COMPOSE_PROJECT_NAME",
           "label": "COMPOSE_PROJECT_NAME",
-          "default": ""
+          "default": "poste"
         },
         {
           "name": "POSTE_PUBLIC_HOSTNAME",
           "label": "POSTE_PUBLIC_HOSTNAME",
-          "default": ""
+          "default": "yourDomain.com"
+        }
+      ],
+      "ports": [
+        {
+          "container": 25,
+          "published": 25,
+          "protocol": "tcp"
+        },
+        {
+          "container": 110,
+          "published": 110,
+          "protocol": "tcp"
+        },
+        {
+          "container": 143,
+          "published": 143,
+          "protocol": "tcp"
+        },
+        {
+          "container": 587,
+          "published": 587,
+          "protocol": "tcp"
+        },
+        {
+          "container": 993,
+          "published": 993,
+          "protocol": "tcp"
+        },
+        {
+          "container": 995,
+          "published": 995,
+          "protocol": "tcp"
+        },
+        {
+          "container": 4190,
+          "published": 4190,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/data"
         }
       ]
     },
@@ -3233,7 +3621,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/nextcloud.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "nextcloud:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3244,37 +3632,43 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": ""
+          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": ""
+          "default": "./data #HELP: volpath"
         },
         {
           "name": "NEXTCLOUD_IMAGE",
           "label": "NEXTCLOUD_IMAGE",
-          "default": ""
+          "default": "nextcloud:latest"
         },
         {
           "name": "NEXTCLOUD_DB_PASSWORD",
           "label": "NEXTCLOUD_DB_PASSWORD",
-          "default": ""
+          "default": "password"
         },
         {
           "name": "NEXTCLOUD_DB",
           "label": "NEXTCLOUD_DB",
-          "default": ""
+          "default": "nextcloud"
         },
         {
           "name": "NEXTCLOUD_DB_USER",
           "label": "NEXTCLOUD_DB_USER",
-          "default": ""
+          "default": "nextcloud"
         },
         {
           "name": "NEXTCLOUD_DB_HOST",
           "label": "NEXTCLOUD_DB_HOST",
-          "default": ""
+          "default": "nextcloud-db"
+        }
+      ],
+      "ports": [],
+      "volumes": [
+        {
+          "container": "-./data}/nextcloud:/var/www/html"
         }
       ]
     },
@@ -3287,14 +3681,26 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/hedgedoc.png",
+      "logo": "https://i.4lt.ca/cookbooks/default.png",
       "image": "ghcr.io/hedgedoc/hedgedoc:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "hedgedoc/docker-compose.yml",
         "stackfile_plain": false
       },
-      "env": []
+      "env": [],
+      "ports": [
+        {
+          "container": 3000,
+          "published": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/hedgedoc/data"
+        }
+      ]
     }
   ]
 }
