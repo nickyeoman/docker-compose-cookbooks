@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import json
+import re
 from pathlib import Path
 
 # ---------------------------------------------------------
@@ -33,7 +34,6 @@ def extract_overview(readme_path: Path) -> str:
 
     return " ".join(overview)
 
-
 # ---------------------------------------------------------
 # Logo URL mapping
 # ---------------------------------------------------------
@@ -41,9 +41,9 @@ def find_logo_url(dir_path: Path) -> str:
     name = dir_path.name
     return f"https://i.4lt.ca/cookbook/{name}.png"
 
-
 # ---------------------------------------------------------
 # Parse first image name from docker-compose.yml
+# Handles Bash-style defaults like ${VAR:-default}
 # ---------------------------------------------------------
 def parse_image(compose_path: Path) -> str:
     if not compose_path.exists():
@@ -51,12 +51,14 @@ def parse_image(compose_path: Path) -> str:
 
     for line in compose_path.read_text().splitlines():
         if "image:" in line:
-            # strip inline quotes and whitespace
-            parts = line.split("image:")
-            image = parts[1].strip().strip('"').strip("'")
+            image = line.split("image:", 1)[1].strip().strip('"').strip("'")
+            # Handle Bash-style ${VAR:-default} -> default
+            match = re.match(r"\$\{[^:]+:-([^}]+)\}", image)
+            if match:
+                image = match.group(1)
             return image
-    return ""
 
+    return ""
 
 # ---------------------------------------------------------
 # Parse environment variables from sample.env or env-sample
@@ -83,7 +85,6 @@ def parse_env_vars(dir_path: Path):
                 env_list.append(key)
 
     return env_list
-
 
 # ---------------------------------------------------------
 # Build template object for a stack directory
@@ -122,8 +123,6 @@ def generate_template_object(dir_path: Path):
         "env": env_entries
     }
 
-
-
 # ---------------------------------------------------------
 # Main script logic
 # ---------------------------------------------------------
@@ -142,7 +141,6 @@ def main():
 
     OUTPUT_FILE.write_text(json.dumps(templates, indent=2))
     print(f"Generated {OUTPUT_FILE} with templates for Docker Compose stacks.")
-
 
 if __name__ == "__main__":
     main()

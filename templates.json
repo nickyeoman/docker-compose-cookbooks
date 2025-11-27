@@ -9,7 +9,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/phpcontainer.png",
-    "image": "${PHPCONTAINER_IMAGE:-4lights/phpcontainer:latest}",
+    "image": "4lights/phpcontainer:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "phpcontainer/docker-compose.yml",
@@ -58,7 +58,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/wallabag.png",
-    "image": "${WALLABAG_IMAGE:-wallabag/wallabag:latest}",
+    "image": "wallabag/wallabag:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "wallabag/docker-compose.yml",
@@ -157,7 +157,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/thunderbird.png",
-    "image": "${THUNDERBIRD_IMAGE:-jlesage/thunderbird}",
+    "image": "jlesage/thunderbird",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "thunderbird/docker-compose.yml",
@@ -201,7 +201,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/mariadb.png",
-    "image": "${MARIADB_IMAGE:-mariadb:latest}",
+    "image": "mariadb:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "mariadb/docker-compose.yml",
@@ -373,7 +373,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/phpmyadmin.png",
-    "image": "${PHPMYADMIN_IMAGE:-phpmyadmin/phpmyadmin:latest}",
+    "image": "phpmyadmin/phpmyadmin:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "phpmyadmin/docker-compose.yml",
@@ -630,7 +630,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/nocodb.png",
-    "image": "${NOCODB_IMAGE:-nocodb/nocodb:latest}",
+    "image": "nocodb/nocodb:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "nocodb/docker-compose.yml",
@@ -837,7 +837,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/n8n.png",
-    "image": "${N8N_IMAGE:-n8nio/n8n:latest}",
+    "image": "n8nio/n8n:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "n8n/docker-compose.yml",
@@ -933,7 +933,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/mealie.png",
-    "image": "${MEALIE_IMAGE:-hkotel/mealie:latest}",
+    "image": "hkotel/mealie:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "mealie/docker-compose.yml",
@@ -1040,7 +1040,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/redis.png",
-    "image": "${REDIS_IMAGE:-redis:alpine}",
+    "image": "redis:alpine",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "redis/docker-compose.yml",
@@ -1069,7 +1069,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/duplicati.png",
-    "image": "${DUPLICATI_IMAGE:-duplicati/duplicati:latest}",
+    "image": "duplicati/duplicati:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "duplicati/docker-compose.yml",
@@ -1113,7 +1113,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/qbittorrent.png",
-    "image": "${QBT_IMAGE:-trigus42/qbittorrentvpn:latest}",
+    "image": "trigus42/qbittorrentvpn:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "qbittorrent/docker-compose.yml",
@@ -1186,7 +1186,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/monica.png",
-    "image": "${MONICA_IMAGE:-latest}",
+    "image": "latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "monica/docker-compose.yml",
@@ -1297,7 +1297,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/lubelogger.png",
-    "image": "${LUBELOGR_IMAGE_NAME:-ghcr.io/hargata/lubelogger:latest}",
+    "image": "ghcr.io/hargata/lubelogger:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "lubelogger/docker-compose.yml",
@@ -1331,7 +1331,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/code-server.png",
-    "image": "${CODE-SERVER_IMAGE:-null}",
+    "image": "null",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "code-server/docker-compose.yml",
@@ -1398,7 +1398,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/handbrake.png",
-    "image": "${HANDBRAKE_IMAGE:-jlesage/handbrake:latest}",
+    "image": "jlesage/handbrake:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "handbrake/docker-compose.yml",
@@ -1546,7 +1546,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/paisa.png",
-    "image": "${PAISA_IMAGE:-ananthakumaran/paisa:latest}",
+    "image": "ananthakumaran/paisa:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "paisa/docker-compose.yml",
@@ -1580,7 +1580,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/semaphore.png",
-    "image": "${SEMAPHORE_IMAGE:-semaphoreui/semaphore:latest}",
+    "image": "semaphoreui/semaphore:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "semaphore/docker-compose.yml",
@@ -1649,7 +1649,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/uptimekuma.png",
-    "image": "${UPTIMEKUMA_IMAGE:-louislam/uptime-kuma:latest}",
+    "image": "louislam/uptime-kuma:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "uptimekuma/docker-compose.yml",
@@ -1786,7 +1786,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/homepage.png",
-    "image": "${HOMEPAGE_IMAGE:-ghcr.io/gethomepage/homepage:latest}",
+    "image": "ghcr.io/gethomepage/homepage:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "homepage/docker-compose.yml",
@@ -1820,7 +1820,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/piwigo.png",
-    "image": "${PIWIGO_IMAGE:-lscr.io/linuxserver/piwigo:latest}",
+    "image": "lscr.io/linuxserver/piwigo:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "piwigo/docker-compose.yml",
@@ -1869,7 +1869,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/portainer.png",
-    "image": "${PORTAINER_IMAGE:-portainer/portainer-ce:latest}",
+    "image": "portainer/portainer-ce:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "portainer/docker-compose.yml",
@@ -2057,7 +2057,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/filebrowser.png",
-    "image": "${FILEBROWSER_IMAGE:-gtstef/filebrowser:latest}",
+    "image": "gtstef/filebrowser:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "filebrowser/docker-compose.yml",
@@ -2106,7 +2106,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/firefly.png",
-    "image": "${FIREFLY_IMAGE:-fireflyiii/core:latest}",
+    "image": "fireflyiii/core:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "firefly/docker-compose.yml",
@@ -2145,7 +2145,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/jellyfin.png",
-    "image": "${JELLYFIN_IMAGE:-jellyfin/jellyfin:latest}",
+    "image": "jellyfin/jellyfin:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "jellyfin/docker-compose.yml",
@@ -2202,7 +2202,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/minio.png",
-    "image": "${MINIO_IMAGE:-quay.io/minio/minio}",
+    "image": "quay.io/minio/minio",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "minio/docker-compose.yml",
@@ -2261,7 +2261,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/vaultwarden.png",
-    "image": "${VAULT_IMAGE:-vaultwarden/server:latest}",
+    "image": "vaultwarden/server:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "vaultwarden/docker-compose.yml",
@@ -2429,7 +2429,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/nginx-proxy-manager.png",
-    "image": "${PROXY_IMAGE:-jc21/nginx-proxy-manager:latest}",
+    "image": "jc21/nginx-proxy-manager:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "nginx-proxy-manager/docker-compose.yml",
@@ -2481,7 +2481,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/bookstack.png",
-    "image": "${BOOKSTACK_IMAGE:-solidnerd/bookstack:latest}",
+    "image": "solidnerd/bookstack:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "bookstack/docker-compose.yml",
@@ -2560,7 +2560,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/gitea.png",
-    "image": "${GITEA_IMAGE:-gitea/gitea:latest}",
+    "image": "gitea/gitea:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "gitea/docker-compose.yml",
@@ -2648,7 +2648,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/ntfy.png",
-    "image": "${NTFY_IMAGE:-binwiederhier/ntfy}",
+    "image": "binwiederhier/ntfy",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "ntfy/docker-compose.yml",
@@ -3105,7 +3105,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/stashapp.png",
-    "image": "${STASHAPP_IMAGE:-stashapp/stash:latest}",
+    "image": "stashapp/stash:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "stashapp/docker-compose.yml",
@@ -3154,7 +3154,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/archivebox.png",
-    "image": "${ARCHIVEBOX_IMAGE:-archivebox/archivebox:stable}",
+    "image": "archivebox/archivebox:stable",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "archivebox/docker-compose.yml",
@@ -3232,7 +3232,7 @@
     ],
     "platform": "linux",
     "logo": "https://i.4lt.ca/cookbook/nextcloud.png",
-    "image": "${NEXTCLOUD_IMAGE:-nextcloud:latest}",
+    "image": "nextcloud:latest",
     "repository": {
       "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
       "stackfile": "nextcloud/docker-compose.yml",
