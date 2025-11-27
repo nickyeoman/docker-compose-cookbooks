@@ -1,8 +1,0 @@
-services:
-
-  php-apache:
-    image: ${PHPCONTAINER_IMAGE:-4lights/phpcontainer:latest}
-    restart: always
-    volumes:
-      - "${VOL_PATH:-./data}/website:/data"
-      - "./config/php.ini:/usr/local/etc/php/php.ini"
