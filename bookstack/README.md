@@ -12,3 +12,15 @@ BookStack is a self-hosted wiki platform for organizing and storing documentatio
 -   **Documentation:** [Docs](https://www.bookstackapp.com/docs/)
 -   **Reverse Proxy Port:** `8080`
 
+## Notes
+
+### APP_KEY
+
+Generate an APP_KEY: echo -n "base64:"$(openssl rand -base64 32)
+
+### Default Password
+
+* Username/Email: admin@admin.com
+* Password: password
+
+After logging in, go to Settings > My Account to update the password (and email if desired). This prevents unauthorized access.
