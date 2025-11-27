@@ -47,4 +47,3 @@ networks:
   proxy:
     external: true
   internal:
-    external: true
