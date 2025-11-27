@@ -126,17 +126,15 @@ def parse_ports(compose_path: Path):
 
     return ports_list
 
-
-
 # ---------------------------------------------------------
 # Parse volumes from docker-compose.yml
-# Returns a list of dicts: {"container": container_path}
+# Returns a list of dicts: {"container": "/container/path"}
 # ---------------------------------------------------------
 def parse_volumes(compose_path: Path):
     if not compose_path.exists():
         return []
 
-    volumes_list = []
+    volumes = []
     lines = compose_path.read_text().splitlines()
     in_volumes = False
 
@@ -147,13 +145,18 @@ def parse_volumes(compose_path: Path):
             continue
         if in_volumes:
             if not stripped or not stripped.startswith("-"):
-                break
-            vol_str = stripped[1:].strip()
-            parts = vol_str.split(":", 1)
-            container_path = parts[1] if len(parts) == 2 else parts[0]
-            volumes_list.append({"container": container_path})
+                break  # end of volumes section
+            # remove "- " prefix
+            volume_str = stripped[1:].strip()
+            # split by ':' to separate host path from container path
+            parts = volume_str.split(":", 1)
+            container_path = parts[-1].strip()  # take container path only
+            # remove quotes and inline comments
+            container_path = container_path.split("#")[0].strip().strip('"').strip("'")
+            if container_path:
+                volumes.append({"container": container_path})
 
-    return volumes_list
+    return volumes
 
 # ---------------------------------------------------------
 # Parse environment variables from sample.env or env-sample

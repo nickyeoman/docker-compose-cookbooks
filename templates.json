@@ -52,10 +52,10 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/website:/data\""
+          "container": "-./data}/website:/data"
         },
         {
-          "container": "/usr/local/etc/php/php.ini\""
+          "container": "/usr/local/etc/php/php.ini"
         }
       ]
     },
@@ -160,7 +160,7 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-/tmp}/wallabag:/var/www/wallabag/web/assets/images\""
+          "container": "-/tmp}/wallabag:/var/www/wallabag/web/assets/images"
         }
       ]
     },
@@ -216,10 +216,10 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/thunderbird/config:/config:rw\""
+          "container": "-./data}/thunderbird/config:/config:rw"
         },
         {
-          "container": "-./data}/thunderbird/export:/export:rw\""
+          "container": "-./data}/thunderbird/export:/export:rw"
         }
       ]
     },
@@ -435,10 +435,10 @@
       ],
       "volumes": [
         {
-          "container": "/data # Stores raw videos"
+          "container": "/data"
         },
         {
-          "container": "/config # Custom configs"
+          "container": "/config"
         }
       ]
     },
@@ -518,10 +518,10 @@
       "ports": [],
       "volumes": [
         {
-          "container": "/etc/timezone:ro\""
+          "container": "/etc/timezone:ro"
         },
         {
-          "container": "/etc/localtime:ro\""
+          "container": "/etc/localtime:ro"
         }
       ]
     },
@@ -603,10 +603,10 @@
       ],
       "volumes": [
         {
-          "container": "/etc/pihole'"
+          "container": "/etc/pihole"
         },
         {
-          "container": "/etc/dnsmasq.d'"
+          "container": "/etc/dnsmasq.d"
         }
       ]
     },
@@ -775,7 +775,7 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/nc_data:/usr/app/data\""
+          "container": "-./data}/nc_data:/usr/app/data"
         }
       ]
     },
@@ -1333,16 +1333,16 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/qbit/config:/config\""
+          "container": "-./data}/qbit/config:/config"
         },
         {
-          "container": "-./data}/qbit/downloads:/downloads\""
+          "container": "-./data}/qbit/downloads:/downloads"
         },
         {
-          "container": "-./data}/qbit/incomplete:/incomplete\""
+          "container": "-./data}/qbit/incomplete:/incomplete"
         },
         {
-          "container": "/dev/net/tun'"
+          "container": "/dev/net/tun"
         }
       ]
     },
@@ -1486,10 +1486,10 @@
           "container": "/var/lib/mysql"
         },
         {
-          "container": "/etc/timezone:ro\""
+          "container": "/etc/timezone:ro"
         },
         {
-          "container": "/etc/localtime:ro\""
+          "container": "/etc/localtime:ro"
         }
       ]
     },
@@ -1590,7 +1590,7 @@
           "container": "-./data}/codeserver:/data"
         },
         {
-          "container": "-./data}/codeserver-config:/config\""
+          "container": "-./data}/codeserver-config:/config"
         }
       ]
     },
@@ -1720,22 +1720,22 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/handbrake/ghb-config:/config\""
+          "container": "-./data}/handbrake/ghb-config:/config"
         },
         {
-          "container": "-./data}/handbrake/storage:/storage\""
+          "container": "-./data}/handbrake/storage:/storage"
         },
         {
-          "container": "-./data}/handbrake/complete:/output\""
+          "container": "-./data}/handbrake/complete:/output"
         },
         {
-          "container": "-./data}/handbrake/watch:/watch\""
+          "container": "-./data}/handbrake/watch:/watch"
         },
         {
-          "container": "-./data}/handbrake/watch2:/watch2\""
+          "container": "-./data}/handbrake/watch2:/watch2"
         },
         {
-          "container": "-./data}/handbrake/trash:/trash\""
+          "container": "-./data}/handbrake/trash:/trash"
         }
       ]
     },
@@ -2061,10 +2061,10 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./config}/homepage:/app/config # Make sure your local config directory exists"
+          "container": "-./config}/homepage:/app/config"
         },
         {
-          "container": "/var/run/docker.sock # (optional) For docker integrations"
+          "container": "/var/run/docker.sock"
         }
       ]
     },
@@ -2490,7 +2490,7 @@
       "ports": [],
       "volumes": [
         {
-          "container": "-./data}/vault-data:/data\""
+          "container": "-./data}/vault-data:/data"
         }
       ]
     },
@@ -2633,10 +2633,10 @@
       ],
       "volumes": [
         {
-          "container": "-./data}/proxy/data:/data\""
+          "container": "-./data}/proxy/data:/data"
         },
         {
-          "container": "-./data}/proxy/letsencrypt:/etc/letsencrypt\""
+          "container": "-./data}/proxy/letsencrypt:/etc/letsencrypt"
         }
       ]
     },
@@ -3412,7 +3412,7 @@
       ],
       "volumes": [
         {
-          "container": "-./data/prowlarr/config}:/config\""
+          "container": "-./data/prowlarr/config}:/config"
         }
       ]
     },
