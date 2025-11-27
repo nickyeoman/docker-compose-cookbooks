@@ -139,7 +139,13 @@ def main():
 
         templates.append(generate_template_object(item))
 
-    OUTPUT_FILE.write_text(json.dumps(templates, indent=2))
+    # Wrap in Portainer top-level object
+    output_data = {
+        "version": "3",
+        "templates": templates
+    }
+
+    OUTPUT_FILE.write_text(json.dumps(output_data, indent=2))
     print(f"Generated {OUTPUT_FILE} with templates for Docker Compose stacks.")
 
 if __name__ == "__main__":

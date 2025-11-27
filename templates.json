@@ -1,3297 +1,3300 @@
-[
-  {
-    "type": 1,
-    "title": "phpcontainer",
-    "description": "phpcontainer Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/phpcontainer.png",
-    "image": "4lights/phpcontainer:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "phpcontainer/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "PHPCONTAINER_IMAGE",
-        "label": "PHPCONTAINER_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "wallabag",
-    "description": "Docker Hub: https://hub.docker.com/r/wallabag/wallabag Project: Docker Compose Example: https://github.com/wallabag/docker Proxy Port: 80",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/wallabag.png",
-    "image": "wallabag/wallabag:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "wallabag/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_TZ",
-        "label": "WALLABAG_TZ",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_IMAGE",
-        "label": "WALLABAG_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_DRIVER",
-        "label": "WALLABAG_DB_DRIVER",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_HOST",
-        "label": "WALLABAG_DB_HOST",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_PORT",
-        "label": "WALLABAG_DB_PORT",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_NAME",
-        "label": "WALLABAG_DB_NAME",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_USER",
-        "label": "WALLABAG_DB_USER",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_PASS",
-        "label": "WALLABAG_DB_PASS",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_CHARSET",
-        "label": "WALLABAG_DB_CHARSET",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DB_PREFIX",
-        "label": "WALLABAG_DB_PREFIX",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_MAILER_DSN",
-        "label": "WALLABAG_MAILER_DSN",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_FROM_WEMAIL",
-        "label": "WALLABAG_FROM_WEMAIL",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_DOMAIN",
-        "label": "WALLABAG_DOMAIN",
-        "default": ""
-      },
-      {
-        "name": "WALLABAG_SERVER",
-        "label": "WALLABAG_SERVER",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "thunderbird",
-    "description": "Git Hub: https://github.com/jlesage/docker-thunderbird Proxy Port: 5800",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/thunderbird.png",
-    "image": "jlesage/thunderbird",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "thunderbird/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "THUNDERBIRD_IMAGE",
-        "label": "THUNDERBIRD_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "THUNDERBIRD_WEB_AUTHENTICATION",
-        "label": "THUNDERBIRD_WEB_AUTHENTICATION",
-        "default": ""
-      },
-      {
-        "name": "THUNDERBIRD_WEB_AUTHENTICATION_USERNAME",
-        "label": "THUNDERBIRD_WEB_AUTHENTICATION_USERNAME",
-        "default": ""
-      },
-      {
-        "name": "THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD",
-        "label": "THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "THUNDERBIRD_SECURE_CONNECTION",
-        "label": "THUNDERBIRD_SECURE_CONNECTION",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "mariadb",
-    "description": "mariadb Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/mariadb.png",
-    "image": "mariadb:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "mariadb/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "MARIADB_IMAGE",
-        "label": "MARIADB_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "MARIADB_MARIADB_DATABASE",
-        "label": "MARIADB_MARIADB_DATABASE",
-        "default": ""
-      },
-      {
-        "name": "MARIADB_MARIADB_ROOT_PASSWORD",
-        "label": "MARIADB_MARIADB_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MARIADB_MARIADB_PASSWORD",
-        "label": "MARIADB_MARIADB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MARIADB_MARIADB_USER",
-        "label": "MARIADB_MARIADB_USER",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "dozzle",
-    "description": "dozzle Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/dozzle.png",
-    "image": "amir20/dozzle:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "dozzle/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "passbolt",
-    "description": "passbolt Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/passbolt.png",
-    "image": "mariadb:${DB_V}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "passbolt/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "PREFIX",
-        "label": "PREFIX",
-        "default": ""
-      },
-      {
-        "name": "DOMAIN_NAME",
-        "label": "DOMAIN_NAME",
-        "default": ""
-      },
-      {
-        "name": "MYSQL_ROOT_PASSWORD",
-        "label": "MYSQL_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MYSQL_PASSWORD",
-        "label": "MYSQL_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "DB_V",
-        "label": "DB_V",
-        "default": ""
-      },
-      {
-        "name": "PASSBOLT_V",
-        "label": "PASSBOLT_V",
-        "default": ""
-      },
-      {
-        "name": "NETWORK_NAME",
-        "label": "NETWORK_NAME",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "unami",
-    "description": "unami Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/unami.png",
-    "image": "ghcr.io/umami-software/umami:postgresql-latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "unami/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "peertube",
-    "description": "peertube Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/peertube.png",
-    "image": "chocobozzz/peertube:production-bookworm",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "peertube/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "phpmyadmin",
-    "description": "Docker Hub: https://hub.docker.com/r/phpmyadmin/phpmyadmin/tags Proxy Port: 80 Not for production, there is no password protection by default.",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/phpmyadmin.png",
-    "image": "phpmyadmin/phpmyadmin:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "phpmyadmin/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "PHPMYADMIN_IMAGE",
-        "label": "PHPMYADMIN_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "PHPMYADMIN_PMA_ARBITRARY",
-        "label": "PHPMYADMIN_PMA_ARBITRARY",
-        "default": ""
-      },
-      {
-        "name": "PHPMYADMIN_PMA_HOST",
-        "label": "PHPMYADMIN_PMA_HOST",
-        "default": ""
-      },
-      {
-        "name": "PHPMYADMIN_PMA_USER",
-        "label": "PHPMYADMIN_PMA_USER",
-        "default": ""
-      },
-      {
-        "name": "PHPMYADMIN_PMA_PASSWORD",
-        "label": "PHPMYADMIN_PMA_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "PHPMYADMIN_UPLOAD_LIMIT",
-        "label": "PHPMYADMIN_UPLOAD_LIMIT",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "activepieces",
-    "description": "activepieces Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/activepieces.png",
-    "image": "ghcr.io/activepieces/activepieces:0.44.0",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "activepieces/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "penpot",
-    "description": "penpot Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/penpot.png",
-    "image": "traefik:v2.9",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "penpot/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "pihole",
-    "description": "pihole Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/pihole.png",
-    "image": "pihole/pihole:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "pihole/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "paperless",
-    "description": "paperless Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/paperless.png",
-    "image": "docker.io/library/redis:8",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "paperless/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_IMAGE",
-        "label": "PAPERLESS_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_MARIADB_HOST",
-        "label": "PAPERLESS_MARIADB_HOST",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_MARIADB_DATABASE",
-        "label": "PAPERLESS_MARIADB_DATABASE",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_MARIADB_USER",
-        "label": "PAPERLESS_MARIADB_USER",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_MARIADB_PASSWORD",
-        "label": "PAPERLESS_MARIADB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_MARIADB_ROOT_PASSWORD",
-        "label": "PAPERLESS_MARIADB_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_SECRET_KEY",
-        "label": "PAPERLESS_SECRET_KEY",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_OCR_LANGUAGE",
-        "label": "PAPERLESS_OCR_LANGUAGE",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_URL",
-        "label": "PAPERLESS_URL",
-        "default": ""
-      },
-      {
-        "name": "PAPERLESS_CONSUMER_DELETE_DUPLICATES",
-        "label": "PAPERLESS_CONSUMER_DELETE_DUPLICATES",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "sonarr",
-    "description": "sonarr Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/sonarr.png",
-    "image": "${SONARR_IMAGE}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "sonarr/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "SONARR_IMAGE",
-        "label": "SONARR_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "nocodb",
-    "description": "Docker Hub: https://hub.docker.com/r/nocodb/nocodb Project: https://nocodb.com/ Docker Compose Example: https://github.com/nocodb/nocodb/blob/master/docker-compose/mysql/docker-compose.yml Proxy Port: 8080",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/nocodb.png",
-    "image": "nocodb/nocodb:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "nocodb/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "NOCODB_IMAGE",
-        "label": "NOCODB_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "directus",
-    "description": "directus Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/directus.png",
-    "image": "directus/directus:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "directus/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "DIRECTUS_SECRET",
-        "label": "DIRECTUS_SECRET",
-        "default": ""
-      },
-      {
-        "name": "DIRECTUS_ADMIN_EMAIL",
-        "label": "DIRECTUS_ADMIN_EMAIL",
-        "default": ""
-      },
-      {
-        "name": "DIRECTUS_ADMIN_PASSWORD",
-        "label": "DIRECTUS_ADMIN_PASSWORD",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "matomo",
-    "description": "matomo Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/matomo.png",
-    "image": "mariadb:${DB_V}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "matomo/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "PREFIX",
-        "label": "PREFIX",
-        "default": ""
-      },
-      {
-        "name": "MATOMO_DOMAIN_NAME",
-        "label": "MATOMO_DOMAIN_NAME",
-        "default": ""
-      },
-      {
-        "name": "MATOMO_MYSQL_ROOT_PASSWORD",
-        "label": "MATOMO_MYSQL_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MATOMO_MYSQL_PASSWORD",
-        "label": "MATOMO_MYSQL_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "DB_V",
-        "label": "DB_V",
-        "default": ""
-      },
-      {
-        "name": "MATOMO_V",
-        "label": "MATOMO_V",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "joomla",
-    "description": "joomla Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/joomla.png",
-    "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "joomla/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "adminer",
-    "description": "adminer Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/adminer.png",
-    "image": "adminer:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "adminer/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "ADMINER_DEFAULT_SERVER",
-        "label": "ADMINER_DEFAULT_SERVER",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "etherpad",
-    "description": "etherpad Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/etherpad.png",
-    "image": "",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "etherpad/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "n8n",
-    "description": "Docker Hub Docs: https://hub.docker.com/r/n8nio/n8n#start-n8n-in-docker Official docs docker-compose: https://docs.n8n.io/hosting/installation/server-setups/docker-compose/#5-create-docker-compose-file Docker Hub Tags: https://hub.docker.com/r/n8nio/n8n/tags Proxy Port: 5678",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/n8n.png",
-    "image": "n8nio/n8n:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "n8n/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "N8N_IMAGE",
-        "label": "N8N_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "N8N_PORT",
-        "label": "N8N_PORT",
-        "default": ""
-      },
-      {
-        "name": "N8N_HOST",
-        "label": "N8N_HOST",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "radarr",
-    "description": "radarr Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/radarr.png",
-    "image": "${RADARR_IMAGE}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "radarr/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "RADARR_IMAGE",
-        "label": "RADARR_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "posthog",
-    "description": "posthog Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/posthog.png",
-    "image": "",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "posthog/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "mealie",
-    "description": "Docker Hub: https://hub.docker.com/r/hkotel/mealie Project: https://mealie.io/ Proxy Port: 9000",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/mealie.png",
-    "image": "hkotel/mealie:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "mealie/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_IMAGE",
-        "label": "MEALIE_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_BASE_URL",
-        "label": "MEALIE_BASE_URL",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_DEFAULT_EMAIL",
-        "label": "MEALIE_DEFAULT_EMAIL",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_PGID",
-        "label": "MEALIE_PGID",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_PUID",
-        "label": "MEALIE_PUID",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_RECIPE_DISABLE_AMOUNT",
-        "label": "MEALIE_RECIPE_DISABLE_AMOUNT",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_RECIPE_DISABLE_COMMENTS",
-        "label": "MEALIE_RECIPE_DISABLE_COMMENTS",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_RECIPE_LANDSCAPE_VIEW",
-        "label": "MEALIE_RECIPE_LANDSCAPE_VIEW",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_RECIPE_PUBLIC",
-        "label": "MEALIE_RECIPE_PUBLIC",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_RECIPE_SHOW_ASSETS",
-        "label": "MEALIE_RECIPE_SHOW_ASSETS",
-        "default": ""
-      },
-      {
-        "name": "MEALIE_RECIPE_SHOW_NUTRITION",
-        "label": "MEALIE_RECIPE_SHOW_NUTRITION",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "memos",
-    "description": "memos Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/memos.png",
-    "image": "neosmemo/memos:stable",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "memos/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "redis",
-    "description": "Docker Hub: https://hub.docker.com/_/redis",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/redis.png",
-    "image": "redis:alpine",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "redis/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "REDIS_IMAGE",
-        "label": "REDIS_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "duplicati",
-    "description": "duplicati Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/duplicati.png",
-    "image": "duplicati/duplicati:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "duplicati/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "DUPLICATI_IMAGE",
-        "label": "DUPLICATI_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "DUPLICATI_KEY",
-        "label": "DUPLICATI_KEY",
-        "default": ""
-      },
-      {
-        "name": "DUPLICATI_PASS",
-        "label": "DUPLICATI_PASS",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "qbittorrent",
-    "description": "qbittorrent Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/qbittorrent.png",
-    "image": "trigus42/qbittorrentvpn:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "qbittorrent/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "QBT_IMAGE",
-        "label": "QBT_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "QBT_PASS",
-        "label": "QBT_PASS",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "videoduplicatefinder",
-    "description": "videoduplicatefinder Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/videoduplicatefinder.png",
-    "image": "jlesage/video-duplicate-finder:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "videoduplicatefinder/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "monica",
-    "description": "Docker Hub: https://hub.docker.com/_/monica Project: https://www.monicahq.com/ Proxy Port: 80",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/monica.png",
-    "image": "latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "monica/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "MONICA_IMAGE",
-        "label": "MONICA_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "MONICA_DB_HOST",
-        "label": "MONICA_DB_HOST",
-        "default": ""
-      },
-      {
-        "name": "MONICA_DB_USERNAME",
-        "label": "MONICA_DB_USERNAME",
-        "default": ""
-      },
-      {
-        "name": "MONICA_DB_PASSWORD",
-        "label": "MONICA_DB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MONICA_APP_ENV",
-        "label": "MONICA_APP_ENV",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "listmonk",
-    "description": "listmonk Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/listmonk.png",
-    "image": "postgres:13-alpine",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "listmonk/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "POSTGRES_USER",
-        "label": "POSTGRES_USER",
-        "default": ""
-      },
-      {
-        "name": "POSTGRES_PASSWORD",
-        "label": "POSTGRES_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "POSTGRES_DB",
-        "label": "POSTGRES_DB",
-        "default": ""
-      },
-      {
-        "name": "SECRET_KEY",
-        "label": "SECRET_KEY",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "shlink",
-    "description": "shlink Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/shlink.png",
-    "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "shlink/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "lubelogger",
-    "description": "lubelogger Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/lubelogger.png",
-    "image": "ghcr.io/hargata/lubelogger:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "lubelogger/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "LUBELOGR_IMAGE_NAME",
-        "label": "LUBELOGR_IMAGE_NAME",
-        "default": ""
-      },
-      {
-        "name": "LUBELOGR_RESTART",
-        "label": "LUBELOGR_RESTART",
-        "default": ""
-      },
-      {
-        "name": "LUBELOGR_PORT",
-        "label": "LUBELOGR_PORT",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "code-server",
-    "description": "Proxy Port: 8443",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/code-server.png",
-    "image": "null",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "code-server/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "CODE-SERVER_IMAGE",
-        "label": "CODE-SERVER_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "CODE-SERVER_PASSWORD",
-        "label": "CODE-SERVER_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "CODE-SERVER_DOMAIN",
-        "label": "CODE-SERVER_DOMAIN",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "authentik",
-    "description": "authentik Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/authentik.png",
-    "image": "docker.io/library/postgres:16-alpine",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "authentik/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "handbrake",
-    "description": "handbrake Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/handbrake.png",
-    "image": "jlesage/handbrake:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "handbrake/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "HANDBRAKE_IMAGE",
-        "label": "HANDBRAKE_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION",
-        "label": "AUTOMATED_CONVERSION",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_FORMAT",
-        "label": "AUTOMATED_CONVERSION_FORMAT",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_KEEP_SOURCE",
-        "label": "AUTOMATED_CONVERSION_KEEP_SOURCE",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_USE_TRASH",
-        "label": "AUTOMATED_CONVERSION_USE_TRASH",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_OVERWRITE_OUTPUT",
-        "label": "AUTOMATED_CONVERSION_OVERWRITE_OUTPUT",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
-        "label": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS",
-        "label": "AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_PRESET",
-        "label": "AUTOMATED_CONVERSION_PRESET",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_OUTPUT_DIR",
-        "label": "AUTOMATED_CONVERSION_OUTPUT_DIR",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_PRESET_2",
-        "label": "AUTOMATED_CONVERSION_PRESET_2",
-        "default": ""
-      },
-      {
-        "name": "AUTOMATED_CONVERSION_OUTPUT_DIR_2",
-        "label": "AUTOMATED_CONVERSION_OUTPUT_DIR_2",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "yourls",
-    "description": "yourls Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/yourls.png",
-    "image": "mariadb:${DB_V}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "yourls/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "PREFIX",
-        "label": "PREFIX",
-        "default": ""
-      },
-      {
-        "name": "YOURLS_DOMAIN_NAME",
-        "label": "YOURLS_DOMAIN_NAME",
-        "default": ""
-      },
-      {
-        "name": "YOURLS_MYSQL_ROOT_PASSWORD",
-        "label": "YOURLS_MYSQL_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "YOURLS_MYSQL_PASSWORD",
-        "label": "YOURLS_MYSQL_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "YOURLS_USER",
-        "label": "YOURLS_USER",
-        "default": ""
-      },
-      {
-        "name": "YOURLS_PASS",
-        "label": "YOURLS_PASS",
-        "default": ""
-      },
-      {
-        "name": "DB_V",
-        "label": "DB_V",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "paisa",
-    "description": "Docker Hub: https://hub.docker.com/r/ananthakumaran/paisa Project: https://paisa.fyi/ Github: https://github.com/ananthakumaran/paisa Proxy Port: 7500",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/paisa.png",
-    "image": "ananthakumaran/paisa:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "paisa/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "PAISA_IMAGE",
-        "label": "PAISA_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "semaphore",
-    "description": "* [Docker Hub](https://hub.docker.com/r/semaphoreui/semaphore) * [Official Website](https://semaphoreui.com/) * [Docker Compose Example](https://docs.semaphoreui.com/administration-guide/installation/#docker)",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/semaphore.png",
-    "image": "semaphoreui/semaphore:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "semaphore/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "SEMAPHORE_IMAGE",
-        "label": "SEMAPHORE_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
-        "label": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
-        "default": ""
-      },
-      {
-        "name": "SEMAPHORE_ADMIN_EMAIL",
-        "label": "SEMAPHORE_ADMIN_EMAIL",
-        "default": ""
-      },
-      {
-        "name": "SEMAPHORE_ADMIN_NAME",
-        "label": "SEMAPHORE_ADMIN_NAME",
-        "default": ""
-      },
-      {
-        "name": "SEMAPHORE_ADMIN_PASSWORD",
-        "label": "SEMAPHORE_ADMIN_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "SEMAPHORE_PLAYBOOK_PATH",
-        "label": "SEMAPHORE_PLAYBOOK_PATH",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "uptimekuma",
-    "description": "Proxy Port: 3001 * [Official Website](https://uptime.kuma.pet/) * [Dockerhub](https://hub.docker.com/r/louislam/uptime-kuma) * [Github](https://github.com/louislam/uptime-kuma/tree/1.23.X) * [Docker Compose Example](https://github.com/louislam/uptime-kuma/blob/1.23.X/docker/docker-compose.yml)",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/uptimekuma.png",
-    "image": "louislam/uptime-kuma:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "uptimekuma/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "UPTIMEKUMA_IMAGE",
-        "label": "UPTIMEKUMA_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "ollama",
-    "description": "ollama Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/ollama.png",
-    "image": "ollama/ollama",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "ollama/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "WEBUI_IMAGE",
-        "label": "WEBUI_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "WEBUI_SECRET_KEY",
-        "label": "WEBUI_SECRET_KEY",
-        "default": ""
-      },
-      {
-        "name": "WEBUI_URL",
-        "label": "WEBUI_URL",
-        "default": ""
-      },
-      {
-        "name": "USE_CUDA_DOCKER",
-        "label": "USE_CUDA_DOCKER",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "zammad",
-    "description": "zammad Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/zammad.png",
-    "image": "postgres:${POSTGRES_VERSION:-17.5-alpine}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "zammad/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      },
-      {
-        "name": "ZAMMAD_RAILS_IMAGE",
-        "label": "ZAMMAD_RAILS_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "ZAMMAD_RESTART",
-        "label": "ZAMMAD_RESTART",
-        "default": ""
-      },
-      {
-        "name": "scheme",
-        "label": "scheme",
-        "default": ""
-      },
-      {
-        "name": "AWS_REGION",
-        "label": "AWS_REGION",
-        "default": ""
-      },
-      {
-        "name": "NGINX_PORT",
-        "label": "NGINX_PORT",
-        "default": ""
-      },
-      {
-        "name": "NGINX_SERVER_SCHEME",
-        "label": "NGINX_SERVER_SCHEME",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "homepage",
-    "description": "Project: https://gethomepage.dev/latest/ Docker Compose Example: https://gethomepage.dev/latest/installation/docker/ Proxy Port: 3000 If you want to use the optional docker socket, you must run as root.",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/homepage.png",
-    "image": "ghcr.io/gethomepage/homepage:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "homepage/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "HOMEPAGE_IMAGE",
-        "label": "HOMEPAGE_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "piwigo",
-    "description": "Docker Hub: https://hub.docker.com/r/linuxserver/piwigo/tags/ Project: https://piwigo.org/ Docker Compose Example: https://hub.docker.com/r/linuxserver/piwigo Proxy Port: 80",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/piwigo.png",
-    "image": "lscr.io/linuxserver/piwigo:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "piwigo/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "PIWIGO_IMAGE",
-        "label": "PIWIGO_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "PIWIGO_PUID",
-        "label": "PIWIGO_PUID",
-        "default": ""
-      },
-      {
-        "name": "PIWIGO_PGID",
-        "label": "PIWIGO_PGID",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "portainer",
-    "description": "portainer Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/portainer.png",
-    "image": "portainer/portainer-ce:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "portainer/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "PORTAINER_IMAGE",
-        "label": "PORTAINER_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "PORTAINER_AGENT_IMAGE",
-        "label": "PORTAINER_AGENT_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "AGENT_SECRET",
-        "label": "AGENT_SECRET",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "openarchiver",
-    "description": "openarchiver Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/openarchiver.png",
-    "image": "logiclabshq/open-archiver:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "openarchiver/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "NODE_ENV",
-        "label": "NODE_ENV",
-        "default": ""
-      },
-      {
-        "name": "PORT_BACKEND",
-        "label": "PORT_BACKEND",
-        "default": ""
-      },
-      {
-        "name": "PORT_FRONTEND",
-        "label": "PORT_FRONTEND",
-        "default": ""
-      },
-      {
-        "name": "SYNC_FREQUENCY",
-        "label": "SYNC_FREQUENCY",
-        "default": ""
-      },
-      {
-        "name": "POSTGRES_DB",
-        "label": "POSTGRES_DB",
-        "default": ""
-      },
-      {
-        "name": "POSTGRES_USER",
-        "label": "POSTGRES_USER",
-        "default": ""
-      },
-      {
-        "name": "POSTGRES_PASSWORD",
-        "label": "POSTGRES_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "DATABASE_URL",
-        "label": "DATABASE_URL",
-        "default": ""
-      },
-      {
-        "name": "MEILI_MASTER_KEY",
-        "label": "MEILI_MASTER_KEY",
-        "default": ""
-      },
-      {
-        "name": "MEILI_HOST",
-        "label": "MEILI_HOST",
-        "default": ""
-      },
-      {
-        "name": "MEILI_INDEXING_BATCH",
-        "label": "MEILI_INDEXING_BATCH",
-        "default": ""
-      },
-      {
-        "name": "REDIS_HOST",
-        "label": "REDIS_HOST",
-        "default": ""
-      },
-      {
-        "name": "REDIS_PORT",
-        "label": "REDIS_PORT",
-        "default": ""
-      },
-      {
-        "name": "REDIS_PASSWORD",
-        "label": "REDIS_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "REDIS_TLS_ENABLED",
-        "label": "REDIS_TLS_ENABLED",
-        "default": ""
-      },
-      {
-        "name": "STORAGE_TYPE",
-        "label": "STORAGE_TYPE",
-        "default": ""
-      },
-      {
-        "name": "BODY_SIZE_LIMIT",
-        "label": "BODY_SIZE_LIMIT",
-        "default": ""
-      },
-      {
-        "name": "STORAGE_LOCAL_ROOT_PATH",
-        "label": "STORAGE_LOCAL_ROOT_PATH",
-        "default": ""
-      },
-      {
-        "name": "RATE_LIMIT_WINDOW_MS",
-        "label": "RATE_LIMIT_WINDOW_MS",
-        "default": ""
-      },
-      {
-        "name": "RATE_LIMIT_MAX_REQUESTS",
-        "label": "RATE_LIMIT_MAX_REQUESTS",
-        "default": ""
-      },
-      {
-        "name": "JWT_SECRET",
-        "label": "JWT_SECRET",
-        "default": ""
-      },
-      {
-        "name": "JWT_EXPIRES_IN",
-        "label": "JWT_EXPIRES_IN",
-        "default": ""
-      },
-      {
-        "name": "ENCRYPTION_KEY",
-        "label": "ENCRYPTION_KEY",
-        "default": ""
-      },
-      {
-        "name": "TIKA_URL",
-        "label": "TIKA_URL",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "filebrowser",
-    "description": "* [Filebrowser Quantum on GitHub](https://github.com/gtsteffaniak/filebrowser/tree/main) * [Getting Started Wiki](https://github.com/gtsteffaniak/filebrowser/wiki/Getting-Started) * [Configuration Docs](https://github.com/gtsteffaniak/filebrowser/wiki/Configuration-And-Examples)",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/filebrowser.png",
-    "image": "gtstef/filebrowser:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "filebrowser/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "FILEBROWSER_IMAGE",
-        "label": "FILEBROWSER_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "FILEBROWSER_CONFIG",
-        "label": "FILEBROWSER_CONFIG",
-        "default": ""
-      },
-      {
-        "name": "FILEBROWSER_ADMIN_PASSWORD",
-        "label": "FILEBROWSER_ADMIN_PASSWORD",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "firefly",
-    "description": "Docker Hub: https://hub.docker.com/r/fireflyiii/core/tags Documentation: https://docs.firefly-iii.org/how-to/firefly-iii/installation/docker/ Project: https://firefly-iii.org/ Proxy Port: 8080 Proxy Port Importer: 8080",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/firefly.png",
-    "image": "fireflyiii/core:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "firefly/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "FIREFLY_IMAGE",
-        "label": "FIREFLY_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "FIREFLY_IMPORTER_IMAGE",
-        "label": "FIREFLY_IMPORTER_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "jellyfin",
-    "description": "* [DockerHub jellyfin](https://hub.docker.com/r/jellyfin/jellyfin) * [Docs](https://jellyfin.org/docs/) ### Ports * 8096/tcp is used by default for HTTP traffic. You can change this in the dashboard. * 8920/tcp is used by default for HTTPS traffic. You can change this in the dashboard. * 1900/udp is used for service auto-discovery. This is not configurable. * 7359/udp is also used for auto-discovery. This is not configurable.",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/jellyfin.png",
-    "image": "jellyfin/jellyfin:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "jellyfin/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "JELLYFIN_IMAGE",
-        "label": "JELLYFIN_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "JELLYFIN_PublishedServerUrl",
-        "label": "JELLYFIN_PublishedServerUrl",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "mailu",
-    "description": "mailu Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/mailu.png",
-    "image": "mailu/mailu:2024.06",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "mailu/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "minio",
-    "description": "Docker Hub: https://hub.docker.com/r/minio/minio/tags Project: https://min.io/ Proxy Port: 9001",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/minio.png",
-    "image": "quay.io/minio/minio",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "minio/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "MINIO_IMAGE",
-        "label": "MINIO_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "MINIO_ROOT_USER",
-        "label": "MINIO_ROOT_USER",
-        "default": ""
-      },
-      {
-        "name": "MINIO_ROOT_PASSWORD",
-        "label": "MINIO_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MINIO_SERVER_URL",
-        "label": "MINIO_SERVER_URL",
-        "default": ""
-      },
-      {
-        "name": "MINIO_BROWSER_REDIRECT_URL",
-        "label": "MINIO_BROWSER_REDIRECT_URL",
-        "default": ""
-      },
-      {
-        "name": "MINO_CONSOLE_SECURE_TLS_REDIRECT",
-        "label": "MINO_CONSOLE_SECURE_TLS_REDIRECT",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "vaultwarden",
-    "description": "vaultwarden Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/vaultwarden.png",
-    "image": "vaultwarden/server:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "vaultwarden/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "PRODDIR",
-        "label": "PRODDIR",
-        "default": ""
-      },
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "VAULT_DOMAIN_NAME",
-        "label": "VAULT_DOMAIN_NAME",
-        "default": ""
-      },
-      {
-        "name": "VAULT_IMAGE",
-        "label": "VAULT_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "WEBSOCKET_ENABLED",
-        "label": "WEBSOCKET_ENABLED",
-        "default": ""
-      },
-      {
-        "name": "SIGNUPS_ALLOWED",
-        "label": "SIGNUPS_ALLOWED",
-        "default": ""
-      },
-      {
-        "name": "VAULT_ADMIN_TOKEN",
-        "label": "VAULT_ADMIN_TOKEN",
-        "default": ""
-      },
-      {
-        "name": "SMTP_HOST",
-        "label": "SMTP_HOST",
-        "default": ""
-      },
-      {
-        "name": "SMTP_FROM",
-        "label": "SMTP_FROM",
-        "default": ""
-      },
-      {
-        "name": "SMTP_PORT",
-        "label": "SMTP_PORT",
-        "default": ""
-      },
-      {
-        "name": "SMTP_SECURITY",
-        "label": "SMTP_SECURITY",
-        "default": ""
-      },
-      {
-        "name": "SMTP_USERNAME",
-        "label": "SMTP_USERNAME",
-        "default": ""
-      },
-      {
-        "name": "SMTP_PASSWORD",
-        "label": "SMTP_PASSWORD",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "immich",
-    "description": "immich Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/immich.png",
-    "image": "${IMMICH_IMAGE}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "immich/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_IMAGE",
-        "label": "IMMICH_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_UPLOAD_LOCATION",
-        "label": "IMMICH_UPLOAD_LOCATION",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_DB_DATA_LOCATION",
-        "label": "IMMICH_DB_DATA_LOCATION",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_DB_HOSTNAME",
-        "label": "IMMICH_DB_HOSTNAME",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_DB_PASSWORD",
-        "label": "IMMICH_DB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_DB_USERNAME",
-        "label": "IMMICH_DB_USERNAME",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_DB_DATABASE_NAME",
-        "label": "IMMICH_DB_DATABASE_NAME",
-        "default": ""
-      },
-      {
-        "name": "IMMICH_REDIS_HOSTNAME",
-        "label": "IMMICH_REDIS_HOSTNAME",
-        "default": ""
-      },
-      {
-        "name": "REDIS_IMAGE",
-        "label": "REDIS_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "POSTGRES_IMAGE",
-        "label": "POSTGRES_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "nginx-proxy-manager",
-    "description": "This Docker Compose configuration sets up the Reverse Proxy application using Docker container. - App: [Proxy Manager on Docker Hub](https://hub.docker.com/r/jc21/nginx-proxy-manager) - Official Site: [Nginx Proxy Manager](https://nginxproxymanager.com/) - [Docker tags](https://hub.docker.com/r/jc21/nginx-proxy-manager/tags) - Expose ports: 80, 81, 443",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/nginx-proxy-manager.png",
-    "image": "jc21/nginx-proxy-manager:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "nginx-proxy-manager/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "PROXY_IMAGE",
-        "label": "PROXY_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "docmost",
-    "description": "docmost Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/docmost.png",
-    "image": "docmost/docmost:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "docmost/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "bookstack",
-    "description": "bookstack Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/bookstack.png",
-    "image": "solidnerd/bookstack:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "bookstack/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_CONFIG_PATH",
-        "label": "VOL_CONFIG_PATH",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_APP_KEY",
-        "label": "BOOKSTACK_APP_KEY",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_APP_TIMEZONE",
-        "label": "BOOKSTACK_APP_TIMEZONE",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_APP_URL",
-        "label": "BOOKSTACK_APP_URL",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_DB_DATABASE",
-        "label": "BOOKSTACK_DB_DATABASE",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_DB_HOST",
-        "label": "BOOKSTACK_DB_HOST",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_DB_PASSWORD",
-        "label": "BOOKSTACK_DB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_DB_USERNAME",
-        "label": "BOOKSTACK_DB_USERNAME",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_IMAGE",
-        "label": "BOOKSTACK_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "BOOKSTACK_REVISION_LIMIT",
-        "label": "BOOKSTACK_REVISION_LIMIT",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "gitea",
-    "description": "gitea Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/gitea.png",
-    "image": "gitea/gitea:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "gitea/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "GITEA_IMAGE",
-        "label": "GITEA_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "GITEA_DB_HOST",
-        "label": "GITEA_DB_HOST",
-        "default": ""
-      },
-      {
-        "name": "GITEA_SSH_PORT",
-        "label": "GITEA_SSH_PORT",
-        "default": ""
-      },
-      {
-        "name": "GITEA_WEB_PORT",
-        "label": "GITEA_WEB_PORT",
-        "default": ""
-      },
-      {
-        "name": "GITEA_SSH_DOMAIN",
-        "label": "GITEA_SSH_DOMAIN",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "heimdall",
-    "description": "Heimdall is a lightweight web-based dashboard for organizing and launching your self-hosted applications.",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/heimdall.png",
-    "image": "${HEIMDALL_IMAGE}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "heimdall/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "HEIMDALL_IMAGE",
-        "label": "HEIMDALL_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "HEIMDALL_PGID",
-        "label": "HEIMDALL_PGID",
-        "default": ""
-      },
-      {
-        "name": "HEIMDALL_PUID",
-        "label": "HEIMDALL_PUID",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "ntfy",
-    "description": "* [Docker Hub](https://hub.docker.com/r/binwiederhier/ntfy) * [Project](https://ntfy.sh/) * [Docker Compose Example](https://github.com/binwiederhier/ntfy/blob/main/docker-compose.yml) Proxy Port: 80",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/ntfy.png",
-    "image": "binwiederhier/ntfy",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "ntfy/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "NTFY_IMAGE",
-        "label": "NTFY_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "NTFY_BASE_URL",
-        "label": "NTFY_BASE_URL",
-        "default": ""
-      },
-      {
-        "name": "NTFY_CACHE_FILE",
-        "label": "NTFY_CACHE_FILE",
-        "default": ""
-      },
-      {
-        "name": "NTFY_AUTH_FILE",
-        "label": "NTFY_AUTH_FILE",
-        "default": ""
-      },
-      {
-        "name": "NTFY_AUTH_DEFAULT_ACCESS",
-        "label": "NTFY_AUTH_DEFAULT_ACCESS",
-        "default": ""
-      },
-      {
-        "name": "NTFY_BEHIND_PROXY",
-        "label": "NTFY_BEHIND_PROXY",
-        "default": ""
-      },
-      {
-        "name": "NTFY_ATTACHMENT_CACHE_DIR",
-        "label": "NTFY_ATTACHMENT_CACHE_DIR",
-        "default": ""
-      },
-      {
-        "name": "NTFY_ENABLE_LOGIN",
-        "label": "NTFY_ENABLE_LOGIN",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "suitecrm",
-    "description": "suitecrm Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/suitecrm.png",
-    "image": "bitnami/suitecrm:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "suitecrm/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "SUITECRM_IMAGE",
-        "label": "SUITECRM_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "SUITECRM_DB_PASSWORD",
-        "label": "SUITECRM_DB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "SUITECRM_USER",
-        "label": "SUITECRM_USER",
-        "default": ""
-      },
-      {
-        "name": "SUITECRM_PASS",
-        "label": "SUITECRM_PASS",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "rocketchat",
-    "description": "rocketchat Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/rocketchat.png",
-    "image": "rocketchat/rocket.chat:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "rocketchat/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "PREFIX",
-        "label": "PREFIX",
-        "default": ""
-      },
-      {
-        "name": "ROCKET_DOMAIN_NAME",
-        "label": "ROCKET_DOMAIN_NAME",
-        "default": ""
-      },
-      {
-        "name": "ROCKETCHAT_V",
-        "label": "ROCKETCHAT_V",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "dockge",
-    "description": "dockge Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/dockge.png",
-    "image": "louislam/dockge:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "dockge/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  },
-  {
-    "type": 1,
-    "title": "jellyseerr",
-    "description": "jellyseerr Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/jellyseerr.png",
-    "image": "${JELLYSEERR_IMAGE}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "jellyseerr/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "JELLYSEERR_IMAGE",
-        "label": "JELLYSEERR_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "invoiceninja",
-    "description": "invoiceninja Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/invoiceninja.png",
-    "image": "invoiceninja/invoiceninja-debian:${TAG:-latest}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "invoiceninja/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "APP_URL",
-        "label": "APP_URL",
-        "default": ""
-      },
-      {
-        "name": "APP_KEY",
-        "label": "APP_KEY",
-        "default": ""
-      },
-      {
-        "name": "APP_ENV",
-        "label": "APP_ENV",
-        "default": ""
-      },
-      {
-        "name": "APP_DEBUG",
-        "label": "APP_DEBUG",
-        "default": ""
-      },
-      {
-        "name": "REQUIRE_HTTPS",
-        "label": "REQUIRE_HTTPS",
-        "default": ""
-      },
-      {
-        "name": "PHANTOMJS_PDF_GENERATION",
-        "label": "PHANTOMJS_PDF_GENERATION",
-        "default": ""
-      },
-      {
-        "name": "PDF_GENERATOR",
-        "label": "PDF_GENERATOR",
-        "default": ""
-      },
-      {
-        "name": "TRUSTED_PROXIES",
-        "label": "TRUSTED_PROXIES",
-        "default": ""
-      },
-      {
-        "name": "CACHE_DRIVER",
-        "label": "CACHE_DRIVER",
-        "default": ""
-      },
-      {
-        "name": "QUEUE_CONNECTION",
-        "label": "QUEUE_CONNECTION",
-        "default": ""
-      },
-      {
-        "name": "SESSION_DRIVER",
-        "label": "SESSION_DRIVER",
-        "default": ""
-      },
-      {
-        "name": "REDIS_HOST",
-        "label": "REDIS_HOST",
-        "default": ""
-      },
-      {
-        "name": "REDIS_PASSWORD",
-        "label": "REDIS_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "REDIS_PORT",
-        "label": "REDIS_PORT",
-        "default": ""
-      },
-      {
-        "name": "FILESYSTEM_DISK",
-        "label": "FILESYSTEM_DISK",
-        "default": ""
-      },
-      {
-        "name": "DB_HOST",
-        "label": "DB_HOST",
-        "default": ""
-      },
-      {
-        "name": "DB_PORT",
-        "label": "DB_PORT",
-        "default": ""
-      },
-      {
-        "name": "DB_DATABASE",
-        "label": "DB_DATABASE",
-        "default": ""
-      },
-      {
-        "name": "DB_USERNAME",
-        "label": "DB_USERNAME",
-        "default": ""
-      },
-      {
-        "name": "DB_PASSWORD",
-        "label": "DB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "DB_ROOT_PASSWORD",
-        "label": "DB_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "DB_CONNECTION",
-        "label": "DB_CONNECTION",
-        "default": ""
-      },
-      {
-        "name": "IN_USER_EMAIL",
-        "label": "IN_USER_EMAIL",
-        "default": ""
-      },
-      {
-        "name": "IN_PASSWORD",
-        "label": "IN_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MAIL_MAILER",
-        "label": "MAIL_MAILER",
-        "default": ""
-      },
-      {
-        "name": "MAIL_HOST",
-        "label": "MAIL_HOST",
-        "default": ""
-      },
-      {
-        "name": "MAIL_PORT",
-        "label": "MAIL_PORT",
-        "default": ""
-      },
-      {
-        "name": "MAIL_USERNAME",
-        "label": "MAIL_USERNAME",
-        "default": ""
-      },
-      {
-        "name": "MAIL_PASSWORD",
-        "label": "MAIL_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MAIL_ENCRYPTION",
-        "label": "MAIL_ENCRYPTION",
-        "default": ""
-      },
-      {
-        "name": "MAIL_FROM_ADDRESS",
-        "label": "MAIL_FROM_ADDRESS",
-        "default": ""
-      },
-      {
-        "name": "MAIL_FROM_NAME",
-        "label": "MAIL_FROM_NAME",
-        "default": ""
-      },
-      {
-        "name": "MYSQL_ROOT_PASSWORD",
-        "label": "MYSQL_ROOT_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MYSQL_USER",
-        "label": "MYSQL_USER",
-        "default": ""
-      },
-      {
-        "name": "MYSQL_PASSWORD",
-        "label": "MYSQL_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "MYSQL_DATABASE",
-        "label": "MYSQL_DATABASE",
-        "default": ""
-      },
-      {
-        "name": "NORDIGEN_SECRET_ID",
-        "label": "NORDIGEN_SECRET_ID",
-        "default": ""
-      },
-      {
-        "name": "NORDIGEN_SECRET_KEY",
-        "label": "NORDIGEN_SECRET_KEY",
-        "default": ""
-      },
-      {
-        "name": "IS_DOCKER",
-        "label": "IS_DOCKER",
-        "default": ""
-      },
-      {
-        "name": "SCOUT_DRIVER",
-        "label": "SCOUT_DRIVER",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "prowlarr",
-    "description": "prowlarr Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/prowlarr.png",
-    "image": "${PROWLARR_IMAGE}",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "prowlarr/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "PROWLARR_IMAGE",
-        "label": "PROWLARR_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "stashapp",
-    "description": "This Docker Compose configuration sets up the Stash application using Docker containers. - Stash App: [Stash on Docker Hub](https://hub.docker.com/r/stashapp/stash) - Compose Example: [Stash GitHub Repository](https://github.com/stashapp/stash/blob/develop/docker/production/docker-compose.yml) - ProxyPort: 9999",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/stashapp.png",
-    "image": "stashapp/stash:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "stashapp/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "STASHAPP_IMAGE",
-        "label": "STASHAPP_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "STASHAPP_STASH_CACHE",
-        "label": "STASHAPP_STASH_CACHE",
-        "default": ""
-      },
-      {
-        "name": "STASHAPP_STASH_DOMAIN_NAME",
-        "label": "STASHAPP_STASH_DOMAIN_NAME",
-        "default": ""
-      },
-      {
-        "name": "STASHAPP_STASH_GENERATED",
-        "label": "STASHAPP_STASH_GENERATED",
-        "default": ""
-      },
-      {
-        "name": "STASHAPP_STASH_METADATA",
-        "label": "STASHAPP_STASH_METADATA",
-        "default": ""
-      },
-      {
-        "name": "STASHAPP_STASH_STASH",
-        "label": "STASHAPP_STASH_STASH",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "archivebox",
-    "description": "Docker Hub: https://hub.docker.com/r/archivebox/archivebox/tags Docker Compose Example: https://raw.githubusercontent.com/ArchiveBox/ArchiveBox/dev/docker-compose.yml Project: https://archivebox.io/ Proxy Port: 8000",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/archivebox.png",
-    "image": "archivebox/archivebox:stable",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "archivebox/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "ARCHIVEBOX_IMAGE",
-        "label": "ARCHIVEBOX_IMAGE",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "poste",
-    "description": "poste Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/poste.png",
-    "image": "analogic/poste.io",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "poste/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "TZ",
-        "label": "TZ",
-        "default": ""
-      },
-      {
-        "name": "COMPOSE_PROJECT_NAME",
-        "label": "COMPOSE_PROJECT_NAME",
-        "default": ""
-      },
-      {
-        "name": "POSTE_PUBLIC_HOSTNAME",
-        "label": "POSTE_PUBLIC_HOSTNAME",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "nextcloud",
-    "description": "nextcloud Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/nextcloud.png",
-    "image": "nextcloud:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "nextcloud/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": [
-      {
-        "name": "COOKBOOK",
-        "label": "COOKBOOK",
-        "default": ""
-      },
-      {
-        "name": "VOL_PATH",
-        "label": "VOL_PATH",
-        "default": ""
-      },
-      {
-        "name": "NEXTCLOUD_IMAGE",
-        "label": "NEXTCLOUD_IMAGE",
-        "default": ""
-      },
-      {
-        "name": "NEXTCLOUD_DB_PASSWORD",
-        "label": "NEXTCLOUD_DB_PASSWORD",
-        "default": ""
-      },
-      {
-        "name": "NEXTCLOUD_DB",
-        "label": "NEXTCLOUD_DB",
-        "default": ""
-      },
-      {
-        "name": "NEXTCLOUD_DB_USER",
-        "label": "NEXTCLOUD_DB_USER",
-        "default": ""
-      },
-      {
-        "name": "NEXTCLOUD_DB_HOST",
-        "label": "NEXTCLOUD_DB_HOST",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": 1,
-    "title": "hedgedoc",
-    "description": "hedgedoc Docker Compose stack",
-    "note": "Auto-generated template from repository",
-    "categories": [
-      "Auto"
-    ],
-    "platform": "linux",
-    "logo": "https://i.4lt.ca/cookbook/hedgedoc.png",
-    "image": "ghcr.io/hedgedoc/hedgedoc:latest",
-    "repository": {
-      "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-      "stackfile": "hedgedoc/docker-compose.yml",
-      "stackfile_plain": false
-    },
-    "env": []
-  }
-]
+{
+  "version": "3",
+  "templates": [
+    {
+      "type": 1,
+      "title": "phpcontainer",
+      "description": "phpcontainer Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/phpcontainer.png",
+      "image": "4lights/phpcontainer:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "phpcontainer/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "PHPCONTAINER_IMAGE",
+          "label": "PHPCONTAINER_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "wallabag",
+      "description": "Docker Hub: https://hub.docker.com/r/wallabag/wallabag Project: Docker Compose Example: https://github.com/wallabag/docker Proxy Port: 80",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/wallabag.png",
+      "image": "wallabag/wallabag:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "wallabag/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_TZ",
+          "label": "WALLABAG_TZ",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_IMAGE",
+          "label": "WALLABAG_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_DRIVER",
+          "label": "WALLABAG_DB_DRIVER",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_HOST",
+          "label": "WALLABAG_DB_HOST",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_PORT",
+          "label": "WALLABAG_DB_PORT",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_NAME",
+          "label": "WALLABAG_DB_NAME",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_USER",
+          "label": "WALLABAG_DB_USER",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_PASS",
+          "label": "WALLABAG_DB_PASS",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_CHARSET",
+          "label": "WALLABAG_DB_CHARSET",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DB_PREFIX",
+          "label": "WALLABAG_DB_PREFIX",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_MAILER_DSN",
+          "label": "WALLABAG_MAILER_DSN",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_FROM_WEMAIL",
+          "label": "WALLABAG_FROM_WEMAIL",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_DOMAIN",
+          "label": "WALLABAG_DOMAIN",
+          "default": ""
+        },
+        {
+          "name": "WALLABAG_SERVER",
+          "label": "WALLABAG_SERVER",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "thunderbird",
+      "description": "Git Hub: https://github.com/jlesage/docker-thunderbird Proxy Port: 5800",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/thunderbird.png",
+      "image": "jlesage/thunderbird",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "thunderbird/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "THUNDERBIRD_IMAGE",
+          "label": "THUNDERBIRD_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "THUNDERBIRD_WEB_AUTHENTICATION",
+          "label": "THUNDERBIRD_WEB_AUTHENTICATION",
+          "default": ""
+        },
+        {
+          "name": "THUNDERBIRD_WEB_AUTHENTICATION_USERNAME",
+          "label": "THUNDERBIRD_WEB_AUTHENTICATION_USERNAME",
+          "default": ""
+        },
+        {
+          "name": "THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD",
+          "label": "THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "THUNDERBIRD_SECURE_CONNECTION",
+          "label": "THUNDERBIRD_SECURE_CONNECTION",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "mariadb",
+      "description": "mariadb Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/mariadb.png",
+      "image": "mariadb:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "mariadb/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "MARIADB_IMAGE",
+          "label": "MARIADB_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "MARIADB_MARIADB_DATABASE",
+          "label": "MARIADB_MARIADB_DATABASE",
+          "default": ""
+        },
+        {
+          "name": "MARIADB_MARIADB_ROOT_PASSWORD",
+          "label": "MARIADB_MARIADB_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MARIADB_MARIADB_PASSWORD",
+          "label": "MARIADB_MARIADB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MARIADB_MARIADB_USER",
+          "label": "MARIADB_MARIADB_USER",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "dozzle",
+      "description": "dozzle Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/dozzle.png",
+      "image": "amir20/dozzle:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "dozzle/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "passbolt",
+      "description": "passbolt Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/passbolt.png",
+      "image": "mariadb:${DB_V}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "passbolt/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "PREFIX",
+          "label": "PREFIX",
+          "default": ""
+        },
+        {
+          "name": "DOMAIN_NAME",
+          "label": "DOMAIN_NAME",
+          "default": ""
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "label": "MYSQL_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "label": "MYSQL_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "DB_V",
+          "label": "DB_V",
+          "default": ""
+        },
+        {
+          "name": "PASSBOLT_V",
+          "label": "PASSBOLT_V",
+          "default": ""
+        },
+        {
+          "name": "NETWORK_NAME",
+          "label": "NETWORK_NAME",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "unami",
+      "description": "unami Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/unami.png",
+      "image": "ghcr.io/umami-software/umami:postgresql-latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "unami/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "peertube",
+      "description": "peertube Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/peertube.png",
+      "image": "chocobozzz/peertube:production-bookworm",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "peertube/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "phpmyadmin",
+      "description": "Docker Hub: https://hub.docker.com/r/phpmyadmin/phpmyadmin/tags Proxy Port: 80 Not for production, there is no password protection by default.",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/phpmyadmin.png",
+      "image": "phpmyadmin/phpmyadmin:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "phpmyadmin/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "PHPMYADMIN_IMAGE",
+          "label": "PHPMYADMIN_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "PHPMYADMIN_PMA_ARBITRARY",
+          "label": "PHPMYADMIN_PMA_ARBITRARY",
+          "default": ""
+        },
+        {
+          "name": "PHPMYADMIN_PMA_HOST",
+          "label": "PHPMYADMIN_PMA_HOST",
+          "default": ""
+        },
+        {
+          "name": "PHPMYADMIN_PMA_USER",
+          "label": "PHPMYADMIN_PMA_USER",
+          "default": ""
+        },
+        {
+          "name": "PHPMYADMIN_PMA_PASSWORD",
+          "label": "PHPMYADMIN_PMA_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "PHPMYADMIN_UPLOAD_LIMIT",
+          "label": "PHPMYADMIN_UPLOAD_LIMIT",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "activepieces",
+      "description": "activepieces Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/activepieces.png",
+      "image": "ghcr.io/activepieces/activepieces:0.44.0",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "activepieces/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "penpot",
+      "description": "penpot Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/penpot.png",
+      "image": "traefik:v2.9",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "penpot/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "pihole",
+      "description": "pihole Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/pihole.png",
+      "image": "pihole/pihole:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "pihole/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "paperless",
+      "description": "paperless Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/paperless.png",
+      "image": "docker.io/library/redis:8",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "paperless/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_IMAGE",
+          "label": "PAPERLESS_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_MARIADB_HOST",
+          "label": "PAPERLESS_MARIADB_HOST",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_MARIADB_DATABASE",
+          "label": "PAPERLESS_MARIADB_DATABASE",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_MARIADB_USER",
+          "label": "PAPERLESS_MARIADB_USER",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_MARIADB_PASSWORD",
+          "label": "PAPERLESS_MARIADB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_MARIADB_ROOT_PASSWORD",
+          "label": "PAPERLESS_MARIADB_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_SECRET_KEY",
+          "label": "PAPERLESS_SECRET_KEY",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_OCR_LANGUAGE",
+          "label": "PAPERLESS_OCR_LANGUAGE",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_URL",
+          "label": "PAPERLESS_URL",
+          "default": ""
+        },
+        {
+          "name": "PAPERLESS_CONSUMER_DELETE_DUPLICATES",
+          "label": "PAPERLESS_CONSUMER_DELETE_DUPLICATES",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "sonarr",
+      "description": "sonarr Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/sonarr.png",
+      "image": "${SONARR_IMAGE}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "sonarr/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "SONARR_IMAGE",
+          "label": "SONARR_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "nocodb",
+      "description": "Docker Hub: https://hub.docker.com/r/nocodb/nocodb Project: https://nocodb.com/ Docker Compose Example: https://github.com/nocodb/nocodb/blob/master/docker-compose/mysql/docker-compose.yml Proxy Port: 8080",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/nocodb.png",
+      "image": "nocodb/nocodb:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "nocodb/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "NOCODB_IMAGE",
+          "label": "NOCODB_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "directus",
+      "description": "directus Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/directus.png",
+      "image": "directus/directus:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "directus/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "DIRECTUS_SECRET",
+          "label": "DIRECTUS_SECRET",
+          "default": ""
+        },
+        {
+          "name": "DIRECTUS_ADMIN_EMAIL",
+          "label": "DIRECTUS_ADMIN_EMAIL",
+          "default": ""
+        },
+        {
+          "name": "DIRECTUS_ADMIN_PASSWORD",
+          "label": "DIRECTUS_ADMIN_PASSWORD",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "matomo",
+      "description": "matomo Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/matomo.png",
+      "image": "mariadb:${DB_V}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "matomo/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "PREFIX",
+          "label": "PREFIX",
+          "default": ""
+        },
+        {
+          "name": "MATOMO_DOMAIN_NAME",
+          "label": "MATOMO_DOMAIN_NAME",
+          "default": ""
+        },
+        {
+          "name": "MATOMO_MYSQL_ROOT_PASSWORD",
+          "label": "MATOMO_MYSQL_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MATOMO_MYSQL_PASSWORD",
+          "label": "MATOMO_MYSQL_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "DB_V",
+          "label": "DB_V",
+          "default": ""
+        },
+        {
+          "name": "MATOMO_V",
+          "label": "MATOMO_V",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "joomla",
+      "description": "joomla Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/joomla.png",
+      "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "joomla/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "adminer",
+      "description": "adminer Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/adminer.png",
+      "image": "adminer:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "adminer/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "ADMINER_DEFAULT_SERVER",
+          "label": "ADMINER_DEFAULT_SERVER",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "etherpad",
+      "description": "etherpad Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/etherpad.png",
+      "image": "",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "etherpad/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "n8n",
+      "description": "Docker Hub Docs: https://hub.docker.com/r/n8nio/n8n#start-n8n-in-docker Official docs docker-compose: https://docs.n8n.io/hosting/installation/server-setups/docker-compose/#5-create-docker-compose-file Docker Hub Tags: https://hub.docker.com/r/n8nio/n8n/tags Proxy Port: 5678",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/n8n.png",
+      "image": "n8nio/n8n:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "n8n/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "N8N_IMAGE",
+          "label": "N8N_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "N8N_PORT",
+          "label": "N8N_PORT",
+          "default": ""
+        },
+        {
+          "name": "N8N_HOST",
+          "label": "N8N_HOST",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "radarr",
+      "description": "radarr Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/radarr.png",
+      "image": "${RADARR_IMAGE}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "radarr/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "RADARR_IMAGE",
+          "label": "RADARR_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "posthog",
+      "description": "posthog Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/posthog.png",
+      "image": "",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "posthog/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "mealie",
+      "description": "Docker Hub: https://hub.docker.com/r/hkotel/mealie Project: https://mealie.io/ Proxy Port: 9000",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/mealie.png",
+      "image": "hkotel/mealie:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "mealie/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_IMAGE",
+          "label": "MEALIE_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_BASE_URL",
+          "label": "MEALIE_BASE_URL",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_DEFAULT_EMAIL",
+          "label": "MEALIE_DEFAULT_EMAIL",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_PGID",
+          "label": "MEALIE_PGID",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_PUID",
+          "label": "MEALIE_PUID",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_RECIPE_DISABLE_AMOUNT",
+          "label": "MEALIE_RECIPE_DISABLE_AMOUNT",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_RECIPE_DISABLE_COMMENTS",
+          "label": "MEALIE_RECIPE_DISABLE_COMMENTS",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_RECIPE_LANDSCAPE_VIEW",
+          "label": "MEALIE_RECIPE_LANDSCAPE_VIEW",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_RECIPE_PUBLIC",
+          "label": "MEALIE_RECIPE_PUBLIC",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_RECIPE_SHOW_ASSETS",
+          "label": "MEALIE_RECIPE_SHOW_ASSETS",
+          "default": ""
+        },
+        {
+          "name": "MEALIE_RECIPE_SHOW_NUTRITION",
+          "label": "MEALIE_RECIPE_SHOW_NUTRITION",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "memos",
+      "description": "memos Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/memos.png",
+      "image": "neosmemo/memos:stable",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "memos/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "redis",
+      "description": "Docker Hub: https://hub.docker.com/_/redis",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/redis.png",
+      "image": "redis:alpine",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "redis/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "REDIS_IMAGE",
+          "label": "REDIS_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "duplicati",
+      "description": "duplicati Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/duplicati.png",
+      "image": "duplicati/duplicati:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "duplicati/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "DUPLICATI_IMAGE",
+          "label": "DUPLICATI_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "DUPLICATI_KEY",
+          "label": "DUPLICATI_KEY",
+          "default": ""
+        },
+        {
+          "name": "DUPLICATI_PASS",
+          "label": "DUPLICATI_PASS",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "qbittorrent",
+      "description": "qbittorrent Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/qbittorrent.png",
+      "image": "trigus42/qbittorrentvpn:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "qbittorrent/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "QBT_IMAGE",
+          "label": "QBT_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "QBT_PASS",
+          "label": "QBT_PASS",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "videoduplicatefinder",
+      "description": "videoduplicatefinder Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/videoduplicatefinder.png",
+      "image": "jlesage/video-duplicate-finder:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "videoduplicatefinder/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "monica",
+      "description": "Docker Hub: https://hub.docker.com/_/monica Project: https://www.monicahq.com/ Proxy Port: 80",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/monica.png",
+      "image": "latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "monica/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "MONICA_IMAGE",
+          "label": "MONICA_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "MONICA_DB_HOST",
+          "label": "MONICA_DB_HOST",
+          "default": ""
+        },
+        {
+          "name": "MONICA_DB_USERNAME",
+          "label": "MONICA_DB_USERNAME",
+          "default": ""
+        },
+        {
+          "name": "MONICA_DB_PASSWORD",
+          "label": "MONICA_DB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MONICA_APP_ENV",
+          "label": "MONICA_APP_ENV",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "listmonk",
+      "description": "listmonk Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/listmonk.png",
+      "image": "postgres:13-alpine",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "listmonk/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "POSTGRES_USER",
+          "label": "POSTGRES_USER",
+          "default": ""
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "POSTGRES_DB",
+          "default": ""
+        },
+        {
+          "name": "SECRET_KEY",
+          "label": "SECRET_KEY",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "shlink",
+      "description": "shlink Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/shlink.png",
+      "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "shlink/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "lubelogger",
+      "description": "lubelogger Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/lubelogger.png",
+      "image": "ghcr.io/hargata/lubelogger:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "lubelogger/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "LUBELOGR_IMAGE_NAME",
+          "label": "LUBELOGR_IMAGE_NAME",
+          "default": ""
+        },
+        {
+          "name": "LUBELOGR_RESTART",
+          "label": "LUBELOGR_RESTART",
+          "default": ""
+        },
+        {
+          "name": "LUBELOGR_PORT",
+          "label": "LUBELOGR_PORT",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "code-server",
+      "description": "Proxy Port: 8443",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/code-server.png",
+      "image": "null",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "code-server/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "CODE-SERVER_IMAGE",
+          "label": "CODE-SERVER_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "CODE-SERVER_PASSWORD",
+          "label": "CODE-SERVER_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "CODE-SERVER_DOMAIN",
+          "label": "CODE-SERVER_DOMAIN",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "authentik",
+      "description": "authentik Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/authentik.png",
+      "image": "docker.io/library/postgres:16-alpine",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "authentik/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "handbrake",
+      "description": "handbrake Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/handbrake.png",
+      "image": "jlesage/handbrake:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "handbrake/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "HANDBRAKE_IMAGE",
+          "label": "HANDBRAKE_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION",
+          "label": "AUTOMATED_CONVERSION",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_FORMAT",
+          "label": "AUTOMATED_CONVERSION_FORMAT",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_KEEP_SOURCE",
+          "label": "AUTOMATED_CONVERSION_KEEP_SOURCE",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_USE_TRASH",
+          "label": "AUTOMATED_CONVERSION_USE_TRASH",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_OVERWRITE_OUTPUT",
+          "label": "AUTOMATED_CONVERSION_OVERWRITE_OUTPUT",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
+          "label": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS",
+          "label": "AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_PRESET",
+          "label": "AUTOMATED_CONVERSION_PRESET",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_OUTPUT_DIR",
+          "label": "AUTOMATED_CONVERSION_OUTPUT_DIR",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_PRESET_2",
+          "label": "AUTOMATED_CONVERSION_PRESET_2",
+          "default": ""
+        },
+        {
+          "name": "AUTOMATED_CONVERSION_OUTPUT_DIR_2",
+          "label": "AUTOMATED_CONVERSION_OUTPUT_DIR_2",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "yourls",
+      "description": "yourls Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/yourls.png",
+      "image": "mariadb:${DB_V}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "yourls/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "PREFIX",
+          "label": "PREFIX",
+          "default": ""
+        },
+        {
+          "name": "YOURLS_DOMAIN_NAME",
+          "label": "YOURLS_DOMAIN_NAME",
+          "default": ""
+        },
+        {
+          "name": "YOURLS_MYSQL_ROOT_PASSWORD",
+          "label": "YOURLS_MYSQL_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "YOURLS_MYSQL_PASSWORD",
+          "label": "YOURLS_MYSQL_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "YOURLS_USER",
+          "label": "YOURLS_USER",
+          "default": ""
+        },
+        {
+          "name": "YOURLS_PASS",
+          "label": "YOURLS_PASS",
+          "default": ""
+        },
+        {
+          "name": "DB_V",
+          "label": "DB_V",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "paisa",
+      "description": "Docker Hub: https://hub.docker.com/r/ananthakumaran/paisa Project: https://paisa.fyi/ Github: https://github.com/ananthakumaran/paisa Proxy Port: 7500",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/paisa.png",
+      "image": "ananthakumaran/paisa:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "paisa/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "PAISA_IMAGE",
+          "label": "PAISA_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "semaphore",
+      "description": "* [Docker Hub](https://hub.docker.com/r/semaphoreui/semaphore) * [Official Website](https://semaphoreui.com/) * [Docker Compose Example](https://docs.semaphoreui.com/administration-guide/installation/#docker)",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/semaphore.png",
+      "image": "semaphoreui/semaphore:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "semaphore/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "SEMAPHORE_IMAGE",
+          "label": "SEMAPHORE_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
+          "label": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
+          "default": ""
+        },
+        {
+          "name": "SEMAPHORE_ADMIN_EMAIL",
+          "label": "SEMAPHORE_ADMIN_EMAIL",
+          "default": ""
+        },
+        {
+          "name": "SEMAPHORE_ADMIN_NAME",
+          "label": "SEMAPHORE_ADMIN_NAME",
+          "default": ""
+        },
+        {
+          "name": "SEMAPHORE_ADMIN_PASSWORD",
+          "label": "SEMAPHORE_ADMIN_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "SEMAPHORE_PLAYBOOK_PATH",
+          "label": "SEMAPHORE_PLAYBOOK_PATH",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "uptimekuma",
+      "description": "Proxy Port: 3001 * [Official Website](https://uptime.kuma.pet/) * [Dockerhub](https://hub.docker.com/r/louislam/uptime-kuma) * [Github](https://github.com/louislam/uptime-kuma/tree/1.23.X) * [Docker Compose Example](https://github.com/louislam/uptime-kuma/blob/1.23.X/docker/docker-compose.yml)",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/uptimekuma.png",
+      "image": "louislam/uptime-kuma:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "uptimekuma/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "UPTIMEKUMA_IMAGE",
+          "label": "UPTIMEKUMA_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "ollama",
+      "description": "ollama Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/ollama.png",
+      "image": "ollama/ollama",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "ollama/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "WEBUI_IMAGE",
+          "label": "WEBUI_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "WEBUI_SECRET_KEY",
+          "label": "WEBUI_SECRET_KEY",
+          "default": ""
+        },
+        {
+          "name": "WEBUI_URL",
+          "label": "WEBUI_URL",
+          "default": ""
+        },
+        {
+          "name": "USE_CUDA_DOCKER",
+          "label": "USE_CUDA_DOCKER",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "zammad",
+      "description": "zammad Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/zammad.png",
+      "image": "postgres:${POSTGRES_VERSION:-17.5-alpine}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "zammad/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        },
+        {
+          "name": "ZAMMAD_RAILS_IMAGE",
+          "label": "ZAMMAD_RAILS_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "ZAMMAD_RESTART",
+          "label": "ZAMMAD_RESTART",
+          "default": ""
+        },
+        {
+          "name": "scheme",
+          "label": "scheme",
+          "default": ""
+        },
+        {
+          "name": "AWS_REGION",
+          "label": "AWS_REGION",
+          "default": ""
+        },
+        {
+          "name": "NGINX_PORT",
+          "label": "NGINX_PORT",
+          "default": ""
+        },
+        {
+          "name": "NGINX_SERVER_SCHEME",
+          "label": "NGINX_SERVER_SCHEME",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "homepage",
+      "description": "Project: https://gethomepage.dev/latest/ Docker Compose Example: https://gethomepage.dev/latest/installation/docker/ Proxy Port: 3000 If you want to use the optional docker socket, you must run as root.",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/homepage.png",
+      "image": "ghcr.io/gethomepage/homepage:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "homepage/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "HOMEPAGE_IMAGE",
+          "label": "HOMEPAGE_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "piwigo",
+      "description": "Docker Hub: https://hub.docker.com/r/linuxserver/piwigo/tags/ Project: https://piwigo.org/ Docker Compose Example: https://hub.docker.com/r/linuxserver/piwigo Proxy Port: 80",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/piwigo.png",
+      "image": "lscr.io/linuxserver/piwigo:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "piwigo/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "PIWIGO_IMAGE",
+          "label": "PIWIGO_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "PIWIGO_PUID",
+          "label": "PIWIGO_PUID",
+          "default": ""
+        },
+        {
+          "name": "PIWIGO_PGID",
+          "label": "PIWIGO_PGID",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "portainer",
+      "description": "portainer Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/portainer.png",
+      "image": "portainer/portainer-ce:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "portainer/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "PORTAINER_IMAGE",
+          "label": "PORTAINER_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "PORTAINER_AGENT_IMAGE",
+          "label": "PORTAINER_AGENT_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "AGENT_SECRET",
+          "label": "AGENT_SECRET",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "openarchiver",
+      "description": "openarchiver Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/openarchiver.png",
+      "image": "logiclabshq/open-archiver:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "openarchiver/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "NODE_ENV",
+          "label": "NODE_ENV",
+          "default": ""
+        },
+        {
+          "name": "PORT_BACKEND",
+          "label": "PORT_BACKEND",
+          "default": ""
+        },
+        {
+          "name": "PORT_FRONTEND",
+          "label": "PORT_FRONTEND",
+          "default": ""
+        },
+        {
+          "name": "SYNC_FREQUENCY",
+          "label": "SYNC_FREQUENCY",
+          "default": ""
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "POSTGRES_DB",
+          "default": ""
+        },
+        {
+          "name": "POSTGRES_USER",
+          "label": "POSTGRES_USER",
+          "default": ""
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "DATABASE_URL",
+          "label": "DATABASE_URL",
+          "default": ""
+        },
+        {
+          "name": "MEILI_MASTER_KEY",
+          "label": "MEILI_MASTER_KEY",
+          "default": ""
+        },
+        {
+          "name": "MEILI_HOST",
+          "label": "MEILI_HOST",
+          "default": ""
+        },
+        {
+          "name": "MEILI_INDEXING_BATCH",
+          "label": "MEILI_INDEXING_BATCH",
+          "default": ""
+        },
+        {
+          "name": "REDIS_HOST",
+          "label": "REDIS_HOST",
+          "default": ""
+        },
+        {
+          "name": "REDIS_PORT",
+          "label": "REDIS_PORT",
+          "default": ""
+        },
+        {
+          "name": "REDIS_PASSWORD",
+          "label": "REDIS_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "REDIS_TLS_ENABLED",
+          "label": "REDIS_TLS_ENABLED",
+          "default": ""
+        },
+        {
+          "name": "STORAGE_TYPE",
+          "label": "STORAGE_TYPE",
+          "default": ""
+        },
+        {
+          "name": "BODY_SIZE_LIMIT",
+          "label": "BODY_SIZE_LIMIT",
+          "default": ""
+        },
+        {
+          "name": "STORAGE_LOCAL_ROOT_PATH",
+          "label": "STORAGE_LOCAL_ROOT_PATH",
+          "default": ""
+        },
+        {
+          "name": "RATE_LIMIT_WINDOW_MS",
+          "label": "RATE_LIMIT_WINDOW_MS",
+          "default": ""
+        },
+        {
+          "name": "RATE_LIMIT_MAX_REQUESTS",
+          "label": "RATE_LIMIT_MAX_REQUESTS",
+          "default": ""
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT_SECRET",
+          "default": ""
+        },
+        {
+          "name": "JWT_EXPIRES_IN",
+          "label": "JWT_EXPIRES_IN",
+          "default": ""
+        },
+        {
+          "name": "ENCRYPTION_KEY",
+          "label": "ENCRYPTION_KEY",
+          "default": ""
+        },
+        {
+          "name": "TIKA_URL",
+          "label": "TIKA_URL",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "filebrowser",
+      "description": "* [Filebrowser Quantum on GitHub](https://github.com/gtsteffaniak/filebrowser/tree/main) * [Getting Started Wiki](https://github.com/gtsteffaniak/filebrowser/wiki/Getting-Started) * [Configuration Docs](https://github.com/gtsteffaniak/filebrowser/wiki/Configuration-And-Examples)",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/filebrowser.png",
+      "image": "gtstef/filebrowser:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "filebrowser/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "FILEBROWSER_IMAGE",
+          "label": "FILEBROWSER_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "FILEBROWSER_CONFIG",
+          "label": "FILEBROWSER_CONFIG",
+          "default": ""
+        },
+        {
+          "name": "FILEBROWSER_ADMIN_PASSWORD",
+          "label": "FILEBROWSER_ADMIN_PASSWORD",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "firefly",
+      "description": "Docker Hub: https://hub.docker.com/r/fireflyiii/core/tags Documentation: https://docs.firefly-iii.org/how-to/firefly-iii/installation/docker/ Project: https://firefly-iii.org/ Proxy Port: 8080 Proxy Port Importer: 8080",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/firefly.png",
+      "image": "fireflyiii/core:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "firefly/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "FIREFLY_IMAGE",
+          "label": "FIREFLY_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "FIREFLY_IMPORTER_IMAGE",
+          "label": "FIREFLY_IMPORTER_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "jellyfin",
+      "description": "* [DockerHub jellyfin](https://hub.docker.com/r/jellyfin/jellyfin) * [Docs](https://jellyfin.org/docs/) ### Ports * 8096/tcp is used by default for HTTP traffic. You can change this in the dashboard. * 8920/tcp is used by default for HTTPS traffic. You can change this in the dashboard. * 1900/udp is used for service auto-discovery. This is not configurable. * 7359/udp is also used for auto-discovery. This is not configurable.",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/jellyfin.png",
+      "image": "jellyfin/jellyfin:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "jellyfin/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "JELLYFIN_IMAGE",
+          "label": "JELLYFIN_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "JELLYFIN_PublishedServerUrl",
+          "label": "JELLYFIN_PublishedServerUrl",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "mailu",
+      "description": "mailu Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/mailu.png",
+      "image": "mailu/mailu:2024.06",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "mailu/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "minio",
+      "description": "Docker Hub: https://hub.docker.com/r/minio/minio/tags Project: https://min.io/ Proxy Port: 9001",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/minio.png",
+      "image": "quay.io/minio/minio",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "minio/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "MINIO_IMAGE",
+          "label": "MINIO_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "MINIO_ROOT_USER",
+          "label": "MINIO_ROOT_USER",
+          "default": ""
+        },
+        {
+          "name": "MINIO_ROOT_PASSWORD",
+          "label": "MINIO_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MINIO_SERVER_URL",
+          "label": "MINIO_SERVER_URL",
+          "default": ""
+        },
+        {
+          "name": "MINIO_BROWSER_REDIRECT_URL",
+          "label": "MINIO_BROWSER_REDIRECT_URL",
+          "default": ""
+        },
+        {
+          "name": "MINO_CONSOLE_SECURE_TLS_REDIRECT",
+          "label": "MINO_CONSOLE_SECURE_TLS_REDIRECT",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "vaultwarden",
+      "description": "vaultwarden Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/vaultwarden.png",
+      "image": "vaultwarden/server:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "vaultwarden/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "PRODDIR",
+          "label": "PRODDIR",
+          "default": ""
+        },
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "VAULT_DOMAIN_NAME",
+          "label": "VAULT_DOMAIN_NAME",
+          "default": ""
+        },
+        {
+          "name": "VAULT_IMAGE",
+          "label": "VAULT_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "WEBSOCKET_ENABLED",
+          "label": "WEBSOCKET_ENABLED",
+          "default": ""
+        },
+        {
+          "name": "SIGNUPS_ALLOWED",
+          "label": "SIGNUPS_ALLOWED",
+          "default": ""
+        },
+        {
+          "name": "VAULT_ADMIN_TOKEN",
+          "label": "VAULT_ADMIN_TOKEN",
+          "default": ""
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST",
+          "default": ""
+        },
+        {
+          "name": "SMTP_FROM",
+          "label": "SMTP_FROM",
+          "default": ""
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": ""
+        },
+        {
+          "name": "SMTP_SECURITY",
+          "label": "SMTP_SECURITY",
+          "default": ""
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "SMTP_USERNAME",
+          "default": ""
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP_PASSWORD",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "immich",
+      "description": "immich Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/immich.png",
+      "image": "${IMMICH_IMAGE}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "immich/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_IMAGE",
+          "label": "IMMICH_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_UPLOAD_LOCATION",
+          "label": "IMMICH_UPLOAD_LOCATION",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_DB_DATA_LOCATION",
+          "label": "IMMICH_DB_DATA_LOCATION",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_DB_HOSTNAME",
+          "label": "IMMICH_DB_HOSTNAME",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_DB_PASSWORD",
+          "label": "IMMICH_DB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_DB_USERNAME",
+          "label": "IMMICH_DB_USERNAME",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_DB_DATABASE_NAME",
+          "label": "IMMICH_DB_DATABASE_NAME",
+          "default": ""
+        },
+        {
+          "name": "IMMICH_REDIS_HOSTNAME",
+          "label": "IMMICH_REDIS_HOSTNAME",
+          "default": ""
+        },
+        {
+          "name": "REDIS_IMAGE",
+          "label": "REDIS_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "POSTGRES_IMAGE",
+          "label": "POSTGRES_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "nginx-proxy-manager",
+      "description": "This Docker Compose configuration sets up the Reverse Proxy application using Docker container. - App: [Proxy Manager on Docker Hub](https://hub.docker.com/r/jc21/nginx-proxy-manager) - Official Site: [Nginx Proxy Manager](https://nginxproxymanager.com/) - [Docker tags](https://hub.docker.com/r/jc21/nginx-proxy-manager/tags) - Expose ports: 80, 81, 443",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/nginx-proxy-manager.png",
+      "image": "jc21/nginx-proxy-manager:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "nginx-proxy-manager/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "PROXY_IMAGE",
+          "label": "PROXY_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "docmost",
+      "description": "docmost Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/docmost.png",
+      "image": "docmost/docmost:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "docmost/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "bookstack",
+      "description": "bookstack Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/bookstack.png",
+      "image": "solidnerd/bookstack:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "bookstack/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_CONFIG_PATH",
+          "label": "VOL_CONFIG_PATH",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_APP_KEY",
+          "label": "BOOKSTACK_APP_KEY",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_APP_TIMEZONE",
+          "label": "BOOKSTACK_APP_TIMEZONE",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_APP_URL",
+          "label": "BOOKSTACK_APP_URL",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_DB_DATABASE",
+          "label": "BOOKSTACK_DB_DATABASE",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_DB_HOST",
+          "label": "BOOKSTACK_DB_HOST",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_DB_PASSWORD",
+          "label": "BOOKSTACK_DB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_DB_USERNAME",
+          "label": "BOOKSTACK_DB_USERNAME",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_IMAGE",
+          "label": "BOOKSTACK_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "BOOKSTACK_REVISION_LIMIT",
+          "label": "BOOKSTACK_REVISION_LIMIT",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "gitea",
+      "description": "gitea Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/gitea.png",
+      "image": "gitea/gitea:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "gitea/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "GITEA_IMAGE",
+          "label": "GITEA_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "GITEA_DB_HOST",
+          "label": "GITEA_DB_HOST",
+          "default": ""
+        },
+        {
+          "name": "GITEA_SSH_PORT",
+          "label": "GITEA_SSH_PORT",
+          "default": ""
+        },
+        {
+          "name": "GITEA_WEB_PORT",
+          "label": "GITEA_WEB_PORT",
+          "default": ""
+        },
+        {
+          "name": "GITEA_SSH_DOMAIN",
+          "label": "GITEA_SSH_DOMAIN",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "heimdall",
+      "description": "Heimdall is a lightweight web-based dashboard for organizing and launching your self-hosted applications.",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/heimdall.png",
+      "image": "${HEIMDALL_IMAGE}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "heimdall/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "HEIMDALL_IMAGE",
+          "label": "HEIMDALL_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "HEIMDALL_PGID",
+          "label": "HEIMDALL_PGID",
+          "default": ""
+        },
+        {
+          "name": "HEIMDALL_PUID",
+          "label": "HEIMDALL_PUID",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "ntfy",
+      "description": "* [Docker Hub](https://hub.docker.com/r/binwiederhier/ntfy) * [Project](https://ntfy.sh/) * [Docker Compose Example](https://github.com/binwiederhier/ntfy/blob/main/docker-compose.yml) Proxy Port: 80",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/ntfy.png",
+      "image": "binwiederhier/ntfy",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "ntfy/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "NTFY_IMAGE",
+          "label": "NTFY_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "NTFY_BASE_URL",
+          "label": "NTFY_BASE_URL",
+          "default": ""
+        },
+        {
+          "name": "NTFY_CACHE_FILE",
+          "label": "NTFY_CACHE_FILE",
+          "default": ""
+        },
+        {
+          "name": "NTFY_AUTH_FILE",
+          "label": "NTFY_AUTH_FILE",
+          "default": ""
+        },
+        {
+          "name": "NTFY_AUTH_DEFAULT_ACCESS",
+          "label": "NTFY_AUTH_DEFAULT_ACCESS",
+          "default": ""
+        },
+        {
+          "name": "NTFY_BEHIND_PROXY",
+          "label": "NTFY_BEHIND_PROXY",
+          "default": ""
+        },
+        {
+          "name": "NTFY_ATTACHMENT_CACHE_DIR",
+          "label": "NTFY_ATTACHMENT_CACHE_DIR",
+          "default": ""
+        },
+        {
+          "name": "NTFY_ENABLE_LOGIN",
+          "label": "NTFY_ENABLE_LOGIN",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "suitecrm",
+      "description": "suitecrm Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/suitecrm.png",
+      "image": "bitnami/suitecrm:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "suitecrm/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "SUITECRM_IMAGE",
+          "label": "SUITECRM_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "SUITECRM_DB_PASSWORD",
+          "label": "SUITECRM_DB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "SUITECRM_USER",
+          "label": "SUITECRM_USER",
+          "default": ""
+        },
+        {
+          "name": "SUITECRM_PASS",
+          "label": "SUITECRM_PASS",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "rocketchat",
+      "description": "rocketchat Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/rocketchat.png",
+      "image": "rocketchat/rocket.chat:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "rocketchat/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "PREFIX",
+          "label": "PREFIX",
+          "default": ""
+        },
+        {
+          "name": "ROCKET_DOMAIN_NAME",
+          "label": "ROCKET_DOMAIN_NAME",
+          "default": ""
+        },
+        {
+          "name": "ROCKETCHAT_V",
+          "label": "ROCKETCHAT_V",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "dockge",
+      "description": "dockge Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/dockge.png",
+      "image": "louislam/dockge:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "dockge/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    },
+    {
+      "type": 1,
+      "title": "jellyseerr",
+      "description": "jellyseerr Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/jellyseerr.png",
+      "image": "${JELLYSEERR_IMAGE}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "jellyseerr/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "JELLYSEERR_IMAGE",
+          "label": "JELLYSEERR_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "invoiceninja",
+      "description": "invoiceninja Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/invoiceninja.png",
+      "image": "invoiceninja/invoiceninja-debian:${TAG:-latest}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "invoiceninja/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "default": ""
+        },
+        {
+          "name": "APP_KEY",
+          "label": "APP_KEY",
+          "default": ""
+        },
+        {
+          "name": "APP_ENV",
+          "label": "APP_ENV",
+          "default": ""
+        },
+        {
+          "name": "APP_DEBUG",
+          "label": "APP_DEBUG",
+          "default": ""
+        },
+        {
+          "name": "REQUIRE_HTTPS",
+          "label": "REQUIRE_HTTPS",
+          "default": ""
+        },
+        {
+          "name": "PHANTOMJS_PDF_GENERATION",
+          "label": "PHANTOMJS_PDF_GENERATION",
+          "default": ""
+        },
+        {
+          "name": "PDF_GENERATOR",
+          "label": "PDF_GENERATOR",
+          "default": ""
+        },
+        {
+          "name": "TRUSTED_PROXIES",
+          "label": "TRUSTED_PROXIES",
+          "default": ""
+        },
+        {
+          "name": "CACHE_DRIVER",
+          "label": "CACHE_DRIVER",
+          "default": ""
+        },
+        {
+          "name": "QUEUE_CONNECTION",
+          "label": "QUEUE_CONNECTION",
+          "default": ""
+        },
+        {
+          "name": "SESSION_DRIVER",
+          "label": "SESSION_DRIVER",
+          "default": ""
+        },
+        {
+          "name": "REDIS_HOST",
+          "label": "REDIS_HOST",
+          "default": ""
+        },
+        {
+          "name": "REDIS_PASSWORD",
+          "label": "REDIS_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "REDIS_PORT",
+          "label": "REDIS_PORT",
+          "default": ""
+        },
+        {
+          "name": "FILESYSTEM_DISK",
+          "label": "FILESYSTEM_DISK",
+          "default": ""
+        },
+        {
+          "name": "DB_HOST",
+          "label": "DB_HOST",
+          "default": ""
+        },
+        {
+          "name": "DB_PORT",
+          "label": "DB_PORT",
+          "default": ""
+        },
+        {
+          "name": "DB_DATABASE",
+          "label": "DB_DATABASE",
+          "default": ""
+        },
+        {
+          "name": "DB_USERNAME",
+          "label": "DB_USERNAME",
+          "default": ""
+        },
+        {
+          "name": "DB_PASSWORD",
+          "label": "DB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "DB_ROOT_PASSWORD",
+          "label": "DB_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "DB_CONNECTION",
+          "label": "DB_CONNECTION",
+          "default": ""
+        },
+        {
+          "name": "IN_USER_EMAIL",
+          "label": "IN_USER_EMAIL",
+          "default": ""
+        },
+        {
+          "name": "IN_PASSWORD",
+          "label": "IN_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MAIL_MAILER",
+          "label": "MAIL_MAILER",
+          "default": ""
+        },
+        {
+          "name": "MAIL_HOST",
+          "label": "MAIL_HOST",
+          "default": ""
+        },
+        {
+          "name": "MAIL_PORT",
+          "label": "MAIL_PORT",
+          "default": ""
+        },
+        {
+          "name": "MAIL_USERNAME",
+          "label": "MAIL_USERNAME",
+          "default": ""
+        },
+        {
+          "name": "MAIL_PASSWORD",
+          "label": "MAIL_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MAIL_ENCRYPTION",
+          "label": "MAIL_ENCRYPTION",
+          "default": ""
+        },
+        {
+          "name": "MAIL_FROM_ADDRESS",
+          "label": "MAIL_FROM_ADDRESS",
+          "default": ""
+        },
+        {
+          "name": "MAIL_FROM_NAME",
+          "label": "MAIL_FROM_NAME",
+          "default": ""
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "label": "MYSQL_ROOT_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MYSQL_USER",
+          "label": "MYSQL_USER",
+          "default": ""
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "label": "MYSQL_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "MYSQL_DATABASE",
+          "label": "MYSQL_DATABASE",
+          "default": ""
+        },
+        {
+          "name": "NORDIGEN_SECRET_ID",
+          "label": "NORDIGEN_SECRET_ID",
+          "default": ""
+        },
+        {
+          "name": "NORDIGEN_SECRET_KEY",
+          "label": "NORDIGEN_SECRET_KEY",
+          "default": ""
+        },
+        {
+          "name": "IS_DOCKER",
+          "label": "IS_DOCKER",
+          "default": ""
+        },
+        {
+          "name": "SCOUT_DRIVER",
+          "label": "SCOUT_DRIVER",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "prowlarr",
+      "description": "prowlarr Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/prowlarr.png",
+      "image": "${PROWLARR_IMAGE}",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "prowlarr/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "PROWLARR_IMAGE",
+          "label": "PROWLARR_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "stashapp",
+      "description": "This Docker Compose configuration sets up the Stash application using Docker containers. - Stash App: [Stash on Docker Hub](https://hub.docker.com/r/stashapp/stash) - Compose Example: [Stash GitHub Repository](https://github.com/stashapp/stash/blob/develop/docker/production/docker-compose.yml) - ProxyPort: 9999",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/stashapp.png",
+      "image": "stashapp/stash:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "stashapp/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "STASHAPP_IMAGE",
+          "label": "STASHAPP_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "STASHAPP_STASH_CACHE",
+          "label": "STASHAPP_STASH_CACHE",
+          "default": ""
+        },
+        {
+          "name": "STASHAPP_STASH_DOMAIN_NAME",
+          "label": "STASHAPP_STASH_DOMAIN_NAME",
+          "default": ""
+        },
+        {
+          "name": "STASHAPP_STASH_GENERATED",
+          "label": "STASHAPP_STASH_GENERATED",
+          "default": ""
+        },
+        {
+          "name": "STASHAPP_STASH_METADATA",
+          "label": "STASHAPP_STASH_METADATA",
+          "default": ""
+        },
+        {
+          "name": "STASHAPP_STASH_STASH",
+          "label": "STASHAPP_STASH_STASH",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "archivebox",
+      "description": "Docker Hub: https://hub.docker.com/r/archivebox/archivebox/tags Docker Compose Example: https://raw.githubusercontent.com/ArchiveBox/ArchiveBox/dev/docker-compose.yml Project: https://archivebox.io/ Proxy Port: 8000",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/archivebox.png",
+      "image": "archivebox/archivebox:stable",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "archivebox/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "ARCHIVEBOX_IMAGE",
+          "label": "ARCHIVEBOX_IMAGE",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "poste",
+      "description": "poste Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/poste.png",
+      "image": "analogic/poste.io",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "poste/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "TZ",
+          "label": "TZ",
+          "default": ""
+        },
+        {
+          "name": "COMPOSE_PROJECT_NAME",
+          "label": "COMPOSE_PROJECT_NAME",
+          "default": ""
+        },
+        {
+          "name": "POSTE_PUBLIC_HOSTNAME",
+          "label": "POSTE_PUBLIC_HOSTNAME",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "nextcloud",
+      "description": "nextcloud Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/nextcloud.png",
+      "image": "nextcloud:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "nextcloud/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": [
+        {
+          "name": "COOKBOOK",
+          "label": "COOKBOOK",
+          "default": ""
+        },
+        {
+          "name": "VOL_PATH",
+          "label": "VOL_PATH",
+          "default": ""
+        },
+        {
+          "name": "NEXTCLOUD_IMAGE",
+          "label": "NEXTCLOUD_IMAGE",
+          "default": ""
+        },
+        {
+          "name": "NEXTCLOUD_DB_PASSWORD",
+          "label": "NEXTCLOUD_DB_PASSWORD",
+          "default": ""
+        },
+        {
+          "name": "NEXTCLOUD_DB",
+          "label": "NEXTCLOUD_DB",
+          "default": ""
+        },
+        {
+          "name": "NEXTCLOUD_DB_USER",
+          "label": "NEXTCLOUD_DB_USER",
+          "default": ""
+        },
+        {
+          "name": "NEXTCLOUD_DB_HOST",
+          "label": "NEXTCLOUD_DB_HOST",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "title": "hedgedoc",
+      "description": "hedgedoc Docker Compose stack",
+      "note": "Auto-generated template from repository",
+      "categories": [
+        "Auto"
+      ],
+      "platform": "linux",
+      "logo": "https://i.4lt.ca/cookbook/hedgedoc.png",
+      "image": "ghcr.io/hedgedoc/hedgedoc:latest",
+      "repository": {
+        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
+        "stackfile": "hedgedoc/docker-compose.yml",
+        "stackfile_plain": false
+      },
+      "env": []
+    }
+  ]
+}
