@@ -12,25 +12,35 @@ REPO_ROOT = SCRIPT_DIR.parent
 OUTPUT_FILE = REPO_ROOT / "templates.json"
 
 # ---------------------------------------------------------
-# Extract "Overview" section from README.md
+# Extract "Overview" section from README.md (strict)
 # ---------------------------------------------------------
-def extract_overview(readme_path: Path) -> str:
+def extract_overview(readme_path: Path, project_name: str) -> str:
+    """
+    Extracts the ## Overview section from README.md.
+    - Must match '## Overview' exactly (case-sensitive)
+    - Stops at the next line starting with '#'
+    - If no ## Overview section, returns '<project_name> description to come'
+    """
     if not readme_path.exists():
-        return ""
+        return f"{project_name} description to come"
 
     lines = readme_path.read_text().splitlines()
     overview = []
     in_section = False
 
     for line in lines:
-        if line.strip().lower().startswith("## overview"):
+        stripped = line.strip()
+        if stripped == "## Overview":
             in_section = True
             continue
-        if in_section and line.strip().startswith("## "):
-            break
         if in_section:
-            if line.strip():
-                overview.append(line.strip())
+            if stripped.startswith("#"):
+                break
+            if stripped:
+                overview.append(stripped)
+
+    if not overview:
+        return f"{project_name} description to come"
 
     return " ".join(overview)
 
@@ -39,7 +49,7 @@ def extract_overview(readme_path: Path) -> str:
 # ---------------------------------------------------------
 def find_logo_url(dir_path: Path) -> str:
     name = dir_path.name
-    return f"https://i.4lt.ca/cookbook/{name}.png"
+    return f"https://i.4lt.ca/cookbooks/{name}.png"
 
 # ---------------------------------------------------------
 # Parse first image name from docker-compose.yml
@@ -94,7 +104,7 @@ def generate_template_object(dir_path: Path):
     compose_file = dir_path / "docker-compose.yml"
     readme_file = dir_path / "README.md"
 
-    description = extract_overview(readme_file)
+    description = extract_overview(readme_file, name)
     if not description.strip():
         description = f"{name} Docker Compose stack"
 
@@ -133,6 +143,8 @@ def main():
         if not item.is_dir():
             continue
         if item.name.startswith("_"):
+            continue
+        if item.name.endswith("_dev"):  # development/experimental projects
             continue
         if not (item / "docker-compose.yml").exists():
             continue

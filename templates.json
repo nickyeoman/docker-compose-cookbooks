@@ -4,13 +4,13 @@
     {
       "type": 1,
       "title": "phpcontainer",
-      "description": "phpcontainer Docker Compose stack",
+      "description": "phpcontainer description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/phpcontainer.png",
+      "logo": "https://i.4lt.ca/cookbooks/phpcontainer.png",
       "image": "4lights/phpcontainer:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -59,7 +59,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/wallabag.png",
+      "logo": "https://i.4lt.ca/cookbooks/wallabag.png",
       "image": "wallabag/wallabag:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -158,7 +158,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/thunderbird.png",
+      "logo": "https://i.4lt.ca/cookbooks/thunderbird.png",
       "image": "jlesage/thunderbird",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -196,13 +196,13 @@
     {
       "type": 1,
       "title": "mariadb",
-      "description": "mariadb Docker Compose stack",
+      "description": "mariadb description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/mariadb.png",
+      "logo": "https://i.4lt.ca/cookbooks/mariadb.png",
       "image": "mariadb:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -260,13 +260,13 @@
     {
       "type": 1,
       "title": "dozzle",
-      "description": "dozzle Docker Compose stack",
+      "description": "dozzle description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/dozzle.png",
+      "logo": "https://i.4lt.ca/cookbooks/dozzle.png",
       "image": "amir20/dozzle:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -278,13 +278,13 @@
     {
       "type": 1,
       "title": "passbolt",
-      "description": "passbolt Docker Compose stack",
+      "description": "passbolt description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/passbolt.png",
+      "logo": "https://i.4lt.ca/cookbooks/passbolt.png",
       "image": "mariadb:${DB_V}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -332,13 +332,13 @@
     {
       "type": 1,
       "title": "unami",
-      "description": "unami Docker Compose stack",
+      "description": "unami description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/unami.png",
+      "logo": "https://i.4lt.ca/cookbooks/unami.png",
       "image": "ghcr.io/umami-software/umami:postgresql-latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -350,13 +350,13 @@
     {
       "type": 1,
       "title": "peertube",
-      "description": "peertube Docker Compose stack",
+      "description": "peertube description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/peertube.png",
+      "logo": "https://i.4lt.ca/cookbooks/peertube.png",
       "image": "chocobozzz/peertube:production-bookworm",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -374,7 +374,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/phpmyadmin.png",
+      "logo": "https://i.4lt.ca/cookbooks/phpmyadmin.png",
       "image": "phpmyadmin/phpmyadmin:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -442,13 +442,13 @@
     {
       "type": 1,
       "title": "activepieces",
-      "description": "activepieces Docker Compose stack",
+      "description": "activepieces description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/activepieces.png",
+      "logo": "https://i.4lt.ca/cookbooks/activepieces.png",
       "image": "ghcr.io/activepieces/activepieces:0.44.0",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -460,13 +460,13 @@
     {
       "type": 1,
       "title": "penpot",
-      "description": "penpot Docker Compose stack",
+      "description": "penpot description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/penpot.png",
+      "logo": "https://i.4lt.ca/cookbooks/penpot.png",
       "image": "traefik:v2.9",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -478,13 +478,13 @@
     {
       "type": 1,
       "title": "pihole",
-      "description": "pihole Docker Compose stack",
+      "description": "pihole description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/pihole.png",
+      "logo": "https://i.4lt.ca/cookbooks/pihole.png",
       "image": "pihole/pihole:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -512,13 +512,13 @@
     {
       "type": 1,
       "title": "paperless",
-      "description": "paperless Docker Compose stack",
+      "description": "paperless description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/paperless.png",
+      "logo": "https://i.4lt.ca/cookbooks/paperless.png",
       "image": "docker.io/library/redis:8",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -591,13 +591,13 @@
     {
       "type": 1,
       "title": "sonarr",
-      "description": "sonarr Docker Compose stack",
+      "description": "sonarr description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/sonarr.png",
+      "logo": "https://i.4lt.ca/cookbooks/sonarr.png",
       "image": "${SONARR_IMAGE}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -631,7 +631,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/nocodb.png",
+      "logo": "https://i.4lt.ca/cookbooks/nocodb.png",
       "image": "nocodb/nocodb:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -654,13 +654,13 @@
     {
       "type": 1,
       "title": "directus",
-      "description": "directus Docker Compose stack",
+      "description": "directus description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/directus.png",
+      "logo": "https://i.4lt.ca/cookbooks/directus.png",
       "image": "directus/directus:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -708,13 +708,13 @@
     {
       "type": 1,
       "title": "matomo",
-      "description": "matomo Docker Compose stack",
+      "description": "matomo description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/matomo.png",
+      "logo": "https://i.4lt.ca/cookbooks/matomo.png",
       "image": "mariadb:${DB_V}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -757,13 +757,13 @@
     {
       "type": 1,
       "title": "joomla",
-      "description": "joomla Docker Compose stack",
+      "description": "joomla description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/joomla.png",
+      "logo": "https://i.4lt.ca/cookbooks/joomla.png",
       "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -775,13 +775,13 @@
     {
       "type": 1,
       "title": "adminer",
-      "description": "adminer Docker Compose stack",
+      "description": "adminer description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/adminer.png",
+      "logo": "https://i.4lt.ca/cookbooks/adminer.png",
       "image": "adminer:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -814,13 +814,13 @@
     {
       "type": 1,
       "title": "etherpad",
-      "description": "etherpad Docker Compose stack",
+      "description": "etherpad description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/etherpad.png",
+      "logo": "https://i.4lt.ca/cookbooks/etherpad.png",
       "image": "",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -838,7 +838,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/n8n.png",
+      "logo": "https://i.4lt.ca/cookbooks/n8n.png",
       "image": "n8nio/n8n:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -876,13 +876,13 @@
     {
       "type": 1,
       "title": "radarr",
-      "description": "radarr Docker Compose stack",
+      "description": "radarr description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/radarr.png",
+      "logo": "https://i.4lt.ca/cookbooks/radarr.png",
       "image": "${RADARR_IMAGE}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -910,13 +910,13 @@
     {
       "type": 1,
       "title": "posthog",
-      "description": "posthog Docker Compose stack",
+      "description": "posthog description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/posthog.png",
+      "logo": "https://i.4lt.ca/cookbooks/posthog.png",
       "image": "",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -934,7 +934,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/mealie.png",
+      "logo": "https://i.4lt.ca/cookbooks/mealie.png",
       "image": "hkotel/mealie:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1017,13 +1017,13 @@
     {
       "type": 1,
       "title": "memos",
-      "description": "memos Docker Compose stack",
+      "description": "memos description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/memos.png",
+      "logo": "https://i.4lt.ca/cookbooks/memos.png",
       "image": "neosmemo/memos:stable",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1041,7 +1041,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/redis.png",
+      "logo": "https://i.4lt.ca/cookbooks/redis.png",
       "image": "redis:alpine",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1064,13 +1064,13 @@
     {
       "type": 1,
       "title": "duplicati",
-      "description": "duplicati Docker Compose stack",
+      "description": "duplicati description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/duplicati.png",
+      "logo": "https://i.4lt.ca/cookbooks/duplicati.png",
       "image": "duplicati/duplicati:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1108,13 +1108,13 @@
     {
       "type": 1,
       "title": "qbittorrent",
-      "description": "qbittorrent Docker Compose stack",
+      "description": "qbittorrent description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/qbittorrent.png",
+      "logo": "https://i.4lt.ca/cookbooks/qbittorrent.png",
       "image": "trigus42/qbittorrentvpn:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1147,13 +1147,13 @@
     {
       "type": 1,
       "title": "videoduplicatefinder",
-      "description": "videoduplicatefinder Docker Compose stack",
+      "description": "videoduplicatefinder description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/videoduplicatefinder.png",
+      "logo": "https://i.4lt.ca/cookbooks/videoduplicatefinder.png",
       "image": "jlesage/video-duplicate-finder:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1187,7 +1187,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/monica.png",
+      "logo": "https://i.4lt.ca/cookbooks/monica.png",
       "image": "latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1235,13 +1235,13 @@
     {
       "type": 1,
       "title": "listmonk",
-      "description": "listmonk Docker Compose stack",
+      "description": "listmonk description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/listmonk.png",
+      "logo": "https://i.4lt.ca/cookbooks/listmonk.png",
       "image": "postgres:13-alpine",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1274,13 +1274,13 @@
     {
       "type": 1,
       "title": "shlink",
-      "description": "shlink Docker Compose stack",
+      "description": "shlink description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/shlink.png",
+      "logo": "https://i.4lt.ca/cookbooks/shlink.png",
       "image": "mariadb:10.7.1 # https://hub.docker.com/_/mariadb",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1292,13 +1292,13 @@
     {
       "type": 1,
       "title": "lubelogger",
-      "description": "lubelogger Docker Compose stack",
+      "description": "lubelogger description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/lubelogger.png",
+      "logo": "https://i.4lt.ca/cookbooks/lubelogger.png",
       "image": "ghcr.io/hargata/lubelogger:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1332,7 +1332,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/code-server.png",
+      "logo": "https://i.4lt.ca/cookbooks/code-server.png",
       "image": "null",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1375,13 +1375,13 @@
     {
       "type": 1,
       "title": "authentik",
-      "description": "authentik Docker Compose stack",
+      "description": "authentik description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/authentik.png",
+      "logo": "https://i.4lt.ca/cookbooks/authentik.png",
       "image": "docker.io/library/postgres:16-alpine",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1393,13 +1393,13 @@
     {
       "type": 1,
       "title": "handbrake",
-      "description": "handbrake Docker Compose stack",
+      "description": "handbrake description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/handbrake.png",
+      "logo": "https://i.4lt.ca/cookbooks/handbrake.png",
       "image": "jlesage/handbrake:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1487,13 +1487,13 @@
     {
       "type": 1,
       "title": "yourls",
-      "description": "yourls Docker Compose stack",
+      "description": "yourls description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/yourls.png",
+      "logo": "https://i.4lt.ca/cookbooks/yourls.png",
       "image": "mariadb:${DB_V}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1547,7 +1547,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/paisa.png",
+      "logo": "https://i.4lt.ca/cookbooks/paisa.png",
       "image": "ananthakumaran/paisa:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1581,7 +1581,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/semaphore.png",
+      "logo": "https://i.4lt.ca/cookbooks/semaphore.png",
       "image": "semaphoreui/semaphore:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1650,7 +1650,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/uptimekuma.png",
+      "logo": "https://i.4lt.ca/cookbooks/uptimekuma.png",
       "image": "louislam/uptime-kuma:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1673,13 +1673,13 @@
     {
       "type": 1,
       "title": "ollama",
-      "description": "ollama Docker Compose stack",
+      "description": "ollama description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/ollama.png",
+      "logo": "https://i.4lt.ca/cookbooks/ollama.png",
       "image": "ollama/ollama",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1717,13 +1717,13 @@
     {
       "type": 1,
       "title": "zammad",
-      "description": "zammad Docker Compose stack",
+      "description": "zammad description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/zammad.png",
+      "logo": "https://i.4lt.ca/cookbooks/zammad.png",
       "image": "postgres:${POSTGRES_VERSION:-17.5-alpine}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1787,7 +1787,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/homepage.png",
+      "logo": "https://i.4lt.ca/cookbooks/homepage.png",
       "image": "ghcr.io/gethomepage/homepage:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1821,7 +1821,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/piwigo.png",
+      "logo": "https://i.4lt.ca/cookbooks/piwigo.png",
       "image": "lscr.io/linuxserver/piwigo:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1864,13 +1864,13 @@
     {
       "type": 1,
       "title": "portainer",
-      "description": "portainer Docker Compose stack",
+      "description": "portainer description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/portainer.png",
+      "logo": "https://i.4lt.ca/cookbooks/portainer.png",
       "image": "portainer/portainer-ce:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -1908,13 +1908,13 @@
     {
       "type": 1,
       "title": "openarchiver",
-      "description": "openarchiver Docker Compose stack",
+      "description": "openarchiver description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/openarchiver.png",
+      "logo": "https://i.4lt.ca/cookbooks/openarchiver.png",
       "image": "logiclabshq/open-archiver:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2058,7 +2058,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/filebrowser.png",
+      "logo": "https://i.4lt.ca/cookbooks/filebrowser.png",
       "image": "gtstef/filebrowser:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2107,7 +2107,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/firefly.png",
+      "logo": "https://i.4lt.ca/cookbooks/firefly.png",
       "image": "fireflyiii/core:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2140,13 +2140,13 @@
     {
       "type": 1,
       "title": "jellyfin",
-      "description": "* [DockerHub jellyfin](https://hub.docker.com/r/jellyfin/jellyfin) * [Docs](https://jellyfin.org/docs/) ### Ports * 8096/tcp is used by default for HTTP traffic. You can change this in the dashboard. * 8920/tcp is used by default for HTTPS traffic. You can change this in the dashboard. * 1900/udp is used for service auto-discovery. This is not configurable. * 7359/udp is also used for auto-discovery. This is not configurable.",
+      "description": "* [DockerHub jellyfin](https://hub.docker.com/r/jellyfin/jellyfin) * [Docs](https://jellyfin.org/docs/)",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/jellyfin.png",
+      "logo": "https://i.4lt.ca/cookbooks/jellyfin.png",
       "image": "jellyfin/jellyfin:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2179,13 +2179,13 @@
     {
       "type": 1,
       "title": "mailu",
-      "description": "mailu Docker Compose stack",
+      "description": "mailu description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/mailu.png",
+      "logo": "https://i.4lt.ca/cookbooks/mailu.png",
       "image": "mailu/mailu:2024.06",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2203,7 +2203,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/minio.png",
+      "logo": "https://i.4lt.ca/cookbooks/minio.png",
       "image": "quay.io/minio/minio",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2256,13 +2256,13 @@
     {
       "type": 1,
       "title": "vaultwarden",
-      "description": "vaultwarden Docker Compose stack",
+      "description": "vaultwarden description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/vaultwarden.png",
+      "logo": "https://i.4lt.ca/cookbooks/vaultwarden.png",
       "image": "vaultwarden/server:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2345,13 +2345,13 @@
     {
       "type": 1,
       "title": "immich",
-      "description": "immich Docker Compose stack",
+      "description": "immich description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/immich.png",
+      "logo": "https://i.4lt.ca/cookbooks/immich.png",
       "image": "${IMMICH_IMAGE}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2430,7 +2430,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/nginx-proxy-manager.png",
+      "logo": "https://i.4lt.ca/cookbooks/nginx-proxy-manager.png",
       "image": "jc21/nginx-proxy-manager:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2458,13 +2458,13 @@
     {
       "type": 1,
       "title": "docmost",
-      "description": "docmost Docker Compose stack",
+      "description": "docmost description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/docmost.png",
+      "logo": "https://i.4lt.ca/cookbooks/docmost.png",
       "image": "docmost/docmost:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2476,13 +2476,13 @@
     {
       "type": 1,
       "title": "bookstack",
-      "description": "bookstack Docker Compose stack",
+      "description": "bookstack description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/bookstack.png",
+      "logo": "https://i.4lt.ca/cookbooks/bookstack.png",
       "image": "solidnerd/bookstack:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2555,13 +2555,13 @@
     {
       "type": 1,
       "title": "gitea",
-      "description": "gitea Docker Compose stack",
+      "description": "gitea description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/gitea.png",
+      "logo": "https://i.4lt.ca/cookbooks/gitea.png",
       "image": "gitea/gitea:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2615,7 +2615,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/heimdall.png",
+      "logo": "https://i.4lt.ca/cookbooks/heimdall.png",
       "image": "${HEIMDALL_IMAGE}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2649,7 +2649,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/ntfy.png",
+      "logo": "https://i.4lt.ca/cookbooks/ntfy.png",
       "image": "binwiederhier/ntfy",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2717,13 +2717,13 @@
     {
       "type": 1,
       "title": "suitecrm",
-      "description": "suitecrm Docker Compose stack",
+      "description": "suitecrm description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/suitecrm.png",
+      "logo": "https://i.4lt.ca/cookbooks/suitecrm.png",
       "image": "bitnami/suitecrm:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2761,13 +2761,13 @@
     {
       "type": 1,
       "title": "rocketchat",
-      "description": "rocketchat Docker Compose stack",
+      "description": "rocketchat description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/rocketchat.png",
+      "logo": "https://i.4lt.ca/cookbooks/rocketchat.png",
       "image": "rocketchat/rocket.chat:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2795,13 +2795,13 @@
     {
       "type": 1,
       "title": "dockge",
-      "description": "dockge Docker Compose stack",
+      "description": "dockge description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/dockge.png",
+      "logo": "https://i.4lt.ca/cookbooks/dockge.png",
       "image": "louislam/dockge:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2813,13 +2813,13 @@
     {
       "type": 1,
       "title": "jellyseerr",
-      "description": "jellyseerr Docker Compose stack",
+      "description": "jellyseerr description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/jellyseerr.png",
+      "logo": "https://i.4lt.ca/cookbooks/jellyseerr.png",
       "image": "${JELLYSEERR_IMAGE}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -2847,13 +2847,13 @@
     {
       "type": 1,
       "title": "invoiceninja",
-      "description": "invoiceninja Docker Compose stack",
+      "description": "invoiceninja description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/invoiceninja.png",
+      "logo": "https://i.4lt.ca/cookbooks/invoiceninja.png",
       "image": "invoiceninja/invoiceninja-debian:${TAG:-latest}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3066,13 +3066,13 @@
     {
       "type": 1,
       "title": "prowlarr",
-      "description": "prowlarr Docker Compose stack",
+      "description": "prowlarr description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/prowlarr.png",
+      "logo": "https://i.4lt.ca/cookbooks/prowlarr.png",
       "image": "${PROWLARR_IMAGE}",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3106,7 +3106,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/stashapp.png",
+      "logo": "https://i.4lt.ca/cookbooks/stashapp.png",
       "image": "stashapp/stash:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3155,7 +3155,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/archivebox.png",
+      "logo": "https://i.4lt.ca/cookbooks/archivebox.png",
       "image": "archivebox/archivebox:stable",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3183,13 +3183,13 @@
     {
       "type": 1,
       "title": "poste",
-      "description": "poste Docker Compose stack",
+      "description": "poste description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/poste.png",
+      "logo": "https://i.4lt.ca/cookbooks/poste.png",
       "image": "analogic/poste.io",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3227,13 +3227,13 @@
     {
       "type": 1,
       "title": "nextcloud",
-      "description": "nextcloud Docker Compose stack",
+      "description": "nextcloud description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/nextcloud.png",
+      "logo": "https://i.4lt.ca/cookbooks/nextcloud.png",
       "image": "nextcloud:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -3281,13 +3281,13 @@
     {
       "type": 1,
       "title": "hedgedoc",
-      "description": "hedgedoc Docker Compose stack",
+      "description": "hedgedoc description to come",
       "note": "Auto-generated template from repository",
       "categories": [
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbook/hedgedoc.png",
+      "logo": "https://i.4lt.ca/cookbooks/hedgedoc.png",
       "image": "ghcr.io/hedgedoc/hedgedoc:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
