@@ -12,13 +12,16 @@ services:
       - SYMFONY__ENV__DATABASE_CHARSET=${WALLABAG_DB_CHARSET:-utf8mb4}
       - SYMFONY__ENV__DATABASE_TABLE_PREFIX=${WALLABAG_DB_PREFIX:-wallabag_}
       - SYMFONY__ENV__MAILER_DSN=${WALLABAG_MAILER_DSN:-smtp://127.0.0.1}
-      - SYMFONY__ENV__FROM_EMAIL=${WALLABAG_FROM_WEMAIL:-wallabag@example.com}
+      - SYMFONY__ENV__FROM_EMAIL=${WALLABAG_FROM_EMAIL:-wallabag@example.com}
       - SYMFONY__ENV__DOMAIN_NAME=${WALLABAG_DOMAIN:-https://your-wallabag-instance.wallabag.org}
       - SYMFONY__ENV__SERVER_NAME=${WALLABAG_SERVER:-Your wallabag instance}
       - TZ=${WALLABAG_TZ:-America/Vancouver}
     healthcheck:
-      test: ["CMD", "wget" ,"--no-verbose", "--tries=1", "--spider", "http://localhost/api/info"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/api/info"]
       interval: 1m
       timeout: 3s
     volumes:
-      - "${VOL_PATH:-/tmp}/wallabag:/var/www/wallabag/web/assets/images"
+      - wallabag-data:/var/www/wallabag/web/assets/images
+
+volumes:
+  wallabag-data:

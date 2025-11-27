@@ -3,5 +3,11 @@ services:
     image: ${HOMEPAGE_IMAGE:-ghcr.io/gethomepage/homepage:latest}
     restart: unless-stopped
     volumes:
-      - ${VOL_CONFIG_PATH:-./config}/homepage:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+      - homepage-config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock  # Optional, for Docker integrations
+    environment:
+      - TZ=${TZ:-America/Vancouver}  # optional, if your app needs a timezone
+
+volumes:
+  homepage-config:
+    name: homepage-config

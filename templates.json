@@ -79,16 +79,6 @@
       },
       "env": [
         {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": "/docker/vol/wallabag-data #HELP: volpath"
-        },
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
-        },
-        {
           "name": "WALLABAG_TZ",
           "label": "WALLABAG_TZ",
           "default": "America/Vancouver"
@@ -176,7 +166,7 @@
         "Auto"
       ],
       "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
+      "logo": "https://i.4lt.ca/cookbooks/thunderbird.png",
       "image": "jlesage/thunderbird:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
@@ -781,7 +771,7 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "NOCODB_IMAGE",
@@ -978,7 +968,7 @@
       ],
       "platform": "linux",
       "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "n8nio/n8n:latest # or 1.70.2",
+      "image": "n8nio/n8n:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "n8n/docker-compose.yml",
@@ -998,7 +988,7 @@
         {
           "name": "N8N_IMAGE",
           "label": "N8N_IMAGE",
-          "default": "n8nio/n8n:latest # or 1.70.2"
+          "default": "n8nio/n8n:latest"
         },
         {
           "name": "N8N_PORT",
@@ -1114,12 +1104,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data/ #HELP: volpath"
+          "default": "./data/"
         },
         {
           "name": "TZ",
@@ -1241,7 +1231,7 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "REDIS_IMAGE",
@@ -1262,7 +1252,7 @@
       ],
       "platform": "linux",
       "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "duplicati/duplicati:latest #2.1.0.5",
+      "image": "duplicati/duplicati:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "duplicati/docker-compose.yml",
@@ -1282,7 +1272,7 @@
         {
           "name": "DUPLICATI_IMAGE",
           "label": "DUPLICATI_IMAGE",
-          "default": "duplicati/duplicati:latest #2.1.0.5"
+          "default": "duplicati/duplicati:latest"
         },
         {
           "name": "DUPLICATI_KEY",
@@ -1337,12 +1327,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/home/user/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "/project-dir/project-name/data #HELP: volpath"
+          "default": "/project-dir/project-name/data"
         },
         {
           "name": "QBT_IMAGE",
@@ -1352,7 +1342,7 @@
         {
           "name": "QBT_PASS",
           "label": "QBT_PASS",
-          "default": "01234567890 #HELP: gen32"
+          "default": "01234567890"
         }
       ],
       "ports": [
@@ -1401,12 +1391,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data #HELP: volpath"
+          "default": "./data"
         },
         {
           "name": "MONICA_IMAGE",
@@ -1598,12 +1588,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data #HELP: volpath"
+          "default": "./data"
         },
         {
           "name": "TZ",
@@ -1618,7 +1608,7 @@
         {
           "name": "CODE-SERVER_PASSWORD",
           "label": "CODE-SERVER_PASSWORD",
-          "default": "RanDoMChangeMe #HELP: gen32"
+          "default": "RanDoMChangeMe"
         },
         {
           "name": "CODE-SERVER_DOMAIN",
@@ -1683,17 +1673,17 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "/docker/vol/handbrake-data #HELP: volpath"
+          "default": "/docker/vol/handbrake-data"
         },
         {
           "name": "VOL_CONFIG_PATH",
           "label": "VOL_CONFIG_PATH",
-          "default": "/docker/vol #HELP: configpath"
+          "default": "/docker/vol"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/home/user/git/docker-compose-cookbooks"
         },
         {
           "name": "HANDBRAKE_IMAGE",
@@ -1703,7 +1693,7 @@
         {
           "name": "AUTOMATED_CONVERSION",
           "label": "AUTOMATED_CONVERSION",
-          "default": "1 # 0 for no"
+          "default": "1"
         },
         {
           "name": "AUTOMATED_CONVERSION_FORMAT",
@@ -1713,12 +1703,12 @@
         {
           "name": "AUTOMATED_CONVERSION_KEEP_SOURCE",
           "label": "AUTOMATED_CONVERSION_KEEP_SOURCE",
-          "default": "1 # 0 for remove"
+          "default": "1"
         },
         {
           "name": "AUTOMATED_CONVERSION_USE_TRASH",
           "label": "AUTOMATED_CONVERSION_USE_TRASH",
-          "default": "0 # 1 for yes.  Required KEEP_SOURCE"
+          "default": "0"
         },
         {
           "name": "AUTOMATED_CONVERSION_OVERWRITE_OUTPUT",
@@ -1728,7 +1718,7 @@
         {
           "name": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
           "label": "AUTOMATED_CONVERSION_NO_GUI_PROGRESS",
-          "default": "0 # 0 is show"
+          "default": "0"
         },
         {
           "name": "AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS",
@@ -1871,12 +1861,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data/ #HELP: volpath"
+          "default": "./data/"
         },
         {
           "name": "PAISA_IMAGE",
@@ -1996,7 +1986,7 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "UPTIMEKUMA_IMAGE",
@@ -2072,7 +2062,7 @@
         {
           "name": "NGINX_SERVER_SCHEME",
           "label": "NGINX_SERVER_SCHEME",
-          "default": "$scheme  # Or force 'http'/'https"
+          "default": "$scheme"
         }
       ],
       "ports": [],
@@ -2100,11 +2090,6 @@
         "stackfile_plain": false
       },
       "env": [
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
-        },
         {
           "name": "HOMEPAGE_IMAGE",
           "label": "HOMEPAGE_IMAGE",
@@ -2148,7 +2133,7 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "TZ",
@@ -2158,7 +2143,7 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data #HELP: volpath"
+          "default": "./data"
         },
         {
           "name": "PIWIGO_IMAGE",
@@ -2198,7 +2183,7 @@
       ],
       "platform": "linux",
       "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "gtstef/filebrowser:latest #0.8.7-beta",
+      "image": "gtstef/filebrowser:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "filebrowser/docker-compose.yml",
@@ -2223,7 +2208,7 @@
         {
           "name": "FILEBROWSER_IMAGE",
           "label": "FILEBROWSER_IMAGE",
-          "default": "gtstef/filebrowser:latest #0.8.7-beta"
+          "default": "gtstef/filebrowser:latest"
         },
         {
           "name": "FILEBROWSER_CONFIG",
@@ -2272,12 +2257,12 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "/docker/vol/portainer-data #HELP: volpath"
+          "default": "/docker/vol/portainer-data"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "FIREFLY_IMAGE",
@@ -2323,7 +2308,7 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "JELLYFIN_IMAGE",
@@ -2431,12 +2416,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data/ #HELP: volpath"
+          "default": "./data/"
         },
         {
           "name": "MINIO_IMAGE",
@@ -2497,17 +2482,17 @@
         {
           "name": "PRODDIR",
           "label": "PRODDIR",
-          "default": "/var/www/stashdomain-com/ #HELP: project_path"
+          "default": "/var/www/stashdomain-com/"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/home/user/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "/project-dir/project-name/data #HELP: volpath"
+          "default": "/project-dir/project-name/data"
         },
         {
           "name": "VAULT_DOMAIN_NAME",
@@ -2522,17 +2507,17 @@
         {
           "name": "WEBSOCKET_ENABLED",
           "label": "WEBSOCKET_ENABLED",
-          "default": "true # Enable WebSocket notifications"
+          "default": "true"
         },
         {
           "name": "SIGNUPS_ALLOWED",
           "label": "SIGNUPS_ALLOWED",
-          "default": "false # Disable new user signups"
+          "default": "false"
         },
         {
           "name": "VAULT_ADMIN_TOKEN",
           "label": "VAULT_ADMIN_TOKEN",
-          "default": "01234567890123456790123456790123456789012345678 #HELP: gen32"
+          "default": "01234567890123456790123456790123456789012345678"
         },
         {
           "name": "SMTP_HOST",
@@ -2680,12 +2665,12 @@
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "/docker/vol/portainer-data #HELP: volpath"
+          "default": "/docker/vol/portainer-data"
         },
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/home/user/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/home/user/git/docker-compose-cookbooks"
         },
         {
           "name": "PROXY_IMAGE",
@@ -2882,12 +2867,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data #HELP: volpath"
+          "default": "./data"
         },
         {
           "name": "GITEA_IMAGE",
@@ -2990,7 +2975,7 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
@@ -3522,7 +3507,7 @@
       ],
       "platform": "linux",
       "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "stashapp/stash:latest # https://hub.docker.com/r/stashapp/stash/tags",
+      "image": "stashapp/stash:latest",
       "repository": {
         "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
         "stackfile": "stashapp/docker-compose.yml",
@@ -3532,7 +3517,7 @@
         {
           "name": "STASHAPP_IMAGE",
           "label": "STASHAPP_IMAGE",
-          "default": "stashapp/stash:latest # https://hub.docker.com/r/stashapp/stash/tags"
+          "default": "stashapp/stash:latest"
         },
         {
           "name": "STASHAPP_STASH_CACHE",
@@ -3608,7 +3593,7 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
@@ -3736,12 +3721,12 @@
         {
           "name": "COOKBOOK",
           "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks #HELP: cookbooks"
+          "default": "/git/docker-compose-cookbooks"
         },
         {
           "name": "VOL_PATH",
           "label": "VOL_PATH",
-          "default": "./data #HELP: volpath"
+          "default": "./data"
         },
         {
           "name": "NEXTCLOUD_IMAGE",

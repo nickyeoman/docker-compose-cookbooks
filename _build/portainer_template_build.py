@@ -42,10 +42,13 @@ def extract_overview(readme_path: Path, project_name: str) -> str:
 # ---------------------------------------------------------
 # Logo URL mapping with existence check
 # ---------------------------------------------------------
-def find_logo_url(dir_path: Path) -> str:
+def find_logo_url(dir_path: Path, nologo: bool = False) -> str:
     base_url = "https://i.4lt.ca/cookbooks/"
     name = dir_path.name
     logo_url = f"{base_url}{name}.png"
+
+    if nologo:
+        return f"{base_url}default.png"
 
     try:
         resp = requests.head(logo_url, timeout=5)
@@ -55,6 +58,7 @@ def find_logo_url(dir_path: Path) -> str:
         pass
 
     return f"{base_url}default.png"
+
 
 # ---------------------------------------------------------
 # Parse image from docker-compose.yml using sample.env defaults
@@ -184,7 +188,8 @@ def parse_env_vars(dir_path: Path):
         if "=" in line:
             key, value = line.split("=", 1)
             key = key.strip()
-            value = value.strip().strip('"').strip("'")
+            # Remove inline comment after #, then strip quotes and whitespace
+            value = value.split("#", 1)[0].strip().strip('"').strip("'")
             if key:
                 env_list.append({"name": key, "default": value})
 
@@ -200,7 +205,7 @@ def generate_template_object(dir_path: Path):
 
     # Extract info
     description = extract_overview(readme_file, name)
-    logo = find_logo_url(dir_path)
+    logo = find_logo_url(dir_path, nologo=False)  # for dev/test
     env_vars = parse_env_vars(dir_path)
     image = parse_image(compose_file, env_vars)
     ports = parse_ports(compose_file)
