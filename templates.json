@@ -3,66 +3,6 @@
   "templates": [
     {
       "type": 1,
-      "title": "phpcontainer",
-      "description": "phpcontainer description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "4lights/phpcontainer:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "phpcontainer/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": "/docker-compose-cookbooks"
-        },
-        {
-          "name": "COMPOSE_PROJECT_NAME",
-          "label": "COMPOSE_PROJECT_NAME",
-          "default": "project"
-        },
-        {
-          "name": "TZ",
-          "label": "TZ",
-          "default": "America/Vancouver"
-        },
-        {
-          "name": "VOL_CONFIG_PATH",
-          "label": "VOL_CONFIG_PATH",
-          "default": "/data/projectName/config"
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": "/data/projectName/data"
-        },
-        {
-          "name": "PHPCONTAINER_IMAGE",
-          "label": "PHPCONTAINER_IMAGE",
-          "default": "4lights/phpcontainer:latest"
-        }
-      ],
-      "ports": [],
-      "volumes": [
-        {
-          "name": "phpcontainer-data",
-          "container": "/data"
-        },
-        {
-          "name": "phpcontainer-usr-local-etc-php-php.ini",
-          "container": "/usr/local/etc/php/php.ini"
-        }
-      ]
-    },
-    {
-      "type": 1,
       "title": "wallabag",
       "description": "Docker Hub: https://hub.docker.com/r/wallabag/wallabag Project: Docker Compose Example: https://github.com/wallabag/docker Proxy Port: 80",
       "note": "Auto-generated template from repository",
@@ -235,26 +175,6 @@
         "stackfile_plain": false
       },
       "env": [
-        {
-          "name": "COMPOSE_PROJECT_NAME",
-          "label": "COMPOSE_PROJECT_NAME",
-          "default": "project"
-        },
-        {
-          "name": "TZ",
-          "label": "TZ",
-          "default": "America/Vancouver"
-        },
-        {
-          "name": "VOL_CONFIG_PATH",
-          "label": "VOL_CONFIG_PATH",
-          "default": "/data/projectName/config"
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": "/data/projectName/data"
-        },
         {
           "name": "MARIADB_IMAGE",
           "label": "MARIADB_IMAGE",
@@ -595,7 +515,7 @@
         {
           "container": 53,
           "published": 53,
-          "protocol": "tcp"
+          "protocol": "udp"
         },
         {
           "container": 80,
@@ -748,117 +668,6 @@
         {
           "name": "sonarr-data",
           "container": "/data"
-        }
-      ]
-    },
-    {
-      "type": 1,
-      "title": "nocodb",
-      "description": "Docker Hub: https://hub.docker.com/r/nocodb/nocodb Project: https://nocodb.com/ Docker Compose Example: https://github.com/nocodb/nocodb/blob/master/docker-compose/mysql/docker-compose.yml Proxy Port: 8080",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "nocodb/nocodb:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "nocodb/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks"
-        },
-        {
-          "name": "NOCODB_IMAGE",
-          "label": "NOCODB_IMAGE",
-          "default": "nocodb/nocodb:latest"
-        }
-      ],
-      "ports": [],
-      "volumes": [
-        {
-          "name": "nocodb-usr-app-data",
-          "container": "/usr/app/data"
-        }
-      ]
-    },
-    {
-      "type": 1,
-      "title": "directus",
-      "description": "directus description to come",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "directus/directus:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "directus/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
-        {
-          "name": "COMPOSE_PROJECT_NAME",
-          "label": "COMPOSE_PROJECT_NAME",
-          "default": "directus"
-        },
-        {
-          "name": "TZ",
-          "label": "TZ",
-          "default": "America/Vancouver"
-        },
-        {
-          "name": "VOL_CONFIG_PATH",
-          "label": "VOL_CONFIG_PATH",
-          "default": "/docker/directus/config"
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": "/docker/directus/data"
-        },
-        {
-          "name": "DIRECTUS_SECRET",
-          "label": "DIRECTUS_SECRET",
-          "default": "01234567890123456789012345678912"
-        },
-        {
-          "name": "DIRECTUS_ADMIN_EMAIL",
-          "label": "DIRECTUS_ADMIN_EMAIL",
-          "default": "noreply@example.com"
-        },
-        {
-          "name": "DIRECTUS_ADMIN_PASSWORD",
-          "label": "DIRECTUS_ADMIN_PASSWORD",
-          "default": "enter_secure_password_here"
-        }
-      ],
-      "ports": [
-        {
-          "container": 8055,
-          "published": 8000,
-          "protocol": "tcp"
-        }
-      ],
-      "volumes": [
-        {
-          "name": "directus-directus-uploads",
-          "container": "/directus/uploads"
-        },
-        {
-          "name": "directus-directus-extensions",
-          "container": "/directus/extensions"
-        },
-        {
-          "name": "directus-directus-templates",
-          "container": "/directus/templates"
         }
       ]
     },
@@ -1884,90 +1693,6 @@
     },
     {
       "type": 1,
-      "title": "semaphore",
-      "description": "* [Docker Hub](https://hub.docker.com/r/semaphoreui/semaphore) * [Official Website](https://semaphoreui.com/) * [Docker Compose Example](https://docs.semaphoreui.com/administration-guide/installation/#docker)",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "semaphoreui/semaphore:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "semaphore/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks"
-        },
-        {
-          "name": "TZ",
-          "label": "TZ",
-          "default": "America/Vancouver"
-        },
-        {
-          "name": "VOL_CONFIG_PATH",
-          "label": "VOL_CONFIG_PATH",
-          "default": "./config"
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": "./data"
-        },
-        {
-          "name": "SEMAPHORE_IMAGE",
-          "label": "SEMAPHORE_IMAGE",
-          "default": "semaphoreui/semaphore:latest"
-        },
-        {
-          "name": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
-          "label": "SEMAPHORE_ACCESS_KEY_ENCRYPTION",
-          "default": "1234567890123456789012345678901234567890"
-        },
-        {
-          "name": "SEMAPHORE_ADMIN_EMAIL",
-          "label": "SEMAPHORE_ADMIN_EMAIL",
-          "default": "example@example.com"
-        },
-        {
-          "name": "SEMAPHORE_ADMIN_NAME",
-          "label": "SEMAPHORE_ADMIN_NAME",
-          "default": "admin"
-        },
-        {
-          "name": "SEMAPHORE_ADMIN_PASSWORD",
-          "label": "SEMAPHORE_ADMIN_PASSWORD",
-          "default": "password"
-        },
-        {
-          "name": "SEMAPHORE_PLAYBOOK_PATH",
-          "label": "SEMAPHORE_PLAYBOOK_PATH",
-          "default": "/tmp/semaphore/"
-        }
-      ],
-      "ports": [],
-      "volumes": [
-        {
-          "name": "semaphore---tmp-semaphore-}",
-          "container": "-/tmp/semaphore/}"
-        },
-        {
-          "name": "semaphore-home-semaphore-.ssh",
-          "container": "/home/semaphore/.ssh/"
-        },
-        {
-          "name": "semaphore-etc-hosts",
-          "container": "/etc/hosts"
-        }
-      ]
-    },
-    {
-      "type": 1,
       "title": "uptimekuma",
       "description": "Proxy Port: 3001 * [Official Website](https://uptime.kuma.pet/) * [Dockerhub](https://hub.docker.com/r/louislam/uptime-kuma) * [Github](https://github.com/louislam/uptime-kuma/tree/1.23.X) * [Docker Compose Example](https://github.com/louislam/uptime-kuma/blob/1.23.X/docker/docker-compose.yml)",
       "note": "Auto-generated template from repository",
@@ -2019,21 +1744,6 @@
         "stackfile_plain": false
       },
       "env": [
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": "./data"
-        },
-        {
-          "name": "TZ",
-          "label": "TZ",
-          "default": "America/Vancouver"
-        },
-        {
-          "name": "COMPOSE_PROJECT_NAME",
-          "label": "COMPOSE_PROJECT_NAME",
-          "default": "zammad"
-        },
         {
           "name": "ZAMMAD_RAILS_IMAGE",
           "label": "ZAMMAD_RAILS_IMAGE",
@@ -3499,82 +3209,6 @@
     },
     {
       "type": 1,
-      "title": "stashapp",
-      "description": "This Docker Compose configuration sets up the Stash application using Docker containers. - Stash App: [Stash on Docker Hub](https://hub.docker.com/r/stashapp/stash) - Compose Example: [Stash GitHub Repository](https://github.com/stashapp/stash/blob/develop/docker/production/docker-compose.yml) - ProxyPort: 9999",
-      "note": "Auto-generated template from repository",
-      "categories": [
-        "Auto"
-      ],
-      "platform": "linux",
-      "logo": "https://i.4lt.ca/cookbooks/default.png",
-      "image": "stashapp/stash:latest",
-      "repository": {
-        "url": "https://github.com/nickyeoman/docker-compose-cookbooks",
-        "stackfile": "stashapp/docker-compose.yml",
-        "stackfile_plain": false
-      },
-      "env": [
-        {
-          "name": "STASHAPP_IMAGE",
-          "label": "STASHAPP_IMAGE",
-          "default": "stashapp/stash:latest"
-        },
-        {
-          "name": "STASHAPP_STASH_CACHE",
-          "label": "STASHAPP_STASH_CACHE",
-          "default": "/cache/"
-        },
-        {
-          "name": "STASHAPP_STASH_DOMAIN_NAME",
-          "label": "STASHAPP_STASH_DOMAIN_NAME",
-          "default": "stash.yourdomain.ca"
-        },
-        {
-          "name": "STASHAPP_STASH_GENERATED",
-          "label": "STASHAPP_STASH_GENERATED",
-          "default": "/generated/"
-        },
-        {
-          "name": "STASHAPP_STASH_METADATA",
-          "label": "STASHAPP_STASH_METADATA",
-          "default": "/metadata/"
-        },
-        {
-          "name": "STASHAPP_STASH_STASH",
-          "label": "STASHAPP_STASH_STASH",
-          "default": "/data/"
-        }
-      ],
-      "ports": [],
-      "volumes": [
-        {
-          "name": "stashapp-cache",
-          "container": "/cache"
-        },
-        {
-          "name": "stashapp-generated",
-          "container": "/generated"
-        },
-        {
-          "name": "stashapp-metadata",
-          "container": "/metadata"
-        },
-        {
-          "name": "stashapp-root",
-          "container": "/root"
-        },
-        {
-          "name": "stashapp-data",
-          "container": "/data"
-        },
-        {
-          "name": "stashapp-ro",
-          "container": "ro"
-        }
-      ]
-    },
-    {
-      "type": 1,
       "title": "archivebox",
       "description": "Docker Hub: https://hub.docker.com/r/archivebox/archivebox/tags Docker Compose Example: https://raw.githubusercontent.com/ArchiveBox/ArchiveBox/dev/docker-compose.yml Project: https://archivebox.io/ Proxy Port: 8000",
       "note": "Auto-generated template from repository",
@@ -3590,16 +3224,6 @@
         "stackfile_plain": false
       },
       "env": [
-        {
-          "name": "COOKBOOK",
-          "label": "COOKBOOK",
-          "default": "/git/docker-compose-cookbooks"
-        },
-        {
-          "name": "VOL_PATH",
-          "label": "VOL_PATH",
-          "default": "./data"
-        },
         {
           "name": "ARCHIVEBOX_IMAGE",
           "label": "ARCHIVEBOX_IMAGE",

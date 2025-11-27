@@ -1,0 +1,9 @@
+services:
+  nc:
+    image: ${NOCODB_IMAGE:-nocodb/nocodb:latest}
+    restart: unless-stopped
+    volumes:
+      - "nocodb-data:/usr/app/data"
+
+volumes:
+  nocodb-data:

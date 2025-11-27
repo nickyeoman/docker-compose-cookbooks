@@ -11,3 +11,8 @@ Proxy Port: 8080
 ## Description
 
 This project is setup to use sql lite.  Although it can use mysql with some env vars.
+
+## Notes
+
+# environment:
+    #   - NC_DB=${NCDB_NC_DB:-mysql2://root_db:3306?u=noco&p=password&d=root_db}

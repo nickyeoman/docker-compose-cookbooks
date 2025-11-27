@@ -1,8 +1,0 @@
-services:
-  nc:
-    image: ${NOCODB_IMAGE:-nocodb/nocodb:latest}
-    restart: unless-stopped
-    # environment:
-    #   - NC_DB=${NCDB_NC_DB:-mysql2://root_db:3306?u=noco&p=password&d=root_db}
-    volumes:
-      - "${VOL_PATH:-./data}/nc_data:/usr/app/data"

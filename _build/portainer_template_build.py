@@ -59,7 +59,6 @@ def find_logo_url(dir_path: Path, nologo: bool = False) -> str:
 
     return f"{base_url}default.png"
 
-
 # ---------------------------------------------------------
 # Parse image from docker-compose.yml using sample.env defaults
 # ---------------------------------------------------------
@@ -80,9 +79,7 @@ def parse_image(compose_path: Path, env_vars: list) -> str:
                 bash_default = match.group(2)
                 return env_defaults.get(var_name, bash_default if bash_default else "")
 
-            # Regex matches ${VAR} or ${VAR:-default}
             image = re.sub(r"\$\{([^:}]+)(?:[:-]([^}]+))?\}", replace_var, image)
-
             return image
 
     return ""
@@ -107,37 +104,47 @@ def parse_ports(compose_path: Path):
         if in_ports:
             if not stripped or not stripped.startswith("-"):
                 break
-            # Remove "- " prefix, quotes, and strip comments
+
             port_str = stripped[1:].strip().split("#", 1)[0].strip().strip('"').strip("'")
             if not port_str:
                 continue
-            if ":" in port_str:
-                host_port, container_port = port_str.split(":", 1)
+
+            protocol = "tcp"
+            if "/" in port_str:
+                port_part, protocol_part = port_str.split("/", 1)
+                protocol = protocol_part.strip()
             else:
-                container_port = port_str
+                port_part = port_str
+
+            if ":" in port_part:
+                host_port, container_port = port_part.split(":", 1)
+            else:
+                container_port = port_part
                 host_port = container_port
+
             try:
-                container_port = int(container_port.split("/")[0].strip())
-                host_port = int(host_port.split("/")[0].strip())
+                container_port = int(container_port.strip())
+                host_port = int(host_port.strip())
             except ValueError:
                 continue
+
             ports_list.append({
                 "container": container_port,
                 "published": host_port,
-                "protocol": "tcp"
+                "protocol": protocol
             })
 
     return ports_list
 
 # ---------------------------------------------------------
 # Parse volumes from docker-compose.yml
-# Returns a list of dicts: {"name": "volume_name", "container": "/container/path"}
-# ---------------------------------------------------------
-# ---------------------------------------------------------
-# Parse volumes from docker-compose.yml
 # Returns a list of dicts: {"name": "unique-name", "container": "/container/path"}
 # ---------------------------------------------------------
 def parse_volumes(compose_path: Path, stack_name: str):
+    """
+    Parse volumes from docker-compose.yml and generate Portainer-ready entries.
+    Host paths and VOL_PATH references are ignored; only container paths are used.
+    """
     if not compose_path.exists():
         return []
 
@@ -153,15 +160,27 @@ def parse_volumes(compose_path: Path, stack_name: str):
         if in_volumes:
             if not stripped or not stripped.startswith("-"):
                 break
+
+            # Strip "- ", quotes, inline comments
             volume_str = stripped[1:].strip().split("#", 1)[0].strip().strip('"').strip("'")
             if not volume_str:
                 continue
-            parts = volume_str.rsplit(":", 1)
-            container_path = parts[-1].strip()
+
+            # Split host:container[:ro|rw]
+            parts = volume_str.split(":")
+            if len(parts) == 1:
+                container_path = parts[0].strip()
+            else:
+                container_path = parts[-1].strip()  # always take the last part as container path
+
+            # Remove :ro or :rw suffix if present
             container_path = re.sub(r":(ro|rw)$", "", container_path)
+
+            # Generate unique name for Portainer from stack + container path
             name = f"{stack_name}-{container_path.strip('/').replace('/', '-')}"
             if not name:
                 name = f"{stack_name}-volume"
+
             volumes.append({"name": name, "container": container_path})
 
     return volumes
@@ -188,7 +207,6 @@ def parse_env_vars(dir_path: Path):
         if "=" in line:
             key, value = line.split("=", 1)
             key = key.strip()
-            # Remove inline comment after #, then strip quotes and whitespace
             value = value.split("#", 1)[0].strip().strip('"').strip("'")
             if key:
                 env_list.append({"name": key, "default": value})
@@ -198,25 +216,23 @@ def parse_env_vars(dir_path: Path):
 # ---------------------------------------------------------
 # Build template object for a stack directory
 # ---------------------------------------------------------
-def generate_template_object(dir_path: Path):
+def generate_template_object(dir_path: Path, nologo: bool = False):
     name = dir_path.name
     compose_file = dir_path / "docker-compose.yml"
     readme_file = dir_path / "README.md"
 
-    # Extract info
     description = extract_overview(readme_file, name)
-    logo = find_logo_url(dir_path, nologo=False)  # for dev/test
+    logo = find_logo_url(dir_path, nologo=False)
     env_vars = parse_env_vars(dir_path)
     image = parse_image(compose_file, env_vars)
     ports = parse_ports(compose_file)
-    volumes = parse_volumes(compose_file, name)  # pass stack name for unique volume naming
+    volumes = parse_volumes(compose_file, name)
 
-    # Environment variables entries for Portainer
     env_entries = [
-        {"name": v["name"], "label": v["name"], "default": v["default"]} for v in env_vars
+        {"name": v["name"], "label": v["name"], "default": v["default"]}
+        for v in env_vars if v["default"] is not None
     ]
 
-    # Build template object
     return {
         "type": 1,
         "title": name,
@@ -252,9 +268,8 @@ def main():
         if not (item / "docker-compose.yml").exists():
             continue
 
-        templates.append(generate_template_object(item))
+        templates.append(generate_template_object(item, nologo=True))
 
-    # Wrap in Portainer top-level object
     output_data = {
         "version": "3",
         "templates": templates
