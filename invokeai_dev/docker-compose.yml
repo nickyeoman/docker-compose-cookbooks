@@ -1,0 +1,15 @@
+services:
+  invokeai:
+    image: ghcr.io/invoke-ai/invokeai:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ~/invokeai:/invokeai
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
