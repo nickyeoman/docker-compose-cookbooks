@@ -33,7 +33,22 @@ Example:
     /data – persistent application storage
     /config – configuration files
 
+## Network Notes
+
+Requires proxy network
+
 ## Additional Notes / Gotchas
 
 Add any special information someone should know before running the
 project---quirks, caveats, network requirements, etc.
+
+## Dockhand Stack, Deploy from Git
+
+Cookbooks Repository
+stackname: NAME_HERE
+Compose file path: SERVICENAME/compose.yaml
+Additional env file (optional): SERVICENAME/sample.env
+
+Then "Load" SERVICENAME/sample.env into the Environmental variables in dockhand
+
+Create the Stack
