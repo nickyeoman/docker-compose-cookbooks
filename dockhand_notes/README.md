@@ -43,7 +43,7 @@ This is how I got it working on ansible (roughly):
 
 ## NTFY Notifications
 
-With authentication can be tricky, do it like this, where TOKEN is your token from NTFY:
+NTFY with authentication can be tricky, here is a working example where TOKEN is your token from NTFY:
 ```
 ntfys://TOKEN@ntfy.nickyeoman.com/dockhand
 ```
