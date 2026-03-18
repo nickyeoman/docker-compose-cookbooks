@@ -10,6 +10,8 @@ services:
       - ARCHIVEBOX_UID=1000
       - ARCHIVEBOX_GID=1000
       - PYTHONUNBUFFERED=1
+    ports:
+      - ${ARCHIVEBOX_PORT:-8000}:8000
     networks:
       - proxy
     command:  server --quick-init 0.0.0.0:8000
