@@ -40,3 +40,11 @@ This is how I got it working on ansible (roughly):
       TOKEN: "{{ hawser_token }}"
       AGENT_NAME: "{{ hawser_agent_name }}"
 ```
+
+## NTFY Notifications
+
+With authentication can be tricky, do it like this, where TOKEN is your token from NTFY:
+```
+ntfys://TOKEN@ntfy.nickyeoman.com/dockhand
+```
+ntfy:// can be used for unsecure.

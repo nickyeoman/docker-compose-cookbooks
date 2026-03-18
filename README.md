@@ -13,24 +13,22 @@ I'm only one guy, I tested with
 | Software            | Version   |
 |---------------------|-----------|
 | Debian              | 13        |
-| Docker Engine       | 29.0.4    |
-| Portainer           | 2.33.4    |
+| Docker Engine       | 29.2.1    |
+| Dockhand            | 1.0.18    |
 
 ## 🤔 Assumptions
 
 These compose files make a few assumptions:
 
-1. You are only running on one host.
+1. You are running dockhand.
 2. You are using Nginx Proxy Manager (although most have redundant port access).
-3. Volumes are stored in the project folder under "data", git ignored and backed up externally.
+
 
 ## 📚 Workflow
 The intended workflow is as follows:
 
-1. Copy cookbook.env to .env of your project
-1. Copy the docker-compse.yml file to your project
-1. Concatonate the sample.env to .env in your project
-1. OPTIONAL: concatonate network.yml into your docker-compose.yml
+1. Add the repository ```https://github.com/nickyeoman/docker-compose-cookbooks.git``` to your dockhand Git repositories (in settings)
+1. Create the stack in dockhand
 
 You may have to use multiple containers, such as Maria or postgres for db. 
 
@@ -48,7 +46,7 @@ As we are going to rely on COMPOSE_PROJECT_NAME to create our project names, con
 
 #### Paths
 
-I use 3 Paths strategies:
+I use 3 Paths strategies, they are all considered private:
 
 1. VOL_PATH, usually ./data is a data directory that is not in git, backed up externally.
 1. CONFIG_PATH usually ./config is stored in git (text files)
