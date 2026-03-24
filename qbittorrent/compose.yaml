@@ -5,7 +5,7 @@ services:
       - VPN_TYPE=wireguard
       - WEBUI_PASSWORD=${QBT_PASS:-ChangeMePass}
     volumes:
-      - "${VOL_CONFIG_PATH:-./data}/qbit/config:/config"
+      - "${CONFIG_PATH:-./data}/qbit-config:/config"
       - "${VOL_PATH:-./data}/qbit/downloads:/downloads"
       - "${VOL_PATH:-./data}/qbit/incomplete:/incomplete"
       - '/dev/net/tun:/dev/net/tun'

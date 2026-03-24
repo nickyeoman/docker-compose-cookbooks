@@ -1,8 +1,10 @@
 # qbittorrent
 
+"Docker container which runs the latest qBittorrent-nox client while connecting to WireGuard or OpenVPN with netfilter killswitch to prevent IP leakage when the tunnel goes down."
+
 https://github.com/Trigus42/alpine-qbittorrentvpn
 
-"Docker container which runs the latest qBittorrent-nox client while connecting to WireGuard or OpenVPN with netfilter killswitch to prevent IP leakage when the tunnel goes down."
+port: 8080
 
 ## Default username
 
@@ -18,13 +20,18 @@ The container will fail to boot if VPN_ENABLED is set and there is no valid INTE
 
 chmod 600 /path/to/wg0.conf
 
-## Setup
+## Dockhand Stack, Deploy from Git
 
-env file
-```text
-# qbittorrent
-COOKBOOK=/home/user/git/docker-compose-cookbooks #HELP: cookbooks
-VOL_PATH=/project-dir/project-name/data #HELP: volpath
-QBT_IMAGE=trigus42/qbittorrentvpn:latest
-QBT_PASS=01234567890 #HELP: #HELP: gen32
-```
+Cookbooks Repository
+stackname: qbittorrent
+Compose file path: qbittorrent/compose.yaml
+Additional env file (optional): qbittorrent/sample.env
+
+Then "Load" archivebox/sample.env into the Environmental variables in dockhand
+
+Create the Stack
+
+
+## Gotchas
+
+For the trigus42/qbittorrentvpn image the env Username doesn't work, it's just admin.
