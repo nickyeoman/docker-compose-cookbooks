@@ -1,10 +1,11 @@
+# Thunderbird
 services:
   thunderbird:
     image: ${THUNDERBIRD_IMAGE:-jlesage/thunderbird}
-    restart: unless-stopped
+    restart: ${THUNDERBIRD_RESTART:-unless-stopped}
     volumes:
-      - "thunderbird-config:/config"
-      - "thunderbird-export:/export"
+      - ${VOL_PATH}/config:/config
+      - ${VOL_PATH}/export:/export
     environment:
       - TZ=${THUNDERBIRD_TZ:-America/Vancouver}
       - WEB_AUTHENTICATION=${THUNDERBIRD_WEB_AUTHENTICATION:-1}
@@ -12,11 +13,10 @@ services:
       - WEB_AUTHENTICATION_PASSWORD=${THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD:-password}
       - SECURE_CONNECTION=${THUNDERBIRD_SECURE_CONNECTION:-1}
     ports:
-      - "5800:5800"
+      - ${THUNDERBIRD_PORT:-5800}:5800
     networks:
       - proxy
-      - internal
 
-volumes:
-  thunderbird-config:
-  thunderbird-export:
+networks:
+  proxy:
+    external: true
