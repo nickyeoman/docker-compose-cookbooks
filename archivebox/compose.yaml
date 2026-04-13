@@ -5,7 +5,7 @@ services:
     image: ${ARCHIVEBOX_IMAGE:-archivebox/archivebox:stable}
     restart: ${ARCHIVEBOX_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}:/data
+      - ${VOL_PATH}/archivebox:/data
     environment:
       - ARCHIVEBOX_UID=${ARCHIVEBOX_UID:-1000}
       - ARCHIVEBOX_GID=${ARCHIVEBOX_GID:-1000}
