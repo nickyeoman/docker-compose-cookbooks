@@ -4,8 +4,8 @@ services:
     image: ${THUNDERBIRD_IMAGE:-jlesage/thunderbird}
     restart: ${THUNDERBIRD_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/config:/config
-      - ${VOL_PATH}/export:/export
+      - ${VOL_PATH}/thunderbird/config:/config
+      - ${VOL_PATH}/thunderbird/export:/export
     environment:
       - TZ=${THUNDERBIRD_TZ:-America/Vancouver}
       - WEB_AUTHENTICATION=${THUNDERBIRD_WEB_AUTHENTICATION:-1}
