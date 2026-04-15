@@ -1,7 +1,8 @@
+# Heimdall
 services:
   heimdall:
     image: ${HEIMDALL_IMAGE}
-    restart: unless-stopped
+    restart: ${HEIMDALL_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-./data}/heimdall:/config
     environment:
@@ -12,3 +13,7 @@ services:
       - 8000:80
     networks:
       - proxy
+
+networks:
+  proxy:
+    external: true

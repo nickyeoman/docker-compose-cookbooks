@@ -10,6 +10,13 @@ VS Code
 -   **Container Image:** [Docker Hub](https://hub.docker.com/r/linuxserver/code-server)
 -   **Reverse Proxy Port:** `8443`
 
+## Environment Variable Notes
+
+Data directory:
+```
+- ${VOL_PATH:-./data}/vscode/data:/data
+```
+This is where all your code is stored, it should be set to your 1000 user.  Then you can move your code here as that user.
 
 ## Additional Notes / Gotchas
 
@@ -30,6 +37,10 @@ You also want to generate a key for your connection:
 ssh-keygen -t ed25519 -C "c@nickyeoman.com"
 cat ~/.ssh/id_ed25519.pub 
 ```
+
+## Nginx Proxy manager
+
+If you are placing this behind NPM then you need to enable web sockets.
 
 ## Dockhand Stack, Deploy from Git
 
