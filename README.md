@@ -38,11 +38,22 @@ Directories ending with _dev contain projects that are still under development o
 
 Directories ending with _notes contain projects that usually don’t require a full Docker Compose file. They may include notes, example commands, or minimal Compose files just to illustrate setup. For example, the ollama project has a docker-compose.yml showing CPU vs GPU usage.
 
+## Test a container
+
+Make sure you have a /data created first on your system.
+
+```
+docker compose --env-file sample.env up -d
+
+# then down
+docker compose --env-file sample.env down
+```
+
 ### Decisions
 
 #### container_name 
 
-As we are going to rely on COMPOSE_PROJECT_NAME to create our project names, container_name has been left out of the template intentionally.
+container_name has been left out of the template intentionally.
 
 #### Paths
 

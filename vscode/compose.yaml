@@ -1,0 +1,25 @@
+# Code Server
+
+services:
+  code-server:
+    image: ${VSCODE_IMAGE:-lscr.io/linuxserver/code-server:latest}
+    restart: ${VSCODE_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-./data}/vscode/data:/data
+      - ${VOL_PATH:-./data}/vscode/config:/config
+
+    environment:
+      # App-specific
+      - PUID=${VSCODE_PUID:-1000}
+      - PGID=${VSCODE_PGID:-1000}
+      - PASSWORD=${VSCODE_PASSWORD:-RanDoMChangeMe}
+      - DEFAULT_WORKSPACE=${DEFAULT_WORKSPACE:-/data}
+      - PROXY_DOMAIN=${VSCODE_DOMAIN:-localhost}
+
+    ports:
+      - "${VSCODE_PORT:-8443}:8443"
+
+networks:
+  proxy:
+    external: true
