@@ -10,7 +10,7 @@ services:
       - PUID=${HEIMDALL_PUID:-1000}
       - TZ=${TZ:-America/Vancouver}
     ports:
-      - 8000:80
+      - ${HEIMDALL_PORT:-8000}:80
     networks:
       - proxy
 
