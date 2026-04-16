@@ -17,6 +17,7 @@ services:
       - N8N_PORT=${N8N_PORT:-5678}
       - N8N_HOST=${N8N_HOST:-http://localhost:5678}
       - WEBHOOK_URL=${N8N_HOST:-http://localhost:5678}      
+      - N8N_SECURE_COOKIE=${N8N_SECURE_COOKIE:-true}
     user: "1000:1000"
     networks:
       - proxy
