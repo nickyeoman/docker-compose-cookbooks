@@ -1,0 +1,25 @@
+services:
+  stashapp:
+    image: ${STASHAPP_IMAGE:-stashapp/stash:latest}
+    # image: ghcr.io/hotio/stash # Alternative image
+    restart: ${STASHAPP_RESTART:-unless-stopped}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${VOL_PATH:-./data}/stash/generated:/generated
+      - ${VOL_PATH:-./data}/stash/metadata:/metadata
+      - ${VOL_PATH:-./data}/stash/root:/root/.stash
+      - ${STASH_CONTENT_PATH:-/data/stash}:/data
+    environment:
+      - STASH_CACHE=${STASHAPP_CACHE:-/cache/}
+      - STASH_DOMAIN_NAME=${STASHAPP_DOMAIN:-stash.yourdomain.ca}
+      - STASH_GENERATED=${STASHAPP_GENERATED:-/generated/}
+      - STASH_METADATA=${STASHAPP_METADATA:-/metadata/}
+      - STASH_STASH=${STASHAPP_STASH:-/data/}
+    ports:
+      - "${STASHAPP_PORT:-9999}:9999"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

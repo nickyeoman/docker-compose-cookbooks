@@ -5,6 +5,7 @@ This Docker Compose configuration sets up the Stash application using Docker con
 
 - Stash App: [Stash on Docker Hub](https://hub.docker.com/r/stashapp/stash)
 - Compose Example: [Stash GitHub Repository](https://github.com/stashapp/stash/blob/develop/docker/production/docker-compose.yml)
+- Documentation: https://docs.stashapp.cc/
 - ProxyPort: 9999
 
 ## Setup
