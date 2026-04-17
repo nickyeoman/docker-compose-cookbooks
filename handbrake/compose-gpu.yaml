@@ -13,7 +13,7 @@ services:
     env_file:
       - ${HANDBRADE_ENV:-sample.env}
     ports:
-      - ${HANDBRAKE_PORT:-5800}:5800" 
+      - ${HANDBRAKE_PORT:-5800}:5800
     runtime: nvidia
     deploy:
       resources:
