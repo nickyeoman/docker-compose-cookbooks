@@ -1,0 +1,22 @@
+# Ollama CPU
+
+services:
+  ollama-cpu:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - "${VOL_PATH:-/data}/ollama:/root/.ollama"
+
+  webui-cpu:
+    image: ${WEBUI_IMAGE:-ghcr.io/open-webui/open-webui:main}
+    volumes:
+      - "${VOL_PATH:-/data}/webui/cache:/root/.cache"
+      - "${VOL_PATH:-/data}/webui/data:/app/backend/data"
+    environment:
+      - WEBUI_URL=${WEBUI_URL:-http://localhost:8080}
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:?must_be_set}
+      - OLLAMA_BASE_URL=http://ollama-cpu:11434
+    ports:
+      - "${WEBUI_PORT:-8080}:8080"
+    

@@ -1,4 +1,8 @@
 # Handbrake
+
+Handbrake requires changing the env file and modification of a configuration file.
+I've decided these factors are not ideal for a dockhand deployment.
+However all the information you need are in these notes, they just need to be modifed for proper use. 
  
 - DockerHub: https://hub.docker.com/r/jlesage/handbrake
 - Env docs: https://github.com/jlesage/docker-handbrake
