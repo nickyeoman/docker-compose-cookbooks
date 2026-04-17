@@ -1,7 +1,8 @@
 # Handbrake
  
-DockerHub: https://hub.docker.com/r/jlesage/handbrake
-Env docs: https://github.com/jlesage/docker-handbrake
+- DockerHub: https://hub.docker.com/r/jlesage/handbrake
+- Env docs: https://github.com/jlesage/docker-handbrake
+- Proxy port: 5800
 
 ## NOTES
 
@@ -145,3 +146,15 @@ I think this is the best preset for small file, big quality:
                     "x264UseAdvancedOptions": false
                 },
 ```
+
+
+## Dockhand Stack, Deploy from Git
+
+Cookbooks Repository
+stackname: handbrake
+Compose file path: handbrake/compose-cpu.yaml
+Additional env file (optional): handbrake/sample.env
+
+Then "Load" handbrake/sample.env into the Environmental variables in dockhand
+
+Create the Stack

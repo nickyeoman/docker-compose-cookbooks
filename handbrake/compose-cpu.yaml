@@ -1,6 +1,8 @@
+# Handbrake CPU
 services:
   handbrake:
     image: ${HANDBRAKE_IMAGE:-jlesage/handbrake:latest}
+    restart: ${HANDBRAKE_RESTART:-unless-stopped}
     volumes:
       - "${VOL_PATH:-./data}/handbrake/ghb-config:/config"
       - "${VOL_PATH:-./data}/handbrake/storage:/storage"
@@ -8,15 +10,8 @@ services:
       - "${VOL_PATH:-./data}/handbrake/watch:/watch"
       - "${VOL_PATH:-./data}/handbrake/watch2:/watch2"
       - "${VOL_PATH:-./data}/handbrake/trash:/trash"
-    restart: "unless-stopped"
     env_file:
-      - .env
+      - ${HANDBRADE_ENV:-sample.env}
     ports:
-      - "5800:5800"
-    # Below for GPU
-    runtime: nvidia
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
+      - ${HANDBRAKE_PORT:-5800}:5800"
+   
