@@ -45,7 +45,7 @@ Standard commands
 
 ```bash
 # Add/Pull a  model
-docker compose exec -it ollama ollama pull llama3.1:8b-instruct-q4_0
+docker exec -it ollama-ollama-1 ollama pull llama3.1:8b
 
 # list models
 docker compose exec -it ollama ollama list
