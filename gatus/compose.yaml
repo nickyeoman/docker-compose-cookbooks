@@ -1,0 +1,16 @@
+# Gatus
+services:
+  gatus:
+    image: ${GATUS_IMAGE:-twinproduction/gatus:latest}
+    restart: ${GATUS_RESTART:-unless-stopped}
+    volumes:
+      - ${CONFIG_PATH:-/data/config.yml}:/config/config.yaml
+      - ${VOL_PATH:-/data}/gatus:/config/data
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - ${GATUS_PORT:-8080}:8080
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,47 @@
+web:
+  port: 8080
+
+storage:
+  type: sqlite
+  path: /config/data/data.db
+
+ui:
+  title: "Status"
+  description: "Service monitoring dashboard"
+
+alerting:
+  ntfy:
+    url: "https://ntfy.example.com/"
+    topic: "Downtime"
+    token: "replace_with_token"
+    priority: 3
+    default-alert:
+      # send alert after first failure
+      failure-threshold: 1          
+      # send when service recovers
+      send-on-resolved: true        
+    # group-specific overrides
+    overrides: []                   
+
+endpoints:
+
+  # 🔧 Gitea (your main service)
+  - name: "Gitea"
+    url: "https://git.example.com"
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+
+  # 🌐 External example
+  - name: "4lights"
+    url: "https://www.4lt.ca"
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+
+  # 🐳 Internal Docker service (example)
+  - name: "Gitea (internal)"
+    url: "http://gitea:3000"
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"

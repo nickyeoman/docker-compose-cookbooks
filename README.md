@@ -63,6 +63,10 @@ I use 3 Paths strategies, they are all considered private:
 1. CONFIG_PATH usually ./config is stored in git (text files)
 1. LOG_PATH, usually ./logs is not stored in git or backed up.
 
+#### Prefered Containers
+
+- UptimeKuma - I prefer Gatus over UptimeKuma and have remove UptimeKuma.
+
 ## Similar Projects
 
 * [Awesome Compose](https://github.com/docker/awesome-compose/) -  A starting point for integrating different services using a Compose file.
