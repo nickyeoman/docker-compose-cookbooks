@@ -36,7 +36,7 @@ You may have to use multiple containers, such as Maria or postgres for db.
 
 Directories ending with _dev contain projects that are still under development or experimental. These are not yet considered production-ready.
 
-Directories ending with _notes contain projects that usually don’t require a full Docker Compose file. They may include notes, example commands, or minimal Compose files just to illustrate setup. For example, the ollama project has a docker-compose.yml showing CPU vs GPU usage.
+Directories ending with _notes contain projects that usually don’t require a full Docker Compose file. They may include notes, example commands, or minimal Compose files just to illustrate setup. For example, the handbrake project has a compose-cpu.yaml and a compose-gpu.yaml.
 
 ## Test a container
 
