@@ -1,7 +1,12 @@
 # Paperless
 
-proxy port: 8000
+## Project Details
 
+-   **Project Repository:** [Link](https://github.com/paperless-ngx/paperless-ngx)
+-   **Container Image:** [Github](https://github.com/paperless-ngx/paperless-ngx)
+-   **Compose Example:** [Compose](https://github.com/paperless-ngx/paperless-ngx/blob/main/docker/compose/docker-compose.mariadb-tika.yml)
+-   **Documentation:** [Docs](https://docs.paperless-ngx.com/)
+-   **Reverse Proxy Port:** `8000`
 
 ## First Run
 
