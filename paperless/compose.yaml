@@ -17,7 +17,7 @@ services:
     image: docker.io/library/mariadb:12
     restart: unless-stopped
     volumes:
-      - ${VOL_PATH}/paperless/db:/var/lib/mysql
+      - ${VOL_PATH:-/data}/paperless/db:/var/lib/mysql
     environment:
       MARIADB_HOST: ${PAPERLESS_MARIADB_HOST:-paperless-db}
       MARIADB_DATABASE: ${PAPERLESS_MARIADB_DATABASE:-paperless}
