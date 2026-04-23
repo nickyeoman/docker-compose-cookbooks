@@ -54,7 +54,7 @@ services:
     ports:
       - ${PAPERLESS_PORT:-8000}:8000
     networks:
-      - paperless_internal
+      - paperless
       - proxy
 
   paperless-gotenberg:
