@@ -15,4 +15,4 @@ services:
       - STASH_GENERATED=${STASHAPP_GENERATED:-/generated/}
       - STASH_METADATA=${STASHAPP_METADATA:-/metadata/}
       - STASH_STASH=${STASHAPP_STASH:-/data/}
-    network_mode: "host" # Optional, to run DLNA
+    network_mode: "host"
