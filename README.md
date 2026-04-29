@@ -13,8 +13,8 @@ I'm only one guy, I tested with
 | Software            | Version   |
 |---------------------|-----------|
 | Debian              | 13        |
-| Docker Engine       | 29.2.1    |
-| Dockhand            | 1.0.18    |
+| Docker Engine       | 29.4.1    |
+| Dockhand            | 1.0.26    |
 
 ## 🤔 Assumptions
 
@@ -23,49 +23,37 @@ These compose files make a few assumptions:
 1. You are running dockhand.
 2. You are using Nginx Proxy Manager (although most have redundant port access).
 
-
 ## 📚 Workflow
+
 The intended workflow is as follows:
 
 1. Add the repository ```https://github.com/nickyeoman/docker-compose-cookbooks.git``` to your dockhand Git repositories (in settings)
 1. Create the stack in dockhand
 
-You may have to use multiple containers, such as Maria or postgres for db. 
-
 ## 🛠 Project Directory Structure
 
-Directories ending with _dev contain projects that are still under development or experimental. These are not yet considered production-ready.
+Directories ending with _dev contain projects that are still under development or experimental. These are not yet considered production ready.
 
 Directories ending with _notes contain projects that usually don’t require a full Docker Compose file. They may include notes, example commands, or minimal Compose files just to illustrate setup. For example, the handbrake project has a compose-cpu.yaml and a compose-gpu.yaml.
 
-## Test a container
+## Test a Stack
 
-Make sure you have a /data created first on your system.
+To test a stack, clone the repository, navigate to the directory you're interested in, and run it:
 
 ```
-docker compose --env-file sample.env up -d
-
-# then down
-docker compose --env-file sample.env down
+git pull https://github.com/nickyeoman/docker-compose-cookbooks.git ~/cookbooks
+cd ~/cookbooks
+mkdir /data
+touch /data/test.env
+docker compose --env-file sample.env --env-file /data/test.env up -d
+docker compose --env-file sample.env --env-file down
 ```
 
-### Decisions
+Multiple --env-file flags are supported and applied in order.
 
-#### container_name 
+## Prefered Containers
 
-container_name has been left out of the template intentionally.
-
-#### Paths
-
-I use 3 Paths strategies, they are all considered private:
-
-1. VOL_PATH, usually ./data is a data directory that is not in git, backed up externally.
-1. CONFIG_PATH usually ./config is stored in git (text files)
-1. LOG_PATH, usually ./logs is not stored in git or backed up.
-
-#### Prefered Containers
-
-- UptimeKuma - I prefer Gatus over UptimeKuma and have remove UptimeKuma.
+- UptimeKuma - I prefer Gatus over UptimeKuma and have removed support for UptimeKuma.
 
 ## Similar Projects
 
