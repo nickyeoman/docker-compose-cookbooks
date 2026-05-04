@@ -4,7 +4,7 @@ services:
     image: ${INVOKEAI_IMAGE:-ghcr.io/invoke-ai/invokeai:latest}
     restart: ${INVOKEAI_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/invokeai:/invokeai
+      - ${VOL_PATH:-/data}/invokeai:/invokeai
     environment:
       - INVOKEAI_ROOT=/invokeai
       - INVOKEAI_PORT=${INVOKEAI_PORT:-9090}

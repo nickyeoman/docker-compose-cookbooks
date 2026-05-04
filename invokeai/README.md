@@ -27,3 +27,17 @@ Additional env file (optional): invokeai/sample.env
 Then "Load" SERVICENAME/sample.env into the Environmental variables in dockhand
 
 Create the Stack
+
+## Docker Run
+
+```
+docker run -d \
+  --name invokeai \
+  --restart unless-stopped \
+  -v "/data/invokeai:/invokeai" \
+  -e INVOKEAI_ROOT=/invokeai \
+  -e INVOKEAI_PORT=9090 \
+  -p 9090:9090 \
+  --gpus all \
+  ghcr.io/invoke-ai/invokeai:latest
+  ```
