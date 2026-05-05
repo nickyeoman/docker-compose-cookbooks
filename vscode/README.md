@@ -18,6 +18,9 @@ Data directory:
 ```
 This is where all your code is stored, it should be set to your 1000 user.  Then you can move your code here as that user.
 
+Config Directory:
+This is your home directory, your ssh keys are stored here. 
+
 ## Additional Notes / Gotchas
 
 For setup you need to set the user and group ID
