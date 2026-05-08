@@ -3,7 +3,7 @@ services:
     image: ${POSTGRES_IMAGE:-postgres:18.3-alpine}
     restart: ${POSTGRES_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-/data}/listmonk/db:/var/lib/postgresql/data
+      - ${VOL_PATH:-/data}/listmonk/db:/var/lib/postgresql
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-listmonk}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-securepassword}
