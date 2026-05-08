@@ -1,0 +1,68 @@
+services:
+  listmonk-db:
+    image: ${POSTGRES_IMAGE:-postgres:18.3-alpine}
+    restart: ${POSTGRES_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/listmonk/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-listmonk}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-securepassword}
+      - POSTGRES_DB=${POSTGRES_DB:-listmonk}
+    networks:
+      - listmonk
+
+  listmonk:
+    image: ${LISTMONK_IMAGE:-listmonk/listmonk:latest}
+    restart: ${LISTMONK_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/listmonk/uploads:/listmonk/uploads:rw
+    environment:
+      - LISTMONK_app__address=0.0.0.0:${LISTMONK_PORT:-9000}
+
+      # Database
+      - LISTMONK_db__user=${POSTGRES_USER:-listmonk}
+      - LISTMONK_db__password=${POSTGRES_PASSWORD:-securepassword}
+      - LISTMONK_db__database=${POSTGRES_DB:-listmonk}
+      - LISTMONK_db__host=listmonk-db
+      - LISTMONK_db__port=5432
+      - LISTMONK_db__ssl_mode=${LISTMONK_SSLMODE:-disable}
+
+      # DB Pool
+      - LISTMONK_db__max_open=${LISTMONK_MAX_OPEN:-25}
+      - LISTMONK_db__max_idle=${LISTMONK_MAX_IDLE:-25}
+      - LISTMONK_db__max_lifetime=${LISTMONK_MAX_LIFETIME:-300s}
+
+      # Timezone
+      - TZ=${TZ:-America/Vancouver}
+
+      # Initial Admin User
+      - LISTMONK_ADMIN_USER=${LISTMONK_ADMIN_USER:-admin}
+      - LISTMONK_ADMIN_PASSWORD=${LISTMONK_ADMIN_PASSWORD:-changeme1234}
+
+    ports:
+      - "${LISTMONK_PORT:-9000}:${LISTMONK_PORT:-9000}"
+
+    networks:
+      - listmonk
+      - proxy
+
+    hostname: ${LISTMONK_HOSTNAME:-listmonk.example.com}
+
+    depends_on:
+      - listmonk-db
+
+    command:
+      [
+        sh,
+        -c,
+        "./listmonk --install --idempotent --yes --config '' &&
+         ./listmonk --upgrade --yes --config '' &&
+         ./listmonk --config ''"
+      ]
+
+networks:
+  listmonk:
+    driver: bridge
+
+  proxy:
+    external: true
