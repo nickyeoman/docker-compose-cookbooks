@@ -53,7 +53,10 @@ Multiple --env-file flags are supported and applied in order.
 
 ## Prefered Containers
 
-- UptimeKuma - I prefer Gatus over UptimeKuma and have removed support for UptimeKuma.
+These are projects that are not supported in these cookbooks and the alternative that is:
+
+- UptimeKuma - Gatus is used over uptimekuma.
+- upscayl - Invokeai is used over upscayl. 
 
 ## Similar Projects
 
