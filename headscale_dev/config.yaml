@@ -1,0 +1,12 @@
+server_url: https://headscale.example.com
+listen_addr: 0.0.0.0:8080
+
+db_type: sqlite3
+db_path: /var/lib/headscale/db.sqlite
+
+log:
+  level: info
+
+dns_config:
+  override_local_dns: true
+  base_domain: tailnet.local
