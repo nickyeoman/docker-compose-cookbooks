@@ -6,7 +6,7 @@ services:
     image: ${GITEA_IMAGE}
     restart: ${GITEA_RESTART:-always}
     volumes:
-      - ${VOL_PATH}/gitea:/data
+      - ${VOL_PATH}/gitea/gitea:/data
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -36,7 +36,7 @@ services:
     image: ${MARIA_IMAGE:-mariadb:latest}
     restart: ${GITEA_RESTART:-always}
     volumes:
-      - ${VOL_PATH}/gitea-db:/var/lib/mysql
+      - ${VOL_PATH}/gitea/gitea-db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MARIA_ROOT:-changeMe}
       MYSQL_USER: ${GITEA_DB_USER:-gitea}
