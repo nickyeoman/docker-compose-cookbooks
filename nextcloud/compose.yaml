@@ -14,6 +14,8 @@ services:
       - MARIADB_PASSWORD=${NEXTCLOUD_DB_PASSWORD:-AlsoChangeThisPassword}
     volumes:
       - ${VOL_PATH:-./data}/nextcloud/db:/var/lib/mysql
+    networks:
+      - nextcloud
 
   nextcloud:
     image: ${NEXTCLOUD_IMAGE:-nextcloud:latest}
@@ -25,3 +27,13 @@ services:
       - MYSQL_HOST=${NEXTCLOUD_DB_HOST:-nextcloud-db}
     volumes:
       - ${VOL_PATH:-./data}/nextcloud/nextcloud:/var/www/html
+    networks:
+      - nextcloud
+      - proxy
+      
+networks:
+  nextcloud:
+    driver: bridge
+
+  proxy:
+    external: true
