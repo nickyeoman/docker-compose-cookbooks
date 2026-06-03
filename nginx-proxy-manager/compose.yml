@@ -1,6 +1,6 @@
 services:
   proxy:
-    image: ${PROXY_IMAGE:-jc21/nginx-proxy-manager:latest}
+    image: ${PROXY_IMAGE}
     restart: unless-stopped
     environment:
       X_FRAME_OPTIONS: "sameorigin"
@@ -10,8 +10,8 @@ services:
       - "81:81"
       - "443:443"
     volumes:
-      - "${VOL_PATH:-./data}/proxy/data:/data"
-      - "${VOL_PATH:-./data}/proxy/letsencrypt:/etc/letsencrypt"
+      - "${VOL_PATH}/proxy/data:/data"
+      - "${VOL_PATH}/proxy/letsencrypt:/etc/letsencrypt"
     networks:
       - proxy
 
