@@ -1,5 +1,8 @@
 # Nginx Proxy Manager
 
+This doesn't really work in dockhand as you won't have access to a lot of services without this running.
+Moved to notes section, run the compose file manually.
+
 ## Overview
 This Docker Compose configuration sets up the Reverse Proxy application using Docker container.
 
