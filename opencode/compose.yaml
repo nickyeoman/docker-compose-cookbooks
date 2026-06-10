@@ -1,0 +1,21 @@
+# OpenCode Docker Compose
+
+services:
+  opencode:
+    image: ${OPENCODE_IMAGE_NAME:-ghcr.io/anomalyco/opencode:latest}
+    restart: ${OPENCODE_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/opencode/config:/config
+      - ${VOL_PATH:-/data}/opencode/data:/data
+      - ${VOL_PATH:-/data}/opencode/projects:/projects
+
+    environment:
+      - OPENCODE_PORT=${OPENCODE_PORT:-4096}
+      - OPENCODE_HOSTNAME=${OPENCODE_HOSTNAME:-localhost}
+      - OPENCODE_CONFIG=/config/config.json
+      - OPENCODE_MODEL=ollama/qwen3:8b-16k
+      - OLLAMA_HOST=http://10.1.1.16:11434
+
+    ports:
+      - "${OPENCODE_PORT:-4096}:4096"
