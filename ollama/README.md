@@ -25,6 +25,9 @@ docker exec -it ollama ollama run llama3
 
 WEBUI_SECRET_KEY is just a random secret string used to secure sessions, cookies, and auth in your WebUI.  ```openssl rand -hex 32```
 
+You could also set OLLAMA_KEEP_ALIVE=5m if you are running multiple models. 5m is default, 0 removes as soon as done (then would have to reload model, so not quick), more than 5m is longer (minutes).
+See "Docker Container Cheatsheet" below for how to remove models from memory.
+
 ## Use 
 
 - [Ollama Models](https://ollama.com/search)
@@ -44,17 +47,27 @@ ollamac list
 Standard commands
 
 ```bash
+# Enter a shell
+docker exec -it ollama-ollama-1 sh
+
 # Add/Pull a  model
-docker exec -it ollama-ollama-1 ollama pull llama3.1:8b
+ollama pull llama3.1:8b
 
 # list models
-docker compose exec -it ollama ollama list
+ollama list
 
 # Remove a model
-docker compose exec -it ollama ollama rm <model-name>
+ollama rm <model-name>
 
 # Run CLI
-docker compose exec -it ollama ollama run deebseek-r1:8b "What is Star Trek?"
+ollama run <model-name> "What is Star Trek?"
+
+# See what's running
+ollama ps
+
+# Clear memory
+ollama stop <model-name>
+
 ```
 
 ### API
