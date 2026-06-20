@@ -20,4 +20,4 @@ services:
     ports:
       - "${OPENCODE_PORT:-4096}:4096"
 
-    command: ["serve", "--port", "${OPENCODE_PORT:-4096}"]
+    command: ["serve", "--port", "${OPENCODE_PORT:-4096}", "--hostname", "0.0.0.0"]
