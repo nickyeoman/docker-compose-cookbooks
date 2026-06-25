@@ -1,34 +1,31 @@
-################################################################################
 # matomo
-#
-# Sample .env
-#
-# MATOMO_MYSQL_ROOT_PASSWORD=ChangeRootPass
-# MATOMO_MYSQL_PASSWORD=ChangeThisPassword
-# NETWORKNAME=admin_web
-# DB_V=11.3.2
-#
-# Examples:
-# https://github.com/matomo-org/docker/blob/master/.examples/apache/docker-compose.yml
-################################################################################
-services:
 
+services:
   matomodb:
     image: mariadb:${DB_V}
-    restart: always
+    restart: ${MATOMO_RESTART:-always}
     volumes:
-      - ./data/matomodb:/var/lib/mysql
+      - ${VOL_PATH:-/data}/matomodb:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MATOMO_MYSQL_ROOT_PASSWORD:-12345678}
       MYSQL_PASSWORD: ${MATOMO_MYSQL_PASSWORD:-987654321}
       MYSQL_DATABASE: matomo
       MYSQL_USER: matomo
-
-  # https://hub.docker.com/_/matomo/
   matomo:
     image: matomo:${MATOMO_V}
+    restart: ${MATOMO_RESTART:-always}
     volumes:
-      - ./data/matomo:/var/www/html
-      - ./data/matomoconfig:/var/www/html/config
-      - ./data/matomologs:/var/www/html/logs
-    restart: always
+      - ${VOL_PATH:-/data}/matomo:/var/www/html
+      - ${VOL_PATH:-/data}/matomoconfig:/var/www/html/config
+      - ${VOL_PATH:-/data}/matatomologs:/var/www/html/logs
+    environment:
+      MATOMO_DB_HOST: matomodb
+      MATOMO_DB_USER: matomo
+      MATOMO_DB_PASSWORD: ${MATOMO_DB_PASSWORD:-matomo}
+      MATOMO_DB_NAME: matomo
+
+networks:
+  proxy:
+    external: true
+  db:
+    driver: bridge
