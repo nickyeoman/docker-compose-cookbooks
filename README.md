@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="_assets/heading.svg" alt="Description of SVG" width="800"/>
+  <img src="https://i.4lt.ca/nickyeoman/dccb.png" alt="Nick Yeoman's Docker Compose Cookbook" width="800"/>
 </div>
 
 👤 Author: [Nick Yeoman](https://www.nickyeoman.com/).
@@ -13,8 +13,8 @@ I'm only one guy, I tested with
 | Software            | Version   |
 |---------------------|-----------|
 | Debian              | 13        |
-| Docker Engine       | 29.4.1    |
-| Dockhand            | 1.0.26    |
+| Docker Engine       | 29.6.0    |
+| Dockhand            | 1.0.32    |
 
 ## 🤔 Assumptions
 
@@ -46,7 +46,7 @@ cd ~/cookbooks
 mkdir /data
 touch /data/test.env
 docker compose --env-file sample.env --env-file /data/test.env up -d
-docker compose --env-file sample.env --env-file down
+docker compose --env-file sample.env --env-file /data/test.env down
 ```
 
 Multiple --env-file flags are supported and applied in order.
