@@ -53,15 +53,31 @@ Multiple --env-file flags are supported and applied in order.
 
 ## Prefered Containers
 
-These are projects that are not supported in these cookbooks and the alternative that is:
+These are projects that are not supported in this repo and the alternative:
 
-- Dockge - I like dockhand better
-- Portainer - I like dockhand better
-- UptimeKuma - Gatus is used over uptimekuma.
-- upscayl - Invokeai is used over upscayl. 
+1. [Dockge](https://dockge.kuma.pet/) - Simple Docker Compose stack manager with a clean UI for deploying and managing containers.
+   *Preferred alternative: Dockhand - lighter-weight and preferred by the user.*
+
+1. [Gotify](https://gotify.net/) - Self-hosted push notification server for sending messages to apps.  
+   *Preferred alternative: [ntfy](https://ntfy.sh/) - simpler pub/sub notification system with mobile and CLI support.*
+
+1. [LinkWarden](https://linkwarden.app/) — Bookmark manager for saving and organizing web links.  
+   *Preferred alternative: [Wallabag](https://wallabag.org/) — read-it-later tool for saving articles and offline reading.*
+
+1. [Portainer](https://www.portainer.io/) - Popular Docker management platform with UI, role-based access, and orchestration features.  
+   *Preferred alternative: Dockhand (not linked) - lighter-weight and preferred by the user.*
+
+1. [Upscayl](https://upscayl.org/) — AI image upscaling tool for enhancing image resolution.  
+   *Preferred alternative: [InvokeAI](https://invoke-ai.github.io/) - full generative AI suite with upscaling and image generation workflows.*
+
+1. [Uptime Kuma](https://uptime.kuma.pet/) - Self-hosted monitoring tool for uptime and service checks.  
+   *Preferred alternative: [Gatus](https://github.com/TwinProduction/gatus) - code-based health/status dashboard with GitOps-style configuration.*
+
+
 
 ## Similar Projects
 
 * [Awesome Compose](https://github.com/docker/awesome-compose/) -  A starting point for integrating different services using a Compose file.
 * [Docker compose collection](https://github.com/PAPAMICA/docker-compose-collection) Deploy multiple services easily and quickly.
+* [Funky Penguin's Geek Cookbook](https://geek-cookbook.funkypenguin.co.nz/)
 * [hotio.dev](https://hotio.dev/) - These are images not compose files, but very useful. 
