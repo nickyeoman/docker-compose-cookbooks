@@ -55,6 +55,8 @@ Multiple --env-file flags are supported and applied in order.
 
 These are projects that are not supported in these cookbooks and the alternative that is:
 
+- Dockge - I like dockhand better
+- Portainer - I like dockhand better
 - UptimeKuma - Gatus is used over uptimekuma.
 - upscayl - Invokeai is used over upscayl. 
 
