@@ -1,0 +1,46 @@
+# OpenClaw AI Coding Assistant Gateway
+
+services:
+  openclaw:
+    image: ${OPENCLAW_IMAGE:-ghcr.io/openclaw/openclaw:latest}
+    restart: ${OPENCLAW_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/openclaw/config:/home/node/.openclaw
+      - ${VOL_PATH:-/data}/openclaw/workspace:/home/node/.openclaw/workspace
+      - ${VOL_PATH:-/data}/openclaw/auth-secrets:/home/node/.config/openclaw
+      - /etc/localtime:/etc/localtime:ro
+
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+      - OPENCLAW_DISABLE_BONJOUR=${OPENCLAW_DISABLE_BONJOUR:-1}
+      - OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND:-lan}
+      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${OTEL_EXPORTER_OTLP_ENDPOINT}
+
+    ports:
+      - "${OPENCLAW_PORT:-18789}:18789"
+
+    networks:
+      - proxy
+      - internal
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    command:
+      [
+        "node",
+        "dist/index.js",
+        "gateway",
+        "--bind",
+        "${OPENCLAW_GATEWAY_BIND:-lan}",
+        "--port",
+        "18789",
+      ]
+
+networks:
+  proxy:
+    external: true
+  internal:
+    driver: bridge
