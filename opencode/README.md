@@ -32,6 +32,42 @@ To use a custom config with `VOL_PATH=/data`, copy it to:
 /data/opencode/config/config.json
 ```
 
+## CLI Cheatsheet
+
+From the `opencode/` directory, prefix commands with `docker compose`:
+
+```sh
+# Start the web UI
+docker compose up -d
+
+# Attach TUI to the running server
+docker compose exec opencode opencode
+
+# Run a one-off command (replaces the "serve" command)
+docker compose run --rm opencode opencode stats
+
+# Common commands (via exec or run)
+docker compose exec opencode opencode models --refresh
+docker compose exec opencode opencode models
+docker compose exec opencode opencode stats
+docker compose exec opencode opencode stats --models --days 7
+docker compose exec opencode opencode session list
+docker compose exec opencode opencode auth list
+docker compose exec opencode opencode db path
+docker compose exec opencode opencode upgrade
+```
+
+### Inside the TUI
+
+```
+/init          # Analyze project, create AGENTS.md
+/models        # Switch model
+/connect       # Add API key for a provider
+/undo          # Undo last change
+/redo          # Redo undone change
+/share         # Create share link
+```
+
 ## Ollama
 
 This stack requires the [ollama](../ollama/) stack to be running. The config
