@@ -2,15 +2,14 @@
 
 ## Overview
 
-I have added a config file that uses local ollama (see ollama directory of cookbooks)
+OpenCode is an open source AI coding agent.
 
 ## Project Details
 
--   **Project Repository:** [Link](https://example.com)
--   **Container Image:** [Docker Hub](https://dockerhub.com)
--   **Compose Example:** [Compose](https://dockerhub.com)
--   **Documentation:** [Docs](https://dockerhub.com)
--   **Reverse Proxy Port:** `80`
+-   **Project Repository:** [opencode](https://github.com/anomalyco/opencode)
+-   **Container Image:** [GitHub](https://github.com/anomalyco/opencode/pkgs/container/opencode)
+-   **Documentation:** [Docs](https://opencode.ai/docs)
+-   **Reverse Proxy Port:** `4096`
 
 ## Config file
 
