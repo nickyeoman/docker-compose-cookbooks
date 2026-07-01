@@ -9,6 +9,7 @@ Same with standard ports, no option to change.
 Dockerhub: https://hub.docker.com/r/ollama/ollama
 Github (instructions): https://github.com/open-webui/open-webui
 Reverse Proxy Port webui: 8080 (The docker-compose sets the port to 3000)
+Ollama Models: https://ollama.com/search
 
 ## Preperation
 
