@@ -1,0 +1,20 @@
+services:
+  sonarr:
+    image: ${SONARR_IMAGE:-ghcr.io/hotio/sonarr:release}
+    restart: ${SONARR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/sonarr/config:/config
+      - ${VOL_PATH:-/data}/sonarr/data:/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - "${SONARR_PORT:-8989}:8989"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
