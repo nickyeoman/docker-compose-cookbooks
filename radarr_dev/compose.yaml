@@ -1,0 +1,20 @@
+services:
+  radarr:
+    image: ${RADARR_IMAGE:-ghcr.io/hotio/radarr:release}
+    restart: ${RADARR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/radarr/config:/config
+      - ${VOL_PATH:-/data}/radarr/data:/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - "${RADARR_PORT:-7878}:7878"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
