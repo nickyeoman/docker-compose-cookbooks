@@ -5,6 +5,21 @@
 A short 1--3 sentence description of what this Docker Compose project
 does.
 
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:[PORT] in your browser
+3. Follow the initial setup wizard to configure the application
+
+## Docker Run
+
+```bash
+docker run -d \
+  --name=[SERVICE_NAME] \
+  # ...env vars, ports, volumes...
+  [IMAGE_NAME]
+```
+
 ## Project Details
 
 -   **Project Repository:** [Link](https://example.com)

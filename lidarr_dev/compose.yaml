@@ -1,0 +1,20 @@
+services:
+  lidarr:
+    image: ${LIDARR_IMAGE:-ghcr.io/hotio/lidarr:release}
+    restart: ${LIDARR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-./data}/lidarr/config:/config
+      - ${VOL_PATH:-./data}/lidarr/data:/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - "${LIDARR_PORT:-8686}:8686"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
