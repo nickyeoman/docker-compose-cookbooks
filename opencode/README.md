@@ -26,6 +26,14 @@ Ollama. Available models include:
 
 Tested on an NVIDIA GeForce RTX 5060 Ti (16 GB VRAM).
 
+## Model Guides
+
+See the `docs/` directory for best-practice guides on each supported model:
+
+- [DeepSeek V4 Flash Free](docs/DeepSeekV4FlashFree.md) — free model via opencode provider
+- [Qwen3 8B 16k](docs/Qwen.md) — local model via Ollama
+- [Claude (Anthropic)](docs/Claude.md) — paid model via API key
+
 To use a custom config with `VOL_PATH=/data`, copy it to:
 
 ```
