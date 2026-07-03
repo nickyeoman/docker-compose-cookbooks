@@ -1,0 +1,20 @@
+services:
+  bazarr:
+    image: ${BAZARR_IMAGE:-ghcr.io/hotio/bazarr:release}
+    restart: ${BAZARR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/bazarr/config:/config
+      - ${VOL_PATH:-/data}/media:/media
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - "${BAZARR_PORT:-6767}:6767"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
