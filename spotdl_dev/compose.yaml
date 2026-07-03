@@ -1,0 +1,15 @@
+services:
+  spotdl:
+    image: ${SPOTDL_IMAGE:-spotdl/spotify-downloader:latest}
+    restart: ${SPOTDL_RESTART:-unless-stopped}
+    command: web
+    ports:
+      - "${SPOTDL_PORT:-8800}:8800"
+    volumes:
+      - ${VOL_PATH:-/data}/spotdl/music:/music
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
