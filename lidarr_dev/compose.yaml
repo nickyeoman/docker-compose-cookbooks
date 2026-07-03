@@ -3,8 +3,8 @@ services:
     image: ${LIDARR_IMAGE:-ghcr.io/hotio/lidarr:release}
     restart: ${LIDARR_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/lidarr/config:/config
-      - ${VOL_PATH:-./data}/lidarr/data:/data
+      - ${VOL_PATH:-/data}/lidarr/config:/config
+      - ${VOL_PATH:-/data}/lidarr/data:/data
     environment:
       - PUID=1000
       - PGID=1000

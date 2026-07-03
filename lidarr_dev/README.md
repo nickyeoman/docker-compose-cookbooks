@@ -4,6 +4,12 @@
 
 Lidarr is a music collection manager for Usenet and BitTorrent users. It automatically monitors specified artists, searches for new releases (or upgrades to existing tracks), and sends them to your download client. After download, Lidarr renames and organizes the files into your music library and can notify your media server of the new content.
 
+## Project Details
+
+- **Project Repository:** [https://lidarr.audio/](https://lidarr.audio/)
+- **Container Image:** [ghcr.io/hotio/lidarr](https://hotio.dev/containers/lidarr/)
+- **Reverse Proxy Port:** `8686`
+
 ## Getting Started
 
 Open http://localhost:8686 in your browser and complete the initial setup wizard:
@@ -26,6 +32,31 @@ qBittorrent downloads to its own directory → Lidarr picks it up, renames/tags 
 
 Lidarr doesn't natively import Spotify playlists. Use a community tool like [SpotifyToLidarr](https://github.com/Claudemirovsky/SpotifyToLidarr) or set up a **List** (Settings → Lists) from Last.fm or MusicBrainz to auto-add artists based on your listening habits.
 
+## Environment Variable Notes
+
+| Variable | Description |
+|---|---|
+| `LIDARR_IMAGE` | Container image (default: `ghcr.io/hotio/lidarr:release`) |
+| `LIDARR_RESTART` | Restart policy (default: `unless-stopped`) |
+| `LIDARR_PORT` | Published port for the web UI (default: `8686`) |
+| `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
+| `TZ` | Container timezone (default: `America/Vancouver`) |
+
+## Volume Notes
+
+| Volume | Purpose |
+|---|---|
+| `${VOL_PATH:-/data}/lidarr/config` | Application configuration and database |
+| `${VOL_PATH:-/data}/lidarr/data` | Download client data and working directory |
+
+## Network Notes
+
+Requires an external `proxy` network. Create it once with:
+
+```bash
+docker network create proxy
+```
+
 ## Docker Run
 
 ```bash
@@ -36,42 +67,11 @@ docker run -d \
   -e UMASK=002 \
   -e TZ=America/Vancouver \
   -p 8686:8686 \
-  -v ${VOL_PATH:-./data}/lidarr/config:/config \
-  -v ${VOL_PATH:-./data}/lidarr/data:/data \
+  -v ${VOL_PATH:-/data}/lidarr/config:/config \
+  -v ${VOL_PATH:-/data}/lidarr/data:/data \
   --network proxy \
   --restart unless-stopped \
   ghcr.io/hotio/lidarr:release
-```
-
-## Project Details
-
-- **Project Repository:** [https://lidarr.audio/](https://lidarr.audio/)
-- **Container Image:** [ghcr.io/hotio/lidarr](https://hotio.dev/containers/lidarr/)
-- **Reverse Proxy Port:** `8686`
-
-## Environment Variable Notes
-
-| Variable | Description |
-|---|---|
-| `LIDARR_IMAGE` | Container image (default: `ghcr.io/hotio/lidarr:release`) |
-| `LIDARR_RESTART` | Restart policy (default: `unless-stopped`) |
-| `LIDARR_PORT` | Published port for the web UI (default: `8686`) |
-| `VOL_PATH` | Base path for persistent data volumes (default: `./data`) |
-| `TZ` | Container timezone (default: `America/Vancouver`) |
-
-## Volume Notes
-
-| Volume | Purpose |
-|---|---|
-| `${VOL_PATH}/lidarr/config` | Application configuration and database |
-| `${VOL_PATH}/lidarr/data` | Download client data and working directory |
-
-## Network Notes
-
-Requires an external `proxy` network. Create it once with:
-
-```bash
-docker network create proxy
 ```
 
 ## Dockhand Stack, Deploy from Git

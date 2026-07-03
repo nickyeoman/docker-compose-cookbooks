@@ -1,0 +1,18 @@
+services:
+  prowlarr:
+    image: ${PROWLARR_IMAGE:-ghcr.io/hotio/prowlarr:release}
+    restart: ${PROWLARR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/prowlarr/config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+    ports:
+      - "${PROWLARR_PORT:-9696}:9696"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
