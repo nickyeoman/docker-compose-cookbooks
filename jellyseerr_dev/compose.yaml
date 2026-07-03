@@ -1,0 +1,18 @@
+services:
+  jellyseerr:
+    image: ${JELLYSEERR_IMAGE:-ghcr.io/hotio/jellyseerr:release}
+    restart: ${JELLYSEERR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/jellyseerr/config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+    ports:
+      - "${JELLYSEERR_PORT:-5055}:5055"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
