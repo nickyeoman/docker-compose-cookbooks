@@ -1,51 +1,66 @@
 services:
   immich-server:
-    image: ${IMMICH_IMAGE}
+    image: ${IMMICH_IMAGE:-ghcr.io/immich-app/immich-server:release}
+    restart: ${IMMICH_RESTART:-unless-stopped}
     # extends:
     #   file: hwaccel.transcoding.yml
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
-      # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
-      - ${VOL_PATH:-./data}/immich-upload:/usr/src/app/upload
-      - ${VOL_PATH:-./data}/immich-import:/import
+      - ${VOL_PATH:-/data}/immich/upload:/usr/src/app/upload
+      - ${VOL_PATH:-/data}/immich/import:/import
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - REDIS_HOSTNAME=${IMMICH_REDIS_HOSTNAME:-immich-redis}
-      - DB_HOSTNAME=${IMMICH_DB_HOSTNAME:-immich-postgres}
-      - DB_PASSWORD=${IMMICH_DB_PASSWORD:-postgres}
+      - REDIS_HOSTNAME=immich-redis
+      - DB_HOSTNAME=immich-postgres
+      - DB_PASSWORD=${IMMICH_DB_PASSWORD:-changeme}
       - DB_USERNAME=${IMMICH_DB_USERNAME:-postgres}
       - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME:-immich}
+    ports:
+      - "${IMMICH_PORT:-8000}:2283"
+    networks:
+      - proxy
+      - immich_internal
+    depends_on:
+      - immich-redis
+      - immich-postgres
     healthcheck:
       disable: false
-    ports:
-      - "8000:2283"
 
   immich-machine-learning:
     # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
-    # Example tag: ${IMMICH_VERSION:-release}-cuda
-    image: ghcr.io/immich-app/immich-machine-learning:release
+    # Example tag: ghcr.io/immich-app/immich-machine-learning:release-cuda
+    image: ${IMMICH_ML_IMAGE:-ghcr.io/immich-app/immich-machine-learning:release}
+    restart: ${IMMICH_RESTART:-unless-stopped}
     # extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
     #   file: hwaccel.ml.yml
     #   service: cpu # set to one of [armnn, cuda, openvino, openvino-wsl] for accelerated inference - use the `-wsl` version for WSL2 where applicable
     volumes:
-      - ${VOL_PATH:-./data}/model-cache:/cache
+      - ${VOL_PATH:-/data}/immich/model-cache:/cache
+    networks:
+      - immich_internal
     healthcheck:
       disable: false
 
   immich-redis:
-    image: ${REDIS_IMAGE}
+    image: ${REDIS_IMAGE:-redis:6.2.19-alpine}
+    restart: ${IMMICH_RESTART:-unless-stopped}
+    networks:
+      - immich_internal
     healthcheck:
       test: redis-cli ping || exit 1
 
   immich-postgres:
-    image: ${POSTGRES_IMAGE}
-    environment:
-      POSTGRES_PASSWORD: ${IMMICH_DB_PASSWORD:-postgrespass}
-      POSTGRES_USER: ${IMMICH_DB_USERNAME:-postgres}
-      POSTGRES_DB: ${IMMICH_DB_DATABASE_NAME:-immich}
-      POSTGRES_INITDB_ARGS: '--data-checksums'
+    image: ${POSTGRES_IMAGE:-tensorchord/pgvecto-rs:pg14-v0.2.0}
+    restart: ${IMMICH_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/immich-postgres:/var/lib/postgresql/data
+      - ${VOL_PATH:-/data}/immich/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${IMMICH_DB_PASSWORD:-changeme}
+      - POSTGRES_USER=${IMMICH_DB_USERNAME:-postgres}
+      - POSTGRES_DB=${IMMICH_DB_DATABASE_NAME:-immich}
+      - POSTGRES_INITDB_ARGS=--data-checksums
+    networks:
+      - immich_internal
     healthcheck:
       test: >-
         pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1;
@@ -63,3 +78,9 @@ services:
       -c max_wal_size=2GB
       -c shared_buffers=512MB
       -c wal_compression=on
+
+networks:
+  immich_internal:
+    driver: bridge
+  proxy:
+    external: true
