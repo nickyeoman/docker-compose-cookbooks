@@ -10,8 +10,6 @@ These are containers that have been requested to add to the repo.  This used to 
 
 3. [Duplicati](https://www.duplicati.com/) — Encrypted backup software for securely storing backups to cloud or local destinations.
 
-4. [Adminer](https://www.adminer.org/) — Lightweight database management tool (alternative to phpMyAdmin).
-
 5. [Portus (openSUSE)](https://hub.docker.com/r/opensuse/portus/) — Web UI and authorization service for Docker registries.
 
 6. [Silverpeas](https://hub.docker.com/_/silverpeas) — Enterprise collaboration platform (intranet, document sharing, communication tools).
@@ -57,6 +55,8 @@ These are containers that have been requested to add to the repo.  This used to 
 26. [Tugtainer](https://github.com/Quenary/tugtainer) — GUI alternative to Watchtower for managing Docker container updates.
 
 27. [Sencho](https://sencho.io/) — Lightweight self-hosted service platform.
+
+28. https://www.authelia.com/ - replacement for authentik
 
 
 ## Apps That Will Not be in the Repo
