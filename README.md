@@ -67,6 +67,9 @@ These are projects that are not supported in this repo and the alternative:
 1. [Portainer](https://www.portainer.io/) - Popular Docker management platform with UI, role-based access, and orchestration features.  
    *Preferred alternative: Dockhand (not linked) - lighter-weight and preferred by the user.*
 
+1. [Passbolt](https://www.passbolt.com/) - Self-hosted password manager built for team collaboration and sharing.  
+   *Preferred alternative: [Vaultwarden](https://github.com/dani-garcia/vaultwarden) - lightweight Bitwarden-compatible server, supported in this repo as `vaultwarden_dev`.*
+
 1. [Piwigo](https://piwigo.org/) - Self-hosted photo gallery and management software.  
    *Preferred alternative: [Immich](https://immich.app/) - modern photo and video management with mobile app, ML-powered search, and face recognition.*
 
