@@ -1,0 +1,54 @@
+# Wallabag Read-It-Later
+
+services:
+  wallabag:
+    image: ${WALLABAG_IMAGE:-wallabag/wallabag:latest}
+    restart: ${WALLABAG_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/wallabag/images:/var/www/wallabag/web/assets/images
+
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD:-changeme-root}
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=wallabag-db
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=${WALLABAG_DB_NAME:-wallabag}
+      - SYMFONY__ENV__DATABASE_USER=${WALLABAG_DB_USER:-wallabag}
+      - SYMFONY__ENV__DATABASE_PASSWORD=${WALLABAG_DB_PASSWORD:-changeme}
+      - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
+      - SYMFONY__ENV__DATABASE_TABLE_PREFIX=wallabag_
+      - SYMFONY__ENV__MAILER_DSN=${WALLABAG_MAILER_DSN:-smtp://127.0.0.1}
+      - SYMFONY__ENV__FROM_EMAIL=${WALLABAG_FROM_EMAIL:-wallabag@example.com}
+      - SYMFONY__ENV__DOMAIN_NAME=${WALLABAG_DOMAIN:-http://localhost:8082}
+      - SYMFONY__ENV__SERVER_NAME=${WALLABAG_SERVER_NAME:-wallabag}
+
+    ports:
+      - "${WALLABAG_PORT:-8082}:80"
+
+    networks:
+      - proxy
+      - internal
+
+    depends_on:
+      - wallabag-db
+
+  wallabag-db:
+    image: ${MARIADB_IMAGE:-mariadb:11}
+    restart: ${WALLABAG_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/wallabag/db:/var/lib/mysql
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD:-changeme-root}
+
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
+    driver: bridge
