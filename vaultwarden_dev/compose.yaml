@@ -1,0 +1,30 @@
+# Vaultwarden Password Manager
+
+services:
+  vaultwarden:
+    image: ${VAULT_IMAGE:-vaultwarden/server:latest}
+    restart: ${VAULT_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/vaultwarden:/data
+
+    environment:
+      - DOMAIN=${VAULT_DOMAIN:-http://localhost:8083}
+      - SIGNUPS_ALLOWED=${VAULT_SIGNUPS_ALLOWED:-false}
+      - ADMIN_TOKEN=${VAULT_ADMIN_TOKEN}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_FROM=${SMTP_FROM}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_SECURITY=${SMTP_SECURITY:-starttls}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+
+    ports:
+      - "${VAULT_PORT:-8083}:80"
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
