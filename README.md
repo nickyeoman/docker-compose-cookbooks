@@ -58,6 +58,9 @@ These are projects that are not supported in this repo and the alternative:
 1. [Dockge](https://dockge.kuma.pet/) - Simple Docker Compose stack manager with a clean UI for deploying and managing containers.
    *Preferred alternative: Dockhand - lighter-weight and preferred by the user.*
 
+1. [Dozzle](https://dozzle.dev/) — Real-time Docker log viewer web UI.  
+   *Preferred alternative: Dockhand has built-in log viewing, making Dozzle redundant.*
+
 1. [Gotify](https://gotify.net/) - Self-hosted push notification server for sending messages to apps.  
    *Preferred alternative: [ntfy](https://ntfy.sh/) - simpler pub/sub notification system with mobile and CLI support.*
 
