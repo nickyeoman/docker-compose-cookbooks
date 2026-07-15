@@ -1,0 +1,19 @@
+# Paisa Personal Finance Manager
+
+services:
+  paisa:
+    image: ${PAISA_IMAGE:-ananthakumaran/paisa:latest}
+    restart: ${PAISA_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/paisa:/root/Documents/paisa
+
+    ports:
+      - "${PAISA_PORT:-7500}:7500"
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
