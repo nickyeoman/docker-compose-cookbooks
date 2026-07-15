@@ -1,6 +1,0 @@
-# Domains & Project
-PREFIX=p1
-ROCKET_DOMAIN_NAME=chat.nickyeoman.com
-
-# Software versions
-ROCKETCHAT_V=3.1.1

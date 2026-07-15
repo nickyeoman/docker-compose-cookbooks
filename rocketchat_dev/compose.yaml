@@ -1,0 +1,82 @@
+# Rocket.Chat
+
+services:
+  rocketchat:
+    image: ${ROCKETCHAT_IMAGE:-rocketchat/rocket.chat:latest}
+    restart: ${ROCKETCHAT_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/rocketchat_dev/uploads:/app/uploads
+
+    environment:
+      - PORT=3000
+      - ROOT_URL=http://${ROCKETCHAT_DOMAIN:-localhost}:3000
+      - MONGO_URL=mongodb://mongo:27017/rocketchat
+      - MONGO_OPLOG_URL=mongodb://mongo:27017/local
+      - MAIL_URL=smtp://smtp.email
+
+    ports:
+      - "${ROCKETCHAT_PORT:-3000}:3000"
+
+    networks:
+      - proxy
+      - internal
+
+    depends_on:
+      - mongo
+
+  mongo:
+    image: ${MONGO_IMAGE:-mongo:4.0}
+    restart: ${ROCKETCHAT_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/rocketchat_dev/db:/data/db
+      - ${VOL_PATH:-/data}/rocketchat_dev/dump:/dump
+
+    command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
+
+    networks:
+      - internal
+
+  mongo-init-replica:
+    image: ${MONGO_IMAGE:-mongo:4.0}
+
+    command: >
+      mongo mongo/rocketchat --eval
+        "rs.initiate({
+          _id: 'rs0',
+          members: [ { _id: 0, host: 'localhost:27017' } ]
+        })"
+
+    networks:
+      - internal
+
+    depends_on:
+      - mongo
+
+  hubot:
+    image: ${HUBOT_IMAGE:-rocketchat/hubot-rocketchat:latest}
+    restart: ${ROCKETCHAT_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/rocketchat_dev/hubot-scripts:/home/hubot/scripts
+
+    environment:
+      - ROCKETCHAT_URL=rocketchat:3000
+      - ROCKETCHAT_ROOM=GENERAL
+      - ROCKETCHAT_USER=bot
+      - ROCKETCHAT_PASSWORD=botpassword
+      - BOT_NAME=bot
+      - EXTERNAL_SCRIPTS=hubot-help,hubot-seen,hubot-links,hubot-diagnostics
+
+    networks:
+      - internal
+
+    depends_on:
+      - rocketchat
+
+networks:
+  proxy:
+    external: true
+  internal:
+    driver: bridge
