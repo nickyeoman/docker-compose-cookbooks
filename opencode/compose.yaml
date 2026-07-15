@@ -7,8 +7,7 @@ services:
 
     volumes:
       - ${VOL_PATH:-/data}/opencode/config:/config
-      - ${VOL_PATH:-/data}/opencode/data:/data
-      - ${VOL_PATH:-/data}/opencode/projects:/projects
+      - ${VOL_PROJECTS:-/data/projects}:/projects
 
     environment:
       - OPENCODE_PORT=${OPENCODE_PORT:-4096}

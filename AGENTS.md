@@ -5,7 +5,7 @@
 - Every stack has at least 3 files: `compose.yaml` (dockhand style), `sample.env`, `README.md`
 - `_dev` = experimental, `_notes` = docs/minimal examples, no suffix = production-ready
 - Always references an external `proxy` network (`docker network create proxy` once)
-- Volumes use `${VOL_PATH:-/data}` as the base path (absolute `/data`, never `./data`)
+- Volumes use `${VOL_PATH:-/data}` as the base path (absolute `/data`, never `./data`); project directories use `${VOL_PROJECTS:-/data}`
 - Timezone defaults to `America/Vancouver`, but only include if the container requires it.
 - Restart policy, image tag, and port are configurable via env vars with sensible defaults
 - New stacks: copy from `_docs/template-compose.md` and `_docs/template-readme.md`

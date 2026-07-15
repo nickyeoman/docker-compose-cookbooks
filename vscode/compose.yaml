@@ -6,7 +6,7 @@ services:
     restart: ${VSCODE_RESTART:-unless-stopped}
 
     volumes:
-      - ${VOL_PATH:-./data}/vscode/data:/data
+      - ${VOL_PROJECTS:-/data/projects}:/data
       - ${VOL_PATH:-./data}/vscode/config:/config
 
     environment:
