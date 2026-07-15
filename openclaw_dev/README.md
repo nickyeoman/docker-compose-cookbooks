@@ -12,6 +12,12 @@ support, agent sandboxing, and extensible plugin system.
 -   **Documentation:** [docs.openclaw.ai](https://docs.openclaw.ai)
 -   **Reverse Proxy Port:** `18789`
 
+## Getting Started
+
+1. Copy `sample.env` and set `OPENCLAW_GATEWAY_TOKEN` (`openssl rand -hex 32`)
+2. Start the container: `docker compose up -d`
+3. Open http://localhost:18789 in your browser and sign in with the gateway token
+
 ## Environment Variable Notes
 
 -   `OPENCLAW_GATEWAY_TOKEN` — required shared secret for Control UI access.
@@ -33,6 +39,24 @@ All three use `${VOL_PATH:-/data}/openclaw/` as the host base path.
 
 Requires proxy network
 
+## Docker Run
+
+```bash
+docker run -d \
+  --name=openclaw \
+  -e TZ=America/Vancouver \
+  -e OPENCLAW_DISABLE_BONJOUR=1 \
+  -e OPENCLAW_GATEWAY_TOKEN=change-me-to-a-random-secret \
+  -p 18789:18789 \
+  -v /data/openclaw/config:/home/node/.openclaw \
+  -v /data/openclaw/workspace:/home/node/.openclaw/workspace \
+  -v /data/openclaw/auth-secrets:/home/node/.config/openclaw \
+  -v /etc/localtime:/etc/localtime:ro \
+  --add-host host.docker.internal:host-gateway \
+  ghcr.io/openclaw/openclaw:latest \
+  node dist/index.js gateway --bind lan --port 18789
+```
+
 ## Additional Notes / Gotchas
 
 -   This is a `_dev` stack — experimental, not yet production-ready.
@@ -41,8 +65,9 @@ Requires proxy network
 -   Host-side AI providers (Ollama, LM Studio) are reachable at
     `http://host.docker.internal:<port>`.
 -   CLI commands: `docker compose exec openclaw node dist/index.js <subcommand>`
--   Image includes built-in `HEALTHCHECK`; the compose file adds an explicit
-    `curl`-based check.
+-   No `healthcheck` block in the compose file — healthchecks are a future
+    feature across this repo (see AGENTS.md). The image's built-in
+    `HEALTHCHECK` still applies.
 
 ## Dockhand Stack, Deploy from Git
 
