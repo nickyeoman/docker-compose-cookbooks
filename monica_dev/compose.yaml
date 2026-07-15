@@ -1,0 +1,48 @@
+# Monica Personal CRM
+
+services:
+  monica-db:
+    image: ${MONICA_DB_IMAGE:-mariadb:11}
+    restart: ${MONICA_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/monica_dev/db:/var/lib/mysql
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MONICA_MYSQL_ROOT_PASSWORD:-changeme}
+      - MYSQL_DATABASE=monica
+      - MYSQL_USER=monica
+      - MYSQL_PASSWORD=${MONICA_DB_PASSWORD:-changeme}
+
+    networks:
+      - internal
+
+  monica:
+    image: ${MONICA_IMAGE:-monica:latest}
+    restart: ${MONICA_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/monica_dev/storage:/var/www/html/storage
+
+    environment:
+      - DB_HOST=monica-db
+      - DB_USERNAME=monica
+      - DB_PASSWORD=${MONICA_DB_PASSWORD:-changeme}
+      - DB_DATABASE=monica
+      - APP_ENV=${MONICA_APP_ENV:-production}
+
+    ports:
+      - "${MONICA_PORT:-8081}:80"
+
+    networks:
+      - proxy
+      - internal
+
+    depends_on:
+      - monica-db
+
+networks:
+  proxy:
+    external: true
+  internal:
+    driver: bridge
