@@ -1,0 +1,26 @@
+# phpMyAdmin
+
+services:
+  phpmyadmin:
+    image: ${PHPMYADMIN_IMAGE:-phpmyadmin/phpmyadmin:latest}
+    restart: ${PHPMYADMIN_RESTART:-unless-stopped}
+
+    environment:
+      - PMA_ARBITRARY=${PHPMYADMIN_PMA_ARBITRARY:-1}
+      - PMA_HOST=${PHPMYADMIN_PMA_HOST:-mariadb}
+      - PMA_USER=${PHPMYADMIN_PMA_USER:-root}
+      - PMA_PASSWORD=${PHPMYADMIN_PMA_PASSWORD:-changeme}
+      - UPLOAD_LIMIT=${PHPMYADMIN_UPLOAD_LIMIT:-200M}
+
+    ports:
+      - "${PHPMYADMIN_PORT:-8083}:80"
+
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
+    driver: bridge

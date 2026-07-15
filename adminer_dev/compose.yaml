@@ -1,0 +1,25 @@
+# Adminer
+
+services:
+  adminer:
+    image: ${ADMINER_IMAGE:-adminer:latest}
+    restart: ${ADMINER_RESTART:-unless-stopped}
+
+    tmpfs:
+      - /var/lib/php:rw,noexec,nosuid,size=64M
+
+    environment:
+      - ADMINER_DEFAULT_SERVER=${ADMINER_DEFAULT_SERVER:-mariadb}
+
+    ports:
+      - "${ADMINER_PORT:-8082}:8080"
+
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
+    driver: bridge
