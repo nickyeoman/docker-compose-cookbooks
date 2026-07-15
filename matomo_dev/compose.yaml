@@ -1,0 +1,49 @@
+# Matomo Web Analytics
+
+services:
+  matomo-db:
+    image: ${MATOMO_DB_IMAGE:-mariadb:10.4}
+    restart: ${MATOMO_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/matomo_dev/db:/var/lib/mysql
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MATOMO_MYSQL_ROOT_PASSWORD:-changeme}
+      - MYSQL_DATABASE=matomo
+      - MYSQL_USER=matomo
+      - MYSQL_PASSWORD=${MATOMO_MYSQL_PASSWORD:-changeme}
+
+    networks:
+      - internal
+
+  matomo:
+    image: ${MATOMO_IMAGE:-matomo:latest}
+    restart: ${MATOMO_RESTART:-unless-stopped}
+
+    volumes:
+      - ${VOL_PATH:-/data}/matomo_dev/html:/var/www/html
+      - ${VOL_PATH:-/data}/matomo_dev/config:/var/www/html/config
+      - ${VOL_PATH:-/data}/matomo_dev/logs:/var/www/html/logs
+
+    environment:
+      - MATOMO_DB_HOST=matomo-db
+      - MATOMO_DB_USER=matomo
+      - MATOMO_DB_PASSWORD=${MATOMO_DB_PASSWORD:-changeme}
+      - MATOMO_DB_NAME=matomo
+
+    ports:
+      - "${MATOMO_PORT:-8080}:80"
+
+    networks:
+      - proxy
+      - internal
+
+    depends_on:
+      - matomo-db
+
+networks:
+  proxy:
+    external: true
+  internal:
+    driver: bridge
