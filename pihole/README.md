@@ -12,6 +12,12 @@ This Docker Compose project deploys a Pi-hole DNS sinkhole and network-wide ad b
 -   **Documentation:** [Docs](https://docs.docker.com/compose/install/)
 -   **Reverse Proxy Port:** `53 (tcp & udp), 80, 443, 67, 123`
 
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:PORT in your browser
+3. Follow the initial setup wizard to configure the application
+
 ## Environment Variable Notes
 
 Below are the key environment variables commonly used with the Pi-hole container.  
@@ -36,6 +42,22 @@ Pi-hole uses volumes to persist configuration and query data:
 /etc/dnsmasq.d – Stores dnsmasq configuration files used by Pi-hole’s DNS service.
 ```
 
+## Network Notes
+
+Uses `network_mode: host` (DNS server) — no proxy network.
+
+## Docker Run
+
+```bash
+docker run -d \
+  --name pihole \
+  -v /data/pihole/etc:/etc/pihole \
+  -v /data/pihole/dnsmasq:/etc/dnsmasq.d \
+  pihole/pihole:latest
+```
+
+See compose.yaml for the full set of environment variables.
+
 ## Additional Notes / Gotchas
 
 DHCP Server: If running Pi-hole as your network DHCP server, the container must run in host networking mode to broadcast DHCP packets correctly.
@@ -47,3 +69,14 @@ Port Conflicts: Nothing else on the host may use port 53. Disable systemd-resolv
 Docker + Reverse Proxy: Pi-hole doesn’t always play nicely behind reverse proxies. If using one, forward only the admin interface (port 80) and keep DNS ports (53) exposed directly.
 
 Gravity Updates: Pi-hole updates blocklists daily. If using custom lists, verify they can be fetched without authentication or special headers.
+
+## Dockhand Stack, Deploy from Git
+
+Cookbooks Repository
+stackname: pihole
+Compose file path: pihole/compose.yaml
+Additional env file (optional): pihole/sample.env
+
+Then "Load" pihole/sample.env into the Environmental variables in dockhand
+
+Create the Stack

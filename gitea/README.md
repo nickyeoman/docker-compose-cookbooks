@@ -11,9 +11,15 @@ Self Hosted Git repository.
 -   **Compose Example:** [Compose](https://docs.gitea.com/installation/install-with-docker)
 -   **Reverse Proxy Port:** `3000`
 
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:22 in your browser
+3. Follow the initial setup wizard to configure the application
+
 ## Environment Variable Notes
 
-    ENABLE_SWAGGER="true" – Lets you: Test API calls in browser, See endpoints, Debug integrations
+ENABLE_SWAGGER="true" – Lets you: Test API calls in browser, See endpoints, Debug integrations
     MAX_RESPONSE_ITEMS="15" – controls pagination limits for API responses
     ROOT_URL - This is what Gitea uses for: Clone URLs, Redirects, Webhooks, OAuth callbacks
     LOCAL_ROOT_URL - You can't change the port from 3000, so you don't need this with this configuration.
@@ -26,8 +32,21 @@ volumes are easy, one for gitea and one for mariadb.
 
 We connect to the proxy network and have an internal network for db.
 
-## Additional Notes / Gotchas
+## Docker Run
 
+```bash
+docker run -d \
+  --name gitea \
+  -p 22:22 \
+  -p 3000:3000 \
+  -v /data/gitea/data:/data \
+  -v /data/gitea/db:/var/lib/mysql \
+  gitea/gitea:latest
+```
+
+See compose.yaml for the full set of environment variables.
+
+## Additional Notes / Gotchas
 
 ### 1000 User
 

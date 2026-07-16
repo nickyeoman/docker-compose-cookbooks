@@ -14,6 +14,12 @@ initialization/upgrades, and support for reverse proxy integration.
 -   **Documentation:** https://listmonk.app/docs/
 -   **Reverse Proxy Port:** `9000` (configurable with `LISTMONK_PORT`)
 
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:9000 in your browser
+3. Follow the initial setup wizard to configure the application
+
 ## Environment Variable Notes
 
 Most variables are optional because sane defaults are already included
@@ -52,7 +58,7 @@ These are only used during first startup.
 
 ## Volume Notes
 
-    /data/listmonk/db
+/data/listmonk/db
         PostgreSQL database storage
 
     /data/listmonk/uploads
@@ -77,6 +83,19 @@ Internal application traffic uses the private:
     listmonk
 
 bridge network.
+
+## Docker Run
+
+```bash
+docker run -d \
+  --name listmonk \
+  -p 9000:9000 \
+  -v /data/listmonk/db:/var/lib/postgresql \
+  -v /data/listmonk/uploads:/listmonk/uploads:rw \
+  listmonk/listmonk:latest
+```
+
+See compose.yaml for the full set of environment variables.
 
 ## Additional Notes / Gotchas
 

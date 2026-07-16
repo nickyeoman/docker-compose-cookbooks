@@ -55,6 +55,10 @@ docker network create proxy
 
 This is a multi-service stack — use `docker compose` instead of individual `docker run` commands.
 
+## Additional Notes / Gotchas
+
+Nothing specific to this stack so far.
+
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**

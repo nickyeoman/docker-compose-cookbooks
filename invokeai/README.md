@@ -11,22 +11,23 @@ Makes images, needs gpu.
 -   **Documentation:** [Docs](https://invoke-ai.github.io/InvokeAI/)
 -   **Reverse Proxy Port:** You Can set this in env, I have it set to 9090
 
-## Additional Notes / Gotchas
+## Getting Started
 
-To get started, go to the models tab and install: RealVisXL V3 or Juggernaut XL
-Also in the model manager, for upscale install: RealESRGAN_x4plus
-And last install Tile SDXL version 
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:9090 in your browser
+3. Follow the initial setup wizard to configure the application
 
-## Dockhand Stack, Deploy from Git
+## Environment Variable Notes
 
-Cookbooks Repository
-stackname: invokeai
-Compose file path: invokeai/compose.yaml
-Additional env file (optional): invokeai/sample.env
+    INVOKEAI_PORT – default: 9090
 
-Then "Load" SERVICENAME/sample.env into the Environmental variables in dockhand
+## Volume Notes
 
-Create the Stack
+    /invokeai – host path /data/invokeai
+
+## Network Notes
+
+Requires proxy network
 
 ## Docker Run
 
@@ -41,3 +42,20 @@ docker run -d \
   --gpus all \
   ghcr.io/invoke-ai/invokeai:latest
   ```
+
+## Additional Notes / Gotchas
+
+To get started, go to the models tab and install: RealVisXL V3 or Juggernaut XL
+Also in the model manager, for upscale install: RealESRGAN_x4plus
+And last install Tile SDXL version
+
+## Dockhand Stack, Deploy from Git
+
+Cookbooks Repository
+stackname: invokeai
+Compose file path: invokeai/compose.yaml
+Additional env file (optional): invokeai/sample.env
+
+Then "Load" invokeai/sample.env into the Environmental variables in dockhand
+
+Create the Stack

@@ -56,6 +56,10 @@ docker run -d \
   web
 ```
 
+## Additional Notes / Gotchas
+
+Nothing specific to this stack so far.
+
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**

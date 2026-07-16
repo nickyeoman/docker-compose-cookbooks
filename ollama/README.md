@@ -11,6 +11,67 @@ Github (instructions): https://github.com/open-webui/open-webui
 Reverse Proxy Port webui: 8080 (The docker-compose sets the port to 3000)
 Ollama Models: https://ollama.com/search
 
+## Overview
+
+Local large language model runner with the Open WebUI front end.
+
+## Project Details
+
+-   **Container Image:** [ollama/ollama:latest](https://hub.docker.com/r/ollama/ollama)
+-   **Reverse Proxy Port:** `11434`
+
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:11434 in your browser
+3. Follow the initial setup wizard to configure the application
+
+## Environment Variable Notes
+
+    OLLAMA_KEEP_ALIVE – default: 5m
+    OLLAMA_PORT – default: 11434
+    WEBUI_URL – default: http://localhost:8080
+    WEBUI_PORT – default: 8080
+
+## Volume Notes
+
+    /root/.ollama – host path /data/ollama
+    /root/.cache – host path /data/webui/cache
+    /app/backend/data – host path /data/webui/data
+
+## Network Notes
+
+Requires proxy network
+
+## Docker Run
+
+```bash
+docker run -d \
+  --name ollama \
+  -p 11434:11434 \
+  -v /data/ollama:/root/.ollama \
+  -v /data/webui/cache:/root/.cache \
+  -v /data/webui/data:/app/backend/data \
+  ollama/ollama:latest
+```
+
+See compose.yaml for the full set of environment variables.
+
+## Additional Notes / Gotchas
+
+Nothing specific to this stack so far.
+
+## Dockhand Stack, Deploy from Git
+
+Cookbooks Repository
+stackname: ollama
+Compose file path: ollama/compose.yaml
+Additional env file (optional): ollama/sample.env
+
+Then "Load" ollama/sample.env into the Environmental variables in dockhand
+
+Create the Stack
+
 ## Preperation
 
 You need to have nvidia-drivers, cuda and nvidia-container-toolkit installed before proceeding.
@@ -22,6 +83,7 @@ docker run -d --runtime=nvidia --gpus=all -v ollama:/root/.ollama -p 11434:11434
 docker exec -it ollama ollama pull llama3
 docker exec -it ollama ollama run llama3
 ```
+
 ## Environment
 
 WEBUI_SECRET_KEY is just a random secret string used to secure sessions, cookies, and auth in your WebUI.  ```openssl rand -hex 32```
@@ -29,7 +91,7 @@ WEBUI_SECRET_KEY is just a random secret string used to secure sessions, cookies
 You could also set OLLAMA_KEEP_ALIVE=5m if you are running multiple models. 5m is default, 0 removes as soon as done (then would have to reload model, so not quick), more than 5m is longer (minutes).
 See "Docker Container Cheatsheet" below for how to remove models from memory.
 
-## Use 
+## Use
 
 - [Ollama Models](https://ollama.com/search)
 
@@ -83,6 +145,7 @@ Straight docker run:
 ```bash
 docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
+
 ## Recommended Pulls
 
 For a NVIDIA GeForce RTX 5060 Ti, your GPU may vary.

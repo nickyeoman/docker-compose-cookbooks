@@ -159,6 +159,6 @@ stackname: handbrake
 Compose file path: handbrake/compose-cpu.yaml
 Additional env file (optional): handbrake/sample.env
 
-Then "Load" handbrake/sample.env into the Environmental variables in dockhand
+Then "Load" handbrake_notes/sample.env into the Environmental variables in dockhand
 
 Create the Stack

@@ -12,20 +12,42 @@ ArchiveBox is a self-hosted app that lets you preserve content from websites in 
 -   **Documentation:** [Docs](https://github.com/ArchiveBox/ArchiveBox/wiki)
 -   **Reverse Proxy Port:** `8000`
 
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:8000 in your browser
+3. Follow the initial setup wizard to configure the application
+
 ## Environment Variable Notes
 
-    ARCHIVEBOX_IMAGE - you can lock the version like so: ```archivebox/archivebox:sha-1d49bee```
+ARCHIVEBOX_IMAGE - you can lock the version like so: ```archivebox/archivebox:sha-1d49bee```
     ARCHIVEBOX_UID - User 1000
     ARCHIVEBOX_GID - Group 1000
     PYTHONUNBUFFERED - Ensures logs are output in real-time
 
 ## Volume Notes
 
-    /data – just one volume
+/data – just one volume
 
 ## Network Notes
 
 Requires proxy network
+
+## Docker Run
+
+```bash
+docker run -d \
+  --name archivebox \
+  -p 8000:8000 \
+  -v /data/archivebox:/data \
+  archivebox/archivebox:stable
+```
+
+See compose.yaml for the full set of environment variables.
+
+## Additional Notes / Gotchas
+
+Nothing specific to this stack so far.
 
 ## Dockhand Stack, Deploy from Git
 

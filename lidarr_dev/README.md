@@ -74,6 +74,10 @@ docker run -d \
   ghcr.io/hotio/lidarr:release
 ```
 
+## Additional Notes / Gotchas
+
+Nothing specific to this stack so far.
+
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**

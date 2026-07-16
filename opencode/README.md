@@ -11,6 +11,60 @@ OpenCode is an open source AI coding agent.
 -   **Documentation:** [Docs](https://opencode.ai/docs)
 -   **Reverse Proxy Port:** `4096`
 
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:4096 in your browser
+3. Follow the initial setup wizard to configure the application
+
+## Environment Variable Notes
+
+    OPENCODE_PORT – default: 4096
+    OPENCODE_HOSTNAME – default: 0.0.0.0
+    OLLAMA_HOST_URL – default: http://localhost:11434
+
+## Volume Notes
+
+With `VOL_PATH=/data`:
+
+| Container path | Host path | Purpose |
+|---|---|---|
+| `/config` | `/data/opencode/config` | Config files (config.json) |
+| `/data` | `/data/opencode/data` | OpenCode state |
+| `/projects` | `/data/opencode/projects` | Workspace/project files |
+
+## Network Notes
+
+Requires proxy network
+
+## Docker Run
+
+```bash
+docker run -d \
+  --name opencode \
+  -p 4096:4096 \
+  -v /data/opencode/config:/config \
+  -v /data/projects:/projects \
+  ghcr.io/anomalyco/opencode:latest
+```
+
+See compose.yaml for the full set of environment variables.
+
+## Additional Notes / Gotchas
+
+Nothing specific to this stack so far.
+
+## Dockhand Stack, Deploy from Git
+
+Cookbooks Repository
+stackname: opencode
+Compose file path: opencode/compose.yaml
+Additional env file (optional): opencode/sample.env
+
+Then "Load" opencode/sample.env into the Environmental variables in dockhand.
+
+Create the Stack
+
 ## Config file
 
 The `config.json` at `opencode/config/config.json` is pre-configured for
@@ -89,28 +143,3 @@ To use a host-side ollama instead, set `OLLAMA_HOST=http://host.docker.internal:
 -   `OLLAMA_HOST` — Ollama API endpoint (default `http://localhost:11434`)
 -   `OPENCODE_PORT` — Web UI port (default `4096`)
 -   `VOL_PATH` — Base path for persistent data (default `/data`)
-
-## Volume Notes
-
-With `VOL_PATH=/data`:
-
-| Container path | Host path | Purpose |
-|---|---|---|
-| `/config` | `/data/opencode/config` | Config files (config.json) |
-| `/data` | `/data/opencode/data` | OpenCode state |
-| `/projects` | `/data/opencode/projects` | Workspace/project files |
-
-## Network Notes
-
-Requires proxy network
-
-## dockhand Stack, Deploy from Git
-
-Cookbooks Repository
-stackname: opencode
-Compose file path: opencode/compose.yaml
-Additional env file (optional): opencode/sample.env
-
-Then "Load" opencode/sample.env into the Environmental variables in dockhand.
-
-Create the Stack

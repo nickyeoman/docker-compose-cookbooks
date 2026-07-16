@@ -12,6 +12,12 @@ The web interface also offers audio playback, seamless clipboard sharing, an int
 -   **Container Image:** [Docker Hub](https://hub.docker.com/r/jlesage/thunderbird)
 -   **Reverse Proxy Port:** `5800`
 
+## Getting Started
+
+1. Start the container: `docker compose up -d`
+2. Open http://localhost:5800 in your browser
+3. Follow the initial setup wizard to configure the application
+
 ## Environment Variable Notes
 
 THUNDERBIRD_IMAGE=jlesage/thunderbird:latest
@@ -29,13 +35,34 @@ THUNDERBIRD_SECURE_CONNECTION=1
 I use the import/export plugin for thunderbird so I've added an optional volume:
 ```thunderbird-export:/export```
 
+## Network Notes
+
+Requires proxy network
+
+## Docker Run
+
+```bash
+docker run -d \
+  --name thunderbird \
+  -p 5800:5800 \
+  -v /data/thunderbird/config:/config \
+  -v /data/thunderbird/export:/export \
+  jlesage/thunderbird
+```
+
+See compose.yaml for the full set of environment variables.
+
+## Additional Notes / Gotchas
+
+GUI app streamed to the browser — unauthenticated by default aside from the web password, keep it behind the proxy.
+
 ## Dockhand Stack, Deploy from Git
 
 Cookbooks Repository
 stackname: NAME_HERE
-Compose file path: SERVICENAME/compose.yaml
-Additional env file (optional): SERVICENAME/sample.env
+Compose file path: thunderbird/compose.yaml
+Additional env file (optional): thunderbird/sample.env
 
-Then "Load" SERVICENAME/sample.env into the Environmental variables in dockhand
+Then "Load" thunderbird/sample.env into the Environmental variables in dockhand
 
 Create the Stack
