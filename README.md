@@ -51,7 +51,7 @@ docker compose --env-file sample.env --env-file /data/test.env down
 
 Multiple --env-file flags are supported and applied in order.
 
-## Prefered Containers
+## Preferred Containers
 
 These are projects that are not supported in this repo and the alternative:
 
