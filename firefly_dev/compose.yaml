@@ -1,12 +1,25 @@
 services:
   firefly:
     image: ${FIREFLY_IMAGE:-fireflyiii/core:latest}
-    restart: unless-stopped
+    restart: ${FIREFLY_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/firefly:/var/www/html/storage/upload
-  
+      - ${VOL_PATH:-/data}/firefly:/var/www/html/storage/upload
+    ports:
+      - "${FIREFLY_PORT:-8080}:8080"
+    networks:
+      - proxy
+      - internal
+
   firefly-importer:
     image: ${FIREFLY_IMPORTER_IMAGE:-fireflyiii/data-importer:latest}
-    restart: unless-stopped
+    restart: ${FIREFLY_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/firefly:/var/www/html/storage/upload
+      - ${VOL_PATH:-/data}/firefly:/var/www/html/storage/upload
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

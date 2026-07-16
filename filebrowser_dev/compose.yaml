@@ -1,12 +1,22 @@
 services:
   filebrowser:
     image: ${FILEBROWSER_IMAGE:-gtstef/filebrowser:latest}
+    restart: ${FILEBROWSER_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/storage:/srv
-      - ${VOL_PATH:-./data}/filebrowser/root:/home/filebrowser/data
-      - ${VOL_CONFIG_PATH:-./config}/config.yaml:/home/filebrowser/config.yaml
+      - ${VOL_PATH:-/data}/storage:/srv
+      - ${VOL_PATH:-/data}/filebrowser/root:/home/filebrowser/data
+      - ${FILEBROWSER_CONFIG_PATH:-/data/filebrowser}/config.yaml:/home/filebrowser/config.yaml
     environment:
-      FILEBROWSER_CONFIG: "${FILEBROWSER_CONFIG:-/home/filebrowser/config.yaml}"
-      FILEBROWSER_ADMIN_PASSWORD: ${FILEBROWSER_ADMIN_PASSWORD:-admin}
-      TZ: ${TZ:-America/Vancouver}
+      - FILEBROWSER_CONFIG=${FILEBROWSER_CONFIG:-/home/filebrowser/config.yaml}
+      - FILEBROWSER_ADMIN_PASSWORD=${FILEBROWSER_ADMIN_PASSWORD:-admin}
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - "${FILEBROWSER_PORT:-8080}:80"
+    networks:
+      - proxy
+      - internal
 
+networks:
+  proxy:
+    external: true
+  internal:

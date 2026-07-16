@@ -1,28 +1,55 @@
 services:
-  directus:
-    image: directus/directus:latest
-    restart: unless-stopped
-    ports:
-      - "8000:8055"
+  mariadb:
+    image: ${MARIADB_IMAGE:-mariadb:10.11}
+    restart: ${DIRECTUS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/directus/db:/var/lib/mysql
     environment:
-      SECRET: ${DIRECTUS_SECRET:-0123456789}
-      DB_CLIENT: mysql
-      DB_HOST: mariadb
-      DB_PORT: 3306
-      DB_DATABASE: ${MARIADB_DATABASE:-dbname}
-      DB_USER: ${MARIADB_USER:-db_username}
-      DB_PASSWORD: ${MARIADB_PASSWORD:-db_password}
-      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL:-noreply@example.com}
-      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD:-change_me_to_admin_pass}
-      CACHE_ENABLED: "true"
-      CACHE_AUTO_PURGE: "true"
-      CACHE_STORE: "redis"
-      REDIS: "redis://cache:6379"
-      PUBLIC_URL: ${DIRECTUS_PUBLIC_URL:-http://localhost:8055}
+      - MARIADB_DATABASE=${MARIADB_DATABASE:-directus}
+      - MARIADB_USER=${MARIADB_USER:-directus}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD:-ChangeThisPassword}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisRootPassword}
+    networks:
+      - internal
+
+  redis:
+    image: ${REDIS_IMAGE:-redis:7-alpine}
+    restart: ${DIRECTUS_RESTART:-unless-stopped}
+    networks:
+      - internal
+
+  directus:
+    image: ${DIRECTUS_IMAGE:-directus/directus:latest}
+    restart: ${DIRECTUS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/directus/uploads:/directus/uploads
+      - ${VOL_PATH:-/data}/directus/extensions:/directus/extensions
+      - ${VOL_PATH:-/data}/directus/templates:/directus/templates
+    environment:
+      - SECRET=${DIRECTUS_SECRET:-0123456789}
+      - DB_CLIENT=mysql
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_DATABASE=${MARIADB_DATABASE:-directus}
+      - DB_USER=${MARIADB_USER:-directus}
+      - DB_PASSWORD=${MARIADB_PASSWORD:-ChangeThisPassword}
+      - ADMIN_EMAIL=${DIRECTUS_ADMIN_EMAIL:-noreply@example.com}
+      - ADMIN_PASSWORD=${DIRECTUS_ADMIN_PASSWORD:-ChangeThisPassword}
+      - CACHE_ENABLED=true
+      - CACHE_AUTO_PURGE=true
+      - CACHE_STORE=redis
+      - REDIS=redis://redis:6379
+      - PUBLIC_URL=${DIRECTUS_PUBLIC_URL:-http://localhost:8055}
+    ports:
+      - "${DIRECTUS_PORT:-8000}:8055"
+    networks:
+      - proxy
+      - internal
     depends_on:
       - mariadb
       - redis
-    volumes:
-      - ${VOL_PATH:-./data}/directus/uploads:/directus/uploads
-      - ${VOL_PATH:-./data}/directus/extensions:/directus/extensions
-      - ${VOL_PATH:-./data}/directus/templates:/directus/templates
+
+networks:
+  proxy:
+    external: true
+  internal:

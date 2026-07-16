@@ -1,51 +1,34 @@
-# Headscale Docker Compose Template
-
 services:
   headscale:
     image: ${HEADSCALE_IMAGE:-headscale/headscale:latest}
     restart: ${HEADSCALE_RESTART:-unless-stopped}
-
     volumes:
-      - ${CONFIG_PATH:-./config}/headscale/config:/etc/headscale
-      - ${DATA_PATH:-./data}/headscale:/var/lib/headscale
-      - ${LOG_PATH:-./logs}/headscale:/var/log/headscale
-      - /etc/localtime:/etc/localtime:ro
-
+      - ${VOL_PATH:-/data}/headscale/config:/etc/headscale
+      - ${VOL_PATH:-/data}/headscale/data:/var/lib/headscale
+      - ${VOL_PATH:-/data}/headscale/logs:/var/log/headscale
     environment:
-      - TZ=${TZ:-UTC}
+      - TZ=${TZ:-America/Vancouver}
       - HEADSCALE_LOG_LEVEL=${HEADSCALE_LOG_LEVEL:-info}
-
-    expose:
-      - "8080"
-
     networks:
+      - proxy
       - internal
-
     command:
       - headscale
       - serve
 
-    user: "1000:1000"
-
   headscale-ui:
     image: ${HEADSCALE_UI_IMAGE:-goodieshq/headscale-admin:latest}
     restart: ${HEADSCALE_UI_RESTART:-unless-stopped}
-
     environment:
-      - TZ=${TZ:-UTC}
+      - TZ=${TZ:-America/Vancouver}
       - HEADSCALE_URL=http://headscale:8080
-
-    expose:
-      - "80"
-
+    networks:
+      - proxy
+      - internal
     depends_on:
       - headscale
-
-    networks:
-      - internal
 
 networks:
   proxy:
     external: true
   internal:
-    driver: bridge

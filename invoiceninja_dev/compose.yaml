@@ -1,62 +1,51 @@
 services:
-  app:
-    build:
-      context: .
-    image: invoiceninja/invoiceninja-debian:${TAG:-latest}
-    restart: unless-stopped
-    env_file:
-      - ./sample.env
-    volumes:
-      # - ./php/php.ini:/usr/local/etc/php/conf.d/invoiceninja.ini:ro
-      # - ./php/php-fpm.conf:/usr/local/etc/php-fpm.d/invoiceninja.conf:ro
-      # - ./supervisor/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf:ro
-      - ./data/public:/var/www/html/public
-      - ./data/storage:/var/www/html/storage
-    depends_on:
-      mysql:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-
-  nginx:
-    image: nginx:alpine
-    restart: unless-stopped
-    ports:
-      - "8000:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d:ro
-      - ./data/public:/var/www/html/public:ro
-      - ./data/storage:/var/www/html/storage:ro
-    depends_on:
-      app:
-        condition: service_healthy
-
   mysql:
-    image: mysql:8
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-ninja}
-      MYSQL_USER: ${DB_USERNAME:-ninja}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-ninja}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-ninjaAdm1nPassword}
+    image: ${MYSQL_IMAGE:-mysql:8}
+    restart: ${INVOICENINJA_RESTART:-unless-stopped}
     volumes:
-      - ./data/mysql/:/var/lib/mysql
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "localhost",
-          "-u${MYSQL_USER}",
-          "-p${MYSQL_PASSWORD}",
-        ]
+      - ${VOL_PATH:-/data}/invoiceninja/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE:-ninja}
+      - MYSQL_USER=${DB_USERNAME:-ninja}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-ninja}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-ninjaAdm1nPassword}
+    networks:
+      - internal
 
   redis:
-    image: redis:alpine
-    restart: unless-stopped
+    image: ${REDIS_IMAGE:-redis:alpine}
+    restart: ${INVOICENINJA_RESTART:-unless-stopped}
+    networks:
+      - internal
+
+  app:
+    image: ${INVOICENINJA_IMAGE:-invoiceninja/invoiceninja-debian:latest}
+    restart: ${INVOICENINJA_RESTART:-unless-stopped}
     volumes:
-      - ./data/redis:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      - ${VOL_PATH:-/data}/invoiceninja/public:/var/www/html/public
+      - ${VOL_PATH:-/data}/invoiceninja/storage:/var/www/html/storage
+    networks:
+      - internal
+    depends_on:
+      - mysql
+      - redis
+
+  nginx:
+    image: ${NGINX_IMAGE:-nginx:alpine}
+    restart: ${INVOICENINJA_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/invoiceninja/nginx:/etc/nginx/conf.d:ro
+      - ${VOL_PATH:-/data}/invoiceninja/public:/var/www/html/public:ro
+      - ${VOL_PATH:-/data}/invoiceninja/storage:/var/www/html/storage:ro
+    ports:
+      - "${INVOICENINJA_PORT:-8000}:80"
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - app
+
+networks:
+  proxy:
+    external: true
+  internal:

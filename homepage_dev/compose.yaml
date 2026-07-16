@@ -1,13 +1,18 @@
 services:
   homepage:
     image: ${HOMEPAGE_IMAGE:-ghcr.io/gethomepage/homepage:latest}
-    restart: unless-stopped
+    restart: ${HOMEPAGE_RESTART:-unless-stopped}
     volumes:
-      - homepage-config:/app/config
-      - /var/run/docker.sock:/var/run/docker.sock  # Optional, for Docker integrations
+      - ${VOL_PATH:-/data}/homepage/config:/app/config
     environment:
-      - TZ=${TZ:-America/Vancouver}  # optional, if your app needs a timezone
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - "${HOMEPAGE_PORT:-3000}:3000"
+    networks:
+      - proxy
+      - internal
 
-volumes:
-  homepage-config:
-    name: homepage-config
+networks:
+  proxy:
+    external: true
+  internal:

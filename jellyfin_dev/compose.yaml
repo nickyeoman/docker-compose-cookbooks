@@ -1,16 +1,24 @@
 services:
   jellyfin:
     image: ${JELLYFIN_IMAGE:-jellyfin/jellyfin:latest}
-    restart: unless-stopped
-    environment:
-      - JELLYFIN_PublishedServerUrl=${JELLYFIN_PublishedServerUrl:-http://localhost:8096}
+    restart: ${JELLYFIN_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/jellyfin-cache:/cache
-      - ${VOL_PATH:-./data}/jellyfin-config:/config
-      - ${VOL_PATH:-./data}/jellyfin-content/books:/books
-      - ${VOL_PATH:-./data}/jellyfin-content/media:/media
-      - ${VOL_PATH:-./data}/jellyfin-content/movies:/movies
-      - ${VOL_PATH:-./data}/jellyfin-content/music:/music
-      - ${VOL_PATH:-./data}/jellyfin-content/musicvideos:/musicvideos
-      - ${VOL_PATH:-./data}/jellyfin-content/photos:/photos
-      - ${VOL_PATH:-./data}/jellyfin-content/shows:/shows
+      - ${VOL_PATH:-/data}/jellyfin/cache:/cache
+      - ${VOL_PATH:-/data}/jellyfin/config:/config
+      - ${VOL_PATH:-/data}/jellyfin/media/books:/books
+      - ${VOL_PATH:-/data}/jellyfin/media/movies:/movies
+      - ${VOL_PATH:-/data}/jellyfin/media/music:/music
+      - ${VOL_PATH:-/data}/jellyfin/media/photos:/photos
+      - ${VOL_PATH:-/data}/jellyfin/media/shows:/shows
+    environment:
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL:-http://localhost:8096}
+    ports:
+      - "${JELLYFIN_PORT:-8096}:8096"
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
