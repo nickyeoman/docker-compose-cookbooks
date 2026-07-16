@@ -1,10 +1,11 @@
 services:
   ntfy:
     image: ${NTFY_IMAGE:-binwiederhier/ntfy}
-    restart: unless-stopped
+    restart: ${NTFY_RESTART:-unless-stopped}
     command:
       - serve
     environment:
+      - TZ=${TZ:-UTC}
       - NTFY_BASE_URL=${NTFY_BASE_URL:-http://localhost}
       - NTFY_CACHE_FILE=${NTFY_CACHE_FILE:-/var/lib/ntfy/cache.db}
       - NTFY_AUTH_FILE=${NTFY_AUTH_FILE:-/var/lib/ntfy/auth.db}
@@ -12,8 +13,20 @@ services:
       - NTFY_BEHIND_PROXY=${NTFY_BEHIND_PROXY:-true}
       - NTFY_ATTACHMENT_CACHE_DIR=${NTFY_ATTACHMENT_CACHE_DIR:-/var/lib/ntfy/attachments}
       - NTFY_ENABLE_LOGIN=${NTFY_ENABLE_LOGIN:-true}
-      - TZ=${TZ:-UTC}
+    ports:
+      - "${NTFY_PORT:-80}:80"
+      - "${NTFY_HTTP_PORT:-8080}:8080"
     volumes:
-      - ${VOL_PATH:-./data}/ntfy-cache/ntfy:/var/cache/ntfy
-      - ${VOL_PATH:-./data}/ntfy:/etc/ntfy
-      - ${VOL_PATH:-./data}/ntfy-var:/var/lib/ntfy
+      - ${VOL_PATH:-/data}/ntfy:/etc/ntfy
+      - ${VOL_PATH:-/data}/ntfy-var:/var/lib/ntfy
+      - ${VOL_PATH:-/data}/ntfy-cache:/var/cache/ntfy
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
+    internal: true
