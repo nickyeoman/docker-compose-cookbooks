@@ -3,89 +3,68 @@ services:
     image: postgres:${POSTGRES_VERSION:-17.5-alpine}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/postgresql:/var/lib/postgresql/data
+      - ${VOL_PATH:-/data}/zammad/postgresql:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-zammad_production}
-      POSTGRES_USER: ${POSTGRES_USER:-zammad}
-      POSTGRES_PASSWORD: ${POSTGRES_PASS:-zammad}
+      - POSTGRES_DB=${POSTGRES_DB:-zammad_production}
+      - POSTGRES_USER=${POSTGRES_USER:-zammad}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS:-zammad}
     networks:
-      - zammad
+      - internal
 
   zammad-redis:
     image: redis:${REDIS_VERSION:-7.4.5-alpine}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/redis:/data
+      - ${VOL_PATH:-/data}/zammad/redis:/data
     networks:
-      - zammad
+      - internal
 
   zammad-memcached:
     image: memcached:${MEMCACHE_VERSION:-1.6.39-alpine}
     restart: ${ZAMMAD_RESTART:-always}
-    command: memcached -m 256M
+    volumes:
+      - ${VOL_PATH:-/data}/zammad/memcached:/data
     networks:
-      - zammad
+      - internal
+    command: memcached -m 256M
 
   zammad-elasticsearch:
     image: elasticsearch:${ELASTICSEARCH_VERSION:-8.19.2}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/elasticsearch:/usr/share/elasticsearch/data
+      - ${VOL_PATH:-/data}/zammad/elasticsearch:/usr/share/elasticsearch/data
     environment:
-      discovery.type: single-node
-      xpack.security.enabled: 'false'
-      ES_JAVA_OPTS: ${ELASTICSEARCH_JAVA_OPTS:--Xms1g -Xmx1g}
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=${ELASTICSEARCH_JAVA_OPTS:--Xms1g -Xmx1g}
     networks:
-      - zammad
+      - internal
 
   zammad-init:
     image: ${ZAMMAD_IMAGE:-ghcr.io/zammad/zammad:latest}
     restart: on-failure
     volumes:
-      - ${VOL_PATH:-./data}/zammad/storage:/opt/zammad/storage
+      - ${VOL_PATH:-/data}/zammad/storage:/opt/zammad/storage
     environment:
-      TZ: ${TZ:-America/Vancouver}
-      MEMCACHE_SERVERS: ${MEMCACHE_SERVERS:-zammad-memcached:11211}
-      POSTGRESQL_DB: ${POSTGRES_DB:-zammad_production}
-      POSTGRESQL_HOST: ${POSTGRES_HOST:-zammad-postgresql}
-      POSTGRESQL_USER: ${POSTGRES_USER:-zammad}
-      POSTGRESQL_PASS: ${POSTGRES_PASS:-zammad}
-      POSTGRESQL_PORT: ${POSTGRES_PORT:-5432}
-      POSTGRESQL_OPTIONS: ${POSTGRESQL_OPTIONS:-?pool=50}
-      POSTGRESQL_DB_CREATE: ${POSTGRESQL_DB_CREATE:-true}
-      REDIS_URL: ${REDIS_URL:-redis://zammad-redis:6379}
-      S3_URL: ${S3_URL:-}
-      BACKUP_DIR: "${BACKUP_DIR:-/var/tmp/zammad}"
-      BACKUP_TIME: "${BACKUP_TIME:-03:00}"
-      HOLD_DAYS: "${HOLD_DAYS:-10}"
-      ELASTICSEARCH_ENABLED: ${ELASTICSEARCH_ENABLED:-true}
-      ELASTICSEARCH_SCHEMA: ${ELASTICSEARCH_SCHEMA:-http}
-      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST:-zammad-elasticsearch}
-      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT:-9200}
-      ELASTICSEARCH_USER: ${ELASTICSEARCH_USER:-}
-      ELASTICSEARCH_PASS: ${ELASTICSEARCH_PASS:-}
-      ELASTICSEARCH_NAMESPACE: ${ELASTICSEARCH_NAMESPACE:-zammad}
-      ELASTICSEARCH_REINDEX: ${ELASTICSEARCH_REINDEX:-}
-      AUTOWIZARD_JSON: ${AUTOWIZARD_JSON:-}
-      AUTOWIZARD_RELATIVE_PATH: ${AUTOWIZARD_RELATIVE_PATH:-}
-      ZAMMAD_HTTP_TYPE: ${ZAMMAD_HTTP_TYPE:-}
-      ZAMMAD_FQDN: ${ZAMMAD_FQDN:-}
-      ZAMMAD_WEB_CONCURRENCY: ${ZAMMAD_WEB_CONCURRENCY:-}
-      ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS: ${ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS: ${ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS: ${ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS:-}
-      ZAMMAD_SESSION_JOBS_CONCURRENT: ${ZAMMAD_SESSION_JOBS_CONCURRENT:-}
-      NGINX_PORT: ${NGINX_PORT:-8080}
-      NGINX_CLIENT_MAX_BODY_SIZE: ${NGINX_CLIENT_MAX_BODY_SIZE:-50M}
-      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:-_}
-      NGINX_SERVER_SCHEME: $scheme
-      RAILS_TRUSTED_PROXIES: ${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
-      VIRTUAL_HOST: ${VIRTUAL_HOST:-}
-      VIRTUAL_PORT: ${VIRTUAL_PORT:-}
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+      - TZ=${TZ:-America/Vancouver}
+      - MEMCACHE_SERVERS=${MEMCACHE_SERVERS:-zammad-memcached:11211}
+      - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
+      - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
+      - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
+      - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
+      - POSTGRESQL_DB_CREATE=${POSTGRESQL_DB_CREATE:-true}
+      - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
+      - ELASTICSEARCH_ENABLED=${ELASTICSEARCH_ENABLED:-true}
+      - ELASTICSEARCH_SCHEMA=http
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-zammad-elasticsearch}
+      - ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT:-9200}
+      - NGINX_PORT=${NGINX_PORT:-8080}
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-_}
+      - NGINX_SERVER_SCHEME=$scheme
     networks:
-      - zammad
+      - internal
     depends_on:
       - zammad-postgresql
       - zammad-redis
@@ -98,50 +77,26 @@ services:
     image: ${ZAMMAD_IMAGE:-ghcr.io/zammad/zammad:latest}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/zammad/storage:/opt/zammad/storage
+      - ${VOL_PATH:-/data}/zammad/storage:/opt/zammad/storage
     environment:
-      TZ: ${TZ:-America/Vancouver}
-      MEMCACHE_SERVERS: ${MEMCACHE_SERVERS:-zammad-memcached:11211}
-      POSTGRESQL_DB: ${POSTGRES_DB:-zammad_production}
-      POSTGRESQL_HOST: ${POSTGRES_HOST:-zammad-postgresql}
-      POSTGRESQL_USER: ${POSTGRES_USER:-zammad}
-      POSTGRESQL_PASS: ${POSTGRES_PASS:-zammad}
-      POSTGRESQL_PORT: ${POSTGRES_PORT:-5432}
-      POSTGRESQL_OPTIONS: ${POSTGRESQL_OPTIONS:-?pool=50}
-      POSTGRESQL_DB_CREATE: ${POSTGRESQL_DB_CREATE:-true}
-      REDIS_URL: ${REDIS_URL:-redis://zammad-redis:6379}
-      S3_URL: ${S3_URL:-}
-      BACKUP_DIR: "${BACKUP_DIR:-/var/tmp/zammad}"
-      BACKUP_TIME: "${BACKUP_TIME:-03:00}"
-      HOLD_DAYS: "${HOLD_DAYS:-10}"
-      ELASTICSEARCH_ENABLED: ${ELASTICSEARCH_ENABLED:-true}
-      ELASTICSEARCH_SCHEMA: ${ELASTICSEARCH_SCHEMA:-http}
-      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST:-zammad-elasticsearch}
-      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT:-9200}
-      ELASTICSEARCH_USER: ${ELASTICSEARCH_USER:-}
-      ELASTICSEARCH_PASS: ${ELASTICSEARCH_PASS:-}
-      ELASTICSEARCH_NAMESPACE: ${ELASTICSEARCH_NAMESPACE:-zammad}
-      ELASTICSEARCH_REINDEX: ${ELASTICSEARCH_REINDEX:-}
-      AUTOWIZARD_JSON: ${AUTOWIZARD_JSON:-}
-      AUTOWIZARD_RELATIVE_PATH: ${AUTOWIZARD_RELATIVE_PATH:-}
-      ZAMMAD_HTTP_TYPE: ${ZAMMAD_HTTP_TYPE:-}
-      ZAMMAD_FQDN: ${ZAMMAD_FQDN:-}
-      ZAMMAD_WEB_CONCURRENCY: ${ZAMMAD_WEB_CONCURRENCY:-}
-      ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS: ${ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS: ${ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS: ${ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS:-}
-      ZAMMAD_SESSION_JOBS_CONCURRENT: ${ZAMMAD_SESSION_JOBS_CONCURRENT:-}
-      NGINX_PORT: ${NGINX_PORT:-8080}
-      NGINX_CLIENT_MAX_BODY_SIZE: ${NGINX_CLIENT_MAX_BODY_SIZE:-50M}
-      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:-_}
-      NGINX_SERVER_SCHEME: $scheme
-      RAILS_TRUSTED_PROXIES: ${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
-      VIRTUAL_HOST: ${VIRTUAL_HOST:-}
-      VIRTUAL_PORT: ${VIRTUAL_PORT:-}
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+      - TZ=${TZ:-America/Vancouver}
+      - MEMCACHE_SERVERS=${MEMCACHE_SERVERS:-zammad-memcached:11211}
+      - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
+      - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
+      - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
+      - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
+      - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
+      - ELASTICSEARCH_ENABLED=${ELASTICSEARCH_ENABLED:-true}
+      - ELASTICSEARCH_SCHEMA=http
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-zammad-elasticsearch}
+      - ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT:-9200}
+      - NGINX_PORT=${NGINX_PORT:-8080}
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-_}
+      - RAILS_TRUSTED_PROXIES=${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
     networks:
-      - zammad
+      - internal
     depends_on:
       - zammad-postgresql
       - zammad-redis
@@ -153,50 +108,25 @@ services:
     image: ${ZAMMAD_IMAGE:-ghcr.io/zammad/zammad:latest}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/zammad/storage:/opt/zammad/storage
+      - ${VOL_PATH:-/data}/zammad/storage:/opt/zammad/storage
     environment:
-      TZ: ${TZ:-America/Vancouver}
-      MEMCACHE_SERVERS: ${MEMCACHE_SERVERS:-zammad-memcached:11211}
-      POSTGRESQL_DB: ${POSTGRES_DB:-zammad_production}
-      POSTGRESQL_HOST: ${POSTGRES_HOST:-zammad-postgresql}
-      POSTGRESQL_USER: ${POSTGRES_USER:-zammad}
-      POSTGRESQL_PASS: ${POSTGRES_PASS:-zammad}
-      POSTGRESQL_PORT: ${POSTGRES_PORT:-5432}
-      POSTGRESQL_OPTIONS: ${POSTGRESQL_OPTIONS:-?pool=50}
-      POSTGRESQL_DB_CREATE: ${POSTGRESQL_DB_CREATE:-true}
-      REDIS_URL: ${REDIS_URL:-redis://zammad-redis:6379}
-      S3_URL: ${S3_URL:-}
-      BACKUP_DIR: "${BACKUP_DIR:-/var/tmp/zammad}"
-      BACKUP_TIME: "${BACKUP_TIME:-03:00}"
-      HOLD_DAYS: "${HOLD_DAYS:-10}"
-      ELASTICSEARCH_ENABLED: ${ELASTICSEARCH_ENABLED:-true}
-      ELASTICSEARCH_SCHEMA: ${ELASTICSEARCH_SCHEMA:-http}
-      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST:-zammad-elasticsearch}
-      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT:-9200}
-      ELASTICSEARCH_USER: ${ELASTICSEARCH_USER:-}
-      ELASTICSEARCH_PASS: ${ELASTICSEARCH_PASS:-}
-      ELASTICSEARCH_NAMESPACE: ${ELASTICSEARCH_NAMESPACE:-zammad}
-      ELASTICSEARCH_REINDEX: ${ELASTICSEARCH_REINDEX:-}
-      AUTOWIZARD_JSON: ${AUTOWIZARD_JSON:-}
-      AUTOWIZARD_RELATIVE_PATH: ${AUTOWIZARD_RELATIVE_PATH:-}
-      ZAMMAD_HTTP_TYPE: ${ZAMMAD_HTTP_TYPE:-}
-      ZAMMAD_FQDN: ${ZAMMAD_FQDN:-}
-      ZAMMAD_WEB_CONCURRENCY: ${ZAMMAD_WEB_CONCURRENCY:-}
-      ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS: ${ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS: ${ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS: ${ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS:-}
-      ZAMMAD_SESSION_JOBS_CONCURRENT: ${ZAMMAD_SESSION_JOBS_CONCURRENT:-}
-      NGINX_PORT: ${NGINX_PORT:-8080}
-      NGINX_CLIENT_MAX_BODY_SIZE: ${NGINX_CLIENT_MAX_BODY_SIZE:-50M}
-      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:-_}
-      NGINX_SERVER_SCHEME: $scheme
-      RAILS_TRUSTED_PROXIES: ${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
-      VIRTUAL_HOST: ${VIRTUAL_HOST:-}
-      VIRTUAL_PORT: ${VIRTUAL_PORT:-}
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+      - TZ=${TZ:-America/Vancouver}
+      - MEMCACHE_SERVERS=${MEMCACHE_SERVERS:-zammad-memcached:11211}
+      - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
+      - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
+      - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
+      - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
+      - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
+      - ELASTICSEARCH_ENABLED=${ELASTICSEARCH_ENABLED:-true}
+      - ELASTICSEARCH_SCHEMA=http
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-zammad-elasticsearch}
+      - ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT:-9200}
+      - NGINX_PORT=${NGINX_PORT:-8080}
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-_}
     networks:
-      - zammad
+      - internal
     depends_on:
       - zammad-postgresql
       - zammad-redis
@@ -208,50 +138,25 @@ services:
     image: ${ZAMMAD_IMAGE:-ghcr.io/zammad/zammad:latest}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/zammad/storage:/opt/zammad/storage
+      - ${VOL_PATH:-/data}/zammad/storage:/opt/zammad/storage
     environment:
-      TZ: ${TZ:-America/Vancouver}
-      MEMCACHE_SERVERS: ${MEMCACHE_SERVERS:-zammad-memcached:11211}
-      POSTGRESQL_DB: ${POSTGRES_DB:-zammad_production}
-      POSTGRESQL_HOST: ${POSTGRES_HOST:-zammad-postgresql}
-      POSTGRESQL_USER: ${POSTGRES_USER:-zammad}
-      POSTGRESQL_PASS: ${POSTGRES_PASS:-zammad}
-      POSTGRESQL_PORT: ${POSTGRES_PORT:-5432}
-      POSTGRESQL_OPTIONS: ${POSTGRESQL_OPTIONS:-?pool=50}
-      POSTGRESQL_DB_CREATE: ${POSTGRESQL_DB_CREATE:-true}
-      REDIS_URL: ${REDIS_URL:-redis://zammad-redis:6379}
-      S3_URL: ${S3_URL:-}
-      BACKUP_DIR: "${BACKUP_DIR:-/var/tmp/zammad}"
-      BACKUP_TIME: "${BACKUP_TIME:-03:00}"
-      HOLD_DAYS: "${HOLD_DAYS:-10}"
-      ELASTICSEARCH_ENABLED: ${ELASTICSEARCH_ENABLED:-true}
-      ELASTICSEARCH_SCHEMA: ${ELASTICSEARCH_SCHEMA:-http}
-      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST:-zammad-elasticsearch}
-      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT:-9200}
-      ELASTICSEARCH_USER: ${ELASTICSEARCH_USER:-}
-      ELASTICSEARCH_PASS: ${ELASTICSEARCH_PASS:-}
-      ELASTICSEARCH_NAMESPACE: ${ELASTICSEARCH_NAMESPACE:-zammad}
-      ELASTICSEARCH_REINDEX: ${ELASTICSEARCH_REINDEX:-}
-      AUTOWIZARD_JSON: ${AUTOWIZARD_JSON:-}
-      AUTOWIZARD_RELATIVE_PATH: ${AUTOWIZARD_RELATIVE_PATH:-}
-      ZAMMAD_HTTP_TYPE: ${ZAMMAD_HTTP_TYPE:-}
-      ZAMMAD_FQDN: ${ZAMMAD_FQDN:-}
-      ZAMMAD_WEB_CONCURRENCY: ${ZAMMAD_WEB_CONCURRENCY:-}
-      ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS: ${ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS: ${ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS: ${ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS:-}
-      ZAMMAD_SESSION_JOBS_CONCURRENT: ${ZAMMAD_SESSION_JOBS_CONCURRENT:-}
-      NGINX_PORT: ${NGINX_PORT:-8080}
-      NGINX_CLIENT_MAX_BODY_SIZE: ${NGINX_CLIENT_MAX_BODY_SIZE:-50M}
-      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:-_}
-      NGINX_SERVER_SCHEME: $scheme
-      RAILS_TRUSTED_PROXIES: ${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
-      VIRTUAL_HOST: ${VIRTUAL_HOST:-}
-      VIRTUAL_PORT: ${VIRTUAL_PORT:-}
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+      - TZ=${TZ:-America/Vancouver}
+      - MEMCACHE_SERVERS=${MEMCACHE_SERVERS:-zammad-memcached:11211}
+      - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
+      - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
+      - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
+      - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
+      - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
+      - ELASTICSEARCH_ENABLED=${ELASTICSEARCH_ENABLED:-true}
+      - ELASTICSEARCH_SCHEMA=http
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-zammad-elasticsearch}
+      - ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT:-9200}
+      - NGINX_PORT=${NGINX_PORT:-8080}
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-_}
     networks:
-      - zammad
+      - internal
     depends_on:
       - zammad-postgresql
       - zammad-redis
@@ -263,51 +168,29 @@ services:
     image: ${ZAMMAD_IMAGE:-ghcr.io/zammad/zammad:latest}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/zammad/backup:${BACKUP_DIR:-/var/tmp/zammad}
-      - ${VOL_PATH:-./data}/zammad/storage:/opt/zammad/storage:ro
+      - ${VOL_PATH:-/data}/zammad/backup:/var/tmp/zammad
+      - ${VOL_PATH:-/data}/zammad/storage:/opt/zammad/storage:ro
     environment:
-      TZ: ${TZ:-America/Vancouver}
-      MEMCACHE_SERVERS: ${MEMCACHE_SERVERS:-zammad-memcached:11211}
-      POSTGRESQL_DB: ${POSTGRES_DB:-zammad_production}
-      POSTGRESQL_HOST: ${POSTGRES_HOST:-zammad-postgresql}
-      POSTGRESQL_USER: ${POSTGRES_USER:-zammad}
-      POSTGRESQL_PASS: ${POSTGRES_PASS:-zammad}
-      POSTGRESQL_PORT: ${POSTGRES_PORT:-5432}
-      POSTGRESQL_OPTIONS: ${POSTGRESQL_OPTIONS:-?pool=50}
-      POSTGRESQL_DB_CREATE: ${POSTGRESQL_DB_CREATE:-true}
-      REDIS_URL: ${REDIS_URL:-redis://zammad-redis:6379}
-      S3_URL: ${S3_URL:-}
-      BACKUP_DIR: "${BACKUP_DIR:-/var/tmp/zammad}"
-      BACKUP_TIME: "${BACKUP_TIME:-03:00}"
-      HOLD_DAYS: "${HOLD_DAYS:-10}"
-      ELASTICSEARCH_ENABLED: ${ELASTICSEARCH_ENABLED:-true}
-      ELASTICSEARCH_SCHEMA: ${ELASTICSEARCH_SCHEMA:-http}
-      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST:-zammad-elasticsearch}
-      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT:-9200}
-      ELASTICSEARCH_USER: ${ELASTICSEARCH_USER:-}
-      ELASTICSEARCH_PASS: ${ELASTICSEARCH_PASS:-}
-      ELASTICSEARCH_NAMESPACE: ${ELASTICSEARCH_NAMESPACE:-zammad}
-      ELASTICSEARCH_REINDEX: ${ELASTICSEARCH_REINDEX:-}
-      AUTOWIZARD_JSON: ${AUTOWIZARD_JSON:-}
-      AUTOWIZARD_RELATIVE_PATH: ${AUTOWIZARD_RELATIVE_PATH:-}
-      ZAMMAD_HTTP_TYPE: ${ZAMMAD_HTTP_TYPE:-}
-      ZAMMAD_FQDN: ${ZAMMAD_FQDN:-}
-      ZAMMAD_WEB_CONCURRENCY: ${ZAMMAD_WEB_CONCURRENCY:-}
-      ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS: ${ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS: ${ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS: ${ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS:-}
-      ZAMMAD_SESSION_JOBS_CONCURRENT: ${ZAMMAD_SESSION_JOBS_CONCURRENT:-}
-      NGINX_PORT: ${NGINX_PORT:-8080}
-      NGINX_CLIENT_MAX_BODY_SIZE: ${NGINX_CLIENT_MAX_BODY_SIZE:-50M}
-      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:-_}
-      NGINX_SERVER_SCHEME: $scheme
-      RAILS_TRUSTED_PROXIES: ${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
-      VIRTUAL_HOST: ${VIRTUAL_HOST:-}
-      VIRTUAL_PORT: ${VIRTUAL_PORT:-}
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+      - TZ=${TZ:-America/Vancouver}
+      - MEMCACHE_SERVERS=${MEMCACHE_SERVERS:-zammad-memcached:11211}
+      - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
+      - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
+      - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
+      - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
+      - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
+      - ELASTICSEARCH_ENABLED=${ELASTICSEARCH_ENABLED:-true}
+      - ELASTICSEARCH_SCHEMA=http
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-zammad-elasticsearch}
+      - ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT:-9200}
+      - BACKUP_DIR=/var/tmp/zammad
+      - BACKUP_TIME=${BACKUP_TIME:-03:00}
+      - HOLD_DAYS=${HOLD_DAYS:-10}
+      - NGINX_PORT=${NGINX_PORT:-8080}
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-_}
     networks:
-      - zammad
+      - internal
     depends_on:
       - zammad-postgresql
       - zammad-redis
@@ -320,61 +203,35 @@ services:
     image: ${ZAMMAD_IMAGE:-ghcr.io/zammad/zammad:latest}
     restart: ${ZAMMAD_RESTART:-always}
     volumes:
-      - ${VOL_PATH:-./data}/zammad/storage:/opt/zammad/storage
+      - ${VOL_PATH:-/data}/zammad/storage:/opt/zammad/storage
     environment:
-      TZ: ${TZ:-America/Vancouver}
-      MEMCACHE_SERVERS: ${MEMCACHE_SERVERS:-zammad-memcached:11211}
-      POSTGRESQL_DB: ${POSTGRES_DB:-zammad_production}
-      POSTGRESQL_HOST: ${POSTGRES_HOST:-zammad-postgresql}
-      POSTGRESQL_USER: ${POSTGRES_USER:-zammad}
-      POSTGRESQL_PASS: ${POSTGRES_PASS:-zammad}
-      POSTGRESQL_PORT: ${POSTGRES_PORT:-5432}
-      POSTGRESQL_OPTIONS: ${POSTGRESQL_OPTIONS:-?pool=50}
-      POSTGRESQL_DB_CREATE: ${POSTGRESQL_DB_CREATE:-true}
-      REDIS_URL: ${REDIS_URL:-redis://zammad-redis:6379}
-      S3_URL: ${S3_URL:-}
-      BACKUP_DIR: "${BACKUP_DIR:-/var/tmp/zammad}"
-      BACKUP_TIME: "${BACKUP_TIME:-03:00}"
-      HOLD_DAYS: "${HOLD_DAYS:-10}"
-      ELASTICSEARCH_ENABLED: ${ELASTICSEARCH_ENABLED:-true}
-      ELASTICSEARCH_SCHEMA: ${ELASTICSEARCH_SCHEMA:-http}
-      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST:-zammad-elasticsearch}
-      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT:-9200}
-      ELASTICSEARCH_USER: ${ELASTICSEARCH_USER:-}
-      ELASTICSEARCH_PASS: ${ELASTICSEARCH_PASS:-}
-      ELASTICSEARCH_NAMESPACE: ${ELASTICSEARCH_NAMESPACE:-zammad}
-      ELASTICSEARCH_REINDEX: ${ELASTICSEARCH_REINDEX:-}
-      AUTOWIZARD_JSON: ${AUTOWIZARD_JSON:-}
-      AUTOWIZARD_RELATIVE_PATH: ${AUTOWIZARD_RELATIVE_PATH:-}
-      ZAMMAD_HTTP_TYPE: ${ZAMMAD_HTTP_TYPE:-}
-      ZAMMAD_FQDN: ${ZAMMAD_FQDN:-}
-      ZAMMAD_WEB_CONCURRENCY: ${ZAMMAD_WEB_CONCURRENCY:-}
-      ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS: ${ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS: ${ZAMMAD_PROCESS_SCHEDULED_JOBS_WORKERS:-}
-      ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS: ${ZAMMAD_PROCESS_DELAYED_JOBS_WORKERS:-}
-      ZAMMAD_SESSION_JOBS_CONCURRENT: ${ZAMMAD_SESSION_JOBS_CONCURRENT:-}
-      NGINX_PORT: ${NGINX_PORT:-8080}
-      NGINX_CLIENT_MAX_BODY_SIZE: ${NGINX_CLIENT_MAX_BODY_SIZE:-50M}
-      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME:-_}
-      NGINX_SERVER_SCHEME: $scheme
-      RAILS_TRUSTED_PROXIES: ${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
-      VIRTUAL_HOST: ${VIRTUAL_HOST:-}
-      VIRTUAL_PORT: ${VIRTUAL_PORT:-}
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+      - TZ=${TZ:-America/Vancouver}
+      - MEMCACHE_SERVERS=${MEMCACHE_SERVERS:-zammad-memcached:11211}
+      - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
+      - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
+      - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
+      - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
+      - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
+      - ELASTICSEARCH_ENABLED=${ELASTICSEARCH_ENABLED:-true}
+      - ELASTICSEARCH_SCHEMA=http
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-zammad-elasticsearch}
+      - ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT:-9200}
+      - NGINX_PORT=${NGINX_PORT:-8080}
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-_}
+      - NGINX_SERVER_SCHEME=$scheme
+      - RAILS_TRUSTED_PROXIES=${RAILS_TRUSTED_PROXIES:-"['127.0.0.1', '::1']"}
+    ports:
+      - "${ZAMMAD_PORT:-8080}:${NGINX_PORT:-8080}"
     networks:
-      - zammad
       - proxy
+      - internal
     depends_on:
       - zammad-railsserver
-    expose:
-      - "${NGINX_PORT:-8080}"
-    ports:
-      - "${NGINX_PORT:-8080}:${NGINX_PORT:-8080}"
     command: ["zammad-nginx"]
 
 networks:
   proxy:
     external: true
-  zammad:
-    driver: bridge
+  internal:

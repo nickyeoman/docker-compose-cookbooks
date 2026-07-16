@@ -1,9 +1,16 @@
 services:
-  nc:
+  nocodb:
     image: ${NOCODB_IMAGE:-nocodb/nocodb:latest}
-    restart: unless-stopped
+    restart: ${NOCODB_RESTART:-unless-stopped}
     volumes:
-      - "nocodb-data:/usr/app/data"
+      - ${VOL_PATH:-/data}/nocodb:/usr/app/data
+    ports:
+      - "${NOCODB_PORT:-8080}:8080"
+    networks:
+      - proxy
+      - internal
 
-volumes:
-  nocodb-data:
+networks:
+  proxy:
+    external: true
+  internal:

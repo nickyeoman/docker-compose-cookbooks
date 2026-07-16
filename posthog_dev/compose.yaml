@@ -8,14 +8,8 @@ services:
       - POSTGRES_DB=${POSTHOG_DB_NAME:-posthog}
       - POSTGRES_USER=${POSTHOG_DB_USER:-posthog}
       - POSTGRES_PASSWORD=${POSTHOG_DB_PASSWORD:-posthog}
-      - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
     networks:
       - internal
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTHOG_DB_USER:-posthog} -d ${POSTHOG_DB_NAME:-posthog}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
 
   redis:
     image: ${POSTHOG_REDIS_IMAGE:-redis:7-alpine}
@@ -24,11 +18,6 @@ services:
       - ${VOL_PATH:-/data}/posthog/redis:/data
     networks:
       - internal
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
 
   clickhouse:
     image: ${POSTHOG_CLICKHOUSE_IMAGE:-clickhouse/clickhouse-server:24-alpine}
@@ -67,7 +56,6 @@ services:
   posthog:
     image: ${POSTHOG_IMAGE:-posthog/posthog:latest}
     restart: ${POSTHOG_RESTART:-unless-stopped}
-    command: /compose/start
     volumes:
       - ${VOL_PATH:-/data}/posthog/data:/data
       - ${VOL_PATH:-/data}/posthog/logs:/var/log
@@ -91,6 +79,8 @@ services:
       - EMAIL_HOST_PASSWORD=${POSTHOG_EMAIL_PASSWORD:-}
       - EMAIL_PORT=${POSTHOG_EMAIL_PORT:-587}
       - EMAIL_USE_TLS=${POSTHOG_EMAIL_TLS:-true}
+    ports:
+      - "${POSTHOG_PORT:-8000}:8000"
     networks:
       - proxy
       - internal
@@ -99,11 +89,11 @@ services:
       - redis
       - clickhouse
       - kafka
+    command: /compose/start
 
   worker:
     image: ${POSTHOG_IMAGE:-posthog/posthog:latest}
     restart: ${POSTHOG_RESTART:-unless-stopped}
-    command: /compose/worker
     volumes:
       - ${VOL_PATH:-/data}/posthog/data:/data
     environment:
@@ -128,6 +118,7 @@ services:
       - clickhouse
       - kafka
       - posthog
+    command: /compose/worker
 
 networks:
   proxy:

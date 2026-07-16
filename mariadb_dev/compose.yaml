@@ -1,19 +1,26 @@
 services:
   mariadb:
     image: ${MARIADB_IMAGE:-mariadb:latest}
-    restart: unless-stopped
-    command: >
-      --transaction-isolation=READ-COMMITTED
-      --binlog-format=ROW
-      --innodb-file-per-table=1
-      --skip-innodb-read-only-compressed
+    restart: ${MARIADB_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/mariadb:/var/lib/mysql
     environment:
       - MARIADB_DATABASE=${MARIADB_DATABASE:-mydb}
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
       - MARIADB_USER=${MARIADB_USER:-dbuser}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD:-AlsoChangeThisPassword}
-    volumes:
-      - mariadb-data:/var/lib/mysql
+    ports:
+      - "${MARIADB_PORT:-3306}:3306"
+    networks:
+      - proxy
+      - internal
+    command: >
+      --transaction-isolation=READ-COMMITTED
+      --binlog-format=ROW
+      --innodb-file-per-table=1
+      --skip-innodb-read-only-compressed
 
-volumes:
-  mariadb-data:
+networks:
+  proxy:
+    external: true
+  internal:

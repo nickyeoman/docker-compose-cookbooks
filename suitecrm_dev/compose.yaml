@@ -1,21 +1,40 @@
 services:
+  mariadb:
+    image: ${MARIADB_IMAGE:-mariadb:10.11}
+    restart: ${SUITECRM_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/suitecrm/db:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=suitecrm_db
+      - MARIADB_USER=suitecrm
+      - MARIADB_PASSWORD=${SUITECRM_DB_PASSWORD:-ChangeThisPassword}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisRootPassword}
+    networks:
+      - internal
 
   suitecrm:
-    image: bitnami/suitecrm:latest
+    image: ${SUITECRM_IMAGE:-bitnami/suitecrm:latest}
+    restart: ${SUITECRM_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/suitecrm/data:/bitnami/suitecrm
     environment:
       - SUITECRM_DATABASE_HOST=mariadb
       - SUITECRM_DATABASE_PORT_NUMBER=3306
       - SUITECRM_DATABASE_USER=suitecrm
-      - SUITECRM_DATABASE_PASSWORD=${SUITECRM_DB_PASSWORD}
+      - SUITECRM_DATABASE_PASSWORD=${SUITECRM_DB_PASSWORD:-ChangeThisPassword}
       - SUITECRM_DATABASE_NAME=suitecrm_db
       - ALLOW_EMPTY_PASSWORD=no
-      - SUITECRM_USERNAME=${SUITECRM_USER}
-      - SUITECRM_PASSWORD=${SUITECRM_PASS}
+      - SUITECRM_USERNAME=${SUITECRM_USER:-admin}
+      - SUITECRM_PASSWORD=${SUITECRM_PASS:-ChangeThisPassword}
     ports:
-      - "8080:8080"
+      - "${SUITECRM_PORT:-8080}:8080"
+    networks:
+      - proxy
+      - internal
     depends_on:
       - mariadb
-    volumes:
-      - ${VOL_PATH:-./data}/suitecrm_data:/bitnami/suitecrm
-    restart: unless-stopped
 
+networks:
+  proxy:
+    external: true
+  internal:

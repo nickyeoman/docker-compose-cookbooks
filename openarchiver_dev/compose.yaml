@@ -1,40 +1,57 @@
 services:
-    open-archiver:
-        image: logiclabshq/open-archiver:latest
-        ports:
-            - '3000:3000' # Frontend
-        env_file:
-            - sample.env
-        volumes:
-            - ${VOL_PATH:-./data}/archiver-data:/var/data/open-archiver
-        depends_on:
-            - postgres
-            - valkey
-            - meilisearch
+  postgres:
+    image: ${POSTGRES_IMAGE:-postgres:17-alpine}
+    restart: ${OPENARCHIVER_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/openarchiver/pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-open_archive}
+      - POSTGRES_USER=${POSTGRES_USER:-admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+    networks:
+      - internal
 
-    postgres:
-        image: postgres:17-alpine
-        environment:
-            POSTGRES_DB: ${POSTGRES_DB:-open_archive}
-            POSTGRES_USER: ${POSTGRES_USER:-admin}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
-        volumes:
-            - ${VOL_PATH:-./data}/pgdata:/var/lib/postgresql/data
+  valkey:
+    image: ${VALKEY_IMAGE:-valkey/valkey:8-alpine}
+    restart: ${OPENARCHIVER_RESTART:-unless-stopped}
+    command: valkey-server --requirepass ${REDIS_PASSWORD:-RedisPasswordChangeMe}
+    volumes:
+      - ${VOL_PATH:-/data}/openarchiver/valkeydata:/data
+    networks:
+      - internal
 
-    valkey:
-        image: valkey/valkey:8-alpine
-        command: valkey-server --requirepass ${REDIS_PASSWORD:-RedisPasswordChangeMe}
-        volumes:
-            - ${VOL_PATH:-./data}/valkeydata:/data
+  meilisearch:
+    image: ${MEILISEARCH_IMAGE:-getmeili/meilisearch:v1.15}
+    restart: ${OPENARCHIVER_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/openarchiver/meilidata:/meili_data
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-aSampleMasterKey}
+    networks:
+      - internal
 
-    meilisearch:
-        image: getmeili/meilisearch:v1.15
-        environment:
-            MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-aSampleMasterKey}
-        volumes:
-            - ${VOL_PATH:-./data}/meilidata:/meili_data
+  tika:
+    image: ${TIKA_IMAGE:-apache/tika:3.2.2.0-full}
+    restart: ${OPENARCHIVER_RESTART:-unless-stopped}
+    networks:
+      - internal
 
-    tika:
-        image: apache/tika:3.2.2.0-full
+  open-archiver:
+    image: ${OPENARCHIVER_IMAGE:-logiclabshq/open-archiver:latest}
+    restart: ${OPENARCHIVER_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/openarchiver/archiver-data:/var/data/open-archiver
+    ports:
+      - "${OPENARCHIVER_PORT:-3000}:3000"
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - postgres
+      - valkey
+      - meilisearch
 
-
+networks:
+  proxy:
+    external: true
+  internal:

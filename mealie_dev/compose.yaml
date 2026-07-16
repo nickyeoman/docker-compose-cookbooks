@@ -1,7 +1,9 @@
 services:
   mealie:
     image: ${MEALIE_IMAGE:-hkotel/mealie:latest}
-    restart: unless-stopped
+    restart: ${MEALIE_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/mealie:/app/data
     environment:
       - BASE_URL=${MEALIE_BASE_URL:-https://mealie.domain.com}
       - DEFAULT_EMAIL=${MEALIE_DEFAULT_EMAIL:-email@domain.com}
@@ -14,5 +16,13 @@ services:
       - RECIPE_SHOW_ASSETS=${MEALIE_RECIPE_SHOW_ASSETS:-true}
       - RECIPE_SHOW_NUTRITION=${MEALIE_RECIPE_SHOW_NUTRITION:-true}
       - TZ=${TZ:-America/Vancouver}
-    volumes:
-      - ${VOL_PATH:-./data}/mealie:/app/data
+    ports:
+      - "${MEALIE_PORT:-9000}:80"
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
