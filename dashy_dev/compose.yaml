@@ -1,0 +1,14 @@
+services:
+  dashy:
+    image: ${DASHY_IMAGE:-lissy93/dashy:latest}
+    restart: ${DASHY_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/dashy/user-data:/app/user-data
+    ports:
+      - ${DASHY_PORT:-4000}:8080
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

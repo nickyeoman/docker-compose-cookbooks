@@ -1,0 +1,14 @@
+services:
+  comfyui:
+    image: ${COMFYUI_IMAGE:-yanwk/comfyui-boot:cu124-slim}
+    restart: ${COMFYUI_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/comfyui:/root
+    ports:
+      - ${COMFYUI_PORT:-8188}:8188
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

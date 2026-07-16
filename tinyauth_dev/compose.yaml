@@ -1,0 +1,15 @@
+services:
+  tinyauth:
+    image: ${TINYAUTH_IMAGE:-ghcr.io/steveiliop56/tinyauth:v5}
+    restart: ${TINYAUTH_RESTART:-unless-stopped}
+    environment:
+      - TINYAUTH_APPURL=${TINYAUTH_APPURL:-http://localhost:3000}
+      - TINYAUTH_AUTH_USERS=${TINYAUTH_AUTH_USERS:-user:$$2a$$10$$ReplaceWithBcryptHash}
+    ports:
+      - ${TINYAUTH_PORT:-3000}:3000
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

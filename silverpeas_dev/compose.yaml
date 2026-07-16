@@ -1,0 +1,37 @@
+services:
+  silverpeas:
+    image: ${SILVERPEAS_IMAGE:-silverpeas:latest}
+    restart: ${SILVERPEAS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/silverpeas/data:/opt/silverpeas/data
+      - ${VOL_PATH:-/data}/silverpeas/log:/opt/silverpeas/log
+    environment:
+      - DB_SERVERTYPE=POSTGRESQL
+      - DB_SERVER=silverpeas-db
+      - DB_NAME=silverpeas
+      - DB_USER=silverpeas
+      - DB_PASSWORD=${SILVERPEAS_DB_PASSWORD:-ChangeThisPassword}
+    ports:
+      - ${SILVERPEAS_PORT:-8000}:8000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - silverpeas-db
+
+  silverpeas-db:
+    image: ${POSTGRES_IMAGE:-postgres:16-alpine}
+    restart: ${SILVERPEAS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/silverpeas/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=silverpeas
+      - POSTGRES_USER=silverpeas
+      - POSTGRES_PASSWORD=${SILVERPEAS_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

@@ -1,0 +1,83 @@
+services:
+  chatwoot:
+    image: ${CHATWOOT_IMAGE:-chatwoot/chatwoot:latest}
+    restart: ${CHATWOOT_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/chatwoot/storage:/app/storage
+    environment:
+      - SECRET_KEY_BASE=${CHATWOOT_SECRET_KEY_BASE:-ChangeThisPassword}
+      - FRONTEND_URL=${CHATWOOT_FRONTEND_URL:-http://localhost:3000}
+      - RAILS_ENV=production
+      - POSTGRES_HOST=chatwoot-db
+      - POSTGRES_USERNAME=chatwoot
+      - POSTGRES_PASSWORD=${CHATWOOT_DB_PASSWORD:-ChangeThisPassword}
+      - POSTGRES_DATABASE=chatwoot
+      - REDIS_URL=redis://chatwoot-redis:6379
+    ports:
+      - ${CHATWOOT_PORT:-3000}:3000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - chatwoot-db
+      - chatwoot-redis
+    command:
+      - bundle
+      - exec
+      - rails
+      - s
+      - -p
+      - "3000"
+      - -b
+      - 0.0.0.0
+
+  chatwoot-sidekiq:
+    image: ${CHATWOOT_IMAGE:-chatwoot/chatwoot:latest}
+    restart: ${CHATWOOT_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/chatwoot/storage:/app/storage
+    environment:
+      - SECRET_KEY_BASE=${CHATWOOT_SECRET_KEY_BASE:-ChangeThisPassword}
+      - FRONTEND_URL=${CHATWOOT_FRONTEND_URL:-http://localhost:3000}
+      - RAILS_ENV=production
+      - POSTGRES_HOST=chatwoot-db
+      - POSTGRES_USERNAME=chatwoot
+      - POSTGRES_PASSWORD=${CHATWOOT_DB_PASSWORD:-ChangeThisPassword}
+      - POSTGRES_DATABASE=chatwoot
+      - REDIS_URL=redis://chatwoot-redis:6379
+    networks:
+      - internal
+    depends_on:
+      - chatwoot-db
+      - chatwoot-redis
+    command:
+      - bundle
+      - exec
+      - sidekiq
+      - -C
+      - config/sidekiq.yml
+
+  chatwoot-db:
+    image: ${PGVECTOR_IMAGE:-pgvector/pgvector:pg16}
+    restart: ${CHATWOOT_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/chatwoot/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=chatwoot
+      - POSTGRES_USER=chatwoot
+      - POSTGRES_PASSWORD=${CHATWOOT_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+  chatwoot-redis:
+    image: ${REDIS_IMAGE:-redis:7-alpine}
+    restart: ${CHATWOOT_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/chatwoot/redis:/data
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

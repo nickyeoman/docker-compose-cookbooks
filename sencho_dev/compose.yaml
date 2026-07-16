@@ -1,0 +1,19 @@
+services:
+  sencho:
+    image: ${SENCHO_IMAGE:-saelix/sencho:latest}
+    restart: ${SENCHO_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/sencho/data:/data
+      - ${SENCHO_COMPOSE_DIR:-/data/compose}:/compose
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - COMPOSE_DIR=/compose
+      - DATA_DIR=/data
+    ports:
+      - ${SENCHO_PORT:-1852}:1852
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

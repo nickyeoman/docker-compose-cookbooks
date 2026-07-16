@@ -1,0 +1,46 @@
+services:
+  outline:
+    image: ${OUTLINE_IMAGE:-outlinewiki/outline:latest}
+    restart: ${OUTLINE_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/outline/data:/var/lib/outline/data
+    environment:
+      - URL=${OUTLINE_URL:-http://localhost:3000}
+      - SECRET_KEY=${OUTLINE_SECRET_KEY:-ChangeThisPassword}
+      - UTILS_SECRET=${OUTLINE_UTILS_SECRET:-ChangeThisPassword}
+      - DATABASE_URL=postgres://outline:${OUTLINE_DB_PASSWORD:-ChangeThisPassword}@outline-db:5432/outline
+      - PGSSLMODE=disable
+      - REDIS_URL=redis://outline-redis:6379
+      - FILE_STORAGE=local
+      - FILE_STORAGE_LOCAL_ROOT_DIR=/var/lib/outline/data
+    ports:
+      - ${OUTLINE_PORT:-3000}:3000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - outline-db
+      - outline-redis
+
+  outline-db:
+    image: ${POSTGRES_IMAGE:-postgres:16-alpine}
+    restart: ${OUTLINE_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/outline/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=outline
+      - POSTGRES_USER=outline
+      - POSTGRES_PASSWORD=${OUTLINE_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+  outline-redis:
+    image: ${REDIS_IMAGE:-redis:7-alpine}
+    restart: ${OUTLINE_RESTART:-unless-stopped}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

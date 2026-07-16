@@ -1,0 +1,15 @@
+services:
+  tugtainer:
+    image: ${TUGTAINER_IMAGE:-ghcr.io/quenary/tugtainer:1}
+    restart: ${TUGTAINER_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/tugtainer:/tugtainer
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - ${TUGTAINER_PORT:-9412}:80
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

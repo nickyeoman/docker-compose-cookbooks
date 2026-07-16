@@ -1,0 +1,23 @@
+services:
+  traefik:
+    image: ${TRAEFIK_IMAGE:-traefik:v3}
+    restart: ${TRAEFIK_RESTART:-unless-stopped}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${VOL_PATH:-/data}/traefik/letsencrypt:/letsencrypt
+    ports:
+      - ${TRAEFIK_HTTP_PORT:-80}:80
+      - ${TRAEFIK_HTTPS_PORT:-443}:443
+      - ${TRAEFIK_DASHBOARD_PORT:-8080}:8080
+    networks:
+      - proxy
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+
+networks:
+  proxy:
+    external: true

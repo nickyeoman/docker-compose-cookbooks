@@ -1,0 +1,39 @@
+services:
+  portus:
+    image: ${PORTUS_IMAGE:-opensuse/portus:2.5}
+    restart: ${PORTUS_RESTART:-unless-stopped}
+    environment:
+      - PORTUS_MACHINE_FQDN_VALUE=${PORTUS_FQDN:-portus.localhost}
+      - PORTUS_SECRET_KEY_BASE=${PORTUS_SECRET_KEY_BASE:-ChangeThisPassword}
+      - PORTUS_KEY_PATH=/certificates/portus.key
+      - PORTUS_PASSWORD=${PORTUS_PASSWORD:-ChangeThisPassword}
+      - PORTUS_DB_HOST=portus-db
+      - PORTUS_DB_DATABASE=portus
+      - PORTUS_DB_USERNAME=portus
+      - PORTUS_DB_PASSWORD=${PORTUS_DB_PASSWORD:-ChangeThisPassword}
+      - PORTUS_CHECK_SSL_USAGE_ENABLED=false
+    ports:
+      - ${PORTUS_PORT:-3000}:3000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - portus-db
+
+  portus-db:
+    image: ${MARIADB_IMAGE:-mariadb:10.11}
+    restart: ${PORTUS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/portus/db:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=portus
+      - MARIADB_USER=portus
+      - MARIADB_PASSWORD=${PORTUS_DB_PASSWORD:-ChangeThisPassword}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

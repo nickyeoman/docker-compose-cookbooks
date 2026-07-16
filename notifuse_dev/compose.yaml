@@ -1,0 +1,37 @@
+services:
+  notifuse:
+    image: ${NOTIFUSE_IMAGE:-notifuse/notifuse:latest}
+    restart: ${NOTIFUSE_RESTART:-unless-stopped}
+    environment:
+      - API_ENDPOINT=${NOTIFUSE_API_ENDPOINT:-http://localhost:8080}
+      - ROOT_EMAIL=${NOTIFUSE_ROOT_EMAIL:-admin@example.com}
+      - SECRET_KEY=${NOTIFUSE_SECRET_KEY:-ChangeThisPassword}
+      - DB_HOST=notifuse-db
+      - DB_PORT=5432
+      - DB_USER=notifuse
+      - DB_PASSWORD=${NOTIFUSE_DB_PASSWORD:-ChangeThisPassword}
+      - DB_NAME=notifuse
+    ports:
+      - ${NOTIFUSE_PORT:-8080}:8080
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - notifuse-db
+
+  notifuse-db:
+    image: ${POSTGRES_IMAGE:-postgres:17-alpine}
+    restart: ${NOTIFUSE_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/notifuse/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=notifuse
+      - POSTGRES_USER=notifuse
+      - POSTGRES_PASSWORD=${NOTIFUSE_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

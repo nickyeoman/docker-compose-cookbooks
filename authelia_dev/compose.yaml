@@ -1,0 +1,16 @@
+services:
+  authelia:
+    image: ${AUTHELIA_IMAGE:-authelia/authelia:latest}
+    restart: ${AUTHELIA_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/authelia/config:/config
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - ${AUTHELIA_PORT:-9091}:9091
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

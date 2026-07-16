@@ -1,0 +1,37 @@
+services:
+  fider:
+    image: ${FIDER_IMAGE:-getfider/fider:stable}
+    restart: ${FIDER_RESTART:-unless-stopped}
+    environment:
+      - BASE_URL=${FIDER_BASE_URL:-http://localhost:3000}
+      - DATABASE_URL=postgres://fider:${FIDER_DB_PASSWORD:-ChangeThisPassword}@fider-db:5432/fider?sslmode=disable
+      - JWT_SECRET=${FIDER_JWT_SECRET:-ChangeThisPassword}
+      - EMAIL_NOREPLY=${FIDER_EMAIL_NOREPLY:-noreply@example.com}
+      - EMAIL_SMTP_HOST=${FIDER_SMTP_HOST:-smtp.example.com}
+      - EMAIL_SMTP_PORT=${FIDER_SMTP_PORT:-587}
+      - EMAIL_SMTP_USERNAME=${FIDER_SMTP_USERNAME:-user}
+      - EMAIL_SMTP_PASSWORD=${FIDER_SMTP_PASSWORD:-ChangeThisPassword}
+    ports:
+      - ${FIDER_PORT:-3000}:3000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - fider-db
+
+  fider-db:
+    image: ${POSTGRES_IMAGE:-postgres:17-alpine}
+    restart: ${FIDER_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/fider/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=fider
+      - POSTGRES_USER=fider
+      - POSTGRES_PASSWORD=${FIDER_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

@@ -1,0 +1,62 @@
+services:
+  twenty:
+    image: ${TWENTY_IMAGE:-twentycrm/twenty:latest}
+    restart: ${TWENTY_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/twenty/data:/app/packages/twenty-server/.local-storage
+    environment:
+      - SERVER_URL=${TWENTY_SERVER_URL:-http://localhost:3000}
+      - APP_SECRET=${TWENTY_APP_SECRET:-ChangeThisPassword}
+      - PG_DATABASE_URL=postgres://twenty:${TWENTY_DB_PASSWORD:-ChangeThisPassword}@twenty-db:5432/default
+      - REDIS_URL=redis://twenty-redis:6379
+    ports:
+      - ${TWENTY_PORT:-3000}:3000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - twenty-db
+      - twenty-redis
+
+  twenty-worker:
+    image: ${TWENTY_IMAGE:-twentycrm/twenty:latest}
+    restart: ${TWENTY_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/twenty/data:/app/packages/twenty-server/.local-storage
+    environment:
+      - SERVER_URL=${TWENTY_SERVER_URL:-http://localhost:3000}
+      - APP_SECRET=${TWENTY_APP_SECRET:-ChangeThisPassword}
+      - PG_DATABASE_URL=postgres://twenty:${TWENTY_DB_PASSWORD:-ChangeThisPassword}@twenty-db:5432/default
+      - REDIS_URL=redis://twenty-redis:6379
+      - DISABLE_DB_MIGRATIONS=true
+    networks:
+      - internal
+    depends_on:
+      - twenty-db
+      - twenty-redis
+    command:
+      - yarn
+      - worker:prod
+
+  twenty-db:
+    image: ${POSTGRES_IMAGE:-postgres:16-alpine}
+    restart: ${TWENTY_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/twenty/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=default
+      - POSTGRES_USER=twenty
+      - POSTGRES_PASSWORD=${TWENTY_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+  twenty-redis:
+    image: ${REDIS_IMAGE:-redis:7-alpine}
+    restart: ${TWENTY_RESTART:-unless-stopped}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

@@ -1,0 +1,68 @@
+services:
+  maybe:
+    image: ${MAYBE_IMAGE:-ghcr.io/maybe-finance/maybe:latest}
+    restart: ${MAYBE_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/maybe/storage:/rails/storage
+    environment:
+      - SELF_HOSTED=true
+      - RAILS_FORCE_SSL=false
+      - RAILS_ASSUME_SSL=false
+      - SECRET_KEY_BASE=${MAYBE_SECRET_KEY_BASE:-ChangeThisPassword}
+      - DB_HOST=maybe-db
+      - POSTGRES_DB=maybe
+      - POSTGRES_USER=maybe
+      - POSTGRES_PASSWORD=${MAYBE_DB_PASSWORD:-ChangeThisPassword}
+      - REDIS_URL=redis://maybe-redis:6379/1
+    ports:
+      - ${MAYBE_PORT:-3000}:3000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - maybe-db
+      - maybe-redis
+
+  maybe-worker:
+    image: ${MAYBE_IMAGE:-ghcr.io/maybe-finance/maybe:latest}
+    restart: ${MAYBE_RESTART:-unless-stopped}
+    environment:
+      - SELF_HOSTED=true
+      - SECRET_KEY_BASE=${MAYBE_SECRET_KEY_BASE:-ChangeThisPassword}
+      - DB_HOST=maybe-db
+      - POSTGRES_DB=maybe
+      - POSTGRES_USER=maybe
+      - POSTGRES_PASSWORD=${MAYBE_DB_PASSWORD:-ChangeThisPassword}
+      - REDIS_URL=redis://maybe-redis:6379/1
+    networks:
+      - internal
+    depends_on:
+      - maybe-db
+      - maybe-redis
+    command:
+      - bundle
+      - exec
+      - sidekiq
+
+  maybe-db:
+    image: ${POSTGRES_IMAGE:-postgres:16-alpine}
+    restart: ${MAYBE_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/maybe/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=maybe
+      - POSTGRES_USER=maybe
+      - POSTGRES_PASSWORD=${MAYBE_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+  maybe-redis:
+    image: ${REDIS_IMAGE:-redis:7-alpine}
+    restart: ${MAYBE_RESTART:-unless-stopped}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

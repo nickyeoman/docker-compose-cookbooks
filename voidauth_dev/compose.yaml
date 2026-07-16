@@ -1,0 +1,33 @@
+services:
+  voidauth:
+    image: ${VOIDAUTH_IMAGE:-voidauth/voidauth:latest}
+    restart: ${VOIDAUTH_RESTART:-unless-stopped}
+    environment:
+      - APP_URL=${VOIDAUTH_APP_URL:-http://localhost:3000}
+      - STORAGE_KEY=${VOIDAUTH_STORAGE_KEY:-ChangeThisPassword}
+      - DB_HOST=voidauth-db
+      - DB_PASSWORD=${VOIDAUTH_DB_PASSWORD:-ChangeThisPassword}
+    ports:
+      - ${VOIDAUTH_PORT:-3000}:3000
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - voidauth-db
+
+  voidauth-db:
+    image: ${POSTGRES_IMAGE:-postgres:17-alpine}
+    restart: ${VOIDAUTH_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/voidauth/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=voidauth
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${VOIDAUTH_DB_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

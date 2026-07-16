@@ -1,0 +1,27 @@
+services:
+  tdarr:
+    image: ${TDARR_IMAGE:-ghcr.io/haveagitgat/tdarr:latest}
+    restart: ${TDARR_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/tdarr/server:/app/server
+      - ${VOL_PATH:-/data}/tdarr/configs:/app/configs
+      - ${VOL_PATH:-/data}/tdarr/logs:/app/logs
+      - ${VOL_PATH:-/data}/tdarr/cache:/temp
+      - ${TDARR_MEDIA:-/data/media}:/media
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+      - serverIP=0.0.0.0
+      - serverPort=${TDARR_SERVER_PORT:-8266}
+      - webUIPort=${TDARR_PORT:-8265}
+      - internalNode=true
+      - inContainer=true
+      - nodeName=${TDARR_NODE_NAME:-InternalNode}
+    ports:
+      - ${TDARR_PORT:-8265}:8265
+      - ${TDARR_SERVER_PORT:-8266}:8266
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

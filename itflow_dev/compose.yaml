@@ -1,0 +1,31 @@
+services:
+  itflow:
+    image: ${ITFLOW_IMAGE:-itfloworg/itflow:latest}
+    restart: ${ITFLOW_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/itflow/uploads:/var/www/itflow/uploads
+    ports:
+      - ${ITFLOW_PORT:-8080}:80
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - itflow-db
+
+  itflow-db:
+    image: ${MARIADB_IMAGE:-mariadb:latest}
+    restart: ${ITFLOW_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/itflow/db:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=itflow
+      - MARIADB_USER=itflow
+      - MARIADB_PASSWORD=${ITFLOW_DB_PASSWORD:-ChangeThisPassword}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
+    networks:
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

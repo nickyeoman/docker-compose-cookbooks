@@ -1,0 +1,18 @@
+services:
+  obsidian:
+    image: ${OBSIDIAN_IMAGE:-lscr.io/linuxserver/obsidian:latest}
+    restart: ${OBSIDIAN_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/obsidian/config:/config
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+      - PUID=${OBSIDIAN_PUID:-1000}
+      - PGID=${OBSIDIAN_PGID:-1000}
+    ports:
+      - ${OBSIDIAN_PORT:-3000}:3000
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
