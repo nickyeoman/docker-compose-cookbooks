@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Headscale Quick Start — Zero to Jellyfin in 15 Minutes</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+  h1 { font-size: 1.7rem; }
+  h2 { margin-top: 2.2rem; border-bottom: 1px solid #8884; padding-bottom: .3rem; }
+  pre { background: #8881; border: 1px solid #8883; border-radius: 6px; padding: .8rem 1rem; overflow-x: auto; }
+  code { font-family: ui-monospace, monospace; font-size: .92em; }
+  .diagram { text-align: left; }
+  .checklist li { margin: .4rem 0; }
+  .note { background: #7af3; border-left: 4px solid #47a; padding: .6rem 1rem; border-radius: 4px; margin: 1rem 0; }
+  .warn { background: #fa73; border-left: 4px solid #a74; padding: .6rem 1rem; border-radius: 4px; margin: 1rem 0; }
+  li { margin: .25rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Headscale Quick Start</h1>
+<p><strong>Goal:</strong> reach Jellyfin (and other containers) on your home LAN from anywhere,
+without exposing anything to the internet. Zero to working in about 15 minutes.</p>
+
+<h2>The setup</h2>
+<pre class="diagram">
+[Phone / Laptop]
+        |
+   Tailscale client
+        |
+[Dedicated Server]   ← public IP, runs Headscale (control plane only)
+        |
+   Tailscale network (WireGuard mesh)
+        |
+[LAN Node]           ← Docker host at 192.168.x.x, runs Jellyfin
+</pre>
+<p>The dedicated server only coordinates the mesh. Your media streams directly
+between your device and the LAN node over encrypted WireGuard.</p>
+
+<h2>Checklist</h2>
+<ol class="checklist">
+  <li>☐ Install Headscale on the dedicated server</li>
+  <li>☐ Create a user</li>
+  <li>☐ Generate an auth key</li>
+  <li>☐ Join the LAN node (and your phone/laptop)</li>
+  <li>☐ Open Jellyfin at <code>http://jellyfin:8096</code> or the Tailscale IP</li>
+</ol>
+
+<h2>1. Install Headscale (dedicated server)</h2>
+<p>From this repo's <code>headscale_dev/</code> directory:</p>
+<pre><code>mkdir -p /data/headscale/config
+cp config.yaml /data/headscale/config/config.yaml
+nano /data/headscale/config/config.yaml    # set server_url: https://headscale.example.com (YOUR domain)
+
+cp sample.env .env
+docker compose up -d</code></pre>
+<p>Point your reverse proxy (Nginx Proxy Manager) at container <code>headscale</code>,
+port <code>8080</code>, with SSL and websockets enabled. Then verify:</p>
+<pre><code>curl https://headscale.example.com/health</code></pre>
+
+<h2>2. Create a user</h2>
+<pre><code>docker compose exec headscale headscale users create homelab</code></pre>
+
+<h2>3. Generate an auth key</h2>
+<pre><code>docker compose exec headscale headscale preauthkeys create --user homelab --expiration 1h</code></pre>
+<p>Copy the key it prints.</p>
+
+<h2>4. Join the LAN node</h2>
+<p>On the LAN node (your Docker host running Jellyfin):</p>
+<pre><code>curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up --login-server=https://headscale.example.com --authkey &lt;YOUR-PREAUTH-KEY&gt;</code></pre>
+<p>On your phone: install the Tailscale app, choose <em>custom / alternate coordination server</em>,
+and enter <code>https://headscale.example.com</code>. On a laptop, run the same
+<code>tailscale up</code> command with a fresh key.</p>
+<p>Verify from your laptop:</p>
+<pre><code>tailscale status
+tailscale ping &lt;lan-node-name&gt;</code></pre>
+
+<h2>5. Open Jellyfin</h2>
+<p>With Tailscale connected on your device, open:</p>
+<ul>
+  <li><code>http://&lt;lan-node-tailscale-ip&gt;:8096</code> (the 100.64.x.x address from <code>tailscale status</code>), or</li>
+  <li><code>http://&lt;lan-node-name&gt;.tailnet.local:8096</code> via MagicDNS</li>
+</ul>
+
+<div class="note"><strong>Optional — reach the rest of your LAN:</strong> on the LAN node run
+<code>sudo tailscale up --login-server=https://headscale.example.com --advertise-routes=192.168.1.0/24</code>,
+enable IP forwarding, then approve the route with
+<code>headscale nodes approve-routes</code> on the server. See the README for details.</div>
+
+<div class="warn"><strong>Firewall:</strong> only 80/443 open on the dedicated server. Never forward
+port 8096 (Jellyfin) or 8080 (Headscale) on your router. <br>
+<strong>Lost a device?</strong> Cut it off instantly:
+<code>docker compose exec headscale headscale nodes delete -i &lt;NODE-ID&gt;</code></div>
+
+<p>Full walkthrough, subnet routing, and gotchas: see <code>README.md</code> in this directory.</p>
+
+</body>
+</html>
