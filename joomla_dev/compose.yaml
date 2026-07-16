@@ -1,0 +1,41 @@
+services:
+  mariadb:
+    image: ${MARIADB_IMAGE:-mariadb:10.11}
+    restart: ${JOOMLA_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/joomla/db:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=${JOOMLA_DB_NAME:-joomla}
+      - MARIADB_USER=${JOOMLA_DB_USER:-joomla}
+      - MARIADB_PASSWORD=${JOOMLA_DB_PASSWORD:-ChangeThisPassword}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisRootPassword}
+    networks:
+      - internal
+
+  joomla:
+    image: ${JOOMLA_IMAGE:-joomla:5}
+    restart: ${JOOMLA_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/joomla/html:/var/www/html
+    environment:
+      - JOOMLA_DB_HOST=mariadb
+      - JOOMLA_DB_USER=${JOOMLA_DB_USER:-joomla}
+      - JOOMLA_DB_PASSWORD=${JOOMLA_DB_PASSWORD:-ChangeThisPassword}
+      - JOOMLA_DB_NAME=${JOOMLA_DB_NAME:-joomla}
+      - JOOMLA_SITE_NAME=${JOOMLA_SITE_NAME:-My Joomla Site}
+      - JOOMLA_ADMIN_USER=${JOOMLA_ADMIN_USER:-Joomla Admin}
+      - JOOMLA_ADMIN_USERNAME=${JOOMLA_ADMIN_USERNAME:-admin}
+      - JOOMLA_ADMIN_PASSWORD=${JOOMLA_ADMIN_PASSWORD:-ChangeThisPassword}
+      - JOOMLA_ADMIN_EMAIL=${JOOMLA_ADMIN_EMAIL:-admin@example.com}
+    ports:
+      - "${JOOMLA_PORT:-8080}:80"
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - mariadb
+
+networks:
+  proxy:
+    external: true
+  internal:
