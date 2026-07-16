@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_DB=${POSTHOG_DB_NAME:-posthog}
       - POSTGRES_USER=${POSTHOG_DB_USER:-posthog}
-      - POSTGRES_PASSWORD=${POSTHOG_DB_PASSWORD:-posthog}
+      - POSTGRES_PASSWORD=${POSTHOG_DB_PASSWORD:-ChangeThisPassword}
     networks:
       - internal
 
@@ -27,7 +27,7 @@ services:
     environment:
       - CLICKHOUSE_DB=${POSTHOG_CLICKHOUSE_DB:-posthog}
       - CLICKHOUSE_USER=${POSTHOG_CLICKHOUSE_USER:-clickhouse}
-      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-clickhouse}
+      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-ChangeThisPassword}
       - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
     networks:
       - internal
@@ -62,12 +62,12 @@ services:
     environment:
       - SITE_URL=${POSTHOG_SITE_URL:-http://localhost:8000}
       - SECRET_KEY=${POSTHOG_SECRET_KEY:?must_be_set}
-      - DATABASE_URL=postgres://${POSTHOG_DB_USER:-posthog}:${POSTHOG_DB_PASSWORD:-posthog}@postgres:5432/${POSTHOG_DB_NAME:-posthog}
+      - DATABASE_URL=postgres://${POSTHOG_DB_USER:-posthog}:${POSTHOG_DB_PASSWORD:-ChangeThisPassword}@postgres:5432/${POSTHOG_DB_NAME:-posthog}
       - REDIS_URL=redis://redis:6379/
       - CLICKHOUSE_HOST=clickhouse
       - CLICKHOUSE_DATABASE=${POSTHOG_CLICKHOUSE_DB:-posthog}
       - CLICKHOUSE_USER=${POSTHOG_CLICKHOUSE_USER:-clickhouse}
-      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-clickhouse}
+      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-ChangeThisPassword}
       - CLICKHOUSE_SECURE=false
       - CLICKHOUSE_VERIFY=false
       - KAFKA_HOSTS=kafka:9092
@@ -99,12 +99,12 @@ services:
     environment:
       - SITE_URL=${POSTHOG_SITE_URL:-http://localhost:8000}
       - SECRET_KEY=${POSTHOG_SECRET_KEY:?must_be_set}
-      - DATABASE_URL=postgres://${POSTHOG_DB_USER:-posthog}:${POSTHOG_DB_PASSWORD:-posthog}@postgres:5432/${POSTHOG_DB_NAME:-posthog}
+      - DATABASE_URL=postgres://${POSTHOG_DB_USER:-posthog}:${POSTHOG_DB_PASSWORD:-ChangeThisPassword}@postgres:5432/${POSTHOG_DB_NAME:-posthog}
       - REDIS_URL=redis://redis:6379/
       - CLICKHOUSE_HOST=clickhouse
       - CLICKHOUSE_DATABASE=${POSTHOG_CLICKHOUSE_DB:-posthog}
       - CLICKHOUSE_USER=${POSTHOG_CLICKHOUSE_USER:-clickhouse}
-      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-clickhouse}
+      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-ChangeThisPassword}
       - CLICKHOUSE_SECURE=false
       - CLICKHOUSE_VERIFY=false
       - KAFKA_HOSTS=kafka:9092

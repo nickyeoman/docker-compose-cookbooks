@@ -9,8 +9,8 @@ services:
       - ${VOL_PATH:-/data}/duplicati/restore:/restore
     environment:
       - TZ=${TZ:-America/Vancouver}
-      - SETTINGS_ENCRYPTION_KEY=${DUPLICATI_KEY:-ThisNeedsToChange}
-      - DUPLICATI__WEBSERVICE_PASSWORD=${DUPLICATI_PASS:-changeMe}
+      - SETTINGS_ENCRYPTION_KEY=${DUPLICATI_KEY:-ChangeThisPassword}
+      - DUPLICATI__WEBSERVICE_PASSWORD=${DUPLICATI_PASS:-ChangeThisPassword}
     ports:
       - "${DUPLICATI_PORT:-8200}:8200"
     networks:

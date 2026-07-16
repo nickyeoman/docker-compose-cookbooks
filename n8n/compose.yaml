@@ -3,8 +3,8 @@ services:
     image: ${N8N_IMAGE:-n8nio/n8n:latest}
     restart: ${N8N_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/n8n/data:/home/node/.n8n
-      - ${VOL_PATH}/n8n/files:/files
+      - ${VOL_PATH:-/data}/n8n/data:/home/node/.n8n
+      - ${VOL_PATH:-/data}/n8n/files:/files
     environment:
       - GENERIC_TIMEZONE=${TZ:-America/Vancouver}
       - TZ=${TZ:-America/Vancouver}

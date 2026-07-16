@@ -3,8 +3,8 @@ services:
     image: ${OPENCODE_IMAGE:-ghcr.io/anomalyco/opencode:latest}
     restart: ${OPENCODE_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/opencode/config:/config
-      - ${VOL_PROJECTS:-${VOL_PATH}/projects}:/projects
+      - ${VOL_PATH:-/data}/opencode/config:/config
+      - ${VOL_PROJECTS:-${VOL_PATH:-/data}/projects}:/projects
     environment:
       - OPENCODE_PORT=${OPENCODE_PORT:-4096}
       - OPENCODE_HOSTNAME=${OPENCODE_HOSTNAME:-0.0.0.0}
@@ -13,14 +13,14 @@ services:
       - OLLAMA_HOST=${OLLAMA_HOST_URL:-http://localhost:11434}
     ports:
       - ${OPENCODE_PORT:-4096}:4096
+    networks:
+      - proxy
     command:
       - serve
       - --port
       - ${OPENCODE_PORT:-4096}
       - --hostname
       - 0.0.0.0
-    networks:
-      - proxy
 
 networks:
   proxy:

@@ -4,13 +4,13 @@ services:
     image: ${THUNDERBIRD_IMAGE:-jlesage/thunderbird}
     restart: ${THUNDERBIRD_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/thunderbird/config:/config
-      - ${VOL_PATH}/thunderbird/export:/export
+      - ${VOL_PATH:-/data}/thunderbird/config:/config
+      - ${VOL_PATH:-/data}/thunderbird/export:/export
     environment:
       - TZ=${THUNDERBIRD_TZ:-America/Vancouver}
       - WEB_AUTHENTICATION=${THUNDERBIRD_WEB_AUTHENTICATION:-1}
       - WEB_AUTHENTICATION_USERNAME=${THUNDERBIRD_WEB_AUTHENTICATION_USERNAME:-user}
-      - WEB_AUTHENTICATION_PASSWORD=${THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD:-password}
+      - WEB_AUTHENTICATION_PASSWORD=${THUNDERBIRD_WEB_AUTHENTICATION_PASSWORD:-ChangeThisPassword}
       - SECURE_CONNECTION=${THUNDERBIRD_SECURE_CONNECTION:-1}
     ports:
       - ${THUNDERBIRD_PORT:-5800}:5800

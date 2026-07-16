@@ -9,10 +9,10 @@ services:
       - ${VOL_PATH:-/data}/matomo_dev/db:/var/lib/mysql
 
     environment:
-      - MYSQL_ROOT_PASSWORD=${MATOMO_MYSQL_ROOT_PASSWORD:-changeme}
+      - MYSQL_ROOT_PASSWORD=${MATOMO_MYSQL_ROOT_PASSWORD:-ChangeThisPassword}
       - MYSQL_DATABASE=matomo
       - MYSQL_USER=matomo
-      - MYSQL_PASSWORD=${MATOMO_MYSQL_PASSWORD:-changeme}
+      - MYSQL_PASSWORD=${MATOMO_MYSQL_PASSWORD:-ChangeThisPassword}
 
     networks:
       - internal
@@ -29,7 +29,7 @@ services:
     environment:
       - MATOMO_DB_HOST=matomo-db
       - MATOMO_DB_USER=matomo
-      - MATOMO_DB_PASSWORD=${MATOMO_DB_PASSWORD:-changeme}
+      - MATOMO_DB_PASSWORD=${MATOMO_DB_PASSWORD:-ChangeThisPassword}
       - MATOMO_DB_NAME=matomo
 
     ports:

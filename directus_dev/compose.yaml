@@ -8,7 +8,7 @@ services:
       - MARIADB_DATABASE=${MARIADB_DATABASE:-directus}
       - MARIADB_USER=${MARIADB_USER:-directus}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD:-ChangeThisPassword}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisRootPassword}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
     networks:
       - internal
 
@@ -26,7 +26,7 @@ services:
       - ${VOL_PATH:-/data}/directus/extensions:/directus/extensions
       - ${VOL_PATH:-/data}/directus/templates:/directus/templates
     environment:
-      - SECRET=${DIRECTUS_SECRET:-0123456789}
+      - SECRET=${DIRECTUS_SECRET:-ChangeThisPassword}
       - DB_CLIENT=mysql
       - DB_HOST=mariadb
       - DB_PORT=3306

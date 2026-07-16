@@ -8,7 +8,7 @@ services:
       - ${FILEBROWSER_CONFIG_PATH:-/data/filebrowser}/config.yaml:/home/filebrowser/config.yaml
     environment:
       - FILEBROWSER_CONFIG=${FILEBROWSER_CONFIG:-/home/filebrowser/config.yaml}
-      - FILEBROWSER_ADMIN_PASSWORD=${FILEBROWSER_ADMIN_PASSWORD:-admin}
+      - FILEBROWSER_ADMIN_PASSWORD=${FILEBROWSER_ADMIN_PASSWORD:-ChangeThisPassword}
       - TZ=${TZ:-America/Vancouver}
     ports:
       - "${FILEBROWSER_PORT:-8080}:80"

@@ -3,9 +3,9 @@ services:
     image: ${STASHAPP_IMAGE:-stashapp/stash:latest}
     restart: ${STASHAPP_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/stash/generated:/generated
-      - ${VOL_PATH}/stash/metadata:/metadata
-      - ${VOL_PATH}/stash/root:/root/.stash
+      - ${VOL_PATH:-/data}/stash/generated:/generated
+      - ${VOL_PATH:-/data}/stash/metadata:/metadata
+      - ${VOL_PATH:-/data}/stash/root:/root/.stash
       - ${STASH_CONTENT_PATH:-/data/stash}:/data
     environment:
       - STASH_CACHE=${STASHAPP_CACHE:-/cache/}

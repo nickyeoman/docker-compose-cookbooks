@@ -6,10 +6,10 @@ services:
       - ${VOL_PATH:-/data}/etherpad:/home/etherpad
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - TZ=${TZ:-UTC}
+      - TZ=${TZ:-America/Vancouver}
       - ETHERPAD_DEFAULT_TITLE=${ETHERPAD_DEFAULT_TITLE:-Etherpad}
       - ETHERPAD_DEFAULT_TEXT=${ETHERPAD_DEFAULT_TEXT:-Welcome to Etherpad!}
-      - ETHERPAD_ADMIN_PASSWORD=${ETHERPAD_ADMIN_PASSWORD:-admin}
+      - ETHERPAD_ADMIN_PASSWORD=${ETHERPAD_ADMIN_PASSWORD:-ChangeThisPassword}
     ports:
       - "${ETHERPAD_PORT:-9001}:9001"
     networks:

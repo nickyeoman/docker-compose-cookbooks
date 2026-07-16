@@ -11,11 +11,11 @@ services:
     environment:
       - YOURLS_DB_HOST=yourls-db
       - YOURLS_DB_USER=${YOURLS_DB_USER:-yourls}
-      - YOURLS_DB_PASS=${YOURLS_DB_PASSWORD:-changeme}
+      - YOURLS_DB_PASS=${YOURLS_DB_PASSWORD:-ChangeThisPassword}
       - YOURLS_DB_NAME=${YOURLS_DB_NAME:-yourls}
       - YOURLS_SITE=${YOURLS_SITE:-http://localhost:8080}
       - YOURLS_USER=${YOURLS_USER:-admin}
-      - YOURLS_PASS=${YOURLS_PASS:-changeme}
+      - YOURLS_PASS=${YOURLS_PASS:-ChangeThisPassword}
 
     ports:
       - "${YOURLS_PORT:-8080}:80"
@@ -35,10 +35,10 @@ services:
       - ${VOL_PATH:-/data}/yourls/db:/var/lib/mysql
 
     environment:
-      - MYSQL_ROOT_PASSWORD=${YOURLS_MYSQL_ROOT_PASSWORD:-changeme-root}
+      - MYSQL_ROOT_PASSWORD=${YOURLS_MYSQL_ROOT_PASSWORD:-ChangeThisPassword}
       - MYSQL_DATABASE=${YOURLS_DB_NAME:-yourls}
       - MYSQL_USER=${YOURLS_DB_USER:-yourls}
-      - MYSQL_PASSWORD=${YOURLS_DB_PASSWORD:-changeme}
+      - MYSQL_PASSWORD=${YOURLS_DB_PASSWORD:-ChangeThisPassword}
 
     networks:
       - internal

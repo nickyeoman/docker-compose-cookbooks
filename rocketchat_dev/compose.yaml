@@ -33,13 +33,19 @@ services:
       - ${VOL_PATH:-/data}/rocketchat_dev/db:/data/db
       - ${VOL_PATH:-/data}/rocketchat_dev/dump:/dump
 
+    networks:
+      - internal
+
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
+
+  mongo-init-replica:
+    image: ${MONGO_IMAGE:-mongo:4.0}
 
     networks:
       - internal
 
-  mongo-init-replica:
-    image: ${MONGO_IMAGE:-mongo:4.0}
+    depends_on:
+      - mongo
 
     command: >
       mongo mongo/rocketchat --eval
@@ -47,12 +53,6 @@ services:
           _id: 'rs0',
           members: [ { _id: 0, host: 'localhost:27017' } ]
         })"
-
-    networks:
-      - internal
-
-    depends_on:
-      - mongo
 
   hubot:
     image: ${HUBOT_IMAGE:-rocketchat/hubot-rocketchat:latest}

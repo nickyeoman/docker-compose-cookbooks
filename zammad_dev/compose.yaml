@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_DB=${POSTGRES_DB:-zammad_production}
       - POSTGRES_USER=${POSTGRES_USER:-zammad}
-      - POSTGRES_PASSWORD=${POSTGRES_PASS:-zammad}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS:-ChangeThisPassword}
     networks:
       - internal
 
@@ -51,7 +51,7 @@ services:
       - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
       - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
       - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
-      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-ChangeThisPassword}
       - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
       - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
       - POSTGRESQL_DB_CREATE=${POSTGRESQL_DB_CREATE:-true}
@@ -84,7 +84,7 @@ services:
       - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
       - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
       - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
-      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-ChangeThisPassword}
       - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
       - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
       - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
@@ -115,7 +115,7 @@ services:
       - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
       - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
       - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
-      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-ChangeThisPassword}
       - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
       - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
       - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
@@ -145,7 +145,7 @@ services:
       - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
       - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
       - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
-      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-ChangeThisPassword}
       - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
       - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
       - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
@@ -176,7 +176,7 @@ services:
       - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
       - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
       - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
-      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-ChangeThisPassword}
       - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
       - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
       - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}
@@ -210,7 +210,7 @@ services:
       - POSTGRESQL_DB=${POSTGRES_DB:-zammad_production}
       - POSTGRESQL_HOST=${POSTGRES_HOST:-zammad-postgresql}
       - POSTGRESQL_USER=${POSTGRES_USER:-zammad}
-      - POSTGRESQL_PASS=${POSTGRES_PASS:-zammad}
+      - POSTGRESQL_PASS=${POSTGRES_PASS:-ChangeThisPassword}
       - POSTGRESQL_PORT=${POSTGRES_PORT:-5432}
       - POSTGRESQL_OPTIONS=${POSTGRESQL_OPTIONS:-?pool=50}
       - REDIS_URL=${REDIS_URL:-redis://zammad-redis:6379}

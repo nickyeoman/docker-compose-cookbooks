@@ -3,13 +3,13 @@ services:
     image: ${QBT_IMAGE:-trigus42/qbittorrentvpn:latest}
     restart: ${QBT_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/qbit/config:/config
-      - ${VOL_PATH}/qbit/downloads:/downloads
-      - ${VOL_PATH}/qbit/incomplete:/incomplete
+      - ${VOL_PATH:-/data}/qbit/config:/config
+      - ${VOL_PATH:-/data}/qbit/downloads:/downloads
+      - ${VOL_PATH:-/data}/qbit/incomplete:/incomplete
       - /dev/net/tun:/dev/net/tun
     environment:
       - VPN_TYPE=wireguard
-      - WEBUI_PASSWORD=${QBT_PASS:-ChangeMePass}
+      - WEBUI_PASSWORD=${QBT_PASS:-ChangeThisPassword}
     ports:
       - ${QBT_PORT:-8080}:8080
     cap_add:

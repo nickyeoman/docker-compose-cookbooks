@@ -6,14 +6,14 @@ services:
     restart: ${VSCODE_RESTART:-unless-stopped}
 
     volumes:
-      - ${VOL_PROJECTS:-/data/projects}:/data
+      - ${VOL_PROJECTS:-${VOL_PATH:-/data}/projects}:/data
       - ${VOL_PATH:-/data}/vscode/config:/config
 
     environment:
       # App-specific
       - PUID=${VSCODE_PUID:-1000}
       - PGID=${VSCODE_PGID:-1000}
-      - PASSWORD=${VSCODE_PASSWORD:-RanDoMChangeMe}
+      - PASSWORD=${VSCODE_PASSWORD:-ChangeThisPassword}
       - DEFAULT_WORKSPACE=${DEFAULT_WORKSPACE:-/data}
       - PROXY_DOMAIN=${VSCODE_DOMAIN:-localhost}
 

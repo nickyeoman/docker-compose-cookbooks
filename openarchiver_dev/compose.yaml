@@ -7,18 +7,18 @@ services:
     environment:
       - POSTGRES_DB=${POSTGRES_DB:-open_archive}
       - POSTGRES_USER=${POSTGRES_USER:-admin}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ChangeThisPassword}
     networks:
       - internal
 
   valkey:
     image: ${VALKEY_IMAGE:-valkey/valkey:8-alpine}
     restart: ${OPENARCHIVER_RESTART:-unless-stopped}
-    command: valkey-server --requirepass ${REDIS_PASSWORD:-RedisPasswordChangeMe}
     volumes:
       - ${VOL_PATH:-/data}/openarchiver/valkeydata:/data
     networks:
       - internal
+    command: valkey-server --requirepass ${REDIS_PASSWORD:-ChangeThisPassword}
 
   meilisearch:
     image: ${MEILISEARCH_IMAGE:-getmeili/meilisearch:v1.15}
@@ -26,7 +26,7 @@ services:
     volumes:
       - ${VOL_PATH:-/data}/openarchiver/meilidata:/meili_data
     environment:
-      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-aSampleMasterKey}
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-ChangeThisPassword}
     networks:
       - internal
 
@@ -41,6 +41,28 @@ services:
     restart: ${OPENARCHIVER_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/openarchiver/archiver-data:/var/data/open-archiver
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT_BACKEND=${PORT_BACKEND:-4000}
+      - PORT_FRONTEND=${PORT_FRONTEND:-3000}
+      - SYNC_FREQUENCY=${SYNC_FREQUENCY:-* * * * *}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-ChangeThisPassword}@postgres:5432/${POSTGRES_DB:-open_archive}
+      - MEILI_HOST=${MEILI_HOST:-http://meilisearch:7700}
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-ChangeThisPassword}
+      - MEILI_INDEXING_BATCH=${MEILI_INDEXING_BATCH:-500}
+      - REDIS_HOST=${REDIS_HOST:-valkey}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-ChangeThisPassword}
+      - REDIS_TLS_ENABLED=${REDIS_TLS_ENABLED:-false}
+      - STORAGE_TYPE=${STORAGE_TYPE:-local}
+      - BODY_SIZE_LIMIT=${BODY_SIZE_LIMIT:-100M}
+      - STORAGE_LOCAL_ROOT_PATH=${STORAGE_LOCAL_ROOT_PATH:-/var/data/open-archiver}
+      - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-60000}
+      - RATE_LIMIT_MAX_REQUESTS=${RATE_LIMIT_MAX_REQUESTS:-100}
+      - JWT_SECRET=${JWT_SECRET:-ChangeThisPassword}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-7d}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-ChangeThisPassword}
+      - TIKA_URL=${TIKA_URL:-http://tika:9998}
     ports:
       - "${OPENARCHIVER_PORT:-3000}:3000"
     networks:

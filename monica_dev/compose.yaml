@@ -9,10 +9,10 @@ services:
       - ${VOL_PATH:-/data}/monica_dev/db:/var/lib/mysql
 
     environment:
-      - MYSQL_ROOT_PASSWORD=${MONICA_MYSQL_ROOT_PASSWORD:-changeme}
+      - MYSQL_ROOT_PASSWORD=${MONICA_MYSQL_ROOT_PASSWORD:-ChangeThisPassword}
       - MYSQL_DATABASE=monica
       - MYSQL_USER=monica
-      - MYSQL_PASSWORD=${MONICA_DB_PASSWORD:-changeme}
+      - MYSQL_PASSWORD=${MONICA_DB_PASSWORD:-ChangeThisPassword}
 
     networks:
       - internal
@@ -27,7 +27,7 @@ services:
     environment:
       - DB_HOST=monica-db
       - DB_USERNAME=monica
-      - DB_PASSWORD=${MONICA_DB_PASSWORD:-changeme}
+      - DB_PASSWORD=${MONICA_DB_PASSWORD:-ChangeThisPassword}
       - DB_DATABASE=monica
       - APP_ENV=${MONICA_APP_ENV:-production}
 

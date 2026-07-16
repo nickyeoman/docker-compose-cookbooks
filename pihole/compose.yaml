@@ -3,8 +3,8 @@ services:
     image: ${PIHOLE_IMAGE:-pihole/pihole:latest}
     restart: ${PIHOLE_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/pihole/etc:/etc/pihole
-      - ${VOL_PATH}/pihole/dnsmasq:/etc/dnsmasq.d
+      - ${VOL_PATH:-/data}/pihole/etc:/etc/pihole
+      - ${VOL_PATH:-/data}/pihole/dnsmasq:/etc/dnsmasq.d
     environment:
       - TZ=${TZ:-America/Vancouver}
       - FTLCONF_dns_listeningMode=ALL

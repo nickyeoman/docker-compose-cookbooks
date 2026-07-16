@@ -6,7 +6,7 @@ services:
       - ${VOL_PATH:-/data}/listmonk/db:/var/lib/postgresql
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-listmonk}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-securepassword}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ChangeThisPassword}
       - POSTGRES_DB=${POSTGRES_DB:-listmonk}
     networks:
       - listmonk
@@ -21,7 +21,7 @@ services:
 
       # Database
       - LISTMONK_db__user=${POSTGRES_USER:-listmonk}
-      - LISTMONK_db__password=${POSTGRES_PASSWORD:-securepassword}
+      - LISTMONK_db__password=${POSTGRES_PASSWORD:-ChangeThisPassword}
       - LISTMONK_db__database=${POSTGRES_DB:-listmonk}
       - LISTMONK_db__host=listmonk-db
       - LISTMONK_db__port=5432
@@ -37,7 +37,7 @@ services:
 
       # Initial Admin User
       - LISTMONK_ADMIN_USER=${LISTMONK_ADMIN_USER:-admin}
-      - LISTMONK_ADMIN_PASSWORD=${LISTMONK_ADMIN_PASSWORD:-changeme1234}
+      - LISTMONK_ADMIN_PASSWORD=${LISTMONK_ADMIN_PASSWORD:-ChangeThisPassword}
 
     ports:
       - "${LISTMONK_PORT:-9000}:${LISTMONK_PORT:-9000}"

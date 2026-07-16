@@ -2,15 +2,15 @@ services:
   docmost:
     image: ${DOCMOST_IMAGE:-docmost/docmost:latest}
     restart: ${DOCMOST_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/docmost/storage:/app/data/storage
     environment:
       - APP_URL=${APP_URL:-http://localhost:8000}
       - APP_SECRET=${APP_SECRET}
-      - DATABASE_URL=postgresql://docmost:${DB_PASSWORD:-changeme}@db:5432/docmost?schema=public
+      - DATABASE_URL=postgresql://docmost:${DB_PASSWORD:-ChangeThisPassword}@db:5432/docmost?schema=public
       - REDIS_URL=redis://redis:6379
     ports:
       - "${DOCMOST_PORT:-8000}:3000"
-    volumes:
-      - ${VOL_PATH:-/data}/docmost/storage:/app/data/storage
     networks:
       - proxy
       - docmost_internal
@@ -23,12 +23,12 @@ services:
   db:
     image: ${POSTGRES_IMAGE:-postgres:16-alpine}
     restart: ${DOCMOST_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/docmost/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=docmost
       - POSTGRES_USER=docmost
-      - POSTGRES_PASSWORD=${DB_PASSWORD:-changeme}
-    volumes:
-      - ${VOL_PATH:-/data}/docmost/db:/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-ChangeThisPassword}
     networks:
       - docmost_internal
 

@@ -12,7 +12,7 @@ services:
     environment:
       - REDIS_HOSTNAME=immich-redis
       - DB_HOSTNAME=immich-postgres
-      - DB_PASSWORD=${IMMICH_DB_PASSWORD:-changeme}
+      - DB_PASSWORD=${IMMICH_DB_PASSWORD:-ChangeThisPassword}
       - DB_USERNAME=${IMMICH_DB_USERNAME:-postgres}
       - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME:-immich}
     ports:
@@ -47,7 +47,7 @@ services:
     volumes:
       - ${VOL_PATH:-/data}/immich/postgres:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${IMMICH_DB_PASSWORD:-changeme}
+      - POSTGRES_PASSWORD=${IMMICH_DB_PASSWORD:-ChangeThisPassword}
       - POSTGRES_USER=${IMMICH_DB_USERNAME:-postgres}
       - POSTGRES_DB=${IMMICH_DB_DATABASE_NAME:-immich}
       - POSTGRES_INITDB_ARGS=--data-checksums

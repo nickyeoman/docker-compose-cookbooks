@@ -2,13 +2,8 @@ services:
   nextcloud-db:
     image: ${MARIADB_IMAGE:-mariadb:latest}
     restart: ${MARIADB_RESTART:-unless-stopped}
-    command: >
-      --transaction-isolation=READ-COMMITTED
-      --binlog-format=ROW
-      --innodb-file-per-table=1
-      --skip-innodb-read-only-compressed
     volumes:
-      - ${VOL_PATH}/nextcloud/db:/var/lib/mysql
+      - ${VOL_PATH:-/data}/nextcloud/db:/var/lib/mysql
     environment:
       - MARIADB_DATABASE=${NEXTCLOUD_DB:-nextcloud}
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
@@ -16,12 +11,17 @@ services:
       - MARIADB_PASSWORD=${NEXTCLOUD_DB_PASSWORD:-ChangeThisPassword}
     networks:
       - internal
+    command: >
+      --transaction-isolation=READ-COMMITTED
+      --binlog-format=ROW
+      --innodb-file-per-table=1
+      --skip-innodb-read-only-compressed
 
   nextcloud:
     image: ${NEXTCLOUD_IMAGE:-nextcloud:latest}
     restart: ${NEXTCLOUD_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/nextcloud/data:/var/www/html
+      - ${VOL_PATH:-/data}/nextcloud/data:/var/www/html
     environment:
       - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD:-ChangeThisPassword}
       - MYSQL_DATABASE=${NEXTCLOUD_DB:-nextcloud}

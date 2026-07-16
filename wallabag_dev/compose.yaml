@@ -10,13 +10,13 @@ services:
 
     environment:
       - TZ=${TZ:-America/Vancouver}
-      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD:-changeme-root}
+      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD:-ChangeThisPassword}
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
       - SYMFONY__ENV__DATABASE_HOST=wallabag-db
       - SYMFONY__ENV__DATABASE_PORT=3306
       - SYMFONY__ENV__DATABASE_NAME=${WALLABAG_DB_NAME:-wallabag}
       - SYMFONY__ENV__DATABASE_USER=${WALLABAG_DB_USER:-wallabag}
-      - SYMFONY__ENV__DATABASE_PASSWORD=${WALLABAG_DB_PASSWORD:-changeme}
+      - SYMFONY__ENV__DATABASE_PASSWORD=${WALLABAG_DB_PASSWORD:-ChangeThisPassword}
       - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
       - SYMFONY__ENV__DATABASE_TABLE_PREFIX=wallabag_
       - SYMFONY__ENV__MAILER_DSN=${WALLABAG_MAILER_DSN:-smtp://127.0.0.1}
@@ -42,7 +42,7 @@ services:
       - ${VOL_PATH:-/data}/wallabag/db:/var/lib/mysql
 
     environment:
-      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD:-changeme-root}
+      - MYSQL_ROOT_PASSWORD=${WALLABAG_MYSQL_ROOT_PASSWORD:-ChangeThisPassword}
 
     networks:
       - internal
