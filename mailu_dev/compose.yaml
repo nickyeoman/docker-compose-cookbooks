@@ -1,0 +1,96 @@
+services:
+  redis:
+    image: redis:alpine
+    restart: ${MAILU_RESTART:-always}
+    volumes:
+      - ${VOL_PATH:-/data}/mailu/redis:/data
+    networks:
+      - internal
+
+  front:
+    image: ${MAILU_ORG:-ghcr.io/mailu}/nginx:${MAILU_VERSION:-2024.06}
+    restart: ${MAILU_RESTART:-always}
+    env_file: .env
+    volumes:
+      - ${VOL_PATH:-/data}/mailu/certs:/certs
+      - ${VOL_PATH:-/data}/mailu/overrides/nginx:/overrides:ro
+    ports:
+      - "${BIND_ADDRESS4:-}25:25"
+      - "${BIND_ADDRESS4:-}465:465"
+      - "${BIND_ADDRESS4:-}587:587"
+      - "${BIND_ADDRESS4:-}110:110"
+      - "${BIND_ADDRESS4:-}995:995"
+      - "${BIND_ADDRESS4:-}143:143"
+      - "${BIND_ADDRESS4:-}993:993"
+      - "${BIND_ADDRESS4:-}4190:4190"
+    networks:
+      - proxy
+      - internal
+
+  admin:
+    image: ${MAILU_ORG:-ghcr.io/mailu}/admin:${MAILU_VERSION:-2024.06}
+    restart: ${MAILU_RESTART:-always}
+    env_file: .env
+    volumes:
+      - ${VOL_PATH:-/data}/mailu/data:/data
+      - ${VOL_PATH:-/data}/mailu/dkim:/dkim
+    networks:
+      - internal
+    depends_on:
+      - redis
+
+  imap:
+    image: ${MAILU_ORG:-ghcr.io/mailu}/dovecot:${MAILU_VERSION:-2024.06}
+    restart: ${MAILU_RESTART:-always}
+    env_file: .env
+    volumes:
+      - ${VOL_PATH:-/data}/mailu/mail:/mail
+      - ${VOL_PATH:-/data}/mailu/overrides/dovecot:/overrides:ro
+    networks:
+      - internal
+    depends_on:
+      - front
+
+  smtp:
+    image: ${MAILU_ORG:-ghcr.io/mailu}/postfix:${MAILU_VERSION:-2024.06}
+    restart: ${MAILU_RESTART:-always}
+    env_file: .env
+    volumes:
+      - ${VOL_PATH:-/data}/mailu/mailqueue:/queue
+      - ${VOL_PATH:-/data}/mailu/overrides/postfix:/overrides:ro
+    networks:
+      - internal
+    depends_on:
+      - front
+
+  antispam:
+    image: ${MAILU_ORG:-ghcr.io/mailu}/rspamd:${MAILU_VERSION:-2024.06}
+    restart: ${MAILU_RESTART:-always}
+    env_file: .env
+    volumes:
+      - ${VOL_PATH:-/data}/mailu/filter:/var/lib/rspamd
+      - ${VOL_PATH:-/data}/mailu/dkim:/dkim:ro
+      - ${VOL_PATH:-/data}/mailu/overrides/rspamd:/etc/rspamd/override.d:ro
+    networks:
+      - internal
+    depends_on:
+      - front
+
+  webmail:
+    image: ${MAILU_ORG:-ghcr.io/mailu}/${MAILU_WEBMAIL:-roundcube}:${MAILU_VERSION:-2024.06}
+    restart: ${MAILU_RESTART:-always}
+    profiles:
+      - webmail
+    env_file: .env
+    volumes:
+      - ${VOL_PATH:-/data}/mailu/webmail:/data
+      - ${VOL_PATH:-/data}/mailu/overrides/webmail:/overrides:ro
+    networks:
+      - internal
+    depends_on:
+      - imap
+
+networks:
+  proxy:
+    external: true
+  internal:
