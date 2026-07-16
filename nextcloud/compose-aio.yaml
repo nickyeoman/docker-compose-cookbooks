@@ -1,0 +1,26 @@
+# Nextcloud All-in-One (AIO)
+# The master container manages and spawns all other Nextcloud containers itself.
+# Container name and volume name are fixed requirements of AIO — do not change them.
+
+services:
+  nextcloud-aio-mastercontainer:
+    image: ghcr.io/nextcloud-releases/all-in-one:latest
+    restart: unless-stopped
+    container_name: nextcloud-aio-mastercontainer
+    init: true
+    volumes:
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      # Behind Nginx Proxy Manager: Apache listens on this port for proxied traffic
+      - APACHE_PORT=11000
+      - APACHE_IP_BINDING=0.0.0.0
+      # Where AIO stores Nextcloud user data on the host
+      - NEXTCLOUD_DATADIR=/data/nextcloud-aio
+    ports:
+      # AIO admin interface (self-signed https)
+      - 8080:8080
+
+volumes:
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer
