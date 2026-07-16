@@ -66,5 +66,8 @@
         }
       }
     }
+  },
+  "permission": {
+    "bash": { "git *": "ask" }
   }
 }
