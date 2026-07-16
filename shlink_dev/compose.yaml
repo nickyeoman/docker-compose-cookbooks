@@ -1,0 +1,50 @@
+services:
+  mariadb:
+    image: ${MARIADB_IMAGE:-mariadb:10.11}
+    restart: ${SHLINK_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/shlink/db:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=${SHLINK_DB_NAME:-shlink}
+      - MARIADB_USER=${SHLINK_DB_USER:-shlink}
+      - MARIADB_PASSWORD=${SHLINK_DB_PASSWORD:-ChangeThisPassword}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisRootPassword}
+    networks:
+      - internal
+
+  shlink:
+    image: ${SHLINK_IMAGE:-shlinkio/shlink:latest}
+    restart: ${SHLINK_RESTART:-unless-stopped}
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+      - DEFAULT_DOMAIN=${SHLINK_DOMAIN:-localhost}
+      - IS_HTTPS_ENABLED=${SHLINK_HTTPS:-false}
+      - DB_DRIVER=maria
+      - DB_HOST=mariadb
+      - DB_NAME=${SHLINK_DB_NAME:-shlink}
+      - DB_USER=${SHLINK_DB_USER:-shlink}
+      - DB_PASSWORD=${SHLINK_DB_PASSWORD:-ChangeThisPassword}
+      - DEFAULT_BASE_URL_REDIRECT=${SHLINK_REDIRECT_URL:-https://localhost}
+    ports:
+      - "${SHLINK_PORT:-8080}:8080"
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - mariadb
+
+  shlink-web-client:
+    image: ${SHLINK_WEB_CLIENT_IMAGE:-shlinkio/shlink-web-client:latest}
+    restart: ${SHLINK_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/shlink/web-client:/usr/share/nginx/html
+    ports:
+      - "${SHLINK_WEB_CLIENT_PORT:-8003}:80"
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

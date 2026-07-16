@@ -1,0 +1,135 @@
+services:
+  postgres:
+    image: ${POSTHOG_POSTGRES_IMAGE:-postgres:15-alpine}
+    restart: ${POSTHOG_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/posthog/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTHOG_DB_NAME:-posthog}
+      - POSTGRES_USER=${POSTHOG_DB_USER:-posthog}
+      - POSTGRES_PASSWORD=${POSTHOG_DB_PASSWORD:-posthog}
+      - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTHOG_DB_USER:-posthog} -d ${POSTHOG_DB_NAME:-posthog}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: ${POSTHOG_REDIS_IMAGE:-redis:7-alpine}
+    restart: ${POSTHOG_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/posthog/redis:/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  clickhouse:
+    image: ${POSTHOG_CLICKHOUSE_IMAGE:-clickhouse/clickhouse-server:24-alpine}
+    restart: ${POSTHOG_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/posthog/clickhouse:/var/lib/clickhouse
+    environment:
+      - CLICKHOUSE_DB=${POSTHOG_CLICKHOUSE_DB:-posthog}
+      - CLICKHOUSE_USER=${POSTHOG_CLICKHOUSE_USER:-clickhouse}
+      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-clickhouse}
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+    networks:
+      - internal
+
+  kafka:
+    image: ${POSTHOG_KAFKA_IMAGE:-docker.io/bitnami/kafka:3.7}
+    restart: ${POSTHOG_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/posthog/kafka:/bitnami/kafka
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_LOG_RETENTION_MS=3600000
+      - KAFKA_CFG_LOG_RETENTION_CHECK_INTERVAL_MS=300000
+      - KAFKA_CFG_LOG_RETENTION_HOURS=1
+    networks:
+      - internal
+
+  posthog:
+    image: ${POSTHOG_IMAGE:-posthog/posthog:latest}
+    restart: ${POSTHOG_RESTART:-unless-stopped}
+    command: /compose/start
+    volumes:
+      - ${VOL_PATH:-/data}/posthog/data:/data
+      - ${VOL_PATH:-/data}/posthog/logs:/var/log
+    environment:
+      - SITE_URL=${POSTHOG_SITE_URL:-http://localhost:8000}
+      - SECRET_KEY=${POSTHOG_SECRET_KEY:?must_be_set}
+      - DATABASE_URL=postgres://${POSTHOG_DB_USER:-posthog}:${POSTHOG_DB_PASSWORD:-posthog}@postgres:5432/${POSTHOG_DB_NAME:-posthog}
+      - REDIS_URL=redis://redis:6379/
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_DATABASE=${POSTHOG_CLICKHOUSE_DB:-posthog}
+      - CLICKHOUSE_USER=${POSTHOG_CLICKHOUSE_USER:-clickhouse}
+      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-clickhouse}
+      - CLICKHOUSE_SECURE=false
+      - CLICKHOUSE_VERIFY=false
+      - KAFKA_HOSTS=kafka:9092
+      - DEPLOYMENT=hobby
+      - OPT_OUT_CAPTURE=true
+      - DISABLE_SECURITY=0
+      - EMAIL_HOST=${POSTHOG_EMAIL_HOST:-}
+      - EMAIL_HOST_USER=${POSTHOG_EMAIL_USER:-}
+      - EMAIL_HOST_PASSWORD=${POSTHOG_EMAIL_PASSWORD:-}
+      - EMAIL_PORT=${POSTHOG_EMAIL_PORT:-587}
+      - EMAIL_USE_TLS=${POSTHOG_EMAIL_TLS:-true}
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - postgres
+      - redis
+      - clickhouse
+      - kafka
+
+  worker:
+    image: ${POSTHOG_IMAGE:-posthog/posthog:latest}
+    restart: ${POSTHOG_RESTART:-unless-stopped}
+    command: /compose/worker
+    volumes:
+      - ${VOL_PATH:-/data}/posthog/data:/data
+    environment:
+      - SITE_URL=${POSTHOG_SITE_URL:-http://localhost:8000}
+      - SECRET_KEY=${POSTHOG_SECRET_KEY:?must_be_set}
+      - DATABASE_URL=postgres://${POSTHOG_DB_USER:-posthog}:${POSTHOG_DB_PASSWORD:-posthog}@postgres:5432/${POSTHOG_DB_NAME:-posthog}
+      - REDIS_URL=redis://redis:6379/
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_DATABASE=${POSTHOG_CLICKHOUSE_DB:-posthog}
+      - CLICKHOUSE_USER=${POSTHOG_CLICKHOUSE_USER:-clickhouse}
+      - CLICKHOUSE_PASSWORD=${POSTHOG_CLICKHOUSE_PASSWORD:-clickhouse}
+      - CLICKHOUSE_SECURE=false
+      - CLICKHOUSE_VERIFY=false
+      - KAFKA_HOSTS=kafka:9092
+      - DEPLOYMENT=hobby
+      - OPT_OUT_CAPTURE=true
+    networks:
+      - internal
+    depends_on:
+      - postgres
+      - redis
+      - clickhouse
+      - kafka
+      - posthog
+
+networks:
+  proxy:
+    external: true
+  internal:

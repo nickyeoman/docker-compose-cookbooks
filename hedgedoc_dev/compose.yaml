@@ -1,0 +1,21 @@
+services:
+  hedgedoc:
+    image: ${HEDGEDOC_IMAGE:-ghcr.io/hedgedoc/hedgedoc:latest}
+    restart: ${HEDGEDOC_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/hedgedoc/data:/hedgedoc/data
+    environment:
+      - CMD_DB_URL=sqlite:///data/hedgedoc.db
+      - CMD_DOMAIN=${HEDGEDOC_DOMAIN:-localhost}
+      - CMD_PROTOCOL_USESSL=${HEDGEDOC_SSL:-false}
+      - CMD_URL_ADDPORT=${HEDGEDOC_ADDPORT:-true}
+    ports:
+      - "${HEDGEDOC_PORT:-3000}:3000"
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

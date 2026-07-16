@@ -1,0 +1,16 @@
+services:
+  memos:
+    image: ${MEMOS_IMAGE:-neosmemo/memos:stable}
+    restart: ${MEMOS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/memos:/var/opt/memos
+    ports:
+      - "${MEMOS_PORT:-5230}:5230"
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
