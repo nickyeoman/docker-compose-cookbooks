@@ -1,10 +1,9 @@
-# Heimdall
 services:
   heimdall:
-    image: ${HEIMDALL_IMAGE}
+    image: ${HEIMDALL_IMAGE:-linuxserver/heimdall:latest}
     restart: ${HEIMDALL_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-./data}/heimdall:/config
+      - ${VOL_PATH}/heimdall:/config
     environment:
       - PGID=${HEIMDALL_PGID:-1000}
       - PUID=${HEIMDALL_PUID:-1000}

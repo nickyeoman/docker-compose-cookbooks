@@ -1,12 +1,10 @@
 services:
   bookstack:
     image: ${BOOKSTACK_IMAGE:-solidnerd/bookstack:latest}
-    restart: unless-stopped
-    depends_on:
-      - mariadb
+    restart: ${BOOKSTACK_RESTART:-unless-stopped}
     volumes:
-      - bookstack-storage:/var/www/bookstack/storage/uploads
-      - bookstack-uploads:/var/www/bookstack/public/uploads
+      - ${VOL_PATH}/bookstack/uploads:/var/www/bookstack/storage/uploads
+      - ${VOL_PATH}/bookstack/public:/var/www/bookstack/public/uploads
     environment:
       - APP_KEY=${BOOKSTACK_APP_KEY:-APP_KEY}
       - APP_TIMEZONE=${BOOKSTACK_APP_TIMEZONE:-America/Vancouver}
@@ -17,32 +15,28 @@ services:
       - DB_USERNAME=${BOOKSTACK_DB_USERNAME:-dbuser}
       - REVISION_LIMIT=${BOOKSTACK_REVISION_LIMIT:-false}
     ports:
-      - "8080:8080"
+      - ${BOOKSTACK_PORT:-8080}:8080
     networks:
       - proxy
       - internal
+    depends_on:
+      - mariadb
 
   mariadb:
     image: ${MARIADB_IMAGE:-mariadb:latest}
-    restart: unless-stopped
+    restart: ${MARIADB_RESTART:-unless-stopped}
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
-    environment:
-      - MARIADB_DATABASE=${MARIADB_MARIADB_DATABASE:-bookstack}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
-      - MARIADB_USER=${MARIADB_MARIADB_USER:-dbuser}
-      - MARIADB_PASSWORD=${MARIADB_MARIADB_PASSWORD:-AlsoChangeThisPassword}
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - ${VOL_PATH}/bookstack/db:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=${BOOKSTACK_DB_DATABASE:-bookstack}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
+      - MARIADB_USER=${BOOKSTACK_DB_USERNAME:-dbuser}
+      - MARIADB_PASSWORD=${BOOKSTACK_DB_PASSWORD:-AlsoChangeThisPassword}
     networks:
       - internal
-
-volumes:
-  bookstack-php-config:
-  bookstack-storage:
-  bookstack-uploads:
-  mariadb-data:
 
 networks:
   proxy:
     external: true
-  internal: 
+  internal:

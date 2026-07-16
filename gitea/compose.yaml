@@ -1,12 +1,9 @@
-# Gitea
-
 services:
-
   gitea:
-    image: ${GITEA_IMAGE}
+    image: ${GITEA_IMAGE:-gitea/gitea:latest}
     restart: ${GITEA_RESTART:-always}
     volumes:
-      - ${VOL_PATH}/gitea/gitea:/data
+      - ${VOL_PATH}/gitea/data:/data
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -22,32 +19,29 @@ services:
       - GITEA__server__SSH_PORT=${GITEA_SSH_PORT:-22}
       - ENABLE_SWAGGER=true
       - MAX_RESPONSE_ITEMS=15
-      
     ports:
-      - ${GITEA_HOST_SSH_PORT:-22}:${GITEA_SSH_PORT:-22}
-      - ${GITEA_WEB_PORT:-3000}:3000
+      - ${GITEA_SSH_PORT:-22}:22
+      - ${GITEA_PORT:-3000}:3000
     networks:
       - proxy
-      - db
+      - internal
     depends_on:
       - gitea-db
 
   gitea-db:
-    image: ${MARIA_IMAGE:-mariadb:latest}
-    restart: ${GITEA_RESTART:-always}
+    image: ${MARIADB_IMAGE:-mariadb:latest}
+    restart: ${MARIADB_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH}/gitea/gitea-db:/var/lib/mysql
+      - ${VOL_PATH}/gitea/db:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MARIA_ROOT:-changeMe}
-      MYSQL_USER: ${GITEA_DB_USER:-gitea}
-      MYSQL_PASSWORD: ${GITEA_DB_PASS:-changeMe}
-      MYSQL_DATABASE: ${GITEA_DB_NAME:-gitea}
-      TZ: ${TZ:-America/Vancouver}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-changeMe}
+      - MARIADB_USER=${GITEA_DB_USER:-gitea}
+      - MARIADB_PASSWORD=${GITEA_DB_PASS:-changeMe}
+      - MARIADB_DATABASE=${GITEA_DB_NAME:-gitea}
     networks:
-      - db
+      - internal
 
 networks:
   proxy:
     external: true
-  db:
-    driver: bridge
+  internal:
