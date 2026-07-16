@@ -1,0 +1,28 @@
+services:
+  etherpad:
+    image: ${ETHERPAD_IMAGE:-node:18-slim}
+    restart: ${ETHERPAD_RESTART:-unless-stopped}
+    command:
+      - docker-entrypoint.sh
+      - /bin/bash
+      - -c
+      - "npm install -g git+https://github.com/etherpad/etherpad-lite.git && cp -r /usr/local/lib/node_modules/etherpad-lite/* /home/etherpad/ && chmod -R 775 /home/etherpad/ && ls -la /home/etherpad/"
+    environment:
+      - TZ=${TZ:-UTC}
+      - ETHERPAD_DEFAULT_TITLE=${ETHERPAD_DEFAULT_TITLE:-Etherpad}
+      - ETHERPAD_DEFAULT_TEXT=${ETHERPAD_DEFAULT_TEXT:-Welcome to Etherpad!}
+      - ETHERPAD_ADMIN_PASSWORD=${ETHERPAD_ADMIN_PASSWORD:-admin}
+    ports:
+      - "${ETHERPAD_PORT:-9001}:9001"
+    volumes:
+      - ${VOL_PATH:-/data}/etherpad:/home/etherpad
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:
+    internal: true
