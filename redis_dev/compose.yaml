@@ -12,11 +12,6 @@ services:
     networks:
       - proxy
       - internal
-    depends_on:
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: ${REDIS_HEALTHCHECK_INTERVAL:-20s}
-      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
 
 networks:
   proxy:

@@ -7,7 +7,7 @@ services:
 
     volumes:
       - ${VOL_PROJECTS:-/data/projects}:/data
-      - ${VOL_PATH:-./data}/vscode/config:/config
+      - ${VOL_PATH:-/data}/vscode/config:/config
 
     environment:
       # App-specific

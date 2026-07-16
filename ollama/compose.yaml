@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ${OLLAMA_IMAGE:-ollama/ollama}
+    image: ${OLLAMA_IMAGE:-ollama/ollama:latest}
     restart: ${OLLAMA_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/ollama:/root/.ollama

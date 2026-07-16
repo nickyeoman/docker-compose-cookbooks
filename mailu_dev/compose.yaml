@@ -1,6 +1,6 @@
 services:
   redis:
-    image: redis:alpine
+    image: ${MAILU_REDIS_IMAGE:-redis:alpine}
     restart: ${MAILU_RESTART:-always}
     volumes:
       - ${VOL_PATH:-/data}/mailu/redis:/data

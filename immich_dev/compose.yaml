@@ -23,9 +23,6 @@ services:
     depends_on:
       - immich-redis
       - immich-postgres
-    healthcheck:
-      disable: false
-
   immich-machine-learning:
     # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
     # Example tag: ghcr.io/immich-app/immich-machine-learning:release-cuda
@@ -38,16 +35,11 @@ services:
       - ${VOL_PATH:-/data}/immich/model-cache:/cache
     networks:
       - immich_internal
-    healthcheck:
-      disable: false
-
   immich-redis:
     image: ${REDIS_IMAGE:-redis:6.2.19-alpine}
     restart: ${IMMICH_RESTART:-unless-stopped}
     networks:
       - immich_internal
-    healthcheck:
-      test: redis-cli ping || exit 1
 
   immich-postgres:
     image: ${POSTGRES_IMAGE:-tensorchord/pgvecto-rs:pg14-v0.2.0}
@@ -61,15 +53,6 @@ services:
       - POSTGRES_INITDB_ARGS=--data-checksums
     networks:
       - immich_internal
-    healthcheck:
-      test: >-
-        pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1;
-        Chksum="$$(psql --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" --tuples-only --no-align
-        --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')";
-        echo "checksum failure count is $$Chksum";
-        [ "$$Chksum" = '0' ] || exit 1
-      interval: 5m
-      start_period: 5m
     command: >-
       postgres
       -c shared_preload_libraries=vectors.so
