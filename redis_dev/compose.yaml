@@ -1,0 +1,25 @@
+services:
+  redis:
+    image: ${REDIS_IMAGE:-redis:alpine}
+    restart: ${REDIS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/redis:/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=${TZ:-UTC}
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    networks:
+      - proxy
+      - internal
+    depends_on:
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: ${REDIS_HEALTHCHECK_INTERVAL:-20s}
+      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
+
+networks:
+  proxy:
+    external: true
+  internal:
+    internal: true
