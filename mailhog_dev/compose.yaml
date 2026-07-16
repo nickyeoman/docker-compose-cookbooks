@@ -1,0 +1,15 @@
+services:
+  mailhog:
+    image: ${MAILHOG_IMAGE:-mailhog/mailhog:latest}
+    restart: ${MAILHOG_RESTART:-unless-stopped}
+    ports:
+      - "${MAILHOG_SMTP_PORT:-1025}:1025"
+      - "${MAILHOG_UI_PORT:-8025}:8025"
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal:

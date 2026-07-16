@@ -1,0 +1,36 @@
+services:
+  ollama:
+    image: ${OLLAMA_IMAGE:-ollama/ollama}
+    restart: ${OLLAMA_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/ollama:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=${OLLAMA_KEEP_ALIVE:-5m}
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    networks:
+      - proxy
+      - internal
+
+  webui:
+    image: ${WEBUI_IMAGE:-ghcr.io/open-webui/open-webui:main}
+    restart: ${WEBUI_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/webui/cache:/root/.cache
+      - ${VOL_PATH:-/data}/webui/data:/app/backend/data
+    environment:
+      - WEBUI_URL=${WEBUI_URL:-http://localhost:8080}
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:?must_be_set}
+      - OLLAMA_BASE_URL=http://ollama:11434
+    ports:
+      - "${WEBUI_PORT:-8080}:8080"
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - ollama
+
+networks:
+  proxy:
+    external: true
+  internal:
