@@ -1,0 +1,50 @@
+services:
+  pangolin:
+    image: ${PANGOLIN_IMAGE:-fosrl/pangolin:latest}
+    restart: ${PANGOLIN_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/pangolin/config:/app/config
+    networks:
+      - internal
+
+  gerbil:
+    image: ${GERBIL_IMAGE:-fosrl/gerbil:latest}
+    restart: ${GERBIL_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/pangolin/gerbil:/var/config
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - ${GERBIL_WG_PORT:-51820}:51820/udp
+      - ${GERBIL_HTTP_PORT:-80}:80
+      - ${GERBIL_HTTPS_PORT:-443}:443
+    networks:
+      - internal
+    depends_on:
+      - pangolin
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    command:
+      - --reachableAt=http://gerbil:3003
+      - --generateAndSaveKeyTo=/var/config/key
+      - --remoteConfig=http://pangolin:3001/api/v1/
+      - --reportBandwidthTo=http://pangolin:3001/api/v1
+
+  traefik:
+    image: ${TRAEFIK_IMAGE:-traefik:v3.3}
+    restart: ${TRAEFIK_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/pangolin/traefik:/etc/traefik:ro
+      - ${VOL_PATH:-/data}/pangolin/letsencrypt:/letsencrypt
+    depends_on:
+      - pangolin
+      - gerbil
+    network_mode: service:gerbil
+    command:
+      - --configFile=/etc/traefik/traefik_config.yml
+
+networks:
+  proxy:
+    external: true
+  internal:

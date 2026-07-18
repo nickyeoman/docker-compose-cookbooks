@@ -28,6 +28,7 @@ networks:
 These deliberately violate the conventions above — do not "fix" them:
 
 - `pihole` uses `network_mode: host` (it's a DNS server), so it has no `proxy` network
+- `pangolin_dev` is itself an edge reverse proxy (Pangolin + gerbil + traefik), not a client of NPM; the `proxy` network is declared for convention but unused by its services, and `traefik` uses `network_mode: service:gerbil` instead of joining `internal`
 - `zammad_dev` `zammad-init` service hardcodes `restart: on-failure` (init container)
 - `nextcloud/compose-aio.yaml` follows the upstream AIO layout: fixed container/volume names, no env templating, no proxy network
 - `opencode` and `vscode` default `VOL_PROJECTS` to `${VOL_PATH:-/data}/projects` (nested default), not plain `/data`
