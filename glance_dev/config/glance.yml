@@ -1,0 +1,44 @@
+pages:
+  - name: Home
+    columns:
+      - size: small
+        widgets:
+          - type: clock
+            hour-format: 24h
+
+          - type: bookmarks
+            groups:
+              - title: General
+                links:
+                  - title: Gmail
+                    url: https://mail.google.com/mail/u/0/
+                  - title: GitHub
+                    url: https://github.com/
+
+          - type: weather
+            location: Vancouver, Canada
+
+      - size: full
+        widgets:
+          - type: monitor
+            title: Services
+            sites:
+              - title: Nginx Proxy Manager
+                url: http://nginx-proxy-manager:81
+                icon: si:nginxproxymanager
+
+          - type: rss
+            title: Latest News
+            limit: 10
+            collapse-after: 5
+            cache: 12h
+            feeds:
+              - url: https://selfh.st/rss/
+                title: selfh.st
+
+      - size: small
+        widgets:
+          - type: server-stats
+            servers:
+              - type: local
+                name: Host

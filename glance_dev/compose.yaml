@@ -1,0 +1,16 @@
+services:
+  glance:
+    image: ${GLANCE_IMAGE:-glanceapp/glance:latest}
+    restart: ${GLANCE_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/glance/config:/app/config
+    environment:
+      - TZ=${TZ:-America/Vancouver}
+    ports:
+      - ${GLANCE_PORT:-8080}:8080
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
