@@ -4,13 +4,15 @@ services:
     restart: ${OPENCODE_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/opencode/config:/config
+      - ${VOL_PATH:-/data}/opencode/data:/data
       - ${VOL_PROJECTS:-${VOL_PATH:-/data}/projects}:/projects
     environment:
       - OPENCODE_PORT=${OPENCODE_PORT:-4096}
       - OPENCODE_HOSTNAME=${OPENCODE_HOSTNAME:-0.0.0.0}
       - OPENCODE_CONFIG=/config/config.json
-      - OPENCODE_MODEL=qwen3:8b-16k
-      - OLLAMA_HOST=${OLLAMA_HOST_URL:-http://localhost:11434}
+      - OPENCODE_MODEL=opencode/deepseek-v4-flash-free
+      - HOME=/config
+      - XDG_DATA_HOME=/data
     ports:
       - ${OPENCODE_PORT:-4096}:4096
     networks:

@@ -21,7 +21,6 @@ OpenCode is an open source AI coding agent.
 
     OPENCODE_PORT – default: 4096
     OPENCODE_HOSTNAME – default: 0.0.0.0
-    OLLAMA_HOST_URL – default: http://localhost:11434
 
 ## Volume Notes
 
@@ -29,8 +28,8 @@ With `VOL_PATH=/data`:
 
 | Container path | Host path | Purpose |
 |---|---|---|
-| `/config` | `/data/opencode/config` | Config files (config.json) |
-| `/data` | `/data/opencode/data` | OpenCode state |
+| `/config` | `/data/opencode/config` | Config files (config.json), also `$HOME` |
+| `/data` | `/data/opencode/data` | OpenCode state, incl. `auth.json` from `/connect` |
 | `/projects` | `/data/opencode/projects` | Workspace/project files |
 
 ## Network Notes
@@ -52,41 +51,25 @@ See compose.yaml for the full set of environment variables.
 
 ## Additional Notes / Gotchas
 
-Nothing specific to this stack so far.
+This is a shared, reusable compose file — it ships "ready to use" but not
+pre-authenticated. Whoever runs it needs to `/connect` a provider (OpenCode
+Zen or OpenCode Go) before the agent can actually make model calls. Because
+`HOME` and `XDG_DATA_HOME` point at the `/data` bind mount, that login
+persists across container recreation.
 
-## Dockhand Stack, Deploy from Git
+### Config file
 
-Cookbooks Repository
-stackname: opencode
-Compose file path: opencode/compose.yaml
-Additional env file (optional): opencode/sample.env
+The `config.json` at `opencode/config/config.json` is pre-configured to use
+**OpenCode Zen** cloud models — no local model runtime required. Default
+model is `opencode/deepseek-v4-flash-free` (free tier).
 
-Then "Load" opencode/sample.env into the Environmental variables in dockhand.
+Run `/connect` inside the TUI to authenticate with OpenCode Zen (or another
+provider) and `/models` to switch. Login is persisted to the `/data` bind
+mount, so it survives container recreation.
 
-Create the Stack
-
-## Config file
-
-The `config.json` at `opencode/config/config.json` is pre-configured for
-Ollama. Available models include:
-
-| Model | Default | Purpose |
-|---|---|---|
-| `qwen2.5-coder:14b` | default | Coding & agent tasks (recommended for this repo) |
-| `qwen3:8b` / `qwen3:8b-16k` | | General purpose, tool support |
-| `qwen2.5:7b` | | Lightweight general purpose |
-| `mistral:latest` / `mistral-small3.2:latest` | | Chat & multilingual |
-| `llama3.1:8b` | | General purpose |
-
-Tested on an NVIDIA GeForce RTX 5060 Ti (16 GB VRAM).
-
-## Model Guides
-
-See the `docs/` directory for best-practice guides on each supported model:
-
-- [DeepSeek V4 Flash Free](docs/DeepSeekV4FlashFree.md) — free model via opencode provider
-- [Qwen3 8B 16k](docs/Qwen.md) — local model via Ollama
-- [Claude (Anthropic)](docs/Claude.md) — paid model via API key
+For a flat-rate bundle of open-source models instead of pay-as-you-go, see
+**OpenCode Go** ($10/mo subscription, ~12 models including DeepSeek V4,
+Qwen 3.6, GLM 5.2) — switch to it the same way via `/connect` and `/models`.
 
 To use a custom config with `VOL_PATH=/data`, copy it to:
 
@@ -94,7 +77,14 @@ To use a custom config with `VOL_PATH=/data`, copy it to:
 /data/opencode/config/config.json
 ```
 
-## CLI Cheatsheet
+### Model Guides
+
+See the `docs/` directory for best-practice guides on supported models:
+
+- [DeepSeek V4 Flash Free](docs/DeepSeekV4FlashFree.md) — free model via opencode provider (default)
+- [Claude (Anthropic)](docs/Claude.md) — paid model via API key
+
+### CLI Cheatsheet
 
 From the `opencode/` directory, prefix commands with `docker compose`:
 
@@ -130,16 +120,13 @@ docker compose exec opencode opencode upgrade
 /share         # Create share link
 ```
 
-## Ollama
+## Dockhand Stack, Deploy from Git
 
-This stack requires the [ollama](../ollama/) stack to be running. The config
-connects to `http://localhost:11434/v1` inside the container.
+Cookbooks Repository
+stackname: opencode
+Compose file path: opencode/compose.yaml
+Additional env file (optional): opencode/sample.env
 
-To use a host-side ollama instead, set `OLLAMA_HOST=http://host.docker.internal:11434`.
+Then "Load" opencode/sample.env into the Environmental variables in dockhand.
 
-## Environment Variables
-
--   `OPENCODE_SERVER_PASSWORD` — required. Set a strong password for the web UI.
--   `OLLAMA_HOST` — Ollama API endpoint (default `http://localhost:11434`)
--   `OPENCODE_PORT` — Web UI port (default `4096`)
--   `VOL_PATH` — Base path for persistent data (default `/data`)
+Create the Stack
