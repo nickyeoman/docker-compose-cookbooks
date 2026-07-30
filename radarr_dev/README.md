@@ -20,7 +20,7 @@ Open http://localhost:7878 in your browser and complete the initial setup wizard
 
 Once the wizard finishes, you'll see an empty library. To populate it:
 
-- Go to **Settings → Media Management** and add a **Root Folder** (e.g., `/movies`) — this is where your organized movie library will live
+- Go to **Settings → Media Management** and add a **Root Folder** (e.g., `/media/movies`) — this is where your organized movie library will live
 - Click **Add Movie** and search by title — Radarr fetches metadata, posters, and available releases
 - Optionally connect a **List** (Trakt, IMDb, etc.) to auto-import movies from your watchlists
 
@@ -36,6 +36,7 @@ qBittorrent downloads to its own directory → Radarr picks it up, renames the f
 | `RADARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `RADARR_PORT` | Published port for the web UI (default: `7878`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
+| `RADARR_MEDIA` | Path to the shared media library (default: `/data/media`) — point this at the same library used by Sonarr, Bazarr, and Jellyfin/etc. so downloads land in the shared library |
 | `TZ` | Container timezone (default: `America/Vancouver`) |
 
 ## Volume Notes
@@ -43,7 +44,7 @@ qBittorrent downloads to its own directory → Radarr picks it up, renames the f
 | Volume | Purpose |
 |---|---|
 | `${VOL_PATH:-/data}/radarr/config` | Application configuration and database |
-| `${VOL_PATH:-/data}/radarr/data` | Download client data and working directory |
+| `${RADARR_MEDIA:-/data/media}` | Shared media library, kept separate from `VOL_PATH` since it's typically the same library mounted into Sonarr, Bazarr, and Jellyfin/etc. |
 
 ## Network Notes
 
@@ -64,7 +65,7 @@ docker run -d \
   -e TZ=America/Vancouver \
   -p 7878:7878 \
   -v ${VOL_PATH:-/data}/radarr/config:/config \
-  -v ${VOL_PATH:-/data}/radarr/data:/data \
+  -v ${RADARR_MEDIA:-/data/media}:/media \
   --network proxy \
   --restart unless-stopped \
   ghcr.io/hotio/radarr:release

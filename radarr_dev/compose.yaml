@@ -4,7 +4,7 @@ services:
     restart: ${RADARR_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/radarr/config:/config
-      - ${VOL_PATH:-/data}/radarr/data:/data
+      - ${RADARR_MEDIA:-/data/media}:/media
     environment:
       - PUID=1000
       - PGID=1000
