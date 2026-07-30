@@ -5,11 +5,11 @@ services:
     volumes:
       - ${VOL_PATH:-/data}/jellyfin/cache:/cache
       - ${VOL_PATH:-/data}/jellyfin/config:/config
-      - ${VOL_PATH:-/data}/jellyfin/media/books:/books
-      - ${VOL_PATH:-/data}/jellyfin/media/movies:/movies
-      - ${VOL_PATH:-/data}/jellyfin/media/music:/music
-      - ${VOL_PATH:-/data}/jellyfin/media/photos:/photos
-      - ${VOL_PATH:-/data}/jellyfin/media/shows:/shows
+      - ${JELLYFIN_MEDIA:-/data/media}/books:/books
+      - ${JELLYFIN_MEDIA:-/data/media}/movies:/movies
+      - ${JELLYFIN_MEDIA:-/data/media}/music:/music
+      - ${JELLYFIN_MEDIA:-/data/media}/photos:/photos
+      - ${JELLYFIN_MEDIA:-/data/media}/shows:/shows
     environment:
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL:-http://localhost:8096}
     ports:

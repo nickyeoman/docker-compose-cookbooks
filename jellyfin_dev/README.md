@@ -27,16 +27,17 @@
 
     JELLYFIN_URL – default: http://localhost:8096
     JELLYFIN_PORT – default: 8096
+    JELLYFIN_MEDIA – default: /data/media – shared media library, same one used by Radarr, Bazarr, etc.
 
 ## Volume Notes
 
     /cache – host path /data/jellyfin/cache
     /config – host path /data/jellyfin/config
-    /books – host path /data/jellyfin/media/books
-    /movies – host path /data/jellyfin/media/movies
-    /music – host path /data/jellyfin/media/music
-    /photos – host path /data/jellyfin/media/photos
-    /shows – host path /data/jellyfin/media/shows
+    /books – host path ${JELLYFIN_MEDIA:-/data/media}/books
+    /movies – host path ${JELLYFIN_MEDIA:-/data/media}/movies
+    /music – host path ${JELLYFIN_MEDIA:-/data/media}/music
+    /photos – host path ${JELLYFIN_MEDIA:-/data/media}/photos
+    /shows – host path ${JELLYFIN_MEDIA:-/data/media}/shows
 
 ## Network Notes
 
@@ -50,9 +51,9 @@ docker run -d \
   -p 8096:8096 \
   -v /data/jellyfin/cache:/cache \
   -v /data/jellyfin/config:/config \
-  -v /data/jellyfin/media/books:/books \
-  -v /data/jellyfin/media/movies:/movies \
-  -v /data/jellyfin/media/music:/music \
+  -v /data/media/books:/books \
+  -v /data/media/movies:/movies \
+  -v /data/media/music:/music \
   jellyfin/jellyfin:latest
 ```
 
