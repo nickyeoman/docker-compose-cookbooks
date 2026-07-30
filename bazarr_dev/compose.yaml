@@ -4,7 +4,7 @@ services:
     restart: ${BAZARR_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/bazarr/config:/config
-      - ${VOL_PATH:-/data}/media:/media
+      - ${BAZARR_MEDIA:-/data/media}:/media
     environment:
       - PUID=1000
       - PGID=1000

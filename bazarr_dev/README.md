@@ -31,14 +31,15 @@ Bazarr monitors your Sonarr/Radarr libraries. When new media is added or existin
 | `BAZARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `BAZARR_PORT` | Published port for the web UI (default: `6767`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
+| `BAZARR_MEDIA` | Path to the shared media library (default: `/data/media`) — point this at the same library used by Sonarr, Radarr, and Jellyfin/etc. so subtitles land next to the video files |
 | `TZ` | Container timezone (default: `America/Vancouver`) |
 
 ## Volume Notes
 
 | Volume | Purpose |
 |---|---|
-| `${VOL_PATH:-/data}/bazarr/config` | Application configuration and database |
-| `${VOL_PATH:-/data}/media` | Shared media library — must include your TV and movie folders so Bazarr can write subtitles alongside video files |
+| `${VOL_PATH:-/data}/bazarr/config` | Application configuration and database — holds `config/config.yaml` (Sonarr/Radarr connections, provider credentials, language profiles) and the SQLite database (`config/db/bazarr.db`) tracking subtitle history and sync state. Back this up before upgrades; losing it means reconfiguring providers and Sonarr/Radarr links from scratch. |
+| `${BAZARR_MEDIA:-/data/media}` | Shared media library, kept separate from `VOL_PATH` since it's typically the same library mounted into Sonarr, Radarr, and Jellyfin/etc. — must include your TV and movie folders so Bazarr can write subtitles alongside video files |
 
 ## Network Notes
 
@@ -59,7 +60,7 @@ docker run -d \
   -e TZ=America/Vancouver \
   -p 6767:6767 \
   -v ${VOL_PATH:-/data}/bazarr/config:/config \
-  -v ${VOL_PATH:-/data}/media:/media \
+  -v ${BAZARR_MEDIA:-/data/media}:/media \
   --network proxy \
   --restart unless-stopped \
   ghcr.io/hotio/bazarr:release
