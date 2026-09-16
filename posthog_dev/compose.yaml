@@ -33,7 +33,7 @@ services:
       - internal
 
   kafka:
-    image: ${POSTHOG_KAFKA_IMAGE:-docker.io/bitnami/kafka:3.7}
+    image: ${POSTHOG_KAFKA_IMAGE:-docker.io/soldevelo/kafka:3.7}
     restart: ${POSTHOG_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/posthog/kafka:/bitnami/kafka
