@@ -48,7 +48,7 @@ cp sample.env .env
 docker compose up -d
 ```
 
-Then point Nginx Proxy Manager at it (see Network Notes below) so `https://headscale.example.com` reaches the container. Verify with:
+Then point Nginx Proxy Manager at the `headscale` container, port `8080` (see Network Notes below) so `https://headscale.example.com` reaches it. Verify with:
 
 ```bash
 curl https://headscale.example.com/health
@@ -171,6 +171,10 @@ Back up `data/` and `config/` regularly for recovery.
 * Reverse proxy requirements (Nginx Proxy Manager), for `headscale.example.com`:
   * Forward hostname: `headscale`, forward port: `8080`, scheme: `http`
   * Enable: Websockets Support ✔, Block Common Exploits ✔, SSL (Let's Encrypt) ✔, disable caching ✔
+* Optional: to reach the `headscale-ui` admin panel from a browser, add a **second** proxy host on a separate subdomain (e.g. `headscale-admin.example.com`):
+  * Forward hostname: `headscale-ui`, forward port: `80`, scheme: `http`
+  * Enable: Block Common Exploits ✔, SSL (Let's Encrypt) ✔
+  * The UI container already talks to Headscale internally via `HEADSCALE_URL=http://headscale:8080` (see compose.yaml) — no extra config needed
 
 Firewall considerations on the dedicated server: only 80/443 (reverse proxy) need to be open inbound. On the LAN node: allow UDP 41641 outbound/inbound for direct WireGuard connections (Tailscale falls back to DERP relays if blocked, just slower). Do **not** forward 8096 (Jellyfin) or 8080 (Headscale) on any router.
 

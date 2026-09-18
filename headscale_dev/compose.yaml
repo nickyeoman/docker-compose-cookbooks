@@ -13,7 +13,6 @@ services:
       - proxy
       - internal
     command:
-      - headscale
       - serve
 
   headscale-ui:
