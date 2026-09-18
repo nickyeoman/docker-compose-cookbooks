@@ -18,6 +18,8 @@ services:
   headscale-ui:
     image: ${HEADSCALE_UI_IMAGE:-goodieshq/headscale-admin:latest}
     restart: ${HEADSCALE_UI_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/headscale/config/Caddyfile:/etc/caddy/Caddyfile:ro
     environment:
       - TZ=${TZ:-America/Vancouver}
       - HEADSCALE_URL=http://headscale:8080

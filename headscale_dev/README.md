@@ -54,46 +54,97 @@ Then point Nginx Proxy Manager at the `headscale` container, port `8080` (see Ne
 curl https://headscale.example.com/health
 ```
 
-### 2. Create a user and a pre-auth key
+### 2. Configure Nginx Proxy Manager
+
+Add a proxy host in NPM for your headscale domain:
+
+* **Details tab:**
+  * Domain Names: `headscale.example.com`
+  * Scheme: `http`, Forward Hostname/IP: `headscale`, Forward Port: `8080`
+  * Enable: **Websockets Support**, Block Common Exploits
+* **SSL tab:**
+  * Request a new Let's Encrypt certificate, force SSL
+  * **Disable "HTTP/2 Support"** — this is important and easy to miss. Tailscale clients register through a "noise" control protocol (`/ts2021`) that needs an ALPN/websocket upgrade; forcing HTTP/2 on this host can silently break that handshake even though normal HTTPS requests (like `/health`) still work fine. Symptoms if you skip this: `tailscale up` hangs indefinitely, headscale logs `no upgrade header in TS2021 request`, and `/ts2021` requests return `status=500`.
+* Do **not** disable caching/buffering unless you also see stalled long-poll connections — the important toggles here are Websockets Support (on) and HTTP/2 Support (off).
+
+Optional second proxy host for the admin UI — see [Network Notes](#network-notes) below.
+
+### 3. Create a user and a pre-auth key
 
 ```bash
-docker compose exec headscale headscale users create homelab
-docker compose exec headscale headscale preauthkeys create --user homelab --expiration 1h
+docker exec -it headscale-headscale-1 headscale -c /etc/headscale/config.yaml user create homelab
+docker exec -it headscale-headscale-1 headscale users list
+docker exec -it headscale-headscale-1 headscale preauthkeys create --user 1 --expiration 1h
 ```
 
 Copy the key it prints — you'll use it once on each device you join.
 
-### 3. Connect the LAN node (the Docker host running Jellyfin)
+> **Note on `--expiration`:** this only limits the window in which the key can be used to *register a new device*. Once a device has joined the tailnet with it, that device stays authorized regardless of the key's expiration — it doesn't get disconnected when the key expires. Register your device(s) within the window, or use a longer expiration (e.g. `24h`) / `--reusable` if you're onboarding multiple devices.
+
+### 4. Connect the LAN node (the Docker host running Jellyfin)
 
 On the **LAN node**, install the Tailscale client and point it at your Headscale server:
 
+**Debian/Ubuntu:**
 ```bash
 curl -fsSL https://tailscale.com/install.sh | sh
+sudo systemctl enable --now tailscaled
+```
+
+**Arch:**
+```bash
+sudo pacman -S tailscale
+sudo systemctl enable --now tailscaled
+```
+
+Then on any distro:
+```bash
 sudo tailscale up --login-server=https://headscale.example.com --authkey <YOUR-PREAUTH-KEY>
 ```
 
-(Arch users: `sudo pacman -S tailscale && sudo systemctl enable --now tailscaled`, then the same `tailscale up` command.)
+### 5. Connect your phone / laptop
 
-### 4. Connect your phone / laptop
+#### Android / iOS
 
-Install the Tailscale app (App Store / Play Store / https://tailscale.com/download). In the app, choose **Use a custom server / alternate coordination server** and enter `https://headscale.example.com`, or on desktop run the same `tailscale up --login-server=...` command. Generate a fresh pre-auth key per device, or approve interactively:
+1. Install the Tailscale app (Play Store / App Store).
+2. **Android (tested on v1.102.3, Galaxy S25 Ultra):** go to **Settings → Add account**, then tap the **three-dot menu (⋮)** that appears there and choose the alternate/custom coordination server option. Enter `https://headscale.example.com`.
+   **iOS:** on the sign-in screen, look for **Alternate coordination server** before logging in.
+3. Log in. If the app shows a registration URL/code instead of accepting a pre-auth key directly, approve it from the dedicated server:
+   ```bash
+   docker exec -it headscale-headscale-1 headscale nodes register --user homelab --key <KEY-FROM-DEVICE>
+   ```
+
+#### Laptop / desktop
+
+Install the Tailscale client (https://tailscale.com/download), then run the same style of command used for the LAN node in step 4:
 
 ```bash
-# if a device shows a registration URL instead of using a key:
-docker compose exec headscale headscale nodes register --user homelab --key <KEY-FROM-DEVICE>
+sudo tailscale up --login-server=https://headscale.example.com --authkey <YOUR-PREAUTH-KEY>
 ```
 
-### 5. Verify connectivity
+Or, if you'd rather approve interactively instead of using a pre-auth key:
 
 ```bash
-docker compose exec headscale headscale nodes list   # on the dedicated server
+sudo tailscale up --login-server=https://headscale.example.com
+# copy the printed URL/key, then on the dedicated server:
+docker exec -it headscale-headscale-1 headscale nodes register --user homelab --key <KEY-FROM-DEVICE>
+```
+
+### 6. Verify connectivity
+
+```bash
+docker exec -it headscale-headscale-1 headscale nodes list   # on the dedicated server
 tailscale status                                     # on any client
 tailscale ping <lan-node-hostname-or-100.64.x.x-ip>  # from your laptop/phone terminal
 ```
 
 A reply that says `pong via ...` (direct or DERP) means the mesh works.
 
-### 6. Open Jellyfin
+> **Troubleshooting: `tailscale up` hangs or fails with a 500 on `/ts2021`**
+>
+> This almost always means the reverse proxy isn't configured correctly — see the NPM settings in [step 2](#2-configure-nginx-proxy-manager) (Websockets Support on, HTTP/2 Support off). To confirm: watch `journalctl -u tailscaled -f` on the client and `docker logs ny-headscale-headscale-1` (or your container name) on the server while retrying `tailscale up`. The `/ts2021` requests should return `status=200`, not `500`.
+
+### 7. Open Jellyfin
 
 From your phone/laptop (with Tailscale connected), browse to:
 
@@ -102,6 +153,25 @@ From your phone/laptop (with Tailscale connected), browse to:
 
 Jellyfin's port 8096 only needs to be reachable on the LAN node itself — never forward it on your router.
 
+### 8. Set up the headscale-ui admin panel
+
+The stack already runs `headscale-ui` (goodieshq/headscale-admin) alongside `headscale`. It's a browser app that talks to headscale's API directly using an API key — it doesn't share auth with the NPM proxy host, so it needs its own setup:
+
+> **Note:** the `goodieshq/headscale-admin` image serves its static files from `/app/admin`, but its default Caddyfile roots at `/app` — so requests to `/` 404 out of the box (only `/admin/` works). `compose.yaml` fixes this by bind-mounting the included `Caddyfile` (`root * /app/admin`) over `/etc/caddy/Caddyfile`, so `/` resolves correctly. If you're not using that mount, browse to `/admin/` instead.
+
+1. **Add a proxy host in NPM** for the UI (see [Network Notes](#network-notes) for exact settings) — e.g. `headscale-admin.example.com` → forward to `headscale-ui:80`.
+2. **Generate an API key:**
+   ```bash
+   docker exec -it headscale-headscale-1 headscale apikeys create --expiration 90d
+   ```
+   Copy the printed key — headscale won't show it again.
+3. **Open the UI** at `https://headscale-admin.example.com` and enter:
+   * **Server URL:** your public headscale URL (`https://headscale.example.com`), not the internal `http://headscale:8080`
+   * **API Key:** the key from step 2
+4. You should now see users, nodes, and pre-auth keys manageable from the browser.
+
+Re-run step 2 to mint a fresh key before the old one expires (`headscale apikeys list` / `headscale apikeys expire` to manage existing keys).
+
 ### Optional: subnet routing (reach other LAN devices)
 
 If you want your tailnet devices to reach *everything* on the LAN (not just the LAN node), advertise the subnet from the LAN node:
@@ -109,8 +179,8 @@ If you want your tailnet devices to reach *everything* on the LAN (not just the 
 ```bash
 sudo tailscale up --login-server=https://headscale.example.com --advertise-routes=192.168.1.0/24
 # then approve the route on the dedicated server:
-docker compose exec headscale headscale nodes list-routes
-docker compose exec headscale headscale nodes approve-routes -i <NODE-ID> --routes 192.168.1.0/24
+docker exec -it headscale-headscale-1 headscale nodes list-routes
+docker exec -it headscale-headscale-1 headscale nodes approve-routes -i <NODE-ID> --routes 192.168.1.0/24
 ```
 
 Also enable IP forwarding on the LAN node:
@@ -123,9 +193,9 @@ sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 ### Revoking a compromised device
 
 ```bash
-docker compose exec headscale headscale nodes list
-docker compose exec headscale headscale nodes delete -i <NODE-ID>
-docker compose exec headscale headscale preauthkeys expire --user homelab <KEY>   # if the key leaked too
+docker exec -it headscale-headscale-1 headscale nodes list
+docker exec -it headscale-headscale-1 headscale nodes delete -i <NODE-ID>
+docker exec -it headscale-headscale-1 headscale preauthkeys expire --user homelab <KEY>   # if the key leaked too
 ```
 
 The device is cut off immediately; re-join it later with a fresh key if needed.
@@ -171,10 +241,10 @@ Back up `data/` and `config/` regularly for recovery.
 * Reverse proxy requirements (Nginx Proxy Manager), for `headscale.example.com`:
   * Forward hostname: `headscale`, forward port: `8080`, scheme: `http`
   * Enable: Websockets Support ✔, Block Common Exploits ✔, SSL (Let's Encrypt) ✔, disable caching ✔
-* Optional: to reach the `headscale-ui` admin panel from a browser, add a **second** proxy host on a separate subdomain (e.g. `headscale-admin.example.com`):
+* `headscale-ui` admin panel: add a **second** proxy host on a separate subdomain (e.g. `headscale-admin.example.com`) so you can reach it from a browser — see [step 8](#8-set-up-the-headscale-ui-admin-panel) for the full setup including the API key:
   * Forward hostname: `headscale-ui`, forward port: `80`, scheme: `http`
   * Enable: Block Common Exploits ✔, SSL (Let's Encrypt) ✔
-  * The UI container already talks to Headscale internally via `HEADSCALE_URL=http://headscale:8080` (see compose.yaml) — no extra config needed
+  * `HEADSCALE_URL=http://headscale:8080` (see compose.yaml) only prefills the internal address in the UI — you still authenticate the browser session yourself with an API key (step 8)
 
 Firewall considerations on the dedicated server: only 80/443 (reverse proxy) need to be open inbound. On the LAN node: allow UDP 41641 outbound/inbound for direct WireGuard connections (Tailscale falls back to DERP relays if blocked, just slower). Do **not** forward 8096 (Jellyfin) or 8080 (Headscale) on any router.
 
