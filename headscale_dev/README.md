@@ -155,18 +155,20 @@ Jellyfin's port 8096 only needs to be reachable on the LAN node itself — never
 
 ### 8. Set up the headscale-ui admin panel
 
-The stack already runs `headscale-ui` (goodieshq/headscale-admin) alongside `headscale`. It's a browser app that talks to headscale's API directly using an API key — it doesn't share auth with the NPM proxy host, so it needs its own setup:
+The stack already runs `headscale-ui` (goodieshq/headscale-admin) alongside `headscale`. It's a browser app that talks to headscale's API directly using an API key.
 
-> **Note:** the `goodieshq/headscale-admin` image serves its static files from `/app/admin`, but its default Caddyfile roots at `/app` — so requests to `/` 404 out of the box (only `/admin/` works). `compose.yaml` fixes this by bind-mounting the included `Caddyfile` (`root * /app/admin`) over `/etc/caddy/Caddyfile`, so `/` resolves correctly. If you're not using that mount, browse to `/admin/` instead.
+**Serve it same-origin, on a subpath of your headscale domain — not a separate subdomain.** The app is a SvelteKit build with its asset base path hardcoded at build time to `/admin` (its files live at `/app/admin` inside the image), and if it's on a different origin than the headscale API, the browser blocks the API calls via CORS — headscale doesn't send `Access-Control-Allow-Origin` headers, and there's no supported way to add them via NPM without risking breaking the whole proxy host (ask if you're curious what happened when we tried). Serving both from the same domain sidesteps CORS entirely and matches how the app expects to be deployed.
 
-1. **Add a proxy host in NPM** for the UI (see [Network Notes](#network-notes) for exact settings) — e.g. `headscale-admin.example.com` → forward to `headscale-ui:80`.
+1. **Add a Custom Location on the *existing* `headscale.example.com` proxy host in NPM** (don't create a separate proxy host/subdomain for this):
+   * Location: `/admin`
+   * Scheme: `http`, Forward Hostname/IP: `headscale-ui`, Forward Port: `80`
 2. **Generate an API key:**
    ```bash
    docker exec -it headscale-headscale-1 headscale apikeys create --expiration 90d
    ```
    Copy the printed key — headscale won't show it again.
-3. **Open the UI** at `https://headscale-admin.example.com` and enter:
-   * **Server URL:** your public headscale URL (`https://headscale.example.com`), not the internal `http://headscale:8080`
+3. **Open the UI** at `https://headscale.example.com/admin/` and enter:
+   * **Server URL:** `https://headscale.example.com` (same origin as the page you're on)
    * **API Key:** the key from step 2
 4. You should now see users, nodes, and pre-auth keys manageable from the browser.
 
@@ -241,9 +243,8 @@ Back up `data/` and `config/` regularly for recovery.
 * Reverse proxy requirements (Nginx Proxy Manager), for `headscale.example.com`:
   * Forward hostname: `headscale`, forward port: `8080`, scheme: `http`
   * Enable: Websockets Support ✔, Block Common Exploits ✔, SSL (Let's Encrypt) ✔, disable caching ✔
-* `headscale-ui` admin panel: add a **second** proxy host on a separate subdomain (e.g. `headscale-admin.example.com`) so you can reach it from a browser — see [step 8](#8-set-up-the-headscale-ui-admin-panel) for the full setup including the API key:
-  * Forward hostname: `headscale-ui`, forward port: `80`, scheme: `http`
-  * Enable: Block Common Exploits ✔, SSL (Let's Encrypt) ✔
+* `headscale-ui` admin panel: add a **Custom Location** (`/admin`) on the *same* `headscale.example.com` proxy host — not a separate subdomain, which triggers CORS failures against the headscale API. See [step 8](#8-set-up-the-headscale-ui-admin-panel) for the full setup including the API key:
+  * Location: `/admin`, forward hostname: `headscale-ui`, forward port: `80`, scheme: `http`
   * `HEADSCALE_URL=http://headscale:8080` (see compose.yaml) only prefills the internal address in the UI — you still authenticate the browser session yourself with an API key (step 8)
 
 Firewall considerations on the dedicated server: only 80/443 (reverse proxy) need to be open inbound. On the LAN node: allow UDP 41641 outbound/inbound for direct WireGuard connections (Tailscale falls back to DERP relays if blocked, just slower). Do **not** forward 8096 (Jellyfin) or 8080 (Headscale) on any router.
