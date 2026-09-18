@@ -174,6 +174,8 @@ The stack already runs `headscale-ui` (goodieshq/headscale-admin) alongside `hea
 
 Re-run step 2 to mint a fresh key before the old one expires (`headscale apikeys list` / `headscale apikeys expire` to manage existing keys).
 
+> **Note:** the server URL + API key are saved in that browser's `localStorage`, per browser/device — logging in from a different computer or browser just needs the *same* credentials entered again, not a new key. Only generate a new key if the old one actually expires or you've revoked it.
+
 ### Optional: subnet routing (reach other LAN devices)
 
 If you want your tailnet devices to reach *everything* on the LAN (not just the LAN node), advertise the subnet from the LAN node:
