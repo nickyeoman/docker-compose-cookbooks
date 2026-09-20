@@ -6,6 +6,7 @@ services:
       - ${VOL_PATH:-/data}/qbit/config:/config
       - ${VOL_PATH:-/data}/qbit/downloads:/downloads
       - ${VOL_PATH:-/data}/qbit/incomplete:/incomplete
+      - ${VOL_PATH:-/data}/qbit/watched:/watched
       - /dev/net/tun:/dev/net/tun
     environment:
       - VPN_TYPE=wireguard
