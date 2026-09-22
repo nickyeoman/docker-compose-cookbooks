@@ -1,0 +1,21 @@
+# Firefox
+services:
+  firefox:
+    image: ${FIREFOX_IMAGE:-jlesage/firefox}
+    restart: ${FIREFOX_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/firefox/config:/config
+    environment:
+      - TZ=${FIREFOX_TZ:-America/Vancouver}
+      - WEB_AUTHENTICATION=${FIREFOX_WEB_AUTHENTICATION:-1}
+      - WEB_AUTHENTICATION_USERNAME=${FIREFOX_WEB_AUTHENTICATION_USERNAME:-user}
+      - WEB_AUTHENTICATION_PASSWORD=${FIREFOX_WEB_AUTHENTICATION_PASSWORD:-ChangeThisPassword}
+      - SECURE_CONNECTION=${FIREFOX_SECURE_CONNECTION:-1}
+    ports:
+      - ${FIREFOX_PORT:-5800}:5800
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
