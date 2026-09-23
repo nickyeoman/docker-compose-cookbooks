@@ -1,4 +1,12 @@
 services:
+  redis:
+    image: ${AUTHENTIK_REDIS_IMAGE:-redis:alpine}
+    restart: ${AUTHENTIK_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/authentik/redis:/data
+    networks:
+      - internal
+
   postgresql:
     image: ${AUTHENTIK_POSTGRES_IMAGE:-postgres:16-alpine}
     restart: ${AUTHENTIK_RESTART:-unless-stopped}
@@ -12,7 +20,7 @@ services:
       - internal
 
   server:
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.1}
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2026.8.3}
     restart: ${AUTHENTIK_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/authentik/media:/media
@@ -22,6 +30,7 @@ services:
       - AUTHENTIK_POSTGRESQL__NAME=${PG_DB:-authentik}
       - AUTHENTIK_POSTGRESQL__PASSWORD=${PG_PASS}
       - AUTHENTIK_POSTGRESQL__USER=${PG_USER:-authentik}
+      - AUTHENTIK_REDIS__HOST=redis
       - AUTHENTIK_SECRET_KEY=${AUTHENTIK_SECRET_KEY:?secret key required}
     ports:
       - "${AUTHENTIK_PORT_HTTP:-9000}:9000"
@@ -31,10 +40,11 @@ services:
       - internal
     depends_on:
       - postgresql
+      - redis
     command: server
 
   worker:
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.1}
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2026.8.3}
     restart: ${AUTHENTIK_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/authentik/media:/media
@@ -45,11 +55,13 @@ services:
       - AUTHENTIK_POSTGRESQL__NAME=${PG_DB:-authentik}
       - AUTHENTIK_POSTGRESQL__PASSWORD=${PG_PASS}
       - AUTHENTIK_POSTGRESQL__USER=${PG_USER:-authentik}
+      - AUTHENTIK_REDIS__HOST=redis
       - AUTHENTIK_SECRET_KEY=${AUTHENTIK_SECRET_KEY:?secret key required}
     networks:
       - internal
     depends_on:
       - postgresql
+      - redis
     command: worker
 
 networks:
