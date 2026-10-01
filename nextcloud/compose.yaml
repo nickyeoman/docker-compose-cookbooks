@@ -1,6 +1,6 @@
 services:
   nextcloud-db:
-    image: ${MARIADB_IMAGE:-mariadb:latest}
+    image: ${MARIADB_IMAGE:-mariadb:11.8}
     restart: ${MARIADB_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/nextcloud/db:/var/lib/mysql
@@ -9,27 +9,55 @@ services:
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}
       - MARIADB_USER=${NEXTCLOUD_DB_USER:-nextcloud}
       - MARIADB_PASSWORD=${NEXTCLOUD_DB_PASSWORD:-ChangeThisPassword}
+      - MARIADB_AUTO_UPGRADE=1
     networks:
       - internal
-    command: >
-      --transaction-isolation=READ-COMMITTED
-      --binlog-format=ROW
-      --innodb-file-per-table=1
-      --skip-innodb-read-only-compressed
+    command: --transaction-isolation=READ-COMMITTED
+
+  nextcloud-redis:
+    image: ${REDIS_IMAGE:-redis:alpine}
+    restart: ${REDIS_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/nextcloud/redis:/data
+    networks:
+      - internal
 
   nextcloud:
-    image: ${NEXTCLOUD_IMAGE:-nextcloud:latest}
+    image: ${NEXTCLOUD_IMAGE:-nextcloud:35}
     restart: ${NEXTCLOUD_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/nextcloud/data:/var/www/html
+      - ${VOL_CACHE:-/var/cache}/nextcloud/preview:${NEXTCLOUD_PREVIEW_DIR:-/mnt/nextcloud-preview}
     environment:
       - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD:-ChangeThisPassword}
       - MYSQL_DATABASE=${NEXTCLOUD_DB:-nextcloud}
       - MYSQL_USER=${NEXTCLOUD_DB_USER:-nextcloud}
       - MYSQL_HOST=${NEXTCLOUD_DB_HOST:-nextcloud-db}
+      - REDIS_HOST=${NEXTCLOUD_REDIS_HOST:-nextcloud-redis}
+      - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_DOMAIN:-cloud.example.com}
+      - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES:-172.16.0.0/12}
+      - OVERWRITEPROTOCOL=${NEXTCLOUD_OVERWRITEPROTOCOL:-https}
+      - OVERWRITECLIURL=https://${NEXTCLOUD_DOMAIN:-cloud.example.com}
     networks:
       - proxy
       - internal
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+
+  # Runs background jobs every 5 minutes — volumes and image must match the nextcloud service
+  nextcloud-cron:
+    image: ${NEXTCLOUD_IMAGE:-nextcloud:35}
+    restart: ${NEXTCLOUD_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/nextcloud/data:/var/www/html
+      - ${VOL_CACHE:-/var/cache}/nextcloud/preview:${NEXTCLOUD_PREVIEW_DIR:-/mnt/nextcloud-preview}
+    networks:
+      - internal
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    entrypoint: /cron.sh
 
 networks:
   proxy:
