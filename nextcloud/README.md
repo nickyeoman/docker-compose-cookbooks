@@ -18,6 +18,8 @@ Self-hosted file sync, sharing, and collaboration platform. This stack runs Next
 3. In NPM, add a proxy host for `NEXTCLOUD_DOMAIN` → `http://nextcloud:80` with SSL enabled
 4. Open https://NEXTCLOUD_DOMAIN and create the admin account (the database fields are pre-filled from the environment)
 
+To test without NPM, open http://HOST_IP:8084. Set `NEXTCLOUD_DOMAIN=HOST_IP` and `NEXTCLOUD_OVERWRITEPROTOCOL=http` first. Otherwise Nextcloud rejects the untrusted domain and redirects you to https links that don't work.
+
 ## Environment Variable Notes
 
     NEXTCLOUD_IMAGE – default: nextcloud:35 (pin the major version, see Gotchas)
@@ -31,6 +33,7 @@ Self-hosted file sync, sharing, and collaboration platform. This stack runs Next
     NEXTCLOUD_REDIS_HOST – default: nextcloud-redis
     NEXTCLOUD_DOMAIN – public hostname without a scheme; sets trusted_domains (first install only) and overwrite.cli.url
     NEXTCLOUD_TRUSTED_PROXIES – default: 172.16.0.0/12 (Docker bridge range, covers NPM)
+    NEXTCLOUD_PORT – default: 8084; host port for testing without NPM (NPM connects to nextcloud:80)
     NEXTCLOUD_OVERWRITEPROTOCOL – default: https; generates https links behind NPM's TLS termination
     VOL_CACHE – default: /var/cache; base path for regenerable data (exclude from backups)
     NEXTCLOUD_PREVIEW_DIR – default: /mnt/nextcloud-preview (unused placeholder); after install, set to /var/www/html/data/appdata_<instanceid>/preview
@@ -74,6 +77,7 @@ Nextcloud needs the database container to run, so use compose. The app container
 docker run -d \
   --name nextcloud \
   --network proxy \
+  -p 8084:80 \
   -e MYSQL_HOST=nextcloud-db \
   -e MYSQL_DATABASE=nextcloud \
   -e MYSQL_USER=nextcloud \

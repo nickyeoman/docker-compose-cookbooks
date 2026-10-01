@@ -38,6 +38,8 @@ services:
       - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES:-172.16.0.0/12}
       - OVERWRITEPROTOCOL=${NEXTCLOUD_OVERWRITEPROTOCOL:-https}
       - OVERWRITECLIURL=https://${NEXTCLOUD_DOMAIN:-cloud.example.com}
+    ports: # Can remove this for proxy
+      - "${NEXTCLOUD_PORT:-8084}:80"
     networks:
       - proxy
       - internal
