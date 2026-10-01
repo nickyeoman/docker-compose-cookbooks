@@ -27,7 +27,6 @@ services:
     restart: ${NEXTCLOUD_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/nextcloud/data:/var/www/html
-      - ${VOL_CACHE:-/var/cache}/nextcloud/preview:${NEXTCLOUD_PREVIEW_DIR:-/mnt/nextcloud-preview}
     environment:
       - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD:-ChangeThisPassword}
       - MYSQL_DATABASE=${NEXTCLOUD_DB:-nextcloud}
@@ -53,7 +52,6 @@ services:
     restart: ${NEXTCLOUD_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/nextcloud/data:/var/www/html
-      - ${VOL_CACHE:-/var/cache}/nextcloud/preview:${NEXTCLOUD_PREVIEW_DIR:-/mnt/nextcloud-preview}
     networks:
       - internal
     depends_on:

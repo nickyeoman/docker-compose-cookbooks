@@ -36,7 +36,6 @@ To test without NPM, open http://HOST_IP:8084. Set `NEXTCLOUD_DOMAIN=HOST_IP` an
     NEXTCLOUD_PORT – default: 8084; host port for testing without NPM (NPM connects to nextcloud:80)
     NEXTCLOUD_OVERWRITEPROTOCOL – default: https; generates https links behind NPM's TLS termination
     VOL_CACHE – default: /var/cache; base path for regenerable data (exclude from backups)
-    NEXTCLOUD_PREVIEW_DIR – default: /mnt/nextcloud-preview (unused placeholder); after install, set to /var/www/html/data/appdata_<instanceid>/preview
 
 ## Volume Notes
 
@@ -44,26 +43,13 @@ To test without NPM, open http://HOST_IP:8084. Set `NEXTCLOUD_DOMAIN=HOST_IP` an
     /data – host path /var/cache/nextcloud/redis (Redis cache, file locks and sessions; safe to lose, users are logged out)
     /var/www/html – host path /data/nextcloud/data (Nextcloud app, config and user files; shared by nextcloud and nextcloud-cron)
 
-    /var/www/html/data/appdata_<instanceid>/preview – host path /var/cache/nextcloud/preview (generated thumbnails; only once NEXTCLOUD_PREVIEW_DIR is set)
+Back up `/data/nextcloud/data` and `/data/nextcloud/db` together. Leave out `/var/cache`, because Redis rebuilds its cache.
 
-Back up `/data/nextcloud/data` and `/data/nextcloud/db` together. Leave out `/var/cache`: previews are regenerated on demand, and Redis rebuilds its cache.
+To keep backups small, exclude `data/data/appdata_*` (thumbnail previews and generated JS/CSS, often several GB). Nextcloud regenerates these on demand. It also holds a few things that aren't regenerated, such as theming uploads and the federation signing keys. If you rely on those, exclude only `data/data/appdata_*/preview`.
 
-### Moving previews to VOL_CACHE
-
-Previews are usually the largest regenerable data, often several GB. They live in a folder named after the instance ID, which Nextcloud only creates during install. That's why the preview mount points at a placeholder until you set `NEXTCLOUD_PREVIEW_DIR`.
-
-1. Get the instance ID: `docker compose exec -u www-data nextcloud php occ config:system:get instanceid`
-2. Stop the stack: `docker compose down`
-3. Move existing previews and give them to www-data (UID 33):
-   ```bash
-   sudo mkdir -p /var/cache/nextcloud
-   sudo mv /data/nextcloud/data/data/appdata_<instanceid>/preview /var/cache/nextcloud/preview
-   sudo mkdir /data/nextcloud/data/data/appdata_<instanceid>/preview
-   sudo chown -R 33:33 /var/cache/nextcloud/preview /data/nextcloud/data/data/appdata_<instanceid>/preview
-   ```
-4. Set `NEXTCLOUD_PREVIEW_DIR=/var/www/html/data/appdata_<instanceid>/preview` and start the stack
-
-If you lose `/var/cache`, don't start with an empty folder: Nextcloud's file cache still lists the old previews. Recreate the folder (owned by 33:33), start the stack, then run `docker compose exec -u www-data nextcloud php occ files:scan-app-data preview`.
+```bash
+rsync -a --exclude '/data/appdata_*' /data/nextcloud/data/ /backup/nextcloud/data/
+```
 
 ## Network Notes
 
