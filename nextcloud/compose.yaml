@@ -18,7 +18,7 @@ services:
     image: ${REDIS_IMAGE:-redis:alpine}
     restart: ${REDIS_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-/data}/nextcloud/redis:/data
+      - ${VOL_CACHE:-/var/cache}/nextcloud/redis:/data
     networks:
       - internal
 

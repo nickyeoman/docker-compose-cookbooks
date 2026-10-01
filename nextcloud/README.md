@@ -41,12 +41,12 @@ To test without NPM, open http://HOST_IP:8084. Set `NEXTCLOUD_DOMAIN=HOST_IP` an
 ## Volume Notes
 
     /var/lib/mysql – host path /data/nextcloud/db (MariaDB data)
-    /data – host path /data/nextcloud/redis (Redis cache, safe to lose)
+    /data – host path /var/cache/nextcloud/redis (Redis cache, file locks and sessions; safe to lose, users are logged out)
     /var/www/html – host path /data/nextcloud/data (Nextcloud app, config and user files; shared by nextcloud and nextcloud-cron)
 
     /var/www/html/data/appdata_<instanceid>/preview – host path /var/cache/nextcloud/preview (generated thumbnails; only once NEXTCLOUD_PREVIEW_DIR is set)
 
-Back up `/data/nextcloud/data` and `/data/nextcloud/db` together. Leave out `/var/cache`: previews are regenerated on demand.
+Back up `/data/nextcloud/data` and `/data/nextcloud/db` together. Leave out `/var/cache`: previews are regenerated on demand, and Redis rebuilds its cache.
 
 ### Moving previews to VOL_CACHE
 
