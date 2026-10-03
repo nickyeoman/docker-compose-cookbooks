@@ -14,55 +14,36 @@ Dedicated server for RuneScape: DragonWilds. Runs on a Linux Docker host and acc
 
 ## Getting Started
 
-Consoles can't run the server, so you need a separate always-on machine (home server, VPS). These steps assume a Linux x86_64 (amd64) host — the image has no ARM build — with at least 8 GB RAM, and that you only own the Xbox version of the game.
+Consoles can't run the server, so you need a separate always-on machine (rented dedicated server, VPS or home server). These steps assume a Linux host that already runs Docker with the `proxy` network created, an x86_64 (amd64) CPU (the image has no ARM build), at least 8 GB RAM, and that you only own the Xbox version of the game.
 
 ### 1. Get your Player ID (on the Xbox)
 
 1. On the Xbox, open RuneScape: DragonWilds → **Settings** and scroll to the bottom
 2. Note the **Player ID** — 32 letters and numbers. There's no clipboard from Xbox to the server, so copy it out carefully (a photo of the screen helps). One wrong character and the server won't recognise you as owner.
 
-### 2. Install Docker on the server
+### 2. Open the ports
 
-```bash
-curl -fsSL https://get.docker.com | sudo sh
-sudo usermod -aG docker $USER   # log out and back in afterwards
-docker network create proxy     # once per host, required by every stack in this repo
-```
+Players connect straight to the server over UDP, so UDP `7777` and `8888` have to be reachable from the internet. Which steps apply depends on where the server lives — check whether its own IP (`ip -4 addr`) matches its public IP (`curl -4 ifconfig.me`).
 
-### 3. Open the ports
+**Rented dedicated server / VPS (the server's IP is public):** no router or port forwarding involved. Open UDP `7777` and `8888` in the hosting provider's network firewall / security group, if one is enabled in their control panel.
 
-Players connect straight to the server over UDP, so both ports have to be reachable from the internet.
+### 3. Deploy with Dockhand
 
-Host firewall (if `ufw` is active):
+1. Create the stack from Git as described in [Dockhand Stack, Deploy from Git](#dockhand-stack-deploy-from-git) and "Load" `runescape-dragonwilds/sample.env` into the environment variables
+2. Before deploying, edit these variables in Dockhand:
+    - `RSDW_OWNER_ID` – the Player ID from step 1 (the container exits with `OWNER_ID is not set` if empty)
+    - `RSDW_ADMIN_PASSWORD` – replace `ChangeThisPassword`
+    - `RSDW_WORLD_NAME` – the name players will search for
+    - `RSDW_WORLD_PASSWORD` – optional, leave empty for a public world
+3. Deploy the stack and watch the container logs in Dockhand — the first start downloads several GB of server files before the server comes up
 
-```bash
-sudo ufw allow 7777/udp
-sudo ufw allow 8888/udp
-```
-
-Router: forward UDP `7777` and UDP `8888` to the server's LAN IP (give the server a static IP / DHCP reservation first). On a VPS, open the same two UDP ports in the provider's firewall / security group instead.
-
-If you are behind CGNAT (your router's WAN IP is not your public IP — check with `curl -4 ifconfig.me`), port forwarding won't work; use a VPS or ask your ISP for a public IP.
-
-### 4. Configure and start
-
-```bash
-git clone <this-repo> && cd <this-repo>/runescape-dragonwilds
-cp sample.env .env
-nano .env   # set RSDW_OWNER_ID, RSDW_ADMIN_PASSWORD, RSDW_WORLD_NAME
-docker compose up -d
-docker compose logs -f   # first start downloads several GB of server files
-```
-
-`.env` must have `RSDW_OWNER_ID` set or the container exits with `OWNER_ID is not set`.
-
-### 5. Join from the Xbox
+### 4. Join from the Xbox
 
 1. Xbox **Settings → Account → Privacy & online safety**: allow playing with people outside Xbox (crossplay is blocked at the console level otherwise). An Xbox Game Pass Core/Ultimate subscription is needed for online play.
 2. In game: **Play → Worlds → Public** tab, search for the exact `RSDW_WORLD_NAME` (case sensitive), wait a few seconds, then join.
 3. Enter `RSDW_WORLD_PASSWORD` if you set one. Use `RSDW_ADMIN_PASSWORD` under **Server Management** to change world settings.
 
-If the world shows up in search but you can't join, the ports aren't reachable — recheck step 3.
+If the world shows up in search but you can't join, the ports aren't reachable — recheck step 2.
 
 ## Environment Variable Notes
 
@@ -111,6 +92,7 @@ See compose.yaml for the full set of environment variables.
 - The server won't show up without working port forwarding and a valid `OWNER_ID`/`ADMIN_PASSWORD`.
 - Joining players never need the Owner ID — only the host does.
 - RAM: about 2 GB + 1 GB per player (8 GB for a full 6-player server).
+- Older CPUs: if the container dies with `Illegal instruction` right after the download finishes, the CPU is missing an instruction set the server binary needs (e.g. AVX2) — use a newer host.
 - `stop_grace_period: 30s` gives the server time to save on shutdown.
 - Crossplay (PC, PS5, Xbox Series X|S, Switch 2) is supported since 1.0. The image doesn't set `PlatformPolicy` in `DedicatedServer.ini`, so the game default (`Crossplay`) applies. It rewrites that file on every start, so a manual `PlatformPolicy=` edit to lock the server to one platform won't survive a restart.
 - Clients must be on the same game version as the server — keep `RSDW_UPDATE_ON_START=true` and restart after game patches. There is no cross-save: character progress doesn't carry between platforms.
