@@ -1,0 +1,28 @@
+services:
+  runescape-dragonwilds:
+    image: ${RSDW_IMAGE:-indifferentbroccoli/runescape-dragonwilds-server-docker:latest}
+    restart: ${RSDW_RESTART:-unless-stopped}
+    stop_grace_period: 30s
+    volumes:
+      - ${VOL_PATH:-/data}/runescape-dragonwilds/server-files:/home/steam/server-files
+    environment:
+      - PUID=${RSDW_PUID:-1000}
+      - PGID=${RSDW_PGID:-1000}
+      - UPDATE_ON_START=${RSDW_UPDATE_ON_START:-true}
+      - OWNER_ID=${RSDW_OWNER_ID:-}
+      - SERVER_NAME=${RSDW_SERVER_NAME:-DragonWildsServer}
+      - DEFAULT_WORLD_NAME=${RSDW_WORLD_NAME:-MyWorld}
+      - ADMIN_PASSWORD=${RSDW_ADMIN_PASSWORD:-ChangeThisPassword}
+      - WORLD_PASSWORD=${RSDW_WORLD_PASSWORD:-}
+      - DEFAULT_PORT=${RSDW_PORT:-7777}
+      - BEACON_PORT=${RSDW_BEACON_PORT:-8888}
+      - MAX_PLAYERS=${RSDW_MAX_PLAYERS:-6}
+    ports:  # host and container ports must match
+      - "${RSDW_PORT:-7777}:${RSDW_PORT:-7777}/udp"
+      - "${RSDW_BEACON_PORT:-8888}:${RSDW_BEACON_PORT:-8888}/udp"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
