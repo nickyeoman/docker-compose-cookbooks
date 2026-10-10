@@ -4,6 +4,7 @@ services:
     restart: ${MARIADB_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/nextcloud/db:/var/lib/mysql
+      - ${VOL_PATH:-/data}/nextcloud/db-conf/nextcloud-tuning.cnf:/etc/mysql/conf.d/nextcloud-tuning.cnf:ro
     environment:
       - MARIADB_DATABASE=${NEXTCLOUD_DB:-nextcloud}
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-ChangeThisPassword}

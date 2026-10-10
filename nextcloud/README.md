@@ -14,9 +14,14 @@ Self-hosted file sync, sharing, and collaboration platform. This stack runs Next
 ## Getting Started
 
 1. Set `NEXTCLOUD_DOMAIN` and change every `ChangeThisPassword` in `sample.env`
-2. Start the stack: `docker compose up -d`
-3. In NPM, add a proxy host for `NEXTCLOUD_DOMAIN` → `http://nextcloud:80` with SSL enabled
-4. Open https://NEXTCLOUD_DOMAIN and create the admin account (the database fields are pre-filled from the environment)
+2. Copy the MariaDB tuning file to the data directory **before the first start**. If it's missing, Docker creates a directory at that path and `nextcloud-db` fails to start:
+   ```bash
+   mkdir -p /data/nextcloud/db-conf
+   cp config/nextcloud-tuning.cnf /data/nextcloud/db-conf/
+   ```
+3. Start the stack: `docker compose up -d`
+4. In NPM, add a proxy host for `NEXTCLOUD_DOMAIN` → `http://nextcloud:80` with SSL enabled
+5. Open https://NEXTCLOUD_DOMAIN and create the admin account (the database fields are pre-filled from the environment)
 
 To test without NPM, open http://HOST_IP:8084. Set `NEXTCLOUD_DOMAIN=HOST_IP` and `NEXTCLOUD_OVERWRITEPROTOCOL=http` first. Otherwise Nextcloud rejects the untrusted domain and redirects you to https links that don't work.
 
@@ -40,6 +45,7 @@ To test without NPM, open http://HOST_IP:8084. Set `NEXTCLOUD_DOMAIN=HOST_IP` an
 ## Volume Notes
 
     /var/lib/mysql – host path /data/nextcloud/db (MariaDB data)
+    /etc/mysql/conf.d/nextcloud-tuning.cnf – host path /data/nextcloud/db-conf/nextcloud-tuning.cnf (read-only MariaDB tuning; copy from config/ in this repo, restart nextcloud-db after edits)
     /data – host path /var/cache/nextcloud/redis (Redis cache, file locks and sessions; safe to lose, users are logged out)
     /var/www/html – host path /data/nextcloud/data (Nextcloud app, config and user files; shared by nextcloud and nextcloud-cron)
 
