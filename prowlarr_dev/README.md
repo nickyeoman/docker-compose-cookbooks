@@ -12,12 +12,32 @@ Prowlarr is an indexer manager and proxy for the *arr ecosystem. It centralizes 
 
 ## Getting Started
 
-Open http://localhost:9696 in your browser and complete the initial setup wizard:
+Open http://localhost:9696 in your browser.
 
-1. **Choose your UI language**
-2. **Add an indexer** — search or manually configure your preferred trackers/usenet providers
-3. **Connect your *arr apps** — go to **Settings → Apps** and add Sonarr, Radarr, Lidarr, etc. Prowlarr will automatically sync all configured indexers to them
-4. If you're migrating from Jackett, Prowlarr can import your existing indexer configs during setup
+1. **Create the admin account** — on first boot Prowlarr shows an *Authentication Required* dialog. Set:
+   - **Authentication Method:** `Forms (Login Page)`
+   - **Authentication Required:** `Enabled` (or `Disabled for Local Addresses` if you trust your LAN)
+   - **Username / Password:** your admin credentials
+
+   Click **Save**. You'll be sent to the login page — sign in with the account you just created.
+2. **Add an indexer** — go to **Indexers → Add Indexer** (the `+` button):
+   1. Filter the list by **Protocol** (torrent / usenet), **Language**, or **Privacy** (public / semi-private / private), or type the tracker name into the search box
+   2. Click the indexer to open its settings
+   3. **Public trackers** (e.g. 1337x, The Pirate Bay, YTS) usually need no extra settings
+   4. **Private trackers** need credentials from your account on that site — typically an **API key**, **passkey**, or **cookie / username + password** (the form tells you which field it needs; the tracker's profile/security page has the value)
+   5. **Usenet indexers** (e.g. NZBgeek, DrunkenSlug) need the **API key** from your indexer account page. Usenet providers (the server you download from) are *not* added here — they go in SABnzbd/NZBGet
+   6. Leave **Sync Profile** as `Standard` and **Tags** empty unless you need them
+   7. Click **Test** — a green check means Prowlarr can reach and authenticate with the indexer — then **Save**
+
+   Repeat for each indexer. If a tracker is behind Cloudflare and the test fails with a Cloudflare/challenge error, you'll need a FlareSolverr container added under **Settings → Indexers → Indexer Proxies** and tagged on that indexer.
+3. **Connect your *arr apps** — go to **Settings → Apps → `+`** and pick Sonarr, Radarr, Lidarr, etc.:
+   - **Prowlarr Server:** how the *arr app reaches Prowlarr, e.g. `http://prowlarr:9696`
+   - **Sonarr/Radarr Server:** how Prowlarr reaches the app, e.g. `http://sonarr:8989` / `http://radarr:7878` (container names work since they share the `proxy` network)
+   - **API Key:** from the *arr app under **Settings → General → Security**
+   - **Sync Level:** `Full Sync` (Prowlarr adds, updates, and removes indexers in the app)
+
+   Click **Test**, then **Save**. Prowlarr pushes all configured indexers to the app automatically — don't add indexers directly in Sonarr/Radarr.
+4. **Verify** — use **Search** in Prowlarr to run a test query across all indexers, and check **System → Status** for indexer health warnings.
 
 ### Download flow
 
