@@ -29,15 +29,22 @@ Open http://localhost:9696 in your browser.
    6. Leave **Sync Profile** as `Standard` and **Tags** empty unless you need them
    7. Click **Test** — a green check means Prowlarr can reach and authenticate with the indexer — then **Save**
 
-   Repeat for each indexer. If a tracker is behind Cloudflare and the test fails with a Cloudflare/challenge error, you'll need a FlareSolverr container added under **Settings → Indexers → Indexer Proxies** and tagged on that indexer.
-3. **Connect your *arr apps** — go to **Settings → Apps → `+`** and pick Sonarr, Radarr, Lidarr, etc.:
+   Repeat for each indexer. If a tracker is behind Cloudflare and the test fails with a Cloudflare/challenge error, set up FlareSolverr (step 3) and tag that indexer with `flaresolverr`.
+3. **Add FlareSolverr as an indexer proxy** — this stack runs a FlareSolverr container that solves Cloudflare challenges for Prowlarr. Go to **Settings → Indexers → `+` → FlareSolverr**:
+   - **Name:** `FlareSolverr`
+   - **Tags:** `flaresolverr` (only indexers with this tag are routed through it)
+   - **Host:** `http://flaresolverr:8191/`
+   - **Request Timeout:** `60`
+
+   Click **Test**, then **Save**. Then edit each Cloudflare-protected indexer, add the `flaresolverr` tag, and **Test** again.
+4. **Connect your *arr apps** — go to **Settings → Apps → `+`** and pick Sonarr, Radarr, Lidarr, etc.:
    - **Prowlarr Server:** how the *arr app reaches Prowlarr, e.g. `http://prowlarr:9696`
    - **Sonarr/Radarr Server:** how Prowlarr reaches the app, e.g. `http://sonarr:8989` / `http://radarr:7878` (container names work since they share the `proxy` network)
    - **API Key:** from the *arr app under **Settings → General → Security**
    - **Sync Level:** `Full Sync` (Prowlarr adds, updates, and removes indexers in the app)
 
    Click **Test**, then **Save**. Prowlarr pushes all configured indexers to the app automatically — don't add indexers directly in Sonarr/Radarr.
-4. **Verify** — use **Search** in Prowlarr to run a test query across all indexers, and check **System → Status** for indexer health warnings.
+5. **Verify** — use **Search** in Prowlarr to run a test query across all indexers, and check **System → Status** for indexer health warnings.
 
 ### Download flow
 
@@ -50,6 +57,10 @@ Prowlarr does not handle downloads. It only provides indexer search results to y
 | `PROWLARR_IMAGE` | Container image (default: `ghcr.io/hotio/prowlarr:release`) |
 | `PROWLARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `PROWLARR_PORT` | Published port for the web UI (default: `9696`) |
+| `FLARESOLVERR_IMAGE` | FlareSolverr image (default: `ghcr.io/flaresolverr/flaresolverr:latest`) |
+| `FLARESOLVERR_RESTART` | FlareSolverr restart policy (default: `unless-stopped`) |
+| `FLARESOLVERR_LOG_LEVEL` | FlareSolverr log level (default: `info`; use `debug` when troubleshooting) |
+| `TZ` | Timezone for FlareSolverr (default: `America/Vancouver`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
 
 ## Volume Notes
@@ -66,9 +77,21 @@ Requires an external `proxy` network. Create it once with:
 docker network create proxy
 ```
 
+FlareSolverr sits on the stack's `internal` network only — it is not published to the host or the proxy network. Prowlarr joins both and reaches it at `http://flaresolverr:8191/`.
+
 ## Docker Run
 
 ```bash
+docker network create prowlarr-internal
+
+docker run -d \
+  --name=flaresolverr \
+  -e LOG_LEVEL=info \
+  -e TZ=America/Vancouver \
+  --network prowlarr-internal \
+  --restart unless-stopped \
+  ghcr.io/flaresolverr/flaresolverr:latest
+
 docker run -d \
   --name=prowlarr \
   -e PUID=1000 \
@@ -79,17 +102,20 @@ docker run -d \
   --network proxy \
   --restart unless-stopped \
   ghcr.io/hotio/prowlarr:release
+
+docker network connect prowlarr-internal prowlarr
 ```
 
 ## Additional Notes / Gotchas
 
-Nothing specific to this stack so far.
+- **FlareSolverr only helps tagged indexers** — untagged indexers bypass it. Don't tag everything; it's slow (spins up a headless Chromium per request).
+- **Some challenges still fail** — Cloudflare changes often. If tests keep failing, pull the latest FlareSolverr image and set `FLARESOLVERR_LOG_LEVEL=debug` to see why.
 
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**
-- **stackname:** prowlarr_dev
-- **Compose file path:** prowlarr_dev/compose.yaml
-- **Additional env file (optional):** prowlarr_dev/sample.env
+- **stackname:** prowlarr
+- **Compose file path:** prowlarr/compose.yaml
+- **Additional env file (optional):** prowlarr/sample.env
 
-Load `prowlarr_dev/sample.env` into the Environment variables in Dockhand, then create the Stack.
+Load `prowlarr/sample.env` into the Environment variables in Dockhand, then create the Stack.

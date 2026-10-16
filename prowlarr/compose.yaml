@@ -12,7 +12,21 @@ services:
       - "${PROWLARR_PORT:-9696}:9696"
     networks:
       - proxy
+      - internal
+    depends_on:
+      - flaresolverr
+
+  flaresolverr:
+    image: ${FLARESOLVERR_IMAGE:-ghcr.io/flaresolverr/flaresolverr:latest}
+    restart: ${FLARESOLVERR_RESTART:-unless-stopped}
+    environment:
+      - LOG_LEVEL=${FLARESOLVERR_LOG_LEVEL:-info}
+      - TZ=${TZ:-America/Vancouver}
+    networks:
+      - internal
 
 networks:
   proxy:
     external: true
+  internal:
+    driver: bridge
