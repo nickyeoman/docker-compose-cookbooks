@@ -14,9 +14,9 @@ Docmost is a collaborative wiki and documentation platform, similar to Notion or
 
 Open http://localhost:8000 in your browser:
 
-1. Create your admin account on first visit
-2. Start creating pages and organizing your workspace
-3. Optionally configure SMTP in the compose environment for email invites
+1. In `sample.env`, set `APP_SECRET` (at least 32 characters — `openssl rand -hex 32`), `DB_PASSWORD`, and `APP_URL` to your public URL (e.g. `https://docs.example.com`)
+2. Deploy the stack and open the site — on first visit you create the workspace and admin account
+3. Start creating spaces and pages
 
 ## Environment Variable Notes
 
@@ -28,8 +28,8 @@ Open http://localhost:8000 in your browser:
 | `DOCMOST_RESTART` | Restart policy for all services (default: `unless-stopped`) |
 | `DOCMOST_PORT` | Published port for the web UI (default: `8000`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
-| `APP_URL` | Public-facing URL of your Docmost instance |
-| `APP_SECRET` | Secret key used for encryption and sessions — generate a long random string |
+| `APP_URL` | Public-facing URL of your Docmost instance (used in links and invites; must match the URL you browse to) |
+| `APP_SECRET` | Secret key for encryption and sessions — **must be at least 32 characters** or Docmost will refuse to start (`openssl rand -hex 32`) |
 | `DB_PASSWORD` | Password for the PostgreSQL database user |
 
 ## Volume Notes
@@ -43,7 +43,7 @@ Open http://localhost:8000 in your browser:
 ## Network Notes
 
 - `proxy` — external network for reverse proxy access to the Docmost web UI
-- `docmost_internal` — internal bridge network for communication between Docmost, PostgreSQL, and Redis
+- `internal` — bridge network for Docmost ↔ PostgreSQL/Redis; the database and Redis are only on this network
 
 Create the proxy network once with:
 
@@ -57,13 +57,16 @@ This is a multi-service stack — use `docker compose` instead of individual `do
 
 ## Additional Notes / Gotchas
 
-Nothing specific to this stack so far.
+- **`APP_SECRET` length:** the default `ChangeThisPassword` is too short on purpose — the container won't start until you set a real 32+ character secret.
+- **Reverse proxy:** in Nginx Proxy Manager point the host at `docmost:3000` and enable **Websockets Support** — real-time collaborative editing depends on it.
+- **Email (invites, password reset):** not configured by default. Add `MAIL_DRIVER=smtp`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME` to the `docmost` service environment — see the [Docmost docs](https://docmost.com/docs/self-hosting/environment-variables).
+- **Postgres upgrades:** don't bump `POSTGRES_IMAGE` major versions (e.g. 16 → 17) on an existing data dir; dump and restore instead.
 
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**
-- **stackname:** docmost_dev
-- **Compose file path:** docmost_dev/compose.yaml
-- **Additional env file (optional):** docmost_dev/sample.env
+- **stackname:** docmost
+- **Compose file path:** docmost/compose.yaml
+- **Additional env file (optional):** docmost/sample.env
 
-Load `docmost_dev/sample.env` into the Environment variables in Dockhand, then create the Stack.
+Load `docmost/sample.env` into the Environment variables in Dockhand, then create the Stack.
