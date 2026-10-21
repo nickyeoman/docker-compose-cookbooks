@@ -33,7 +33,7 @@ These deliberately violate the conventions above — do not "fix" them:
 - `nextcloud/compose-aio.yaml` follows the upstream AIO layout: fixed container/volume names, no env templating, no proxy network
 - `opencode` and `vscode` default `VOL_PROJECTS` to `${VOL_PATH:-/data}/projects` (nested default), not plain `/data`
 - `mailu_dev` passes env via `env_file: .env`, so its sample.env holds vars the compose file never references
-- `headscale_dev` sample.env documents `HEADSCALE_DOMAIN`/`HEADSCALE_URL` for the config file even though compose doesn't use them
+- `headscale` sample.env documents `HEADSCALE_DOMAIN`/`HEADSCALE_URL` for the config file even though compose doesn't use them
 
 ## No CI/CD, no dependency management
 

@@ -26,7 +26,7 @@ NO_PROXY_OK = {"pihole"}
 HARDCODED_RESTART_OK = {("zammad_dev", "on-failure")}
 STALE_VARS_OK = {
     "mailu_dev": None,  # env_file: .env — all vars consumed in-container
-    "headscale_dev": {"HEADSCALE_DOMAIN", "HEADSCALE_URL"},  # config-file docs
+    "headscale": {"HEADSCALE_DOMAIN", "HEADSCALE_URL"},  # config-file docs
 }
 
 errors = []
