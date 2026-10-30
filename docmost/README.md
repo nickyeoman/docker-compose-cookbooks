@@ -12,10 +12,8 @@ Docmost is a collaborative wiki and documentation platform, similar to Notion or
 
 ## Getting Started
 
-Open http://localhost:8000 in your browser:
-
 1. In `sample.env`, set `APP_SECRET` (at least 32 characters — `openssl rand -hex 32`), `DB_PASSWORD`, and `APP_URL` to your public URL (e.g. `https://docs.example.com`)
-2. Deploy the stack and open the site — on first visit you create the workspace and admin account
+2. Deploy the stack and open `APP_URL` (or http://localhost:8000) — on first visit you create the workspace and admin account
 3. Start creating spaces and pages
 
 ## Environment Variable Notes
