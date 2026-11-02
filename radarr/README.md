@@ -26,7 +26,7 @@ Once the wizard finishes, you'll see an empty library. To populate it:
 
 ### Download flow
 
-qBittorrent downloads to its own directory → Radarr picks it up, renames the file, and moves it into `<Root Folder>/Movie Name (Year)/`
+qBittorrent downloads to `/media/downloads/prowlarr` → Radarr picks it up, renames the file, and moves it into `<Root Folder>/Movie Name (Year)/`
 
 ## Environment Variable Notes
 
@@ -36,7 +36,7 @@ qBittorrent downloads to its own directory → Radarr picks it up, renames the f
 | `RADARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `RADARR_PORT` | Published port for the web UI (default: `7878`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
-| `RADARR_MEDIA` | Path to the shared media library (default: `/data/media`) — point this at the same library used by Sonarr, Bazarr, and Jellyfin/etc. so downloads land in the shared library |
+| `RADARR_MEDIA` | Shared media root on the host (default: `/data/media`), mounted at `/media`. Must be the same folder qBittorrent, Sonarr and Jellyfin use |
 | `TZ` | Container timezone (default: `America/Vancouver`) |
 
 ## Volume Notes
@@ -44,7 +44,7 @@ qBittorrent downloads to its own directory → Radarr picks it up, renames the f
 | Volume | Purpose |
 |---|---|
 | `${VOL_PATH:-/data}/radarr/config` | Application configuration and database |
-| `${RADARR_MEDIA:-/data/media}` | Shared media library, kept separate from `VOL_PATH` since it's typically the same library mounted into Sonarr, Bazarr, and Jellyfin/etc. |
+| `${RADARR_MEDIA:-/data/media}` → `/media` | Shared media library, kept separate from `VOL_PATH` since it's typically mounted into Sonarr, Radarr, Bazarr, and Jellyfin/etc. |
 
 ## Network Notes
 
@@ -73,13 +73,15 @@ docker run -d \
 
 ## Additional Notes / Gotchas
 
-Nothing specific to this stack so far.
+- **One shared media folder.** qBittorrent, Sonarr, Radarr and Jellyfin all use `/data/media` on the host. qBittorrent, Sonarr and Radarr mount it at `/media`, so a download has the same path in every container: no Remote Path Mapping needed, and imports can use hardlinks (instant, no extra disk space). Enable **Settings → Media Management → Use Hardlinks instead of Copy**.
+- **Layout:** `/data/media/downloads/prowlarr` (qBittorrent category `prowlarr`), `/data/media/shows` (Sonarr), `/data/media/movies` (Radarr). The `shows`/`movies` names match the Jellyfin stack's library mounts.
+- In the qBittorrent download client settings, set **Category** to `prowlarr`.
 
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**
-- **stackname:** radarr_dev
-- **Compose file path:** radarr_dev/compose.yaml
-- **Additional env file (optional):** radarr_dev/sample.env
+- **stackname:** radarr
+- **Compose file path:** radarr/compose.yaml
+- **Additional env file (optional):** radarr/sample.env
 
-Load `radarr_dev/sample.env` into the Environment variables in Dockhand, then create the Stack.
+Load `radarr/sample.env` into the Environment variables in Dockhand, then create the Stack.

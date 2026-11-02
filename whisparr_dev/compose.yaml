@@ -4,7 +4,7 @@ services:
     restart: ${WHISPARR_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/whisparr/config:/config
-      - ${VOL_PATH:-/data}/whisparr/data:/data
+      - ${WHISPARR_MEDIA:-/data/media}:/media
     environment:
       - PUID=1000
       - PGID=1000

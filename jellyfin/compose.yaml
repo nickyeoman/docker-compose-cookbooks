@@ -8,7 +8,6 @@ services:
       - ${JELLYFIN_MEDIA:-/data/media}/books:/books
       - ${JELLYFIN_MEDIA:-/data/media}/movies:/movies
       - ${JELLYFIN_MEDIA:-/data/media}/music:/music
-      - ${JELLYFIN_MEDIA:-/data/media}/photos:/photos
       - ${JELLYFIN_MEDIA:-/data/media}/shows:/shows
     environment:
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL:-http://localhost:8096}
@@ -16,9 +15,7 @@ services:
       - "${JELLYFIN_PORT:-8096}:8096"
     networks:
       - proxy
-      - internal
 
 networks:
   proxy:
     external: true
-  internal:

@@ -15,8 +15,17 @@ Jellyseerr is a free and open-source request management system for your Jellyfin
 Open http://localhost:5055 in your browser and complete the initial setup:
 
 1. **Create your admin account**
-2. **Connect your media server** — select Jellyfin or Emby, enter server URL and API key
-3. **Connect Sonarr and Radarr** — Jellyseerr needs these to handle requests
+2. **Connect Jellyfin** — sign in with your Jellyfin admin account. Server URL: `http://jellyfin:8096` (container name on the `proxy` network). Then pick which libraries to sync (Movies, Shows)
+3. **Connect Radarr and Sonarr** — get each API key from **Settings → General** in the app:
+
+   | | Radarr | Sonarr |
+   |---|---|---|
+   | Hostname | `radarr` | `sonarr` |
+   | Port | `7878` | `8989` |
+   | Root Folder | `/media/movies` | `/media/shows` |
+   | Quality Profile | pick one | pick one |
+
+   Tick **Default Server** on each, click **Test**, then **Save**
 4. Users can now browse your library and submit requests via the Jellyseerr UI
 
 ### Request flow
@@ -30,6 +39,7 @@ User submits a request → approved (auto or manual) → Jellyseerr sends it to 
 | `JELLYSEERR_IMAGE` | Container image (default: `ghcr.io/hotio/jellyseerr:release`) |
 | `JELLYSEERR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `JELLYSEERR_PORT` | Published port for the web UI (default: `5055`) |
+| `TZ` | Container timezone (default: `America/Vancouver`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
 
 ## Volume Notes
@@ -54,6 +64,7 @@ docker run -d \
   -e PUID=1000 \
   -e PGID=1000 \
   -e UMASK=002 \
+  -e TZ=America/Vancouver \
   -p 5055:5055 \
   -v ${VOL_PATH:-/data}/jellyseerr/config:/config \
   --network proxy \
@@ -63,13 +74,15 @@ docker run -d \
 
 ## Additional Notes / Gotchas
 
-Nothing specific to this stack so far.
+- Jellyseerr doesn't mount any media. It only talks to Jellyfin, Sonarr and Radarr over their APIs, so it needs just `/config`.
+- The root folders entered here are paths *inside the Sonarr/Radarr containers* (`/media/shows`, `/media/movies`), not host paths.
+- Use container names (`jellyfin`, `sonarr`, `radarr`), not `localhost`. Inside the container, `localhost` is Jellyseerr itself.
 
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**
-- **stackname:** jellyseerr_dev
-- **Compose file path:** jellyseerr_dev/compose.yaml
-- **Additional env file (optional):** jellyseerr_dev/sample.env
+- **stackname:** jellyseerr
+- **Compose file path:** jellyseerr/compose.yaml
+- **Additional env file (optional):** jellyseerr/sample.env
 
-Load `jellyseerr_dev/sample.env` into the Environment variables in Dockhand, then create the Stack.
+Load `jellyseerr/sample.env` into the Environment variables in Dockhand, then create the Stack.

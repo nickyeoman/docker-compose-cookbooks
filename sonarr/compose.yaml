@@ -4,7 +4,7 @@ services:
     restart: ${SONARR_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/sonarr/config:/config
-      - ${VOL_PATH:-/data}/sonarr/data:/data
+      - ${SONARR_MEDIA:-/data/media}:/media
     environment:
       - PUID=1000
       - PGID=1000

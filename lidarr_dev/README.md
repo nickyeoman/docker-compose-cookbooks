@@ -20,13 +20,13 @@ Open http://localhost:8686 in your browser and complete the initial setup wizard
 
 Once the wizard finishes, Lidarr displays **"No artists found"**. To populate your library:
 
-- Go to **Settings → Media Management** and add a **Root Folder** (e.g., `/music`) — this is where your organized music library will live
+- Go to **Settings → Media Management** and add a **Root Folder** (e.g., `/media/music`) — this is where your organized music library will live
 - Click **Add an artist** and search by name — Lidarr fetches metadata, discography, and album art
 - Lidarr cross-references your Root Folder for any existing files and matches them to the artist's catalog
 
 ### Download flow
 
-qBittorrent downloads to its own directory → Lidarr picks it up, renames/tags the files, and moves them into `<Root Folder>/Artist Name/Album/`
+qBittorrent downloads to `/media/downloads/prowlarr` → Lidarr picks it up, renames/tags the files, and moves them into `<Root Folder>/Artist Name/Album/`
 
 ### Spotify playlist import
 
@@ -40,6 +40,7 @@ Lidarr doesn't natively import Spotify playlists. Use a community tool like [Spo
 | `LIDARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `LIDARR_PORT` | Published port for the web UI (default: `8686`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
+| `LIDARR_MEDIA` | Shared media root on the host (default: `/data/media`), mounted at `/media`. Must be the same folder qBittorrent, Sonarr, Radarr and Jellyfin use |
 | `TZ` | Container timezone (default: `America/Vancouver`) |
 
 ## Volume Notes
@@ -47,7 +48,7 @@ Lidarr doesn't natively import Spotify playlists. Use a community tool like [Spo
 | Volume | Purpose |
 |---|---|
 | `${VOL_PATH:-/data}/lidarr/config` | Application configuration and database |
-| `${VOL_PATH:-/data}/lidarr/data` | Download client data and working directory |
+| `${LIDARR_MEDIA:-/data/media}` → `/media` | Shared media root: downloads in `/media/downloads`, library in `/media/music` |
 
 ## Network Notes
 
@@ -68,7 +69,7 @@ docker run -d \
   -e TZ=America/Vancouver \
   -p 8686:8686 \
   -v ${VOL_PATH:-/data}/lidarr/config:/config \
-  -v ${VOL_PATH:-/data}/lidarr/data:/data \
+  -v ${LIDARR_MEDIA:-/data/media}:/media \
   --network proxy \
   --restart unless-stopped \
   ghcr.io/hotio/lidarr:release
@@ -76,7 +77,9 @@ docker run -d \
 
 ## Additional Notes / Gotchas
 
-Nothing specific to this stack so far.
+- **One shared media folder.** qBittorrent, Sonarr, Radarr, Lidarr and Jellyfin all use `/data/media` on the host, mounted at `/media`, so a download has the same path in every container: no Remote Path Mapping needed, and imports can use hardlinks. Enable **Settings → Media Management → Use Hardlinks instead of Copy**.
+- **Layout:** `/data/media/downloads/prowlarr` (qBittorrent category `prowlarr`), `/data/media/music` (Lidarr root, Jellyfin's `/music` library).
+- In the qBittorrent download client settings, set **Category** to `prowlarr`.
 
 ## Dockhand Stack, Deploy from Git
 

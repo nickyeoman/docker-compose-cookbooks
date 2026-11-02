@@ -8,6 +8,7 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
+      - TZ=${TZ:-America/Vancouver}
     ports:
       - "${JELLYSEERR_PORT:-5055}:5055"
     networks:

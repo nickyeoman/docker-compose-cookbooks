@@ -20,13 +20,13 @@ Open http://localhost:8787 in your browser and complete the initial setup wizard
 
 Once the wizard finishes, you'll see an empty library. To populate it:
 
-- Go to **Settings → Media Management** and add a **Root Folder** (e.g., `/books`) — this is where your organized book library will live
+- Go to **Settings → Media Management** and add a **Root Folder** (e.g., `/media/books`) — this is where your organized book library will live
 - Click **Add Author** and search by name — Readarr fetches metadata, covers, and available editions
 - Optionally connect a **List** (Goodreads, etc.) to auto-import authors from your reading lists
 
 ### Download flow
 
-qBittorrent downloads to its own directory → Readarr picks it up, renames the file, and moves it into `<Root Folder>/Author Name/Book Name/`
+qBittorrent downloads to `/media/downloads/prowlarr` → Readarr picks it up, renames the file, and moves it into `<Root Folder>/Author Name/Book Name/`
 
 ## Environment Variable Notes
 
@@ -36,6 +36,7 @@ qBittorrent downloads to its own directory → Readarr picks it up, renames the 
 | `READARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `READARR_PORT` | Published port for the web UI (default: `8787`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
+| `READARR_MEDIA` | Shared media root on the host (default: `/data/media`), mounted at `/media`. Must be the same folder qBittorrent, Sonarr, Radarr and Jellyfin use |
 | `TZ` | Container timezone (default: `America/Vancouver`) |
 
 ## Volume Notes
@@ -43,7 +44,7 @@ qBittorrent downloads to its own directory → Readarr picks it up, renames the 
 | Volume | Purpose |
 |---|---|
 | `${VOL_PATH:-/data}/readarr/config` | Application configuration and database |
-| `${VOL_PATH:-/data}/readarr/data` | Download client data and working directory |
+| `${READARR_MEDIA:-/data/media}` → `/media` | Shared media root: downloads in `/media/downloads`, library in `/media/books` |
 
 ## Network Notes
 
@@ -64,7 +65,7 @@ docker run -d \
   -e TZ=America/Vancouver \
   -p 8787:8787 \
   -v ${VOL_PATH:-/data}/readarr/config:/config \
-  -v ${VOL_PATH:-/data}/readarr/data:/data \
+  -v ${READARR_MEDIA:-/data/media}:/media \
   --network proxy \
   --restart unless-stopped \
   ghcr.io/hotio/readarr:release
@@ -72,7 +73,9 @@ docker run -d \
 
 ## Additional Notes / Gotchas
 
-Nothing specific to this stack so far.
+- **One shared media folder.** qBittorrent, Sonarr, Radarr, Readarr and Jellyfin all use `/data/media` on the host, mounted at `/media`, so a download has the same path in every container: no Remote Path Mapping needed, and imports can use hardlinks. Enable **Settings → Media Management → Use Hardlinks instead of Copy**.
+- **Layout:** `/data/media/downloads/prowlarr` (qBittorrent category `prowlarr`), `/data/media/books` (Readarr root, Jellyfin's `/books` library).
+- In the qBittorrent download client settings, set **Category** to `prowlarr`.
 
 ## Dockhand Stack, Deploy from Git
 

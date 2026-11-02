@@ -4,7 +4,7 @@ services:
     restart: ${READARR_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/readarr/config:/config
-      - ${VOL_PATH:-/data}/readarr/data:/data
+      - ${READARR_MEDIA:-/data/media}:/media
     environment:
       - PUID=1000
       - PGID=1000

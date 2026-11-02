@@ -25,11 +25,12 @@ BitTorrent client with a full-featured web UI.
 
     QBT_PASS – default: ChangeThisPassword
     QBT_PORT – default: 8080
+    QBT_MEDIA – default: /data/media (shared media root, also mounted by Sonarr, Radarr and Jellyfin)
 
 ## Volume Notes
 
     /config – host path /data/qbit/config
-    /downloads – host path /data/qbit/downloads
+    /media – host path /data/media (downloads go to /media/downloads)
     /incomplete – host path /data/qbit/incomplete
     /dev/net/tun – host path /dev/net/tun
 
@@ -44,7 +45,7 @@ docker run -d \
   --name qbittorrent \
   -p 8080:8080 \
   -v /data/qbit/config:/config \
-  -v /data/qbit/downloads:/downloads \
+  -v /data/media:/media \
   -v /data/qbit/incomplete:/incomplete \
   -v /dev/net/tun:/dev/net/tun \
   trigus42/qbittorrentvpn:latest
@@ -55,6 +56,17 @@ See compose.yaml for the full set of environment variables.
 ## Additional Notes / Gotchas
 
 Check the container logs on first start for the temporary web UI password.
+
+### Shared media folder (for Sonarr / Radarr / Jellyfin)
+
+`/data/media` on the host is mounted at `/media` in qBittorrent, Sonarr and Radarr, so a file has the same path in every container. Imports then work without Remote Path Mappings, and can use hardlinks instead of copying.
+
+In qBittorrent, set:
+
+- **Options → Downloads → Default Save Path:** `/media/downloads`
+- **Category `prowlarr`** (right-click Categories → Add): save path `/media/downloads/prowlarr`
+
+Then in Sonarr/Radarr set the qBittorrent download client's **Category** to `prowlarr`.
 
 ## Dockhand Stack, Deploy from Git
 
