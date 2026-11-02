@@ -12,6 +12,18 @@ Whisparr is an automated adult content collection manager for Usenet and BitTorr
 
 ## Getting Started
 
+### Prepare the shared media folder (once per host)
+
+All media apps run as user `1000` and share `/data/media`. If Docker creates the folder itself it's owned by root, and the apps fail with *"Folder '/media/' is not writable by user 'hotio'"*. Create it with the right owner before first start:
+
+```bash
+sudo mkdir -p /data/media/{downloads/prowlarr,movies,shows,music,books,adult}
+sudo chown -R 1000:1000 /data/media
+sudo chmod -R u+rwX,g+rwX /data/media
+```
+
+Check with `ls -ln /data/media` — the owner should be `1000 1000`.
+
 Open http://localhost:6969 in your browser and complete the initial setup wizard:
 
 1. **Choose your UI language**
@@ -20,7 +32,7 @@ Open http://localhost:6969 in your browser and complete the initial setup wizard
 
 Once the wizard finishes, you'll see an empty library. To populate it:
 
-- Go to **Settings → Media Management** and add a **Root Folder** (e.g., `/media/adult`) — this is where your organized library will live
+- Go to **Settings → Media Management** and add a **Root Folder** `/media/adult` — Stash sees this same folder at `/adult`
 - Click **Add Movie** and search by title — Whisparr fetches metadata and available releases
 - Optionally connect a **List** to auto-import from your watchlists
 
@@ -36,7 +48,7 @@ qBittorrent downloads to `/media/downloads/prowlarr` → Whisparr picks it up, r
 | `WHISPARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `WHISPARR_PORT` | Published port for the web UI (default: `6969`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
-| `WHISPARR_MEDIA` | Shared media root on the host (default: `/data/media`), mounted at `/media`. Must be the same folder qBittorrent, Sonarr, Radarr and Jellyfin use |
+| `WHISPARR_MEDIA` | Shared media root on the host (default: `/data/media`), mounted at `/media`. Downloads land in `/media/downloads/prowlarr`, library in `/media/adult` |
 | `TZ` | Container timezone (default: `America/Vancouver`) |
 
 ## Volume Notes
@@ -44,7 +56,7 @@ qBittorrent downloads to `/media/downloads/prowlarr` → Whisparr picks it up, r
 | Volume | Purpose |
 |---|---|
 | `${VOL_PATH:-/data}/whisparr/config` | Application configuration and database |
-| `${WHISPARR_MEDIA:-/data/media}` → `/media` | Shared media root: downloads in `/media/downloads`, library in `/media/adult` |
+| `${WHISPARR_MEDIA:-/data/media}` → `/media` | Shared media root: downloads in `/media/downloads/prowlarr`, library in `/media/adult` |
 
 ## Network Notes
 
@@ -73,15 +85,16 @@ docker run -d \
 
 ## Additional Notes / Gotchas
 
-- **One shared media folder.** qBittorrent, Sonarr, Radarr, Whisparr and Jellyfin all use `/data/media` on the host, mounted at `/media`, so a download has the same path in every container: no Remote Path Mapping needed, and imports can use hardlinks. Enable **Settings → Media Management → Use Hardlinks instead of Copy**.
-- **Layout:** `/data/media/downloads/prowlarr` (qBittorrent category `prowlarr`), `/data/media/adult` (Whisparr root, not mounted by Jellyfin by default).
+- **Works with Stash, not Jellyfin.** Whisparr's library is `/data/media/adult` on the host. The Stash stack mounts that same folder at `/adult` (`STASH_ADULT_PATH`), so in Stash add **`/adult`** as a library path (Settings → Library). Jellyfin doesn't mount it.
+- **One shared media folder.** qBittorrent and Whisparr both mount `/data/media` at `/media`, so download paths match (no Remote Path Mapping) and imports can use hardlinks. Enable **Settings → Media Management → Use Hardlinks instead of Copy**.
+- **Rescan after import.** Turn on a scheduled library scan in Stash (or scan manually) so new imports show up.
 - In the qBittorrent download client settings, set **Category** to `prowlarr`.
 
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**
-- **stackname:** whisparr_dev
-- **Compose file path:** whisparr_dev/compose.yaml
-- **Additional env file (optional):** whisparr_dev/sample.env
+- **stackname:** whisparr
+- **Compose file path:** whisparr/compose.yaml
+- **Additional env file (optional):** whisparr/sample.env
 
-Load `whisparr_dev/sample.env` into the Environment variables in Dockhand, then create the Stack.
+Load `whisparr/sample.env` into the Environment variables in Dockhand, then create the Stack.

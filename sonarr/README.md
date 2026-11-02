@@ -12,6 +12,18 @@ Sonarr is an automated TV series collection manager for Usenet and BitTorrent us
 
 ## Getting Started
 
+### Prepare the shared media folder (once per host)
+
+All media apps run as user `1000` and share `/data/media`. If Docker creates the folder itself it's owned by root, and the apps fail with *"Folder '/media/' is not writable by user 'hotio'"*. Create it with the right owner before first start:
+
+```bash
+sudo mkdir -p /data/media/{downloads/prowlarr,movies,shows,music,books}
+sudo chown -R 1000:1000 /data/media
+sudo chmod -R u+rwX,g+rwX /data/media
+```
+
+Check with `ls -ln /data/media` — the owner should be `1000 1000`.
+
 Open http://localhost:8989 in your browser and complete the initial setup wizard:
 
 1. **Choose your UI language**

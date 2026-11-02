@@ -12,6 +12,18 @@ Jellyfin is a free, open-source media server. It organizes your movies, shows, m
 
 ## Getting Started
 
+### Prepare the shared media folder (once per host)
+
+All media apps run as user `1000` and share `/data/media`. If Docker creates the folder itself it's owned by root, and the apps fail with *"Folder '/media/' is not writable by user 'hotio'"*. Create it with the right owner before first start:
+
+```bash
+sudo mkdir -p /data/media/{downloads/prowlarr,movies,shows,music,books}
+sudo chown -R 1000:1000 /data/media
+sudo chmod -R u+rwX,g+rwX /data/media
+```
+
+Check with `ls -ln /data/media` — the owner should be `1000 1000`.
+
 Open http://localhost:8096 in your browser and complete the setup wizard:
 
 1. **Create your admin account**
@@ -82,11 +94,6 @@ docker run -d \
 
 ## Additional Notes / Gotchas
 
-- **Create the library folders first.** If `/data/media/movies` etc. don't exist, Docker creates them owned by root and Sonarr/Radarr (PUID 1000) can't write to them:
-  ```bash
-  mkdir -p /data/media/{downloads/prowlarr,movies,shows,music,books}
-  chown -R 1000:1000 /data/media
-  ```
 - **Only port 8096 is published.** HTTPS (8920) is handled by Nginx Proxy Manager. Local network auto-discovery (UDP 1900/7359) won't work through the bridge network, so add the server to clients by URL.
 - **Photos** are left out on purpose — use the Immich stack for photo libraries.
 - **Hardware transcoding** needs the GPU passed into the container (e.g. `devices: [/dev/dri:/dev/dri]` for Intel/AMD). It's not included by default.

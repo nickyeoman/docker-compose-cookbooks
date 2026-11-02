@@ -33,6 +33,7 @@ This Docker Compose configuration sets up the Stash application using Docker con
     /metadata – host path /data/stash/metadata
     /root/.stash – host path /data/stash/root
     /data – host path /data/stash
+    /adult – host path /data/media/adult (Whisparr's root folder)
 
 ## Network Notes
 
@@ -56,6 +57,8 @@ See compose.yaml for the full set of environment variables.
 ## Additional Notes / Gotchas
 
 Point STASH_CONTENT_PATH at your library; first-run wizard configures the library paths.
+
+If you use Whisparr, also add `/adult` as a library path. It's the same folder Whisparr imports into (`/data/media/adult` on the host), so turn on a scheduled scan to pick up new files.
 
 ## Dockhand Stack, Deploy from Git
 
