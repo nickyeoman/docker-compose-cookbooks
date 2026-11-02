@@ -4,7 +4,7 @@ services:
     restart: ${QBT_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/qbit/config:/config
-      - ${QBT_MEDIA:-/data/media}:/media
+      - ${QBT_MEDIA:-/data}/media:/media
       - ${VOL_PATH:-/data}/qbit/incomplete:/incomplete
       - ${VOL_PATH:-/data}/qbit/watched:/watched
       - /dev/net/tun:/dev/net/tun
