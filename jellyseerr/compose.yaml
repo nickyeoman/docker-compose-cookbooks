@@ -1,9 +1,9 @@
 services:
   jellyseerr:
-    image: ${JELLYSEERR_IMAGE:-ghcr.io/hotio/jellyseerr:release}
+    image: ${JELLYSEERR_IMAGE:-ghcr.io/seerr-team/seerr:latest}
     restart: ${JELLYSEERR_RESTART:-unless-stopped}
     volumes:
-      - ${VOL_PATH:-/data}/jellyseerr/config:/config
+      - ${VOL_PATH:-/data}/jellyseerr/config:/app/config
     environment:
       - PUID=1000
       - PGID=1000
