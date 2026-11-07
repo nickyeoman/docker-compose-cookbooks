@@ -4,7 +4,7 @@ services:
     restart: ${LIDARR_RESTART:-unless-stopped}
     volumes:
       - ${VOL_PATH:-/data}/lidarr/config:/config
-      - ${LIDARR_MEDIA:-/data/media}:/media
+      - ${LIDARR_MEDIA:-/data}/media:/media
     environment:
       - PUID=1000
       - PGID=1000
