@@ -1,0 +1,28 @@
+# Jellyfin GPU (NVIDIA) — standalone alternative to compose.yaml
+services:
+  jellyfin:
+    image: ${JELLYFIN_IMAGE:-jellyfin/jellyfin:latest}
+    restart: ${JELLYFIN_RESTART:-unless-stopped}
+    volumes:
+      - ${VOL_PATH:-/data}/jellyfin/cache:/cache
+      - ${VOL_PATH:-/data}/jellyfin/config:/config
+      - ${JELLYFIN_MEDIA:-/data}/media:/media
+    environment:
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL:-http://localhost:8096}
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "${JELLYFIN_PORT:-8096}:8096"
+    networks:
+      - proxy
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+networks:
+  proxy:
+    external: true

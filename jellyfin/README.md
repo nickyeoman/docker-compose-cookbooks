@@ -40,6 +40,28 @@ Open http://localhost:8096 in your browser and complete the setup wizard:
 
 For Jellyseerr, create an API key under **Dashboard → API Keys**.
 
+### GPU transcoding (optional)
+
+Deploy `compose-gpu.yaml` instead of `compose.yaml`. It uses the same env vars. The file defaults to NVIDIA.
+
+1. **Install the NVIDIA Container Toolkit on the host** (once per host; skip it if another GPU stack such as Ollama already works):
+
+   ```bash
+   sudo pacman -S nvidia-container-toolkit        # Arch
+   sudo nvidia-ctk runtime configure --runtime=docker
+   sudo systemctl restart docker
+   ```
+
+2. **Check the container can see the GPU:** `docker exec jellyfin nvidia-smi`
+3. **Enable it in Jellyfin:** go to **Dashboard → Playback → Transcoding**:
+   - **Hardware acceleration:** NVENC
+   - **Hardware decoding:** tick every codec your card supports. An RTX 30-series card decodes H.264, HEVC (incl. 10bit), VP9 (incl. 10bit) and AV1.
+   - **AV1 encoding:** RTX 40-series and newer only. Leave it off on older cards.
+   - **Tone mapping:** turn it on for HDR content. It runs on the GPU.
+4. **Confirm it's working:** play something that needs transcoding. `nvidia-smi` on the host should list a `jellyfin-ffmpeg` process.
+
+**Intel/AMD:** in `compose-gpu.yaml`, remove the `deploy` block and uncomment the `/dev/dri:/dev/dri` device. Then choose VAAPI (AMD) or QSV (Intel) as the hardware acceleration.
+
 ## Environment Variable Notes
 
 | Variable | Description |
@@ -96,13 +118,13 @@ docker run -d \
 
 - **Only port 8096 is published.** HTTPS (8920) is handled by Nginx Proxy Manager. Local network auto-discovery (UDP 1900/7359) won't work through the bridge network, so add the server to clients by URL.
 - **Photos** are left out on purpose — use the Immich stack for photo libraries.
-- **Hardware transcoding** needs the GPU passed into the container (e.g. `devices: [/dev/dri:/dev/dri]` for Intel/AMD). It's not included by default.
+- **Hardware transcoding** is not in `compose.yaml`. See *GPU transcoding* under Getting Started.
 
 ## Dockhand Stack, Deploy from Git
 
 - **Cookbooks Repository**
 - **stackname:** jellyfin
-- **Compose file path:** jellyfin/compose.yaml
+- **Compose file path:** jellyfin/compose.yaml (or jellyfin/compose-gpu.yaml for hardware transcoding)
 - **Additional env file (optional):** jellyfin/sample.env
 
 Load `jellyfin/sample.env` into the Environment variables in Dockhand, then create the Stack.
