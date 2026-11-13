@@ -1,0 +1,19 @@
+services:
+  metube:
+    image: ${METUBE_IMAGE:-ghcr.io/alexta69/metube:latest}
+    container_name: ${METUBE_CONTAINER_NAME:-metube}
+    restart: ${METUBE_RESTART:-unless-stopped}
+    volumes:
+      - ${METUBE_MEDIA:-/data}/media/downloads/metube:/downloads
+    environment:
+      - UID=1000
+      - GID=1000
+      - UMASK=002
+    ports:
+      - "${METUBE_PORT:-8081}:8081"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
