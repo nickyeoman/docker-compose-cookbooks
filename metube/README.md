@@ -25,6 +25,9 @@ MeTube is a self-hosted web UI for yt-dlp. Paste a video or playlist URL from Yo
 | `METUBE_CONTAINER_NAME` | Container name shown in Dockhand / `docker ps` (default: `metube`) |
 | `METUBE_RESTART` | Restart policy (default: `unless-stopped`) |
 | `METUBE_PORT` | Published port for the web UI (default: `8081`) |
+| `METUBE_YTDL_OPTIONS` | yt-dlp options applied to **every** download, as one-line JSON (default: blank = MeTube's default `{}`) |
+| `METUBE_YTDL_OPTIONS_PRESETS` | Named yt-dlp option bundles, picked per download under **Advanced Options** in the UI, as one-line JSON. Ships with a `Video + FLAC` preset |
+| `METUBE_AUDIO_DOWNLOAD_DIR` | Container path for audio-only downloads (default: `/downloads/audio`, i.e. `/data/media/downloads/metube/audio` on the host). Keep it under `/downloads` so it stays on the shared media disk |
 | `METUBE_MEDIA` | Shared media root on the host (default: `/data`, so files land in `/data/media/downloads/metube`). Must be the same root Lidarr, Jellyfin, etc. use |
 
 `UID`/`GID`/`UMASK` are fixed at `1000`/`1000`/`002` (same as the other media apps) in the compose file so downloaded files are owned by your normal user. Many more options (`DARK_MODE`, `YTDL_OPTIONS`, `OUTPUT_TEMPLATE`, `DEFAULT_THEME`, …) are listed in the upstream README.
@@ -51,6 +54,7 @@ docker run -d \
   -e UID=1000 \
   -e GID=1000 \
   -e UMASK=002 \
+  -e AUDIO_DOWNLOAD_DIR=/downloads/audio \
   -p 8081:8081 \
   -v ${METUBE_MEDIA:-/data}/media/downloads/metube:/downloads \
   --network proxy \
@@ -60,7 +64,8 @@ docker run -d \
 
 ## Additional Notes / Gotchas
 
-- **Importing music into Lidarr.** MeTube writes to `/data/media/downloads/metube`, which Lidarr sees as `/media/downloads/metube`. In Lidarr go to **Wanted → Manual Import**, pick that folder, match the tracks to an artist/album and import. Because both folders are on the same `/data/media` filesystem, Lidarr hardlinks the files (enable **Settings → Media Management → Use Hardlinks instead of Copy**) instead of copying them.
+- **Importing music into Lidarr.** MeTube writes to `/data/media/downloads/metube`, which Lidarr sees as `/media/downloads/metube`. Audio-only downloads go to the `audio` subfolder. In Lidarr go to **Wanted → Manual Import**, pick `/media/downloads/metube/audio` (or the parent folder for audio extracted by the `Video + FLAC` preset), match the tracks to an artist/album and import. Because both folders are on the same `/data/media` filesystem, Lidarr hardlinks the files (enable **Settings → Media Management → Use Hardlinks instead of Copy**) instead of copying them.
+- **Video and FLAC in one download.** Pick a video format, open **Advanced Options** and choose the `Video + FLAC` preset. yt-dlp keeps the video (`keepvideo`) and also extracts a FLAC next to it. To do this for every download instead, move the JSON from `METUBE_YTDL_OPTIONS_PRESETS` into `METUBE_YTDL_OPTIONS` (without the preset name wrapper). Don't use it with an audio-only format: MeTube already extracts audio there. With `keepvideo`, yt-dlp may also leave the separate video/audio stream files (`*.f137.mp4`, `*.f251.webm`) beside the merged file.
 - **Don't point MeTube straight at `/media/music`.** Lidarr only recognizes files inside its `Artist/Album/` layout, so loose MeTube files there show up as unmapped instead of being imported.
 - Create the folder as user 1000 first (`sudo mkdir -p /data/media/downloads/metube && sudo chown -R 1000:1000 /data/media/downloads/metube`). MeTube runs as UID/GID 1000 to match the other media apps.
 - MeTube has no built-in authentication — put it behind an auth layer (NPM access list, Authelia, etc.) if exposed publicly.

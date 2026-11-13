@@ -9,6 +9,9 @@ services:
       - UID=1000
       - GID=1000
       - UMASK=002
+      - AUDIO_DOWNLOAD_DIR=${METUBE_AUDIO_DOWNLOAD_DIR:-/downloads/audio}
+      - YTDL_OPTIONS=${METUBE_YTDL_OPTIONS:-}
+      - YTDL_OPTIONS_PRESETS=${METUBE_YTDL_OPTIONS_PRESETS:-}
     ports:
       - "${METUBE_PORT:-8081}:8081"
     networks:

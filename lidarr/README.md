@@ -48,7 +48,7 @@ Lidarr doesn't natively import Spotify playlists. Use a community tool like [Spo
 
 | Variable | Description |
 |---|---|
-| `LIDARR_IMAGE` | Container image (default: `ghcr.io/hotio/lidarr:release`) |
+| `LIDARR_IMAGE` | Container image (default: `ghcr.io/hotio/lidarr:release`). Use `ghcr.io/hotio/lidarr:pr-plugins` for plugins such as Tubifarry |
 | `LIDARR_RESTART` | Restart policy (default: `unless-stopped`) |
 | `LIDARR_PORT` | Published port for the web UI (default: `8686`) |
 | `VOL_PATH` | Base path for persistent data volumes (default: `/data`) |
@@ -92,6 +92,20 @@ docker run -d \
 - **One shared media folder.** qBittorrent, Sonarr, Radarr, Lidarr and Jellyfin all use `/data/media` on the host, mounted at `/media`, so a download has the same path in every container: no Remote Path Mapping needed, and imports can use hardlinks. Enable **Settings → Media Management → Use Hardlinks instead of Copy**.
 - **Layout:** `/data/media/downloads/prowlarr` (qBittorrent category `prowlarr`), `/data/media/music` (Lidarr root, Jellyfin's `/music` library).
 - In the qBittorrent download client settings, set **Category** to `prowlarr`.
+
+### Tubifarry plugin (download from YouTube)
+
+[Tubifarry](https://github.com/TypNull/Tubifarry) lets Lidarr search Spotify's catalog and download the audio from YouTube (it can also use Soulseek via slskd). Lidarr then tags and imports the albums like any other download.
+
+1. Back up `${VOL_PATH:-/data}/lidarr/config`. The plugins image is a pre-release branch of Lidarr.
+2. Set `LIDARR_IMAGE=ghcr.io/hotio/lidarr:pr-plugins` (in Dockhand or `sample.env`) and redeploy.
+3. In Lidarr, go to **System → Plugins**, install `https://github.com/TypNull/Tubifarry` and restart Lidarr when asked.
+4. **Settings → Indexers → Add**, then choose **Tubifarry** (under **Other**, at the bottom of the list).
+5. **Settings → Download Clients → Add**, then choose the Tubifarry YouTube client and set its download path to `/media/downloads/tubifarry` so it stays on the shared media disk.
+
+- Check the Tubifarry release notes for the minimum Lidarr version it needs.
+- YouTube audio is lossy at the source. Converting it to FLAC changes the format only; it adds no detail.
+- To go back, set `LIDARR_IMAGE` to `ghcr.io/hotio/lidarr:release` again. If the config won't load, restore the backup, since the plugins branch may have upgraded the database.
 
 ## Dockhand Stack, Deploy from Git
 
