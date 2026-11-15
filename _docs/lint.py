@@ -22,7 +22,7 @@ README_ORDER = ["Overview", "Project Details", "Getting Started",
 UNIVERSAL_VARS = {"VOL_PATH", "VOL_PROJECTS", "TZ", "CONFIG_PATH", "LOG_PATH"}
 
 # Known exceptions — see AGENTS.md "Known exceptions"
-NO_PROXY_OK = {"pihole"}
+NO_PROXY_OK = {"pihole", "nginx-proxy-manager"}
 HARDCODED_RESTART_OK = {("zammad_dev", "on-failure")}
 STALE_VARS_OK = {
     "mailu_dev": None,  # env_file: .env — all vars consumed in-container

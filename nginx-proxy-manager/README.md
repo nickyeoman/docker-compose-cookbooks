@@ -29,6 +29,8 @@ These apply to the compose file (`sample.env`). The `docker run` command hardcod
     VOL_PATH – base path for data and letsencrypt volumes (default /data)
     LOG_PATH – where NPM logs are written (default /var/log/containers/nginx-proxy-manager)
     PROXY_IMAGE – image and tag to run
+    PROXY_RESTART – restart policy (default unless-stopped)
+    PROXY_HTTP_PORT / PROXY_HTTPS_PORT / PROXY_ADMIN_PORT – host ports (default 80 / 443 / 81)
 
 ## Volume Notes
 

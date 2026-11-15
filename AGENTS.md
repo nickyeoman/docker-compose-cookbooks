@@ -27,6 +27,7 @@ networks:
 
 These deliberately violate the conventions above — do not "fix" them:
 
+- `nginx-proxy-manager` creates the `proxy` network itself (`name: proxy`, `driver: bridge`) instead of declaring it external, since it's the first thing started on each host and is run via `docker run` rather than Dockhand
 - `pihole` uses `network_mode: host` (it's a DNS server), so it has no `proxy` network
 - `pangolin_dev` is itself an edge reverse proxy (Pangolin + gerbil + traefik), not a client of NPM; the `proxy` network is declared for convention but unused by its services, and `traefik` uses `network_mode: service:gerbil` instead of joining `internal`
 - `zammad_dev` `zammad-init` service hardcodes `restart: on-failure` (init container)

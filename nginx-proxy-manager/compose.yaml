@@ -1,18 +1,18 @@
 services:
   proxy:
     image: ${PROXY_IMAGE:-jc21/nginx-proxy-manager:latest}
-    restart: unless-stopped
-    environment:
-      X_FRAME_OPTIONS: "sameorigin"
-      DB_SQLITE_FILE: "/data/database.sqlite"
-    ports:
-      - "80:80"
-      - "81:81"
-      - "443:443"
+    restart: ${PROXY_RESTART:-unless-stopped}
     volumes:
       - "${VOL_PATH:-/data}/nginx-proxy-manager/data:/data"
       - "${VOL_PATH:-/data}/nginx-proxy-manager/letsencrypt:/etc/letsencrypt"
       - "${LOG_PATH:-/var/log/containers/nginx-proxy-manager}:/data/logs"
+    environment:
+      X_FRAME_OPTIONS: "sameorigin"
+      DB_SQLITE_FILE: "/data/database.sqlite"
+    ports:
+      - "${PROXY_HTTP_PORT:-80}:80"
+      - "${PROXY_ADMIN_PORT:-81}:81"
+      - "${PROXY_HTTPS_PORT:-443}:443"
     networks:
       - proxy
 
