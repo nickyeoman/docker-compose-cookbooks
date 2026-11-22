@@ -15,7 +15,7 @@ budgets, and transaction management.
 
 ## Getting Started
 
-1. Copy this stack's `config/` folder to `${VOL_PROJECTS:-/data}/paisa`
+1. Copy this stack's `config/` folder to `${PAISA_LEDGER_PATH:-/data/paisa}`
    and make it a git repo. It holds `paisa.yaml`, an empty `main.ledger`,
    `sheets/`, and a `.gitignore`. Edit `paisa.yaml` to suit you.
    Starting a new business? Copy `template/` instead: it has a chart of
@@ -35,21 +35,24 @@ especially the section on closing entries.
     PAISA_IMAGE – container image (default ananthakumaran/paisa:latest)
     PAISA_RESTART – restart policy (default unless-stopped)
     VOL_PATH – host base path for the database, backed up by restic (default /data)
-    VOL_PROJECTS – host base path for the ledger git repo (default /data)
+    PAISA_LEDGER_PATH – full host path of the ledger git repo, not a base path (default /data/paisa)
     PAISA_PORT – host port for the web UI (default 7500)
 
 ## Volume Notes
 
-Anything that belongs in git goes in `VOL_PROJECTS`; anything that
+Anything that belongs in git goes in `PAISA_LEDGER_PATH`; anything that
 doesn't (the SQLite database) goes in `VOL_PATH`, which is backed up.
 
 -   `/root/Documents/paisa` — `paisa.yaml`, `*.ledger`, `sheets/`;
-    `${VOL_PROJECTS:-/data}/paisa` on the host, kept in git
+    `${PAISA_LEDGER_PATH:-/data/paisa}` on the host, kept in git
 -   `/var/lib/paisa` — `paisa.db`; `${VOL_PATH:-/data}/paisa` on the
     host, backed up by restic
 
-Both default to `/data`, so they start out as the same folder. Change
-them in the stack's env in Dockhand to split them.
+Both default to `/data/paisa`, so they start out as the same folder.
+`PAISA_LEDGER_PATH` is a full path (nothing is appended), so it can point
+anywhere, such as the `demo/` folder in a clone of this repo. The
+database location comes from `db_path` in `paisa.yaml`
+(`/var/lib/paisa/paisa.db`), so it never lands in the ledger repo.
 
 ## Network Notes
 

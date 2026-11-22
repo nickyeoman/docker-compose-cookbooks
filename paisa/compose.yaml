@@ -6,7 +6,7 @@ services:
     restart: ${PAISA_RESTART:-unless-stopped}
 
     volumes:
-      - ${VOL_PROJECTS:-/data}/paisa:/root/Documents/paisa
+      - ${PAISA_LEDGER_PATH:-/data/paisa}:/root/Documents/paisa
       - ${VOL_PATH:-/data}/paisa:/var/lib/paisa
 
     ports:
