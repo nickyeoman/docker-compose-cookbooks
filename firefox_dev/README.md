@@ -26,9 +26,16 @@ Used for securing online:
 ```
 FIREFOX_WEB_AUTHENTICATION=1
 FIREFOX_WEB_AUTHENTICATION_USERNAME=user
-FIREFOX_WEB_AUTHENTICATION_PASSWORD=password
+FIREFOX_WEB_AUTHENTICATION_PASSWORD=ChangeThisPassword
 FIREFOX_SECURE_CONNECTION=1
 ```
+
+## Volume Notes
+
+-   `/config` — Firefox profile (bookmarks, history, extensions, saved
+    logins) and container settings; `${VOL_PATH:-/data}/firefox/config`
+    on the host. Created automatically on first start; back it up to keep
+    the profile.
 
 ## Network Notes
 
@@ -54,9 +61,9 @@ GUI app streamed to the browser — unauthenticated by default aside from the we
 
 Cookbooks Repository
 stackname: NAME_HERE
-Compose file path: firefox/compose.yaml
-Additional env file (optional): firefox/sample.env
+Compose file path: firefox_dev/compose.yaml
+Additional env file (optional): firefox_dev/sample.env
 
-Then "Load" firefox/sample.env into the Environmental variables in dockhand
+Then "Load" firefox_dev/sample.env into the Environmental variables in dockhand
 
 Create the Stack
