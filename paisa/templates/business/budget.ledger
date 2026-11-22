@@ -1,0 +1,13 @@
+; Monthly budget (Paisa reads periodic transactions as budgets)
+; TODO: set amounts, or delete the block until you know your costs.
+
+; Declares the accounts so Paisa's editor can check this file on its own
+include accounts.ledger
+
+~ Monthly
+    Expenses:Office                         150.00 CAD
+    Expenses:Software                       100.00 CAD
+    Expenses:Telephone                       80.00 CAD
+    Expenses:Advertising                    100.00 CAD
+    Assets:TaxSavings                       800.00 CAD
+    Assets:Bank:Chequing

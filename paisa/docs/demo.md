@@ -10,7 +10,7 @@ Paisa before entering your own books. All figures are made up.
 | ----------------- | ---------------------------------------------------------- |
 | `paisa.yaml`      | Paisa config: CAD, BC time zone, strict accounts, goals    |
 | `main.ledger`     | Entry point; includes the other files                      |
-| `accounts.ledger` | Chart of accounts and the CAD commodity                    |
+| `accounts.ledger` | Chart of accounts and the CAD and BTC commodities          |
 | `budget.ledger`   | Monthly budget (periodic transaction)                      |
 | `2025.ledger`     | Incorporation, share issue, equipment purchase (Dec 2025)  |
 | `2026.ledger`     | January and February 2026 transactions                     |
@@ -42,10 +42,28 @@ equity but have no vote. Each holder has an account under
 `Equity:ShareCapital:ClassA` or `ClassB`, and each posting carries a
 `Shares:` tag with the share count.
 
+## Banks and investments
+
+| Account                          | Used for                                          |
+| -------------------------------- | ------------------------------------------------- |
+| `Assets:Bank:BMO:Chequing`       | Main operating account: deposits, bills, transfers|
+| `Assets:Bank:RBC:Payroll`        | Pays the crew; funded from BMO before each payroll|
+| `Assets:Bank:Scotiabank:Savings` | Excavator replacement fund (savings goal)         |
+| `Assets:Bank:CIBC:TaxReserve`    | Cash held back for income tax, GST and PST        |
+| `Assets:Investments:GIC:CIBC`    | $10,000 1-year GIC at 4.00%, matures 2027/01/15   |
+| `Assets:Crypto:Wallet`           | 0.05 BTC bought at $135,000 per BTC               |
+
+GIC interest is accrued monthly to `Income:Interest` and added to the GIC
+balance. Bitcoin is held in its own `BTC` commodity; `P` price lines in
+`2026.ledger` set its market value, so Paisa shows an unrealized loss
+when the price drops to $128,000 at the end of February.
+
 December 2025 covers incorporation and legal fees, the share issue, a
 $120,000 equipment loan, machinery and vehicle purchases (BC PST added to
-the asset cost, GST claimed as input tax credits), a savings transfer, a
-petty cash float, and the first loan payment.
+the asset cost, GST claimed as input tax credits), office equipment
+(desks, chairs, laptops, a desktop and a printer, $8,453) and hand tools
+($2,782) recorded as assets, a savings transfer, a
+payroll account float, a petty cash float, and the first loan payment.
 
 The crew also did three small jobs that month:
 
@@ -110,39 +128,55 @@ The 2026 books cover demolition invoices with GST 5% and
 BC PST 7%, scrap metal sales (GST only), expenses with GST input tax
 credits, payroll and CRA remittances, WorkSafeBC premiums, an equipment
 loan, a credit card, and a savings transfer toward an excavator fund.
+Each month the office pays for business internet (GST + PST), water
+delivery and cooler rental (the water itself is zero-rated), and a
+cleaning service that wipes down the computers and vacuums the floors
+(GST only). Office supplies such as paper are expensed, not added to
+`Assets:Equipment:Office`.
+Day-to-day purchases go on the company Visa (statement closes on the
+15th): fuel, safety gear, saw blades and drill bits, the accounting
+software subscription, job-site parking, and toner and paper. The
+February 16 payment clears everything through the February 15
+statement; $1,246.00 charged after that is still owing at the end of
+February, so the Credit Cards page shows an open balance.
+It also buys the GIC and the bitcoin, funds each payroll from BMO to RBC,
+and moves the tax estimate from the sheet into the CIBC tax reserve.
 
 ## Where the files go
 
-Everything lives in one folder, `${VOL_PATH:-/data/paisa}`: the
+Everything lives in one folder, `${VOL_PATH:-/data}/paisa`: the
 `paisa.yaml` and `*.ledger` files (in git) and `paisa.db` (a cache,
 ignored by `.gitignore`).
 
 ## Load the demo
 
-1. Clone this repo somewhere on the Docker host, e.g.:
+1. From the root of this repo, copy the demo into its own folder named
+   `paisa`, keeping your real books separate:
    ```bash
-   cd /data
-   git clone https://github.com/nickyeoman/docker-compose-cookbooks.git
+   mkdir -p /data/demo
+   cp -r paisa/demo /data/demo/paisa
    ```
-2. In Dockhand, point the stack at the demo folder:
+2. In Dockhand, edit the stack's environment variable:
    ```env
-   VOL_PATH=/data/docker-compose-cookbooks/paisa/demo
+   VOL_PATH=/data/demo
    ```
-   The path is used as-is. Paisa writes `paisa.db` into that folder;
-   `demo/.gitignore` keeps it out of git.
+   The compose file appends `/paisa`, so Paisa reads `/data/demo/paisa`
+   and writes `paisa.db` there.
 3. Redeploy the stack and open http://localhost:7500 (or the host's
    address or proxy hostname if you're not on the Docker host).
 
 ## Switch back to your own books
 
-Set `VOL_PATH` back to your books (default `/data/paisa`) and redeploy.
-The demo's `paisa.db` stays in the clone and can be deleted any time.
+Set `VOL_PATH` back to your value (default `/data`) and redeploy. The
+demo folder `/data/demo` can be deleted any time.
 
 ## Start your own books
 
--   **New business:** copy `template/` instead of `demo/`. It has a
-    chart of accounts for a small BC corporation, `strict: "yes"`, a
-    sample budget, and a year file with commented examples. Fill in the
-    `TODO`s in `paisa.yaml`, `main.ledger`, and `accounts.ledger`.
+-   **From a template:** copy one of the `templates/` folders instead of
+    `demo/`: `personal/`, `household/`, `business/` (sole proprietor), or
+    `corporation/` (small BC corporation). Each has a chart of accounts,
+    `strict: "yes"`, a sample budget, and a year file with commented
+    examples. Fill in the `TODO`s in `paisa.yaml`, `main.ledger`, and
+    `accounts.ledger`.
 -   **Blank slate:** copy `config/`. It holds the same defaults with an
     empty journal, `strict: "no"`, and no accounts.

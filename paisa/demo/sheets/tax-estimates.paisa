@@ -16,21 +16,21 @@ profit_2025 = -cost(pre_tax AND fy2025)               ; 3,890.00
 tax_2025 = profit_2025 * small_business_rate          ; 427.90, accrued Dec 31
 
 gst_collected_2025 = -cost({account = Liabilities:GST:Collected} AND fy2025)  ; 772.50
-gst_itc_2025 = cost({account = Assets:GST:InputTaxCredits} AND fy2025)        ; 12,565.00
-gst_net_2025 = gst_collected_2025 - gst_itc_2025      ; -11,792.50 = refund due
+gst_itc_2025 = cost({account = Assets:GST:InputTaxCredits} AND fy2025)        ; 13,090.00
+gst_net_2025 = gst_collected_2025 - gst_itc_2025      ; -12,317.50 = refund due
 
 // ---- 2026 year to date ----
 ytd = {date >= [2026-01-01] AND date < [2027-01-01]}
-profit_ytd = -cost(pre_tax AND ytd)                   ; 12,820.00
-tax_ytd = profit_ytd * small_business_rate            ; 1,410.20 to set aside
+profit_ytd = -cost(pre_tax AND ytd)                   ; 10,332.20
+tax_ytd = profit_ytd * small_business_rate            ; 1,136.54 to set aside
 
 gst_collected_ytd = -cost({account = Liabilities:GST:Collected} AND ytd)   ; 3,640.00
-gst_itc_ytd = cost({account = Assets:GST:InputTaxCredits} AND ytd)         ; 404.50
-gst_net_ytd = gst_collected_ytd - gst_itc_ytd         ; 3,235.50 owing to CRA
+gst_itc_ytd = cost({account = Assets:GST:InputTaxCredits} AND ytd)         ; 525.10
+gst_net_ytd = gst_collected_ytd - gst_itc_ytd         ; 3,114.90 owing to CRA
 pst_ytd = -cost({account = Liabilities:PST:Collected} AND ytd)             ; 4,900.00 owing to BC
 
 // Cash to hold back for tax this year
-set_aside = tax_ytd + gst_net_ytd + pst_ytd           ; 9,545.70
+set_aside = tax_ytd + gst_net_ytd + pst_ytd           ; 9,151.44
 
 // Function: GST included in a tax-inclusive receipt total
 gst_in(total) = total * gst_rate / (1 + gst_rate)

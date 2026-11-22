@@ -1,6 +1,6 @@
 # Paisa config for Demolition Company Ltd. (demo)
 # Incorporated in BC 2025/12/01; 100 shares (66 Class A voting, 34 Class B non-voting)
-# Git repo: ${VOL_PATH:-/data/paisa}, mounted at /root/Documents/paisa
+# Git repo: ${VOL_PATH:-/data}/paisa, mounted at /root/Documents/paisa
 # Reference: https://paisa.fyi/reference/config/
 
 # Relative paths resolve from this file's directory (in git)
@@ -36,8 +36,18 @@ user_accounts: []
 #    password: sha256:<hash>
 
 accounts:
-  - name: Assets:Bank:Chequing
+  - name: Assets:Bank:BMO:Chequing
     icon: mdi:bank
+  - name: Assets:Bank:RBC:Payroll
+    icon: mdi:account-cash
+  - name: Assets:Bank:Scotiabank:Savings
+    icon: mdi:piggy-bank
+  - name: Assets:Bank:CIBC:TaxReserve
+    icon: mdi:safe
+  - name: Assets:Investments:GIC
+    icon: mdi:certificate
+  - name: Assets:Crypto:Wallet
+    icon: mdi:bitcoin
   - name: Assets:Equipment
     icon: mdi:excavator
   - name: Equity:ShareCapital
@@ -60,7 +70,7 @@ goals:
       target_date: "2028-12-31"
       rate: 3
       accounts:
-        - Assets:Bank:Savings
+        - Assets:Bank:Scotiabank:Savings
 
 schedule_al:
   - code: bank

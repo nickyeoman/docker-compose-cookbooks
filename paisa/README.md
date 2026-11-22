@@ -15,12 +15,18 @@ budgets, and transaction management.
 
 ## Getting Started
 
-1. Copy this stack's `config/` folder to `${VOL_PATH:-/data/paisa}`
+1. Copy this stack's `config/` folder to `${VOL_PATH:-/data}/paisa`
    and make it a git repo. It holds `paisa.yaml`, an empty `main.ledger`,
    `sheets/`, and a `.gitignore`. Edit `paisa.yaml` to suit you.
-   Starting a new business? Copy `template/` instead: it has a chart of
-   accounts for a small BC corporation and commented example entries.
-   Fill in its `TODO`s.
+   Or start from one of the `templates/` folders instead. Each has a chart
+   of accounts, a budget, and commented example entries; fill in its `TODO`s:
+   -   `personal/` — one person: salary, TFSA/RRSP, everyday spending
+   -   `household/` — two adults and a child: joint accounts, mortgage,
+       CCB, RESP, childcare
+   -   `business/` — sole proprietor (not incorporated): GST/PST, owner
+       draws, T2125 expense categories
+   -   `corporation/` — small BC corporation: share capital, shareholder
+       loan, payroll, WorkSafeBC
 2. Deploy the stack. Paisa creates `paisa.db` in the same folder.
 3. Open http://localhost:7500 in your browser.
 
@@ -34,7 +40,7 @@ especially the section on closing entries.
 
     PAISA_IMAGE – container image (default ananthakumaran/paisa:latest)
     PAISA_RESTART – restart policy (default unless-stopped)
-    VOL_PATH – full host path of the ledger git repo; nothing is appended (default /data/paisa)
+    VOL_PATH – host base path; the ledger git repo is VOL_PATH/paisa (default /data)
     PAISA_PORT – host port for the web UI (default 7500)
 
 ## Volume Notes
@@ -42,10 +48,10 @@ especially the section on closing entries.
 One volume holds everything:
 
 -   `/root/Documents/paisa` — `paisa.yaml`, `*.ledger`, `sheets/`, and
-    `paisa.db`; `${VOL_PATH:-/data/paisa}` on the host
+    `paisa.db`; `${VOL_PATH:-/data}/paisa` on the host
 
-`VOL_PATH` is the full path to the folder (nothing is appended), so it
-can point anywhere, such as the `demo/` folder in a clone of this repo.
+The compose file appends `/paisa` to `VOL_PATH`, so the folder is always
+named `paisa`.
 Keep the folder in git; the shipped `.gitignore` keeps `paisa.db` out of
 commits. The database is a cache rebuilt from the ledger files.
 
@@ -69,13 +75,15 @@ docker run -d \
     (INR, en-IN, fiscal year starting in April), so copy `config/` in first.
 -   `paisa.db` sits in the git folder (`db_path: paisa.db`); keep the
     shipped `.gitignore` so it isn't committed.
--   Upgrading from the old two-volume layout with the old default
-    (`VOL_PATH=/data`): set `VOL_PATH=/data/paisa` or Paisa will look in
-    `/data`.
 -   `config/paisa.yaml` uses CAD, en-US number formatting,
     America/Vancouver, a January fiscal year, and no login. Add
     `user_accounts` before exposing Paisa through the proxy.
 -   The container runs as root; files it writes are root-owned.
+-   With `strict: "yes"`, Paisa's editor checks each file on its own
+    (`ledger --pedantic` on just that file), so every `.ledger` file that
+    posts to accounts starts with `include accounts.ledger`. Without it
+    the editor shows `Unknown account` for every line, even though the
+    full journal is fine. Add the include to any new year file.
 
 ## Dockhand Stack, Deploy from Git
 

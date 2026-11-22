@@ -1,5 +1,5 @@
 ; Demolition Company Ltd. — demo books (BC, Canada)
-; Ledger git repo: ${VOL_PATH:-/data/paisa}, mounted at /root/Documents/paisa
+; Ledger git repo: ${VOL_PATH:-/data}/paisa, mounted at /root/Documents/paisa
 ; Incorporated in BC on 2025/12/01; fiscal year end December 31
 ; Sales tax: GST 5% (federal) + PST 7% (BC)
 

@@ -1,0 +1,41 @@
+; 2026 transactions. Uncomment and edit the examples below, or delete them.
+; Add a file per year (2027.ledger, ...) and include it in main.ledger.
+; See docs/ledger-cheatsheet.md for more patterns.
+
+; Declares the accounts so Paisa's editor can check this file on its own
+include accounts.ledger
+
+; Starting balances: what you have and owe on day one
+; 2026/01/01 Opening balances
+;     Assets:Bank:Chequing                      2,500.00 CAD
+;     Assets:Bank:Savings                       5,000.00 CAD
+;     Liabilities:CreditCard                     -800.00 CAD
+;     Equity:OpeningBalances
+
+; Paycheque: record gross pay and each deduction from the pay stub
+; 2026/01/15 Employer | Pay period ending Jan 15
+;     Assets:Bank:Chequing                      2,150.00 CAD
+;     Expenses:Tax:Income                         480.00 CAD
+;     Expenses:Tax:CPP                            170.00 CAD
+;     Expenses:Tax:EI                              50.00 CAD
+;     Income:Salary                            -2,850.00 CAD
+
+; Rent
+; 2026/02/01 Landlord | February rent
+;     Expenses:Housing:Rent                     1,800.00 CAD
+;     Assets:Bank:Chequing
+
+; Groceries on the credit card
+; 2026/01/18 Grocery store
+;     Expenses:Food:Groceries                     124.37 CAD
+;     Liabilities:CreditCard
+
+; Pay off the credit card
+; 2026/01/25 Credit card payment
+;     Liabilities:CreditCard                      924.37 CAD
+;     Assets:Bank:Chequing
+
+; TFSA contribution
+; 2026/01/31 TFSA contribution
+;     Assets:Investments:TFSA                     500.00 CAD
+;     Assets:Bank:Chequing

@@ -1,4 +1,4 @@
-# Paisa starter config — copy this folder into ${VOL_PATH:-/data/paisa} (git repo)
+# Paisa starter config — copy this folder into ${VOL_PATH:-/data}/paisa (git repo)
 # Reference: https://paisa.fyi/reference/config/
 
 # Relative paths resolve from this file's directory (in git)

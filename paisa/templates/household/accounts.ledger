@@ -1,0 +1,76 @@
+; Chart of accounts for a BC household: two adults and one child.
+; TODO: rename PartnerA/PartnerB/Child to your names (or keep them).
+; With strict: "yes", every account used in a transaction must be declared here first.
+
+commodity CAD
+    format 1,000.00 CAD
+
+; Assets
+account Assets:Bank:Joint:Chequing
+account Assets:Bank:Joint:Savings
+account Assets:Bank:PartnerA:Chequing
+account Assets:Bank:PartnerB:Chequing
+account Assets:Cash
+account Assets:Investments:TFSA:PartnerA
+account Assets:Investments:TFSA:PartnerB
+account Assets:Investments:RRSP:PartnerA
+account Assets:Investments:RRSP:PartnerB
+account Assets:Investments:RESP:Child
+account Assets:Home
+
+; Liabilities
+account Liabilities:Mortgage
+account Liabilities:CreditCard:PartnerA
+account Liabilities:CreditCard:PartnerB
+account Liabilities:LineOfCredit
+account Liabilities:Loan:Vehicle
+
+; Equity
+account Equity:OpeningBalances
+
+; Income
+account Income:Salary:PartnerA
+account Income:Salary:PartnerB
+account Income:Benefits:CCB
+account Income:Benefits:GST
+account Income:Benefits:RESPGrant
+account Income:Interest
+account Income:TaxRefund
+account Income:Gifts
+
+; Payroll deductions (from each pay stub)
+account Expenses:Tax:Income:PartnerA
+account Expenses:Tax:Income:PartnerB
+account Expenses:Tax:CPP:PartnerA
+account Expenses:Tax:CPP:PartnerB
+account Expenses:Tax:EI:PartnerA
+account Expenses:Tax:EI:PartnerB
+
+; Expenses
+account Expenses:Housing:MortgageInterest
+account Expenses:Housing:PropertyTax
+account Expenses:Housing:Insurance
+account Expenses:Housing:Maintenance
+account Expenses:Utilities:Hydro
+account Expenses:Utilities:Gas
+account Expenses:Utilities:Internet
+account Expenses:Utilities:Phone
+account Expenses:Food:Groceries
+account Expenses:Food:Restaurants
+account Expenses:Transport:Fuel
+account Expenses:Transport:Insurance
+account Expenses:Transport:Maintenance
+account Expenses:Transport:Transit
+account Expenses:Child:Childcare
+account Expenses:Child:Activities
+account Expenses:Child:Clothing
+account Expenses:Child:School
+account Expenses:Health:Dental
+account Expenses:Health:Pharmacy
+account Expenses:Personal:Clothing
+account Expenses:Personal:Subscriptions
+account Expenses:Entertainment
+account Expenses:Travel
+account Expenses:Gifts
+account Expenses:Donations
+account Expenses:BankFees

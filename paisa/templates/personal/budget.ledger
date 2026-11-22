@@ -1,0 +1,17 @@
+; Monthly budget (Paisa reads periodic transactions as budgets)
+; TODO: set amounts to match your spending, or delete lines you don't need.
+
+; Declares the accounts so Paisa's editor can check this file on its own
+include accounts.ledger
+
+~ Monthly
+    Expenses:Housing:Rent                 1,800.00 CAD
+    Expenses:Utilities:Hydro                 60.00 CAD
+    Expenses:Utilities:Internet              80.00 CAD
+    Expenses:Utilities:Phone                 60.00 CAD
+    Expenses:Food:Groceries                 500.00 CAD
+    Expenses:Food:Restaurants               200.00 CAD
+    Expenses:Transport:Transit              110.00 CAD
+    Expenses:Personal:Subscriptions          40.00 CAD
+    Expenses:Entertainment                  150.00 CAD
+    Assets:Bank:Chequing

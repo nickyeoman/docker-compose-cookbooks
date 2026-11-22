@@ -1,4 +1,4 @@
-# Paisa template for a new business — copy this folder into ${VOL_PATH:-/data/paisa} (git repo)
+# Paisa template for a BC corporation — copy this folder into ${VOL_PATH:-/data}/paisa (git repo)
 # Fill in the TODOs here and in accounts.ledger, then start recording in the year file.
 # Reference: https://paisa.fyi/reference/config/
 

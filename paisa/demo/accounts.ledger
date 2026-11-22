@@ -3,14 +3,28 @@
 commodity CAD
     format 1,000.00 CAD
 
+commodity BTC
+    format 1.00000000 BTC
+
 ; Assets
-account Assets:Bank:Chequing
-account Assets:Bank:Savings
+; Banks: BMO is the main operating account, RBC pays the crew,
+; Scotiabank holds the excavator fund, CIBC holds money set aside for tax
+account Assets:Bank:BMO:Chequing
+account Assets:Bank:RBC:Payroll
+account Assets:Bank:Scotiabank:Savings
+account Assets:Bank:CIBC:TaxReserve
+; Investments: a 1-year non-redeemable GIC and a bitcoin wallet
+account Assets:Investments:GIC:CIBC
+account Assets:Crypto:Wallet
 account Assets:Cash
 account Assets:AccountsReceivable
 account Assets:GST:InputTaxCredits
 account Assets:Equipment:Machinery
 account Assets:Equipment:Vehicles
+; Desks, chairs, computers, printer (consumable supplies go to Expenses:Office)
+account Assets:Equipment:Office
+; Hand tools: sledgehammers, pry bars, cordless saws and drills
+account Assets:Equipment:Tools
 
 ; Liabilities
 account Liabilities:CreditCard
@@ -43,8 +57,10 @@ account Equity:RetainedEarnings
 ; Income
 account Income:Demolition
 account Income:Scrap
+account Income:Interest
 
 ; Expenses
+account Expenses:Cleaning
 account Expenses:Disposal
 account Expenses:EquipmentRental
 account Expenses:Fuel
@@ -52,11 +68,17 @@ account Expenses:Insurance
 account Expenses:IncomeTax
 account Expenses:Incorporation
 account Expenses:Interest
+account Expenses:Internet
 account Expenses:Office
+account Expenses:Parking
 account Expenses:Permits
 account Expenses:ProfessionalFees
 account Expenses:Repairs
+account Expenses:SafetyGear
+account Expenses:SmallTools
+account Expenses:Software
 account Expenses:Wages
+account Expenses:WaterCooler
 account Expenses:WorkSafeBC
 
 ; Metadata tags

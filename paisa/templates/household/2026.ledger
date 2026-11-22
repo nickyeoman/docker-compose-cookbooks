@@ -1,0 +1,46 @@
+; 2026 transactions. Uncomment and edit the examples below, or delete them.
+; Add a file per year (2027.ledger, ...) and include it in main.ledger.
+; See docs/ledger-cheatsheet.md for more patterns.
+
+; Declares the accounts so Paisa's editor can check this file on its own
+include accounts.ledger
+
+; Starting balances: what the household has and owes on day one
+; 2026/01/01 Opening balances
+;     Assets:Bank:Joint:Chequing                4,000.00 CAD
+;     Assets:Bank:Joint:Savings                10,000.00 CAD
+;     Assets:Home                             750,000.00 CAD
+;     Liabilities:Mortgage                   -450,000.00 CAD
+;     Equity:OpeningBalances
+
+; Partner A's paycheque, deposited to the joint account
+; 2026/01/15 Employer A | Pay period ending Jan 15
+;     Assets:Bank:Joint:Chequing                2,600.00 CAD
+;     Expenses:Tax:Income:PartnerA                620.00 CAD
+;     Expenses:Tax:CPP:PartnerA                   210.00 CAD
+;     Expenses:Tax:EI:PartnerA                     60.00 CAD
+;     Income:Salary:PartnerA                   -3,490.00 CAD
+
+; Mortgage payment: split principal and interest from the lender's statement
+; 2026/02/01 Bank | Mortgage payment
+;     Liabilities:Mortgage                      1,400.00 CAD
+;     Expenses:Housing:MortgageInterest         1,100.00 CAD
+;     Assets:Bank:Joint:Chequing
+
+; Canada Child Benefit (tax-free, paid monthly)
+; 2026/01/20 CRA | Canada Child Benefit
+;     Assets:Bank:Joint:Chequing                  650.00 CAD
+;     Income:Benefits:CCB
+
+; Daycare (keep receipts: childcare expenses are deductible)
+; 2026/01/31 Daycare | January
+;     Expenses:Child:Childcare                    500.00 CAD
+;     Assets:Bank:Joint:Chequing
+
+; RESP contribution; the 20% CESG grant arrives later
+; 2026/01/31 RESP contribution
+;     Assets:Investments:RESP:Child               208.33 CAD
+;     Assets:Bank:Joint:Chequing
+; 2026/03/15 CESG grant
+;     Assets:Investments:RESP:Child                41.67 CAD
+;     Income:Benefits:RESPGrant

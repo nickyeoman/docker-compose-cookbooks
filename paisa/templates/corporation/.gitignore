@@ -1,0 +1,3 @@
+# paisa.db is a rebuildable cache next to paisa.yaml; keep it out of git
+paisa.db
+paisa.db-*

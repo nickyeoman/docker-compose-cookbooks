@@ -2,6 +2,9 @@
 ; the include in main.ledger. Uncomment and edit the examples below, or
 ; delete them. See docs/ledger-cheatsheet.md for more patterns.
 
+; Declares the accounts so Paisa's editor can check this file on its own
+include accounts.ledger
+
 ; Founder buys shares when the company is incorporated
 ; 2026/01/01 Share issuance | Class A shares to founder
 ;     Assets:Bank:Chequing                        100.00 CAD

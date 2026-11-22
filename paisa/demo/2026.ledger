@@ -1,32 +1,79 @@
 ; 2026 transactions — Demolition Company Ltd.
 ; All amounts are fictional demo data.
 
-2026/01/08 Customer | Payment on invoice 1002 (2025)
-    Assets:Bank:Chequing                  5,376.00 CAD
-    Assets:AccountsReceivable
+; Declares the accounts so Paisa's editor can check this file on its own
+include accounts.ledger
+
+2026/01/05 Water delivery | January water bottles and cooler rental
+    Expenses:WaterCooler                     46.05 CAD  ; water 30.00 (zero-rated) + rental 15.00 + PST 1.05
+    Assets:GST:InputTaxCredits                0.75 CAD
+    Assets:Bank:BMO:Chequing
 
 2026/01/05 Fuel station | Diesel for excavator
     Expenses:Fuel                           850.00 CAD
     Assets:GST:InputTaxCredits               42.50 CAD
     Liabilities:CreditCard
 
+2026/01/07 Hardware store | Gloves, safety glasses, ear protection
+    Expenses:SafetyGear                     256.80 CAD  ; 240.00 + PST 16.80
+    Assets:GST:InputTaxCredits               12.00 CAD
+    Liabilities:CreditCard
+
+2026/01/08 Customer | Payment on invoice 1002 (2025)
+    Assets:Bank:BMO:Chequing                  5,376.00 CAD
+    Assets:AccountsReceivable
+
 2026/01/09 Insurance broker | Annual liability policy
     Expenses:Insurance                    9,600.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
 
 2026/01/12 City permit office | Demolition permit, 123 Main St
     Expenses:Permits                        450.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
+
+2026/01/13 Accounting software | January subscription
+    Expenses:Software                        48.15 CAD  ; 45.00 + PST 3.15
+    Assets:GST:InputTaxCredits                2.25 CAD
+    Liabilities:CreditCard
+
+; 1-year non-redeemable GIC at 4.00%, matures 2027/01/15.
+; Interest is accrued monthly and paid at maturity.
+2026/01/15 CIBC | Buy 1-year GIC at 4.00%
+    Assets:Investments:GIC:CIBC          10,000.00 CAD
+    Assets:Bank:BMO:Chequing
+
+2026/01/15 Internet provider | January business internet
+    Expenses:Internet                       101.65 CAD  ; 95.00 + PST 6.65
+    Assets:GST:InputTaxCredits                4.75 CAD
+    Assets:Bank:BMO:Chequing
 
 2026/01/20 Landfill | Tipping fees, Main St job
     Expenses:Disposal                     3,200.00 CAD
     Assets:GST:InputTaxCredits              160.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
+
+; Bitcoin bought through an exchange and moved to the company wallet.
+; P lines record market prices so Paisa can show the gain or loss.
+P 2026/01/21 BTC 135,000.00 CAD
+
+2026/01/21 Exchange | Buy bitcoin
+    Assets:Crypto:Wallet                 0.05000000 BTC @ 135,000.00 CAD
+    Assets:Bank:BMO:Chequing
 
 2026/01/23 Scrap yard | Steel and copper from Main St job
-    Assets:Bank:Chequing                  2,940.00 CAD
+    Assets:Bank:BMO:Chequing                  2,940.00 CAD
     Income:Scrap                         -2,800.00 CAD
     Liabilities:GST:Collected              -140.00 CAD
+
+2026/01/27 City parkade | Parking at Main St job
+    Expenses:Parking                         64.00 CAD
+    Assets:GST:InputTaxCredits                3.20 CAD
+    Liabilities:CreditCard
+
+2026/01/29 Cleaning service | January office cleaning
+    Expenses:Cleaning                       220.00 CAD  ; wipe down computers, vacuum floors
+    Assets:GST:InputTaxCredits               11.00 CAD
+    Assets:Bank:BMO:Chequing
 
 2026/01/30 Invoice 1004 | Main St house demolition
     Assets:AccountsReceivable            31,360.00 CAD
@@ -34,10 +81,18 @@
     Liabilities:GST:Collected            -1,400.00 CAD
     Liabilities:PST:Collected            -1,960.00 CAD
 
+2026/01/30 Transfer | Fund January payroll
+    Assets:Bank:RBC:Payroll                   13,500.00 CAD
+    Assets:Bank:BMO:Chequing
+
 2026/01/31 Payroll | January crew wages
     Expenses:Wages                       18,000.00 CAD
     Liabilities:Payroll:CRA              -4,500.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:RBC:Payroll
+
+2026/01/31 CIBC | GIC interest accrued, Jan 15 to 31
+    Assets:Investments:GIC:CIBC              16.67 CAD
+    Income:Interest
 
 2026/01/31 WorkSafeBC | January premium
     Expenses:WorkSafeBC                     720.00 CAD
@@ -46,15 +101,25 @@
 2026/01/31 Lender | Equipment loan payment
     Liabilities:Loan:Equipment            2,800.00 CAD
     Expenses:Interest                       650.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
+
+2026/02/03 Hardware store | Saw blades and drill bits
+    Expenses:SmallTools                     197.95 CAD  ; 185.00 + PST 12.95
+    Assets:GST:InputTaxCredits                9.25 CAD
+    Liabilities:CreditCard
 
 2026/02/04 Fuel station | Diesel and truck fuel
     Expenses:Fuel                         1,100.00 CAD
     Assets:GST:InputTaxCredits               55.00 CAD
     Liabilities:CreditCard
 
+2026/02/05 Water delivery | February water bottles and cooler rental
+    Expenses:WaterCooler                     46.05 CAD  ; water 30.00 (zero-rated) + rental 15.00 + PST 1.05
+    Assets:GST:InputTaxCredits                0.75 CAD
+    Assets:Bank:BMO:Chequing
+
 2026/02/10 Customer | Payment on invoice 1004
-    Assets:Bank:Chequing                 31,360.00 CAD
+    Assets:Bank:BMO:Chequing                 31,360.00 CAD
     Assets:AccountsReceivable
 
 2026/02/12 Equipment rental | Skid steer, 5 days
@@ -62,18 +127,55 @@
     Assets:GST:InputTaxCredits               87.50 CAD
     Liabilities:CreditCard
 
+2026/02/13 Accounting software | February subscription
+    Expenses:Software                        48.15 CAD  ; 45.00 + PST 3.15
+    Assets:GST:InputTaxCredits                2.25 CAD
+    Liabilities:CreditCard
+
 2026/02/14 CRA | Payroll source deductions remittance
     Liabilities:Payroll:CRA               4,500.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
 
+2026/02/15 Internet provider | February business internet
+    Expenses:Internet                       101.65 CAD  ; 95.00 + PST 6.65
+    Assets:GST:InputTaxCredits                4.75 CAD
+    Assets:Bank:BMO:Chequing
+
+; Pays the balance through the February 15 statement; charges after that
+; are still owing at the end of February
 2026/02/16 Credit card | Payment
-    Liabilities:CreditCard                4,725.00 CAD
-    Assets:Bank:Chequing
+    Liabilities:CreditCard                5,369.00 CAD
+    Assets:Bank:BMO:Chequing
+
+2026/02/18 Fuel station | Diesel for strip-out job
+    Expenses:Fuel                           920.00 CAD
+    Assets:GST:InputTaxCredits               46.00 CAD
+    Liabilities:CreditCard
 
 2026/02/20 Repair shop | Hydraulic hose replacement
     Expenses:Repairs                        980.00 CAD
     Assets:GST:InputTaxCredits               49.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
+
+2026/02/21 Hardware store | Safety gear restock
+    Expenses:SafetyGear                     128.40 CAD  ; 120.00 + PST 8.40
+    Assets:GST:InputTaxCredits                6.00 CAD
+    Liabilities:CreditCard
+
+2026/02/24 Online office store | Toner and paper
+    Expenses:Office                          90.95 CAD  ; 85.00 + PST 5.95
+    Assets:GST:InputTaxCredits                4.25 CAD
+    Liabilities:CreditCard
+
+2026/02/25 City parkade | Parking at strip-out job
+    Expenses:Parking                         48.00 CAD
+    Assets:GST:InputTaxCredits                2.40 CAD
+    Liabilities:CreditCard
+
+2026/02/26 Cleaning service | February office cleaning
+    Expenses:Cleaning                       220.00 CAD  ; wipe down computers, vacuum floors
+    Assets:GST:InputTaxCredits               11.00 CAD
+    Assets:Bank:BMO:Chequing
 
 2026/02/26 Invoice 1005 | Commercial interior strip-out
     Assets:AccountsReceivable            47,040.00 CAD
@@ -84,23 +186,38 @@
 2026/02/27 Office supplies | Printer and paper
     Expenses:Office                         210.00 CAD
     Assets:GST:InputTaxCredits               10.50 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
+
+2026/02/27 Transfer | Fund February payroll
+    Assets:Bank:RBC:Payroll                   15,750.00 CAD
+    Assets:Bank:BMO:Chequing
 
 2026/02/28 Payroll | February crew wages
     Expenses:Wages                       21,000.00 CAD
     Liabilities:Payroll:CRA              -5,250.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:RBC:Payroll
 
 2026/02/28 WorkSafeBC | Pay Dec 2025 to Feb 2026 premiums
     Liabilities:WorkSafeBC                  960.00 CAD
     Expenses:WorkSafeBC                     840.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
 
 2026/02/28 Lender | Equipment loan payment
     Liabilities:Loan:Equipment            2,820.00 CAD
     Expenses:Interest                       630.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:BMO:Chequing
 
 2026/02/28 Transfer | Excavator replacement fund
-    Assets:Bank:Savings                   2,000.00 CAD
-    Assets:Bank:Chequing
+    Assets:Bank:Scotiabank:Savings                   2,000.00 CAD
+    Assets:Bank:BMO:Chequing
+
+2026/02/28 CIBC | GIC interest accrued, February
+    Assets:Investments:GIC:CIBC              33.33 CAD
+    Income:Interest
+
+; Hold back the tax owing from the tax-estimates sheet (rounded)
+2026/02/28 Transfer | Tax reserve
+    Assets:Bank:CIBC:TaxReserve           9,500.00 CAD
+    Assets:Bank:BMO:Chequing
+
+P 2026/02/28 BTC 128,000.00 CAD

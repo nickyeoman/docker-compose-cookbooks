@@ -1,0 +1,58 @@
+; Chart of accounts for one person in BC.
+; Add, rename, or delete accounts to suit you. With strict: "yes",
+; every account used in a transaction must be declared here first.
+
+commodity CAD
+    format 1,000.00 CAD
+
+; Assets
+account Assets:Bank:Chequing
+account Assets:Bank:Savings
+account Assets:Cash
+account Assets:Investments:TFSA
+account Assets:Investments:RRSP
+account Assets:Investments:NonRegistered
+
+; Liabilities
+account Liabilities:CreditCard
+account Liabilities:LineOfCredit
+account Liabilities:Loan:Vehicle
+account Liabilities:Loan:Student
+
+; Equity
+account Equity:OpeningBalances
+
+; Income
+account Income:Salary
+account Income:Interest
+account Income:Dividends
+account Income:TaxRefund
+account Income:Gifts
+
+; Payroll deductions (from the pay stub)
+account Expenses:Tax:Income
+account Expenses:Tax:CPP
+account Expenses:Tax:EI
+
+; Expenses
+account Expenses:Housing:Rent
+account Expenses:Housing:Insurance
+account Expenses:Utilities:Hydro
+account Expenses:Utilities:Internet
+account Expenses:Utilities:Phone
+account Expenses:Food:Groceries
+account Expenses:Food:Restaurants
+account Expenses:Transport:Transit
+account Expenses:Transport:Fuel
+account Expenses:Transport:Insurance
+account Expenses:Health:MSP
+account Expenses:Health:Dental
+account Expenses:Health:Pharmacy
+account Expenses:Personal:Clothing
+account Expenses:Personal:Subscriptions
+account Expenses:Entertainment
+account Expenses:Travel
+account Expenses:Gifts
+account Expenses:Donations
+account Expenses:BankFees
+account Expenses:Interest

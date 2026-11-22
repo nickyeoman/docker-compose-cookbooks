@@ -1,0 +1,39 @@
+; 2026 transactions. Uncomment and edit the examples below, or delete them.
+; Sole proprietors file on the calendar year (T1 with T2125).
+; See docs/ledger-cheatsheet.md for more patterns.
+
+; Declares the accounts so Paisa's editor can check this file on its own
+include accounts.ledger
+
+; Owner puts money into the business account
+; 2026/01/01 Owner contribution
+;     Assets:Bank:Chequing                      2,000.00 CAD
+;     Equity:Owner:Contributions
+
+; Sale with GST 5% + BC PST 7% (register for GST once revenue passes $30,000)
+; 2026/01/15 Invoice 1001 | Customer name
+;     Assets:AccountsReceivable                 1,120.00 CAD
+;     Income:Sales                             -1,000.00 CAD
+;     Liabilities:GST:Collected                   -50.00 CAD
+;     Liabilities:PST:Collected                   -70.00 CAD
+
+; Customer pays
+; 2026/01/30 Payment | Invoice 1001
+;     Assets:Bank:Chequing                      1,120.00 CAD
+;     Assets:AccountsReceivable
+
+; Expense with GST input tax credit
+; 2026/01/20 Office supply store
+;     Expenses:Office                             100.00 CAD
+;     Assets:GST:InputTaxCredits                    5.00 CAD
+;     Liabilities:CreditCard
+
+; Owner pays themselves: a draw, not wages or an expense
+; 2026/01/31 Owner draw
+;     Equity:Owner:Drawings                     1,500.00 CAD
+;     Assets:Bank:Chequing
+
+; Set aside money for personal income tax and CPP (both owed by the owner)
+; 2026/01/31 Tax savings
+;     Assets:TaxSavings                           800.00 CAD
+;     Assets:Bank:Chequing

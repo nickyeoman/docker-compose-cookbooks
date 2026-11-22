@@ -1,0 +1,9 @@
+; TODO: Your Name — personal books (BC, Canada)
+; Ledger git repo: ${VOL_PATH:-/data}/paisa, mounted at /root/Documents/paisa
+; Calendar year (January 1 to December 31), matching the personal tax year
+;
+; Add a file per year (2027.ledger, ...) and include it below.
+
+include accounts.ledger
+include budget.ledger
+include 2026.ledger

@@ -1,0 +1,51 @@
+; Chart of accounts for a BC sole proprietorship (not incorporated).
+; Expense accounts roughly follow CRA form T2125 so year-end is easier.
+; With strict: "yes", every account used in a transaction must be declared here first.
+
+commodity CAD
+    format 1,000.00 CAD
+
+; Assets
+account Assets:Bank:Chequing
+account Assets:Bank:Savings
+account Assets:Cash
+account Assets:AccountsReceivable
+account Assets:GST:InputTaxCredits
+account Assets:Equipment
+account Assets:TaxSavings
+
+; Liabilities
+account Liabilities:AccountsPayable
+account Liabilities:CreditCard
+account Liabilities:Loan
+account Liabilities:GST:Collected
+account Liabilities:PST:Collected
+
+; Equity: there are no shares; the owner contributes and draws
+account Equity:Owner:Contributions
+account Equity:Owner:Drawings
+account Equity:OpeningBalances
+
+; Income
+account Income:Sales
+account Income:Interest
+
+; Expenses (T2125 categories)
+account Expenses:Advertising
+account Expenses:BankFees
+account Expenses:BusinessUseOfHome
+account Expenses:Insurance
+account Expenses:Interest
+account Expenses:Meals
+account Expenses:Office
+account Expenses:ProfessionalFees
+account Expenses:Rent
+account Expenses:Software
+account Expenses:Subcontractors
+account Expenses:Supplies
+account Expenses:Telephone
+account Expenses:Travel
+account Expenses:Vehicle
+
+; Metadata tags
+tag closing
