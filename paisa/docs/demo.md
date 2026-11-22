@@ -15,7 +15,7 @@ Paisa before entering your own books. All figures are made up.
 | `2025.ledger`     | Incorporation, share issue, equipment purchase (Dec 2025)  |
 | `2026.ledger`     | January and February 2026 transactions                     |
 | `sheets/`         | Paisa sheet with 2025 and 2026 tax estimates               |
-| `.gitignore`      | Keeps `paisa.db` out of git if both paths share a folder   |
+| `.gitignore`      | Keeps `paisa.db` out of git                                |
 
 ## The company
 
@@ -113,35 +113,30 @@ loan, a credit card, and a savings transfer toward an excavator fund.
 
 ## Where the files go
 
-| Data                          | Host path                    | In git? |
-| ----------------------------- | ---------------------------- | ------- |
-| `paisa.yaml`, `*.ledger`      | `${PAISA_LEDGER_PATH:-/data/paisa}` | Yes |
-| `paisa.db` (SQLite)           | `${VOL_PATH:-/data}/paisa`     | No, backed up by restic |
-
-Out of the box both are `/data/paisa`.
+Everything lives in one folder, `${VOL_PATH:-/data/paisa}`: the
+`paisa.yaml` and `*.ledger` files (in git) and `paisa.db` (a cache,
+ignored by `.gitignore`).
 
 ## Load the demo
 
 1. Clone this repo somewhere on the Docker host, e.g.:
    ```bash
-   cd /data/paisa
+   cd /data
    git clone https://github.com/nickyeoman/docker-compose-cookbooks.git
    ```
-2. In Dockhand, set the stack's environment variable to the demo folder:
+2. In Dockhand, point the stack at the demo folder:
    ```env
-   PAISA_LEDGER_PATH=/data/paisa/docker-compose-cookbooks/paisa/demo
+   VOL_PATH=/data/docker-compose-cookbooks/paisa/demo
    ```
-   The path is used as-is, so the ledger comes straight from the clone.
-   The database stays in `${VOL_PATH:-/data}/paisa` (from `db_path` in
-   `demo/paisa.yaml`).
+   The path is used as-is. Paisa writes `paisa.db` into that folder;
+   `demo/.gitignore` keeps it out of git.
 3. Redeploy the stack and open http://localhost:7500 (or the host's
    address or proxy hostname if you're not on the Docker host).
 
 ## Switch back to your own books
 
-Set `PAISA_LEDGER_PATH` back to your books (default `/data/paisa`) and
-redeploy. Paisa rebuilds `paisa.db` from the ledger files, so the demo
-data in it is replaced on the next sync.
+Set `VOL_PATH` back to your books (default `/data/paisa`) and redeploy.
+The demo's `paisa.db` stays in the clone and can be deleted any time.
 
 ## Start your own books
 

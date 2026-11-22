@@ -1,14 +1,14 @@
 # Paisa config for Demolition Company Ltd. (demo)
 # Incorporated in BC 2025/12/01; 100 shares (66 Class A voting, 34 Class B non-voting)
-# Git repo: ${VOL_PROJECTS:-/data}/paisa, mounted at /root/Documents/paisa
+# Git repo: ${VOL_PATH:-/data/paisa}, mounted at /root/Documents/paisa
 # Reference: https://paisa.fyi/reference/config/
 
 # Relative paths resolve from this file's directory (in git)
 journal_path: main.ledger
 sheets_directory: sheets
 
-# Database is not in git: ${VOL_PATH:-/data}/paisa, backed up by restic
-db_path: /var/lib/paisa/paisa.db
+# Database sits next to this file; .gitignore keeps it out of git
+db_path: paisa.db
 
 # ledger | hledger | beancount (hledger/beancount need the matching image tag)
 ledger_cli: ledger

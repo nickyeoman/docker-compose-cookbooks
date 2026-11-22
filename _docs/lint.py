@@ -23,6 +23,7 @@ UNIVERSAL_VARS = {"VOL_PATH", "VOL_PROJECTS", "TZ", "CONFIG_PATH", "LOG_PATH"}
 
 # Known exceptions — see AGENTS.md "Known exceptions"
 NO_PROXY_OK = {"pihole", "nginx-proxy-manager"}
+NESTED_VOL_PATH_OK = {"paisa"}  # single full-path volume
 HARDCODED_RESTART_OK = {("zammad_dev", "on-failure")}
 STALE_VARS_OK = {
     "mailu_dev": None,  # env_file: .env — all vars consumed in-container
@@ -54,7 +55,7 @@ def check_compose(stack, path):
         err(stack, f"relative volume path: {m.group(1)}")
     if re.search(r"\$\{VOL_PATH\}", c):
         err(stack, "VOL_PATH used without :-/data default")
-    if re.search(r"VOL_PATH:-(?!/data\})", c):
+    if stack not in NESTED_VOL_PATH_OK and re.search(r"VOL_PATH:-(?!/data\})", c):
         err(stack, "VOL_PATH default is not /data")
     for m in re.finditer(r"TZ:-([^}\s]+)", c):
         if m.group(1) != "America/Vancouver":

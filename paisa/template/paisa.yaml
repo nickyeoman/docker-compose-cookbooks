@@ -1,4 +1,4 @@
-# Paisa template for a new business — copy this folder into ${VOL_PROJECTS:-/data}/paisa (git repo)
+# Paisa template for a new business — copy this folder into ${VOL_PATH:-/data/paisa} (git repo)
 # Fill in the TODOs here and in accounts.ledger, then start recording in the year file.
 # Reference: https://paisa.fyi/reference/config/
 
@@ -6,8 +6,8 @@
 journal_path: main.ledger
 sheets_directory: sheets
 
-# Database is not in git: ${VOL_PATH:-/data}/paisa, backed up by restic
-db_path: /var/lib/paisa/paisa.db
+# Database sits next to this file; .gitignore keeps it out of git
+db_path: paisa.db
 
 # ledger | hledger | beancount (hledger/beancount need the matching image tag)
 ledger_cli: ledger
