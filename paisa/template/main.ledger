@@ -1,0 +1,10 @@
+; TODO: Business Name Ltd. — books (BC, Canada)
+; Ledger git repo: ${VOL_PROJECTS:-/data}/paisa, mounted at /root/Documents/paisa
+; TODO: incorporation date and fiscal year end
+; Sales tax: GST 5% (federal) + PST 7% (BC)
+;
+; Add a file per fiscal year (2027.ledger, ...) and include it below.
+
+include accounts.ledger
+include budget.ledger
+include 2026.ledger

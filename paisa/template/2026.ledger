@@ -1,0 +1,20 @@
+; 2026 transactions. Rename this file to your first fiscal year and update
+; the include in main.ledger. Uncomment and edit the examples below, or
+; delete them. See docs/ledger-cheatsheet.md for more patterns.
+
+; Founder buys shares when the company is incorporated
+; 2026/01/01 Share issuance | Class A shares to founder
+;     Assets:Bank:Chequing                        100.00 CAD
+;     Equity:ShareCapital:ClassA:Founder         -100.00 CAD  ; Shares: 100
+
+; Incorporation filing paid personally by the founder (company owes it back)
+; 2026/01/01 BC Registries | Incorporation filing
+;     Expenses:Incorporation                      350.00 CAD
+;     Liabilities:ShareholderLoan
+
+; Sale with GST 5% + BC PST 7%
+; 2026/01/15 Invoice 1001 | Customer name
+;     Assets:AccountsReceivable                 1,120.00 CAD
+;     Income:Sales                             -1,000.00 CAD
+;     Liabilities:GST:Collected                   -50.00 CAD
+;     Liabilities:PST:Collected                   -70.00 CAD

@@ -1,0 +1,106 @@
+; 2026 transactions — Demolition Company Ltd.
+; All amounts are fictional demo data.
+
+2026/01/08 Customer | Payment on invoice 1002 (2025)
+    Assets:Bank:Chequing                  5,376.00 CAD
+    Assets:AccountsReceivable
+
+2026/01/05 Fuel station | Diesel for excavator
+    Expenses:Fuel                           850.00 CAD
+    Assets:GST:InputTaxCredits               42.50 CAD
+    Liabilities:CreditCard
+
+2026/01/09 Insurance broker | Annual liability policy
+    Expenses:Insurance                    9,600.00 CAD
+    Assets:Bank:Chequing
+
+2026/01/12 City permit office | Demolition permit, 123 Main St
+    Expenses:Permits                        450.00 CAD
+    Assets:Bank:Chequing
+
+2026/01/20 Landfill | Tipping fees, Main St job
+    Expenses:Disposal                     3,200.00 CAD
+    Assets:GST:InputTaxCredits              160.00 CAD
+    Assets:Bank:Chequing
+
+2026/01/23 Scrap yard | Steel and copper from Main St job
+    Assets:Bank:Chequing                  2,940.00 CAD
+    Income:Scrap                         -2,800.00 CAD
+    Liabilities:GST:Collected              -140.00 CAD
+
+2026/01/30 Invoice 1004 | Main St house demolition
+    Assets:AccountsReceivable            31,360.00 CAD
+    Income:Demolition                   -28,000.00 CAD
+    Liabilities:GST:Collected            -1,400.00 CAD
+    Liabilities:PST:Collected            -1,960.00 CAD
+
+2026/01/31 Payroll | January crew wages
+    Expenses:Wages                       18,000.00 CAD
+    Liabilities:Payroll:CRA              -4,500.00 CAD
+    Assets:Bank:Chequing
+
+2026/01/31 WorkSafeBC | January premium
+    Expenses:WorkSafeBC                     720.00 CAD
+    Liabilities:WorkSafeBC
+
+2026/01/31 Lender | Equipment loan payment
+    Liabilities:Loan:Equipment            2,800.00 CAD
+    Expenses:Interest                       650.00 CAD
+    Assets:Bank:Chequing
+
+2026/02/04 Fuel station | Diesel and truck fuel
+    Expenses:Fuel                         1,100.00 CAD
+    Assets:GST:InputTaxCredits               55.00 CAD
+    Liabilities:CreditCard
+
+2026/02/10 Customer | Payment on invoice 1004
+    Assets:Bank:Chequing                 31,360.00 CAD
+    Assets:AccountsReceivable
+
+2026/02/12 Equipment rental | Skid steer, 5 days
+    Expenses:EquipmentRental              1,750.00 CAD
+    Assets:GST:InputTaxCredits               87.50 CAD
+    Liabilities:CreditCard
+
+2026/02/14 CRA | Payroll source deductions remittance
+    Liabilities:Payroll:CRA               4,500.00 CAD
+    Assets:Bank:Chequing
+
+2026/02/16 Credit card | Payment
+    Liabilities:CreditCard                4,725.00 CAD
+    Assets:Bank:Chequing
+
+2026/02/20 Repair shop | Hydraulic hose replacement
+    Expenses:Repairs                        980.00 CAD
+    Assets:GST:InputTaxCredits               49.00 CAD
+    Assets:Bank:Chequing
+
+2026/02/26 Invoice 1005 | Commercial interior strip-out
+    Assets:AccountsReceivable            47,040.00 CAD
+    Income:Demolition                   -42,000.00 CAD
+    Liabilities:GST:Collected            -2,100.00 CAD
+    Liabilities:PST:Collected            -2,940.00 CAD
+
+2026/02/27 Office supplies | Printer and paper
+    Expenses:Office                         210.00 CAD
+    Assets:GST:InputTaxCredits               10.50 CAD
+    Assets:Bank:Chequing
+
+2026/02/28 Payroll | February crew wages
+    Expenses:Wages                       21,000.00 CAD
+    Liabilities:Payroll:CRA              -5,250.00 CAD
+    Assets:Bank:Chequing
+
+2026/02/28 WorkSafeBC | Pay Dec 2025 to Feb 2026 premiums
+    Liabilities:WorkSafeBC                  960.00 CAD
+    Expenses:WorkSafeBC                     840.00 CAD
+    Assets:Bank:Chequing
+
+2026/02/28 Lender | Equipment loan payment
+    Liabilities:Loan:Equipment            2,820.00 CAD
+    Expenses:Interest                       630.00 CAD
+    Assets:Bank:Chequing
+
+2026/02/28 Transfer | Excavator replacement fund
+    Assets:Bank:Savings                   2,000.00 CAD
+    Assets:Bank:Chequing

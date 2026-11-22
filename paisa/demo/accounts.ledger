@@ -1,0 +1,64 @@
+; Chart of accounts for Demolition Company Ltd.
+
+commodity CAD
+    format 1,000.00 CAD
+
+; Assets
+account Assets:Bank:Chequing
+account Assets:Bank:Savings
+account Assets:Cash
+account Assets:AccountsReceivable
+account Assets:GST:InputTaxCredits
+account Assets:Equipment:Machinery
+account Assets:Equipment:Vehicles
+
+; Liabilities
+account Liabilities:CreditCard
+account Liabilities:Loan:Equipment
+account Liabilities:IncomeTax
+account Liabilities:GST:Collected
+account Liabilities:PST:Collected
+account Liabilities:Payroll:CRA
+account Liabilities:WorkSafeBC
+
+; Equity
+; Class A: voting common shares (officers)
+account Equity:ShareCapital:ClassA:CEO
+account Equity:ShareCapital:ClassA:CAO
+account Equity:ShareCapital:ClassA:CFO
+account Equity:ShareCapital:ClassA:Secretary
+; Class B: non-voting common shares (family and friends investors)
+account Equity:ShareCapital:ClassB:Investor01
+account Equity:ShareCapital:ClassB:Investor02
+account Equity:ShareCapital:ClassB:Investor03
+account Equity:ShareCapital:ClassB:Investor04
+account Equity:ShareCapital:ClassB:Investor05
+account Equity:ShareCapital:ClassB:Investor06
+account Equity:ShareCapital:ClassB:Investor07
+account Equity:ShareCapital:ClassB:Investor08
+account Equity:ShareCapital:ClassB:Investor09
+account Equity:ShareCapital:ClassB:Investor10
+account Equity:RetainedEarnings
+
+; Income
+account Income:Demolition
+account Income:Scrap
+
+; Expenses
+account Expenses:Disposal
+account Expenses:EquipmentRental
+account Expenses:Fuel
+account Expenses:Insurance
+account Expenses:IncomeTax
+account Expenses:Incorporation
+account Expenses:Interest
+account Expenses:Office
+account Expenses:Permits
+account Expenses:ProfessionalFees
+account Expenses:Repairs
+account Expenses:Wages
+account Expenses:WorkSafeBC
+
+; Metadata tags
+tag Shares
+tag closing

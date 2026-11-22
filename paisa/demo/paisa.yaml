@@ -1,0 +1,89 @@
+# Paisa config for Demolition Company Ltd. (demo)
+# Incorporated in BC 2025/12/01; 100 shares (66 Class A voting, 34 Class B non-voting)
+# Git repo: ${VOL_PROJECTS:-/data}/paisa, mounted at /root/Documents/paisa
+# Reference: https://paisa.fyi/reference/config/
+
+# Relative paths resolve from this file's directory (in git)
+journal_path: main.ledger
+sheets_directory: sheets
+
+# Database is not in git: ${VOL_PATH:-/data}/paisa, backed up by restic
+db_path: /var/lib/paisa/paisa.db
+
+# ledger | hledger | beancount (hledger/beancount need the matching image tag)
+ledger_cli: ledger
+
+# Upstream defaults are tuned for India (INR / en-IN / April FY)
+default_currency: CAD
+locale: en-US
+time_zone: America/Vancouver
+display_precision: 2
+amount_alignment_column: 52
+# Fiscal year end December 31
+financial_year_starting_month: 1
+week_starting_day: 0
+
+# Accounts and commodities are declared in accounts.ledger
+strict: "yes"
+
+budget:
+  rollover: "yes"
+
+# Empty = no login. Add users to enable auth; password is sha256 hashed twice:
+#   echo -n 'ChangeThisPassword' | sha256sum | head -c 64 | sha256sum | head -c 64
+user_accounts: []
+#  - username: admin
+#    password: sha256:<hash>
+
+accounts:
+  - name: Assets:Bank:Chequing
+    icon: mdi:bank
+  - name: Assets:Equipment
+    icon: mdi:excavator
+  - name: Equity:ShareCapital
+    icon: mdi:account-group
+  - name: Liabilities:CreditCard
+    icon: mdi:credit-card
+  - name: Liabilities:Loan:Equipment
+    icon: mdi:cash-lock
+  - name: Income:Demolition
+    icon: mdi:hammer-wrench
+  - name: Income:Scrap
+    icon: mdi:recycle
+
+goals:
+  retirement: []
+  savings:
+    - name: Excavator Replacement
+      icon: mdi:excavator
+      target: 150000
+      target_date: "2028-12-31"
+      rate: 3
+      accounts:
+        - Assets:Bank:Savings
+
+schedule_al:
+  - code: bank
+    accounts:
+      - Assets:Bank:*
+  - code: vehicle
+    accounts:
+      - Assets:Equipment:Vehicles
+  - code: cash
+    accounts:
+      - Assets:Cash
+  - code: loan
+    accounts:
+      - Liabilities:Loan:*
+
+allocation_targets: []
+commodities: []
+import_templates: []
+credit_cards:
+  - account: Liabilities:CreditCard
+    credit_limit: 25000
+    statement_end_day: 15
+    due_day: 5
+    network: visa
+    number: "0000"
+    expiration_date: "2029-12-31"

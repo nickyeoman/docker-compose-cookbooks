@@ -1,0 +1,56 @@
+; Chart of accounts for a small BC corporation.
+; Add, rename, or delete accounts to suit the business. With strict: "yes",
+; every account used in a transaction must be declared here first.
+
+commodity CAD
+    format 1,000.00 CAD
+
+; Assets
+account Assets:Bank:Chequing
+account Assets:Bank:Savings
+account Assets:Cash
+account Assets:AccountsReceivable
+account Assets:GST:InputTaxCredits
+account Assets:Equipment
+
+; Liabilities
+account Liabilities:AccountsPayable
+account Liabilities:CreditCard
+account Liabilities:Loan
+account Liabilities:ShareholderLoan
+account Liabilities:IncomeTax
+account Liabilities:GST:Collected
+account Liabilities:PST:Collected
+account Liabilities:Payroll:CRA
+account Liabilities:WorkSafeBC
+
+; Equity
+; One account per shareholder, e.g. Equity:ShareCapital:ClassA:Founder
+account Equity:ShareCapital:ClassA:Founder
+account Equity:RetainedEarnings
+account Equity:OpeningBalances
+
+; Income
+account Income:Sales
+account Income:Interest
+
+; Expenses
+account Expenses:Advertising
+account Expenses:BankFees
+account Expenses:IncomeTax
+account Expenses:Incorporation
+account Expenses:Insurance
+account Expenses:Interest
+account Expenses:Office
+account Expenses:ProfessionalFees
+account Expenses:Rent
+account Expenses:Software
+account Expenses:Telephone
+account Expenses:Travel
+account Expenses:Vehicle
+account Expenses:Wages
+account Expenses:WorkSafeBC
+
+; Metadata tags
+tag Shares
+tag closing

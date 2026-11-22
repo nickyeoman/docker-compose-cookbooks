@@ -1,0 +1,5 @@
+; Main Paisa journal. Split by year with: include 2026.ledger
+; Included files must be in this folder or a subfolder.
+
+commodity CAD
+    format 1,000.00 CAD

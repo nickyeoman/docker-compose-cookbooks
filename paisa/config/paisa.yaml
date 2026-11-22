@@ -1,0 +1,44 @@
+# Paisa starter config — copy this folder into ${VOL_PROJECTS:-/data}/paisa (git repo)
+# Reference: https://paisa.fyi/reference/config/
+
+# Relative paths resolve from this file's directory (in git)
+journal_path: main.ledger
+sheets_directory: sheets
+
+# Database is not in git: ${VOL_PATH:-/data}/paisa, backed up by restic
+db_path: /var/lib/paisa/paisa.db
+
+# ledger | hledger | beancount (hledger/beancount need the matching image tag)
+ledger_cli: ledger
+
+# Upstream defaults are tuned for India (INR / en-IN / April FY)
+default_currency: CAD
+locale: en-US
+time_zone: America/Vancouver
+display_precision: 2
+amount_alignment_column: 52
+financial_year_starting_month: 1
+week_starting_day: 0
+
+# "yes" requires accounts and commodities to be declared before use
+strict: "no"
+
+budget:
+  rollover: "yes"
+
+# Empty = no login. Add users to enable auth; password is sha256 hashed twice:
+#   echo -n 'ChangeThisPassword' | sha256sum | head -c 64 | sha256sum | head -c 64
+user_accounts: []
+#  - username: admin
+#    password: sha256:<hash>
+
+goals:
+  retirement: []
+  savings: []
+
+accounts: []
+commodities: []
+schedule_al: []
+allocation_targets: []
+import_templates: []
+credit_cards: []

@@ -1,0 +1,159 @@
+; 2025 transactions — Demolition Company Ltd.
+; Incorporated in British Columbia on 2025/12/01. Fiscal year end: December 31.
+; All amounts are fictional demo data.
+;
+; Share structure: 100 common shares issued at 2,500.00 CAD each (250,000.00 CAD)
+;   Class A (voting)       66 shares  CEO 26, CAO 25, CFO 10, Secretary 5
+;   Class B (non-voting)   34 shares  10 family and friends investors
+;     Investor01-04: 4 shares each, Investor05-10: 3 shares each
+
+2025/12/01 Share issuance | Class A voting shares to officers
+    Assets:Bank:Chequing                      165,000.00 CAD
+    Equity:ShareCapital:ClassA:CEO            -65,000.00 CAD  ; Shares: 26
+    Equity:ShareCapital:ClassA:CAO            -62,500.00 CAD  ; Shares: 25
+    Equity:ShareCapital:ClassA:CFO            -25,000.00 CAD  ; Shares: 10
+    Equity:ShareCapital:ClassA:Secretary      -12,500.00 CAD  ; Shares: 5
+
+2025/12/01 Share issuance | Class B non-voting shares to investors
+    Assets:Bank:Chequing                       85,000.00 CAD
+    Equity:ShareCapital:ClassB:Investor01     -10,000.00 CAD  ; Shares: 4
+    Equity:ShareCapital:ClassB:Investor02     -10,000.00 CAD  ; Shares: 4
+    Equity:ShareCapital:ClassB:Investor03     -10,000.00 CAD  ; Shares: 4
+    Equity:ShareCapital:ClassB:Investor04     -10,000.00 CAD  ; Shares: 4
+    Equity:ShareCapital:ClassB:Investor05      -7,500.00 CAD  ; Shares: 3
+    Equity:ShareCapital:ClassB:Investor06      -7,500.00 CAD  ; Shares: 3
+    Equity:ShareCapital:ClassB:Investor07      -7,500.00 CAD  ; Shares: 3
+    Equity:ShareCapital:ClassB:Investor08      -7,500.00 CAD  ; Shares: 3
+    Equity:ShareCapital:ClassB:Investor09      -7,500.00 CAD  ; Shares: 3
+    Equity:ShareCapital:ClassB:Investor10      -7,500.00 CAD  ; Shares: 3
+
+2025/12/01 BC Registries | Incorporation filing
+    Expenses:Incorporation                        350.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/03 Law firm | Incorporation and shareholder agreement
+    Expenses:ProfessionalFees                   1,500.00 CAD
+    Assets:GST:InputTaxCredits                     75.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/05 Lender | Equipment loan advance
+    Assets:Bank:Chequing                      120,000.00 CAD
+    Liabilities:Loan:Equipment
+
+; BC PST is not recoverable, so it is added to the cost of the asset
+2025/12/08 Equipment dealer | Excavator and skid steer
+    Assets:Equipment:Machinery                197,950.00 CAD  ; 185,000 + PST 12,950
+    Assets:GST:InputTaxCredits                  9,250.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/10 Truck dealer | Dump truck and pickup
+    Assets:Equipment:Vehicles                  66,340.00 CAD  ; 62,000 + PST 4,340
+    Assets:GST:InputTaxCredits                  3,100.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/12 Transfer | Excavator replacement fund
+    Assets:Bank:Savings                        20,000.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/12 Bank | Petty cash float
+    Assets:Cash                                   500.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/15 Fuel station | Diesel for first jobs
+    Expenses:Fuel                                 320.00 CAD
+    Assets:GST:InputTaxCredits                     16.00 CAD
+    Liabilities:CreditCard
+
+2025/12/16 Invoice 1001 | Backyard shed removal
+    Assets:AccountsReceivable                   2,800.00 CAD
+    Income:Demolition                          -2,500.00 CAD
+    Liabilities:GST:Collected                    -125.00 CAD
+    Liabilities:PST:Collected                    -175.00 CAD
+
+2025/12/16 Customer | E-transfer for invoice 1001
+    Assets:Bank:Chequing                        2,800.00 CAD
+    Assets:AccountsReceivable
+
+2025/12/16 Landfill | Tipping fees, shed job
+    Expenses:Disposal                             600.00 CAD
+    Assets:GST:InputTaxCredits                     30.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/19 Invoice 1002 | Kitchen tear-out, Oak Ave
+    Assets:AccountsReceivable                   5,376.00 CAD
+    Income:Demolition                          -4,800.00 CAD
+    Liabilities:GST:Collected                    -240.00 CAD
+    Liabilities:PST:Collected                    -336.00 CAD
+
+2025/12/22 Fuel station | Diesel and truck fuel
+    Expenses:Fuel                                 480.00 CAD
+    Assets:GST:InputTaxCredits                     24.00 CAD
+    Liabilities:CreditCard
+
+2025/12/22 Invoice 1003 | Detached garage demolition
+    Assets:AccountsReceivable                   8,400.00 CAD
+    Income:Demolition                          -7,500.00 CAD
+    Liabilities:GST:Collected                    -375.00 CAD
+    Liabilities:PST:Collected                    -525.00 CAD
+
+2025/12/22 Landfill | Tipping fees, garage job
+    Expenses:Disposal                           1,400.00 CAD
+    Assets:GST:InputTaxCredits                     70.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/23 Scrap yard | Steel from garage job
+    Assets:Bank:Chequing                          682.50 CAD
+    Income:Scrap                                 -650.00 CAD
+    Liabilities:GST:Collected                     -32.50 CAD
+
+2025/12/30 Customer | Payment on invoice 1003
+    Assets:Bank:Chequing                        8,400.00 CAD
+    Assets:AccountsReceivable
+
+2025/12/31 Payroll | December crew wages
+    Expenses:Wages                              6,000.00 CAD
+    Liabilities:Payroll:CRA                    -1,500.00 CAD
+    Assets:Bank:Chequing
+
+2025/12/31 WorkSafeBC | December premium
+    Expenses:WorkSafeBC                           240.00 CAD
+    Liabilities:WorkSafeBC
+
+2025/12/31 Lender | Equipment loan payment
+    Liabilities:Loan:Equipment                  2,780.00 CAD
+    Expenses:Interest                             670.00 CAD
+    Assets:Bank:Chequing
+
+
+; ---------------------------------------------------------------------------
+; Year end: December 31, 2025 (first fiscal year, 1 month)
+;
+;   Income:   Demolition 14,800.00 + Scrap 650.00             = 15,450.00
+;   Expenses: Incorporation 350, Professional fees 1,500,
+;             Interest 670, Disposal 2,000, Fuel 800,
+;             Wages 6,000, WorkSafeBC 240                     = 11,560.00
+;   Net income before tax                                     =  3,890.00
+;   Corporate income tax, 11% small business rate
+;             (9% federal + 2% BC)                            =    427.90
+;   Net income after tax, to retained earnings                =  3,462.10
+;
+; Tax is accrued now; the T2 is due 2026/06/30. Invoice 1002 is still
+; receivable at year end and is collected in January 2026.
+; ---------------------------------------------------------------------------
+
+2025/12/31 * Year end | Accrue 2025 corporate income tax
+    Expenses:IncomeTax                            427.90 CAD
+    Liabilities:IncomeTax
+
+2025/12/31 * Year end | Close 2025 income and expenses  ; :closing:
+    Income:Demolition                          14,800.00 CAD
+    Income:Scrap                                  650.00 CAD
+    Expenses:Incorporation                       -350.00 CAD
+    Expenses:ProfessionalFees                  -1,500.00 CAD
+    Expenses:Interest                            -670.00 CAD
+    Expenses:Disposal                          -2,000.00 CAD
+    Expenses:Fuel                                -800.00 CAD
+    Expenses:Wages                             -6,000.00 CAD
+    Expenses:WorkSafeBC                          -240.00 CAD
+    Expenses:IncomeTax                           -427.90 CAD
+    Equity:RetainedEarnings                    -3,462.10 CAD

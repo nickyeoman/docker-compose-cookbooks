@@ -1,0 +1,9 @@
+; Monthly budget (Paisa reads periodic transactions as budgets)
+
+~ Monthly
+    Expenses:Fuel                         3,000.00 CAD
+    Expenses:Disposal                     4,000.00 CAD
+    Expenses:EquipmentRental              2,500.00 CAD
+    Expenses:Repairs                      1,000.00 CAD
+    Expenses:Office                         300.00 CAD
+    Assets:Bank:Chequing

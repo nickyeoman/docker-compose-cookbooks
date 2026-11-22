@@ -1,0 +1,3 @@
+# paisa.db lives in VOL_PATH; ignore it if both paths point at the same folder
+paisa.db
+paisa.db-*
